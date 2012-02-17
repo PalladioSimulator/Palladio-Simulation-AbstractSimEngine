@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
+
+  <rm:locator searchPathRef="localresources" failOnError="false"/>
+  <rm:locator searchPathRef="palladio-composite" failOnError="false" />
+  
+  <rm:searchPath name="palladio-composite">
+  <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
+ 	<rm:property key="buckminster.source" value="false"/>
+    <rm:property key="buckminster.mutable" value="false"/>
+  	<rm:uri format="http://sdqweb.ipd.kit.edu/eclipse/PCM_nightly_composite/"/>
+  </rm:provider></rm:searchPath>
+  
+  <rm:searchPath name="localresources">
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="local">
+      <rm:uri format="file:///{0}/{1}/">
+        <bc:propertyRef key="workspace.root"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+</rm:rmap>
