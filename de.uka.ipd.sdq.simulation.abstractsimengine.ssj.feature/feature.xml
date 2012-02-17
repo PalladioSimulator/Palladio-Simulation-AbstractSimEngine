@@ -218,17 +218,10 @@ litigation.
       <update label="Palladio Update Site" url="http://sdqweb.ipd.uka.de/eclipse/PCM/"/>
    </url>
 
-   <includes
-         id="de.uka.ipd.sdq.simulation.abstractsimengine.ssj.feature.source"
-         version="0.0.0"/>
-
-   <includes
-         id="de.uka.ipd.sdq.simulation.abstractsimengine.feature"
-         version="0.0.0"/>
-
    <requires>
       <import plugin="de.uka.ipd.sdq.simulation.abstractsimengine" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.javaflow" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.log4j" version="1.2.13" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -243,13 +236,6 @@ litigation.
          download-size="0"
          install-size="0"
          version="0.0.0"/>
-
-   <plugin
-         id="org.apache.log4j"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
    <plugin
          id="org.apache.commons.javaflow"
