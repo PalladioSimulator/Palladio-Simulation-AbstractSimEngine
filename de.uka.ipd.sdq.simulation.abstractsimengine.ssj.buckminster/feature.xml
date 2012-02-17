@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="de.uka.ipd.sdq.simulation.abstractsimengine.ssj.buckminster"
-      label="SSJ AddOn Buckminster"
+      label="SSJ AddOn Buckminster Build Feature"
       version="1.0.0.qualifier">
 
    <includes
-         id="de.uka.ipd.sdq.simulation.abstractsimengine.ssj.buckminster.site"
+         id="de.uka.ipd.sdq.simulation.abstractsimengine.ssj.feature"
          version="0.0.0"/>
 
 </feature>
