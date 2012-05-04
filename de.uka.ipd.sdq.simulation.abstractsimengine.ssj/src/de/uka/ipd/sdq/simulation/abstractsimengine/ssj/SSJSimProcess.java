@@ -76,6 +76,31 @@ public class SSJSimProcess extends SimulatedProcess {
             }.schedule(delay);
         }
     }
+    
+    public void passivate(double delay) {
+        if (!isTerminated()) {
+            if (this.myProcessState != ProcessState.RUNNING) {
+                throw new IllegalStateException("Tried to passivate thread which was not running ["
+                        + this.myAbstractProcess.getId() + "]");
+            }
+
+            // Resume process immediately to force process cleanup
+            if (!simIsRunning()) {
+                resume();
+            }
+
+            new Event(sim) {
+                @Override
+                public void actions() {
+                    if (!isTerminated()) {
+                        resume();
+                    }
+                }
+            }.schedule(delay);
+            
+            suspend();
+        }
+    }
 
     private boolean simIsRunning() {
         return !ssjExperiment.getSimulator().isStopped();
