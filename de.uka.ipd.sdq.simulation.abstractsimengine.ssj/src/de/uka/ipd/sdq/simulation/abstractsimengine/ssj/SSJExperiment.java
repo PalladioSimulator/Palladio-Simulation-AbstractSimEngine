@@ -1,6 +1,5 @@
 package de.uka.ipd.sdq.simulation.abstractsimengine.ssj;
 
-import umontreal.iro.lecuyer.simevents.Event;
 import umontreal.iro.lecuyer.simevents.Simulator;
 import umontreal.iro.lecuyer.simevents.eventlist.SplayTree;
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractExperiment;
@@ -19,7 +18,7 @@ public class SSJExperiment extends AbstractExperiment {
         this.simulator = new Simulator();
         this.simulator.init(new SplayTree());
 
-        this.scheduleEvent(this.CHECK_EVENT, 1);
+//        this.scheduleEvent(this.CHECK_EVENT, 1);
     }
 
     public double getCurrentSimulationTime() {
@@ -30,15 +29,15 @@ public class SSJExperiment extends AbstractExperiment {
         return this.simulator;
     }
 
-    @Override
-    public void scheduleEvent(final IEvent event, final double delay) {
-        new Event(this.simulator) {
-            @Override
-            public void actions() {
-                event.run();
-            }
-        }.schedule(delay);
-    }
+//    @Override
+//    public void scheduleEvent(final IEvent event, final double delay) {
+//        new Event(this.simulator) {
+//            @Override
+//            public void actions() {
+//                event.run();
+//            }
+//        }.schedule(delay);
+//    }
 
     @Override
     public void startSimulator() {
