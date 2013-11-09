@@ -5,7 +5,6 @@ package de.uka.ipd.sdq.simulation.abstractsimengine.ssj;
 
 import org.apache.log4j.Logger;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import umontreal.iro.lecuyer.simevents.Event;
 import umontreal.iro.lecuyer.simevents.Simulator;
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimProcessDelegator;
@@ -113,12 +112,12 @@ public class SSJSimProcess extends SimulatedProcess {
 
     @Override
     public boolean isScheduled() {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void reschedule(double delay) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
 
 }

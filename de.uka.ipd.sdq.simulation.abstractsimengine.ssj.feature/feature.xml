@@ -692,9 +692,8 @@ Public License instead of this License.  But first, please read
    </url>
 
    <requires>
-      <import plugin="de.uka.ipd.sdq.simulation.abstractsimengine" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.apache.commons.javaflow" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.apache.log4j" version="1.2.13" match="greaterOrEqual"/>
+      <import plugin="de.uka.ipd.sdq.simulation.abstractsimengine" version="1.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -706,12 +705,6 @@ Public License instead of this License.  But first, please read
 
    <plugin
          id="ca.umontreal.iro.lecuyer.ssj"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.apache.commons.javaflow"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
