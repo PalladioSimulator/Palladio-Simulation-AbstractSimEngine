@@ -11,6 +11,7 @@
   <rm:locator pattern="^de\.uka\.ipd\.sdq\..*" searchPathRef="FeatureModel" failOnError="false"/>
   <rm:locator pattern="^de\.uka\.ipd\.sdq\..*" searchPathRef="WorkflowEngine" failOnError="false"/>
   <rm:locator pattern="^de\.ikv\.medini\.qvt\..*" searchPathRef="mediniqvt" failOnError="false"/>
+  <rm:locator pattern="^org\.jscience.*" searchPathRef="thirdparty" failOnError="false"/>
   <rm:locator searchPathRef="eclipse-juno" failOnError="false"/>
   <rm:locator searchPathRef="orbit" failOnError="false"/>
   <rm:searchPath name="localresources">
@@ -82,6 +83,13 @@
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="http://download.eclipse.org/tools/orbit/downloads/drops/R20110523182458/repository/"/>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="thirdparty">
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="http://sdqweb.ipd.kit.edu/eclipse/thirdpartywrapper/nightly/"/>
     </rm:provider>
   </rm:searchPath>
 </rm:rmap>

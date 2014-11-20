@@ -694,6 +694,7 @@ Public License instead of this License.  But first, please read
    <requires>
       <import plugin="org.apache.log4j" version="1.2.13" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.simulation.abstractsimengine" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="ca.umontreal.iro.lecuyer.ssj" version="1.2.2" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -708,5 +709,19 @@ Public License instead of this License.  But first, please read
          download-size="0"
          install-size="0"
          version="0.0.0"/>
+
+   <plugin
+         id="ca.umontreal.iro.lecuyer.ssj.linux"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"/>
+
+   <plugin
+         id="ca.umontreal.iro.lecuyer.ssj.win32"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"/>
 
 </feature>
