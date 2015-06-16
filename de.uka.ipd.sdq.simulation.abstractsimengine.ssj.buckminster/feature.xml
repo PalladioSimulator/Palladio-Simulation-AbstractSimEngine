@@ -2,8 +2,11 @@
 <feature
       id="de.uka.ipd.sdq.simulation.abstractsimengine.ssj.buckminster"
       label="SSJ AddOn Buckminster Build Feature"
-      version="1.0.0.qualifier">
+      version="1.0.0.qualifier"
+      license-feature="org.palladiosimulator.license"
+      license-feature-version="1.0.0.qualifier">
 
+   
    <includes
          id="de.uka.ipd.sdq.simulation.abstractsimengine.ssj.feature"
          version="0.0.0"/>
