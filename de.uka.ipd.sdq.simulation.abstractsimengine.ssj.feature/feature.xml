@@ -3,7 +3,6 @@
       id="de.uka.ipd.sdq.simulation.abstractsimengine.ssj.feature"
       label="SSJ Simulation Engine Feature"
       version="1.0.0.qualifier"
-      provider-name="palladiosimulator.org"
       plugin="org.palladiosimulator.branding">
 
    <description url="http://sdq.ipd.kit.edu/">
