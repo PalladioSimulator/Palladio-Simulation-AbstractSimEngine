@@ -4,7 +4,7 @@
       label="SSJ AddOn Buckminster Build Feature"
       version="1.0.0.qualifier"
       license-feature="org.palladiosimulator.license"
-      license-feature-version="1.0.0.qualifier">
+      license-feature-version="1.0.0">
 
    
    <includes
