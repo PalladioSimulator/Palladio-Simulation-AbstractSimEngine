@@ -1,4 +1,4 @@
-package de.uka.ipd.sdq.simulation.abstractsimengine.ssj;
+package org.palladiosimulator.simulation.abstractsimengine.ssj;
 
 import org.apache.log4j.Logger;
 

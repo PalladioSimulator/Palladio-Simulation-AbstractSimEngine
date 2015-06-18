@@ -1,4 +1,4 @@
-package de.uka.ipd.sdq.simulation.abstractsimengine.ssj;
+package org.palladiosimulator.simulation.abstractsimengine.ssj;
 
 import umontreal.iro.lecuyer.simevents.Simulator;
 import umontreal.iro.lecuyer.simevents.eventlist.SplayTree;

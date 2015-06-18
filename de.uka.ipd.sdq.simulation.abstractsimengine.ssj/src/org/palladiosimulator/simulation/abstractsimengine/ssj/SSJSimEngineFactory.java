@@ -1,4 +1,4 @@
-package de.uka.ipd.sdq.simulation.abstractsimengine.ssj;
+package org.palladiosimulator.simulation.abstractsimengine.ssj;
 
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimEntityDelegator;
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimEventDelegator;

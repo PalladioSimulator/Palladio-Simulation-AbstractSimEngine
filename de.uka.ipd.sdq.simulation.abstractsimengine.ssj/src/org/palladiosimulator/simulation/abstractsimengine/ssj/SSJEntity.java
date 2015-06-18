@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.uka.ipd.sdq.simulation.abstractsimengine.ssj;
+package org.palladiosimulator.simulation.abstractsimengine.ssj;
 
 import umontreal.iro.lecuyer.simevents.Event;
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimEntityDelegator;
