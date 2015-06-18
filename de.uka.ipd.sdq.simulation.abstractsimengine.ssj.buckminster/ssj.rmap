@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
+  <rm:locator pattern="^org\.palladiosimulator\.simulation\.abstractsimengine.*$" searchPathRef="SSJAddon" failOnError="true"/>
 
-  <rm:locator searchPathRef="localresources" failOnError="false"/>
   <rm:redirect pattern=".*" href="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/Build/trunk/org.palladiosimulator.targetPlatformBuild/pcm_base.rmap"/>
 
-  <rm:searchPath name="localresources">
-    <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="local">
-      <rm:uri format="file:///{0}/{1}/">
-        <bc:propertyRef key="workspace.root"/>
+  <rm:searchPath name="SSJAddon">
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="svn">
+      <rm:uri format="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/Palladio/Addons/SimuComSSJ/{0}">
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
     </rm:provider>
