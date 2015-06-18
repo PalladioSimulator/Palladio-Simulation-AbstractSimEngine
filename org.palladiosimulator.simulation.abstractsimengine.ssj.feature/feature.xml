@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="de.uka.ipd.sdq.simulation.abstractsimengine.ssj.feature"
+      id="org.palladiosimulator.simulation.abstractsimengine.ssj.feature"
       label="SSJ Simulation Engine Feature"
       version="1.0.0.qualifier"
       plugin="org.palladiosimulator.branding">
@@ -697,7 +697,7 @@ Public License instead of this License.  But first, please read
    </requires>
 
    <plugin
-         id="de.uka.ipd.sdq.simulation.abstractsimengine.ssj"
+         id="org.palladiosimulator.simulation.abstractsimengine.ssj"
          download-size="0"
          install-size="0"
          version="0.0.0"
