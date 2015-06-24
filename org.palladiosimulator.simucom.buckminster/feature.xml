@@ -28,6 +28,18 @@ loader.
          id="org.palladiosimulator.simucom.reliability.feature"
          version="0.0.0"/>
 
+   <requires>
+      <import plugin="org.junit"/>
+      <import plugin="de.uka.ipd.sdq.simucomframework"/>
+      <import plugin="org.palladiosimulator.recorderframework.sensorframework" version="2.0.1" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.analyzer.workflow" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.recorderframework" version="2.0.1" match="greaterOrEqual"/>
+      <import plugin="org.apache.log4j"/>
+      <import plugin="de.uka.ipd.sdq.probfunction.math"/>
+      <import plugin="org.apache.commons.math"/>
+      <import plugin="de.uka.ipd.sdq.simucomframework.variables"/>
+   </requires>
+
    <plugin
          id="de.uka.ipd.sdq.codegen.simucontroller.tests"
          download-size="0"

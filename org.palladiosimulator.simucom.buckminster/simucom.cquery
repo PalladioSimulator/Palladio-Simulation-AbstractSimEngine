@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><cq:componentQuery xmlns:cq="http://www.eclipse.org/buckminster/CQuery-1.0" resourceMap="simucom_source.rmap">
+    <cq:rootRequest name="org.palladiosimulator.simucom.buckminster" componentType="eclipse.feature"/>
+    <cq:advisorNode namePattern="^org\.palladiosimulator\.simucom.*" useWorkspace="false"/>
+    <cq:advisorNode namePattern="^de\.fzi\.se.*" useWorkspace="false"/>
+    <cq:advisorNode namePattern="^de\.uka\.ipd\.sdq\.codegen.*" useWorkspace="false"/>
+    <cq:advisorNode namePattern="^de\.uka\.ipd\.sdq\.markov.*" useWorkspace="false"/>
+    <cq:advisorNode namePattern="^de\.uka\.ipd\.sdq\.pcm\.codegen.*" useWorkspace="false"/>
+    <cq:advisorNode namePattern="^de\.uka\.ipd\.sdq\.reliability.*" useWorkspace="false"/>
+    <cq:advisorNode namePattern="^de\.uka\.ipd\.sdq\.scheduler.*" useWorkspace="false"/>
+    <cq:advisorNode namePattern="^de\.uka\.ipd\.sdq\.simucom.*" useWorkspace="false"/>
+    <cq:advisorNode namePattern="^de\.uka\.ipd\.sdq\.simulation.*" useWorkspace="false"/>
+    <cq:advisorNode namePattern="^edu\.kit\.ipd\.sdq\.pcm\.codegen.*" useWorkspace="false"/>
+</cq:componentQuery>

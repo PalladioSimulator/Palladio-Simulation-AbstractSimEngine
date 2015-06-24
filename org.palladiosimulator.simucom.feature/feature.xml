@@ -106,10 +106,6 @@ loader.
       <import plugin="de.uka.ipd.sdq.workflow.mdsd" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="de.uka.ipd.sdq.simucomframework.simucomstatus" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="de.uka.ipd.sdq.workflow" version="2.0.1" match="greaterOrEqual"/>
-      <import plugin="de.uka.ipd.sdq.workflow.launchconfig" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.debug.core"/>
-      <import plugin="org.eclipse.debug.ui" version="3.5.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtend.lib" version="2.8.0" match="greaterOrEqual"/>
       <import plugin="com.google.guava" version="15.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.xbase.lib" version="2.8.0" match="greaterOrEqual"/>
