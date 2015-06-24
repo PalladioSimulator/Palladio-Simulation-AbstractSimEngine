@@ -3,6 +3,7 @@
       id="de.fzi.se.accuracy.feature"
       label="Palladio Accuracy Feature"
       version="1.0.0.qualifier"
+      plugin="org.palladiosimulator.branding"
       license-feature="org.palladiosimulator.license"
       license-feature-version="1.0.0">
 
