@@ -36,7 +36,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Text;
 import org.palladiosimulator.analyzer.workflow.ConstantsContainer;
-import org.palladiosimulator.pcm.dialogs.selection.PalladioSelectEObjectDialog;
+import org.palladiosimulator.editors.dialogs.selection.PalladioSelectEObjectDialog;
 import org.palladiosimulator.pcm.ui.provider.PalladioItemProviderAdapterFactory;
 import org.palladiosimulator.recorderframework.launch.RecorderTabGroup;
 import org.palladiosimulator.recorderframework.utils.RecorderExtensionHelper;
