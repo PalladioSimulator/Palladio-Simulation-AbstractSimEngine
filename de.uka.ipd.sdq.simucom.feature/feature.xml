@@ -17,6 +17,7 @@ loader.
       <import plugin="de.uka.ipd.sdq.identifier" version="2.0.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.probfunction" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.stoex" version="2.2.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.pcm" version="4.0.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.analyzer.completions" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.featureconfig" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.featuremodel" version="2.1.0" match="greaterOrEqual"/>
@@ -59,6 +60,7 @@ loader.
       <import plugin="org.eclipse.emf.common.ui"/>
       <import plugin="de.uka.ipd.sdq.workflow.launchconfig" version="1.1.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.sensorframework.dialogs"/>
+      <import plugin="org.palladiosimulator.editors.dialogs"/>
       <import plugin="org.eclipse.osgi.services"/>
       <import plugin="ch.ethz.iks.r_osgi.remote" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.query.ocl" version="1.2.0" match="greaterOrEqual"/>
@@ -82,15 +84,19 @@ loader.
       <import plugin="org.eclipse.core.runtime" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.equinox.event" version="1.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.osgi" version="3.10.2" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.eclipse.emf.query"/>
       <import plugin="org.apache.commons.collections15"/>
+      <import plugin="org.eclipse.emf.cdo"/>
       <import plugin="de.uka.ipd.sdq.identifier" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.units" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.uml2.types" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.edit" version="2.9.0" match="compatible"/>
       <import plugin="de.uka.ipd.sdq.identifier.edit" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.pcm.edit" version="4.0.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.probfunction.edit" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore.edit"/>
       <import plugin="de.uka.ipd.sdq.stoex.edit" version="2.2.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.units.edit" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.uml2.common.edit" version="1.6.0" match="greaterOrEqual"/>
@@ -104,27 +110,17 @@ loader.
       <import plugin="de.uka.ipd.sdq.workflow.launchconfig" version="2.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.debug.core"/>
       <import plugin="org.eclipse.debug.ui" version="3.5.1" match="greaterOrEqual"/>
-      <import plugin="org.palladiosimulator.edp2.util" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.palladiosimulator.edp2.edit"/>
-      <import plugin="org.palladiosimulator.metricspec.edit"/>
-      <import plugin="javax.inject" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.xtend.standalone" version="2.5.3" match="greaterOrEqual"/>
-      <import plugin="org.objectweb.asm" version="3.3.1" match="greaterOrEqual"/>
-      <import feature="de.uka.ipd.sdq.simulation.abstractsimengine.feature" version="3.3.0" match="greaterOrEqual"/>
-      <import plugin="org.palladiosimulator.pcm" version="4.0.0" match="greaterOrEqual"/>
-      <import plugin="org.palladiosimulator.editors.dialogs"/>
-      <import plugin="org.eclipse.core.runtime" version="3.10.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.osgi" version="3.10.2" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.cdo"/>
-      <import plugin="org.palladiosimulator.pcm.edit" version="4.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecore.edit"/>
       <import plugin="org.eclipse.xtend.lib" version="2.8.0" match="greaterOrEqual"/>
       <import plugin="com.google.guava" version="15.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.xbase.lib" version="2.8.0" match="greaterOrEqual"/>
+      <import plugin="javax.inject" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtend.standalone" version="2.5.3" match="greaterOrEqual"/>
+      <import plugin="org.objectweb.asm" version="3.3.1" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.pcm.stochasticexpressions" version="2.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtend" version="2.0.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.codegen.simucontroller" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.pcm" version="3.6.0" match="greaterOrEqual"/>
+      <import feature="de.uka.ipd.sdq.simulation.abstractsimengine.feature" version="3.3.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -156,20 +152,6 @@ loader.
 
    <plugin
          id="de.uka.ipd.sdq.scheduler"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.palladiosimulator.branding"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="ch.ethz.iks.r_osgi.remote"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -225,35 +207,7 @@ loader.
          unpack="false"/>
 
    <plugin
-         id="de.uka.ipd.sdq.statistics"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="de.uka.ipd.sdq.simulation"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.palladiosimulator.analyzer.workflow"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.palladiosimulator.pcm.edp2.measuringpoint"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.palladiosimulator.pcm.edp2.measuringpoint.edit"
          download-size="0"
          install-size="0"
          version="0.0.0"
