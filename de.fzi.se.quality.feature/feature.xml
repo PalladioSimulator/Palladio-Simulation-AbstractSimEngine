@@ -17,21 +17,29 @@
       <import plugin="org.eclipse.ocl.ecore"/>
       <import plugin="org.eclipse.ocl"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="de.uka.ipd.sdq.identifier"/>
-      <import plugin="de.uka.ipd.sdq.pcm"/>
-      <import plugin="de.uka.ipd.sdq.probfunction"/>
-      <import plugin="de.uka.ipd.sdq.stoex"/>
-      <import plugin="de.uka.ipd.sdq.units"/>
       <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="de.uka.ipd.sdq.identifier.edit"/>
-      <import plugin="org.palladiosimulator.pcm.edit"/>
-      <import plugin="de.uka.ipd.sdq.probfunction.edit"/>
-      <import plugin="de.uka.ipd.sdq.stoex.edit"/>
-      <import plugin="de.uka.ipd.sdq.units.edit"/>
-      <import plugin="org.eclipse.uml2.common.edit"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.emf.cdo"/>
+      <import plugin="de.uka.ipd.sdq.identifier" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="de.uka.ipd.sdq.probfunction" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="de.uka.ipd.sdq.stoex" version="2.2.0" match="greaterOrEqual"/>
+      <import plugin="de.uka.ipd.sdq.units" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.uml2.types" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.pcm" version="4.0.0" match="greaterOrEqual"/>
+      <import plugin="de.fzi.se.quality" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.uka.ipd.sdq.identifier.edit" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.pcm.edit" version="4.0.0" match="greaterOrEqual"/>
+      <import plugin="de.uka.ipd.sdq.probfunction.edit" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore.edit"/>
+      <import plugin="de.uka.ipd.sdq.stoex.edit" version="2.2.0" match="greaterOrEqual"/>
+      <import plugin="de.uka.ipd.sdq.units.edit" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.uml2.common.edit" version="1.6.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.pcm.ui" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="de.fzi.se.quality.edit" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.uka.ipd.sdq.workflow.launchconfig" version="2.0.3" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.analyzer.workflow" version="1.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
