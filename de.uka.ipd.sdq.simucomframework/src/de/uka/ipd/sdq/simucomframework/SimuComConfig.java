@@ -7,10 +7,10 @@ import java.util.Map;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
+import org.palladiosimulator.analyzer.workflow.runconfig.ExperimentRunDescriptor;
 
 import de.uka.ipd.sdq.probfunction.math.IRandomGenerator;
 import de.uka.ipd.sdq.simulation.AbstractSimulationConfig;
-import de.uka.ipd.sdq.workflow.pcm.runconfig.ExperimentRunDescriptor;
 
 /**
  * @author roman

@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
+import org.palladiosimulator.analyzer.workflow.runconfig.FileNamesInputTab;
 
 import de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs.WorkflowHooks;
 import de.uka.ipd.sdq.workflow.launchconfig.extension.ExtendableTabGroup;
 import de.uka.ipd.sdq.workflow.launchconfig.tabs.DebugEnabledCommonTab;
-import de.uka.ipd.sdq.workflow.pcm.runconfig.FileNamesInputTab;
 
 /**
  * The class defines tabs for the SimuBench Launch configuration menu.

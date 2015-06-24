@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn="de.uka.ipd.sdq.workflow.pcm.configurations.AbstractPCMLaunchConfigurationDelegate:"/>
+                  <meta.attribute kind="java" basedOn="org.palladiosimulator.analyzer.workflow.configurations.AbstractPCMLaunchConfigurationDelegate:"/>
                </appInfo>
             </annotation>
          </attribute>

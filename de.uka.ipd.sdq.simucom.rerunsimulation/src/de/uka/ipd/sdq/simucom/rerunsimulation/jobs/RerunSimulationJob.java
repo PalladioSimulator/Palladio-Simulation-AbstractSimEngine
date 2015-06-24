@@ -1,6 +1,7 @@
 package de.uka.ipd.sdq.simucom.rerunsimulation.jobs;
 
 import org.eclipse.core.runtime.CoreException;
+import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
 
 import de.uka.ipd.sdq.codegen.simucontroller.debug.IDebugListener;
 import de.uka.ipd.sdq.codegen.simucontroller.runconfig.SimuComWorkflowConfiguration;
@@ -14,7 +15,6 @@ import de.uka.ipd.sdq.simucom.rerunsimulation.runconfig.RerunSimuComWorkflowConf
 import de.uka.ipd.sdq.workflow.extension.AbstractExtendableJob;
 import de.uka.ipd.sdq.workflow.jobs.IJob;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
-import de.uka.ipd.sdq.workflow.pcm.jobs.LoadPCMModelsIntoBlackboardJob;
 
 /**
  * Every job that is needed for rerunning a simulation is added in this class

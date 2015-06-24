@@ -21,6 +21,11 @@ import de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs.xtendworkflow.UsageMo
 import de.uka.ipd.sdq.pcm.codegen.simucom.guice.SimuComModule;
 import de.uka.ipd.sdq.pcm.codegen.simucom.transformations.RepositoryXpt;
 import de.uka.ipd.sdq.pcm.codegen.simucom.transformations.sim.SimAccuracyInfluenceExt;
+
+import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
+import org.palladiosimulator.analyzer.workflow.configurations.AbstractCodeGenerationWorkflowRunConfiguration;
+import org.palladiosimulator.analyzer.workflow.jobs.LoadMiddlewareConfigurationIntoBlackboardJob;
+import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
 import org.palladiosimulator.pcm.repository.Repository;
 import de.uka.ipd.sdq.pcm.transformations.ApplyConnectorCompletionsJob;
 import de.uka.ipd.sdq.workflow.jobs.CleanupFailedException;
@@ -31,10 +36,6 @@ import de.uka.ipd.sdq.workflow.jobs.SequentialBlackboardInteractingJob;
 import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.ResourceSetPartition;
-import de.uka.ipd.sdq.workflow.pcm.blackboard.PCMResourceSetPartition;
-import de.uka.ipd.sdq.workflow.pcm.configurations.AbstractCodeGenerationWorkflowRunConfiguration;
-import de.uka.ipd.sdq.workflow.pcm.jobs.LoadMiddlewareConfigurationIntoBlackboardJob;
-import de.uka.ipd.sdq.workflow.pcm.jobs.LoadPCMModelsIntoBlackboardJob;
 
 /**
  * Start the Workflow-Engine of oAW - Generator

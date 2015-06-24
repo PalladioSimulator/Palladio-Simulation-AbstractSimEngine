@@ -3,9 +3,10 @@ package de.uka.ipd.sdq.codegen.simucontroller.runconfig;
 import java.util.List;
 import java.util.Map;
 
+import org.palladiosimulator.analyzer.workflow.configurations.AbstractCodeGenerationWorkflowRunConfiguration;
+
 import de.uka.ipd.sdq.simulation.AbstractSimulationConfig;
 import de.uka.ipd.sdq.workflow.extension.ExtendableJobConfiguration;
-import de.uka.ipd.sdq.workflow.pcm.configurations.AbstractCodeGenerationWorkflowRunConfiguration;
 
 public abstract class AbstractSimulationWorkflowConfiguration extends AbstractCodeGenerationWorkflowRunConfiguration
         implements Cloneable, ExtendableJobConfiguration {

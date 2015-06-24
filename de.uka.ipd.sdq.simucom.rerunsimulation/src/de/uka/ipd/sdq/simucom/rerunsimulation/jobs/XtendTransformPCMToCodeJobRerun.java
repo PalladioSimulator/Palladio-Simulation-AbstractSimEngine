@@ -6,6 +6,8 @@ import java.util.Map;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow;
+import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
+import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
 
 import de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs.xtendworkflow.AllocationWorkflowComponent;
 import de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs.xtendworkflow.SystemWorkflowComponent;
@@ -18,8 +20,6 @@ import de.uka.ipd.sdq.workflow.jobs.JobFailedException;
 import de.uka.ipd.sdq.workflow.jobs.SequentialBlackboardInteractingJob;
 import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
-import de.uka.ipd.sdq.workflow.pcm.blackboard.PCMResourceSetPartition;
-import de.uka.ipd.sdq.workflow.pcm.jobs.LoadPCMModelsIntoBlackboardJob;
 
 /**
  * Start the Workflow-Engine of oAW - Generator. Only system, allocation and usage can be

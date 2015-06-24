@@ -16,6 +16,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import de.uka.ipd.sdq.codegen.simucontroller.runconfig.AbstractSimulationWorkflowConfiguration;
 import de.uka.ipd.sdq.identifier.Identifier;
+
+import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
+import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
+import org.palladiosimulator.analyzer.workflow.runconfig.SensitivityAnalysisConfiguration;
 import org.palladiosimulator.pcm.core.PCMRandomVariable;
 import org.palladiosimulator.pcm.core.entity.Entity;
 import org.palladiosimulator.pcm.usagemodel.ClosedWorkload;
@@ -25,9 +29,6 @@ import de.uka.ipd.sdq.workflow.jobs.IBlackboardInteractingJob;
 import de.uka.ipd.sdq.workflow.jobs.JobFailedException;
 import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
-import de.uka.ipd.sdq.workflow.pcm.blackboard.PCMResourceSetPartition;
-import de.uka.ipd.sdq.workflow.pcm.jobs.LoadPCMModelsIntoBlackboardJob;
-import de.uka.ipd.sdq.workflow.pcm.runconfig.SensitivityAnalysisConfiguration;
 
 public class TransformPCMForSensitivityAnalysisJob implements IBlackboardInteractingJob<MDSDBlackboard> {
 

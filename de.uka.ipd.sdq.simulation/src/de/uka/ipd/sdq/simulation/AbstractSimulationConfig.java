@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.palladiosimulator.analyzer.workflow.runconfig.ExperimentRunDescriptor;
 import org.palladiosimulator.recorderframework.config.IRecorderConfigurationFactory;
 import org.palladiosimulator.recorderframework.utils.RecorderExtensionHelper;
 
 import de.uka.ipd.sdq.probfunction.math.IRandomGenerator;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimulationConfig;
-import de.uka.ipd.sdq.workflow.pcm.runconfig.ExperimentRunDescriptor;
 
 /**
  * This is the abstract base class for simulation configurations. It encapsulates the configuration

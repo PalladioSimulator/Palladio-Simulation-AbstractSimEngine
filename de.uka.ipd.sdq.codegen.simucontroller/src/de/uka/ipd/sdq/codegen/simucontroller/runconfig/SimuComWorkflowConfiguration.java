@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.palladiosimulator.analyzer.workflow.runconfig.AccuracyInfluenceAnalysisState;
+import org.palladiosimulator.analyzer.workflow.runconfig.ExperimentRunDescriptor;
+import org.palladiosimulator.analyzer.workflow.runconfig.SensitivityAnalysisConfiguration;
 
 import de.uka.ipd.sdq.simucomframework.SimuComConfig;
 import de.uka.ipd.sdq.simulation.AbstractSimulationConfig;
-import de.uka.ipd.sdq.workflow.pcm.runconfig.AccuracyInfluenceAnalysisState;
-import de.uka.ipd.sdq.workflow.pcm.runconfig.ExperimentRunDescriptor;
-import de.uka.ipd.sdq.workflow.pcm.runconfig.SensitivityAnalysisConfiguration;
 
 public class SimuComWorkflowConfiguration extends AbstractSimulationWorkflowConfiguration {
 

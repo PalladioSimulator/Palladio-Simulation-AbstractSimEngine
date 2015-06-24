@@ -23,16 +23,15 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.palladiosimulator.analyzer.workflow.ConstantsContainer;
+import org.palladiosimulator.analyzer.workflow.runconfig.ConfigurationTab;
 import org.palladiosimulator.pcm.dialogs.selection.PalladioSelectEObjectDialog;
-
-import de.uka.ipd.sdq.workflow.pcm.ConstantsContainer;
-import de.uka.ipd.sdq.workflow.pcm.runconfig.ConfigurationTab;
 
 /**
  * The class extends ConfigurationTab by CheckBox. User can decide whether that generated instance
  * of Palladio Component Model after simulating must be deleted.
  *
- * @see de.uka.ipd.sdq.workflow.pcm.runconfig.ConfigurationTab
+ * @see org.palladiosimulator.analyzer.workflow.runconfig.ConfigurationTab
  *
  * @author Roman Andrej
  */

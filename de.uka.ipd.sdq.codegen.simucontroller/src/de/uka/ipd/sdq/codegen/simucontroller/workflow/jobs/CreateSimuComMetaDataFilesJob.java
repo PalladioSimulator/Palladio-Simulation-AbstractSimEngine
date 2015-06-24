@@ -2,8 +2,9 @@ package de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs;
 
 import java.io.PrintStream;
 
+import org.palladiosimulator.analyzer.workflow.configurations.AbstractCodeGenerationWorkflowRunConfiguration;
+
 import de.uka.ipd.sdq.workflow.jobs.IJob;
-import de.uka.ipd.sdq.workflow.pcm.configurations.AbstractCodeGenerationWorkflowRunConfiguration;
 
 public class CreateSimuComMetaDataFilesJob extends AbstractCreateMetaDataFilesJob implements IJob {
 

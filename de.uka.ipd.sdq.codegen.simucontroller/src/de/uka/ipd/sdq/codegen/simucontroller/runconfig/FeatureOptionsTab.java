@@ -19,11 +19,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.palladiosimulator.analyzer.workflow.ConstantsContainer;
 
 import de.uka.ipd.sdq.featureinstance.FeatureConfigWidget;
 import de.uka.ipd.sdq.workflow.launchconfig.ImageRegistryHelper;
 import de.uka.ipd.sdq.workflow.launchconfig.tabs.TabHelper;
-import de.uka.ipd.sdq.workflow.pcm.ConstantsContainer;
 
 /**
  * The class defines a tab, where the specific characteristics for the simulation can be set.

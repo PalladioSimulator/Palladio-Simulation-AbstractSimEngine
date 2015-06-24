@@ -6,12 +6,12 @@ package de.uka.ipd.sdq.codegen.simucontroller.runconfig;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
+import org.palladiosimulator.analyzer.workflow.configurations.AbstractPCMWorkflowRunConfiguration;
+import org.palladiosimulator.analyzer.workflow.jobs.PCMWorkflowJobBuilder;
 
 import de.uka.ipd.sdq.codegen.simucontroller.debug.IDebugListener;
 import de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs.SensitivityAnalysisJob;
 import de.uka.ipd.sdq.workflow.jobs.IJob;
-import de.uka.ipd.sdq.workflow.pcm.configurations.AbstractPCMWorkflowRunConfiguration;
-import de.uka.ipd.sdq.workflow.pcm.jobs.PCMWorkflowJobBuilder;
 
 /**
  * Builder for SimuComJobs.
@@ -33,7 +33,7 @@ public class SimuComWorkflowJobBuilder extends PCMWorkflowJobBuilder {
      * (non-Javadoc)
      * 
      * @see
-     * de.uka.ipd.sdq.workflow.pcm.jobs.PCMWorkflowJobBuilder#buildJob(de.uka.ipd.sdq.workflow.pcm
+     * org.palladiosimulator.analyzer.workflow.jobs.PCMWorkflowJobBuilder#buildJob(org.palladiosimulator.analyzer.workflow
      * .configurations.AbstractPCMWorkflowRunConfiguration)
      */
     @Override

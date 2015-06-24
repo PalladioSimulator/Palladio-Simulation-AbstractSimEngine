@@ -32,10 +32,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.palladiosimulator.analyzer.workflow.ConstantsContainer;
 
 import de.uka.ipd.sdq.simucom.rerunsimulation.filter.ProjectFilterPattern;
 import de.uka.ipd.sdq.workflow.launchconfig.tabs.TabHelper;
-import de.uka.ipd.sdq.workflow.pcm.ConstantsContainer;
 
 /**
  * The tab in the rerun simulation configuration that shows the generated project and its models
