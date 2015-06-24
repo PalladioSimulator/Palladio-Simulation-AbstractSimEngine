@@ -24,7 +24,7 @@
   
   <rm:searchPath name="AnalyzerFramework">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
-      <rm:uri format="https://sdqweb.ipd.kit.edu/eclipse/palladio/analyser/framework/nightly/"/>
+      <rm:uri format="https://sdqweb.ipd.kit.edu/eclipse/palladio/analyzer/framework/nightly/"/>
     </rm:provider>
   </rm:searchPath>
   
