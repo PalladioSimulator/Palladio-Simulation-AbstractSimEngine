@@ -4,11 +4,11 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
 import org.palladiosimulator.analyzer.workflow.configurations.AbstractPCMWorkflowRunConfiguration;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
+import org.palladiosimulator.reliability.FailureStatistics;
+import org.palladiosimulator.reliability.MarkovEvaluationType;
+import org.palladiosimulator.reliability.helper.MarkovFailureTypeHelper;
 
 import de.uka.ipd.sdq.codegen.simucontroller.runconfig.SimuComWorkflowConfiguration;
-import de.uka.ipd.sdq.reliability.core.FailureStatistics;
-import de.uka.ipd.sdq.reliability.core.MarkovEvaluationType;
-import de.uka.ipd.sdq.reliability.core.helper.MarkovFailureTypeHelper;
 import de.uka.ipd.sdq.workflow.jobs.CleanupFailedException;
 import de.uka.ipd.sdq.workflow.jobs.IBlackboardInteractingJob;
 import de.uka.ipd.sdq.workflow.jobs.JobFailedException;

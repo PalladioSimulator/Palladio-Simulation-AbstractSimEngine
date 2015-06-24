@@ -1,7 +1,8 @@
 package de.uka.ipd.sdq.simucomframework.exceptions;
 
-import de.uka.ipd.sdq.reliability.core.FailureStatistics.FailureType;
-import de.uka.ipd.sdq.reliability.core.MarkovFailureType;
+import org.palladiosimulator.reliability.MarkovFailureType;
+import org.palladiosimulator.reliability.FailureStatistics.FailureType;
+
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
 
 /**

@@ -131,18 +131,18 @@ abstract class SEFFBodyXpt {
 			«val resourceFailureType = ft as ResourceTimeoutFailureType»
 			(
 			  (failureException_«id».getFailureType() instanceof
-			  de.uka.ipd.sdq.reliability.core.MarkovResourceTimeoutFailureType)
+			  org.palladiosimulator.reliability.MarkovResourceTimeoutFailureType)
 			  &&
-			  (((de.uka.ipd.sdq.reliability.core.MarkovResourceTimeoutFailureType)
+			  (((org.palladiosimulator.reliability.MarkovResourceTimeoutFailureType)
 			  failureException_«id».getFailureType()).getPassiveResourceId().equals(
 			  "«resourceFailureType.passiveResource__ResourceTimeoutFailureType.id»"))
 			)
 		«ELSE»
 			(
 			  (failureException_«id».getFailureType() instanceof
-			  de.uka.ipd.sdq.reliability.core.MarkovSoftwareInducedFailureType)
+			  org.palladiosimulator.reliability.MarkovSoftwareInducedFailureType)
 			  &&
-			  (((de.uka.ipd.sdq.reliability.core.MarkovSoftwareInducedFailureType)
+			  (((org.palladiosimulator.reliability.MarkovSoftwareInducedFailureType)
 			  failureException_«id».getFailureType()).getSoftwareFailureId().equals("«ft.id»"))
 			)
 		«ENDIF»
@@ -151,9 +151,9 @@ abstract class SEFFBodyXpt {
 	def dispatch checkFailureTypeMatch(HardwareInducedFailureType ft, String id) '''
 		(
 		  (failureException_«id».getFailureType() instanceof
-		  de.uka.ipd.sdq.reliability.core.MarkovHardwareInducedFailureType)
+		  org.palladiosimulator.reliability.MarkovHardwareInducedFailureType)
 		  &&
-		  (((de.uka.ipd.sdq.reliability.core.MarkovHardwareInducedFailureType)
+		  (((org.palladiosimulator.reliability.MarkovHardwareInducedFailureType)
 		  failureException_«id».getFailureType()).getResourceTypeId().equals(
 		  "«ft.processingResourceType__HardwareInducedFailureType.id»"))
 		)
@@ -162,9 +162,9 @@ abstract class SEFFBodyXpt {
 	def dispatch checkFailureTypeMatch(NetworkInducedFailureType ft, String id) '''
 		(
 		  (failureException_«id».getFailureType() instanceof
-		  de.uka.ipd.sdq.reliability.core.MarkovNetworkInducedFailureType)
+		  org.palladiosimulator.reliability.MarkovNetworkInducedFailureType)
 		  &&
-		  (((de.uka.ipd.sdq.reliability.core.MarkovNetworkInducedFailureType)
+		  (((org.palladiosimulator.reliability.MarkovNetworkInducedFailureType)
 		  failureException_«id».getFailureType()).getCommLinkResourceTypeId().equals(
 		  "«ft.communicationLinkResourceType__NetworkInducedFailureType.id»"))
 		)
@@ -187,7 +187,7 @@ abstract class SEFFBodyXpt {
 				// Mark the original exception as handled (even if the
 				// handling alternative fails itself, this will be a new
 				// failure, and the original failure is counted as handled):
-				ctx.getModel().getFailureStatistics().increaseFailureCounter(de.uka.ipd.sdq.reliability.core.FailureStatistics.FailureType.HANDLED, failureException_«id».getFailureType());
+				ctx.getModel().getFailureStatistics().increaseFailureCounter(org.palladiosimulator.reliability.FailureStatistics.FailureType.HANDLED, failureException_«id».getFailureType());
 				failureException_«id» = null;
 		
 				«behaviour.recoveryActionAlternative»

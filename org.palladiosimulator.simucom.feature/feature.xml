@@ -41,7 +41,7 @@ loader.
       <import plugin="de.uka.ipd.sdq.simulation.abstractsimengine" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.errorhandling" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.fzi.se.accuracy" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="de.uka.ipd.sdq.reliability.core" version="3.1.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.reliability" version="3.1.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.simulation" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.edp2" version="2.0.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.probeframework" version="2.0.0" match="greaterOrEqual"/>
@@ -168,7 +168,7 @@ loader.
          unpack="false"/>
 
    <plugin
-         id="de.uka.ipd.sdq.reliability.core"
+         id="org.palladiosimulator.reliability"
          download-size="0"
          install-size="0"
          version="0.0.0"

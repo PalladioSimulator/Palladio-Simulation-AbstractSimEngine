@@ -200,7 +200,7 @@ class SimCallsXpt extends CallsXpt {
 				// If the failure-on-demand occurrence is handled,
 				// update the failure statistics accordingly:
 				this.getModel().getFailureStatistics().increaseFailureCounter(
-		de.uka.ipd.sdq.reliability.core.FailureStatistics.FailureType.HANDLED, failureException_«id».getFailureType()); //count handled failure
+		org.palladiosimulator.reliability.FailureStatistics.FailureType.HANDLED, failureException_«id».getFailureType()); //count handled failure
 
 			} else {
 
