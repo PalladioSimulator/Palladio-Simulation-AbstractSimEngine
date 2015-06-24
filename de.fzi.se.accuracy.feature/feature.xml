@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="de.fzi.se.accuracy.feature"
+      id="org.palladiosimulator.simucom.accuracy.feature"
       label="Palladio Accuracy Feature"
       version="1.0.0.qualifier"
       plugin="org.palladiosimulator.branding"

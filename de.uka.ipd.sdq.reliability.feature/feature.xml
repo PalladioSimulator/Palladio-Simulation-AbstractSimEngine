@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="de.uka.ipd.sdq.reliability.feature"
+      id="org.palladiosimulator.simucom.reliability.feature"
       label="PCM Reliablity Solver Feature"
       version="3.5.0.qualifier"
       plugin="org.palladiosimulator.branding"

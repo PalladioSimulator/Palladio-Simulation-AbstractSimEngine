@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="de.fzi.se.quality"
+      id="org.palladiosimulator.simucom.quality.feature"
       label="Palladio Quality Feature"
       version="1.0.0.qualifier"
       plugin="org.palladiosimulator.branding"

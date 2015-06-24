@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="de.uka.ipd.sdq.simucom.feature"
-      label="Palladio Component Model - Analyzer: SimuCom"
+      id="org.palladiosimulator.simucom.feature"
+      label="Palladio SimuCom Analyzer"
       version="4.0.0.qualifier"
       plugin="org.palladiosimulator.branding"
       license-feature="org.palladiosimulator.license"
       license-feature-version="1.0.0">
 
-   <description url="http://sdq.ipd.kit.edu">
+   <description url="https://sdqweb.ipd.kit.edu/wiki/SimuCom">
       Simulation framework for PCM instances. Uses Model-2-Text transformation
 to generate a plugin which is executed directly using OSGi dynamic
 loader.
