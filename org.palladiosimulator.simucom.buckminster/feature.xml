@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.palladiosimulator.simucom.buckminster"
+      label="Palladio SimuCom Analyzer - Buckminster Feature"
+      version="1.0.0"
+      license-feature="org.palladiosimulator.license"
+      license-feature-version="1.0.0">
+
+   <description url="https://sdqweb.ipd.kit.edu/wiki/SimuCom">
+      Simulation framework for PCM instances. Uses Model-2-Text transformation
+to generate a plugin which is executed directly using OSGi dynamic
+loader.
+   </description>
+
+   <includes
+         id="org.palladiosimulator.simucom.accuracy.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.palladiosimulator.simucom.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.palladiosimulator.simucom.quality.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.palladiosimulator.simucom.reliability.feature"
+         version="0.0.0"/>
+
+   <plugin
+         id="de.uka.ipd.sdq.codegen.simucontroller.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.uka.ipd.sdq.simucomframework.variables.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+</feature>
