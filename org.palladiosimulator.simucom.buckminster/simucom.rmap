@@ -14,17 +14,11 @@
   <rm:locator pattern="^org\.palladiosimulator\.analyzer.*" searchPathRef="AnalyzerFramework" failOnError="true"/>
   
   <rm:redirect pattern=".*"
-		href="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/Palladio/Core/trunk/Editors/org.palladiosimulator.editors.buckminster/editors.rmap" />
+		href="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/Palladio/Analyzer/Framework/trunk/org.palladiosimulator.analyzer.buckminster/analyzer.rmap" />
 
   <rm:searchPath name="SimuCom">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
       <rm:uri format="https://sdqweb.ipd.kit.edu/eclipse/palladio/analyser/simucom/nightly/"/>
-    </rm:provider>
-  </rm:searchPath>
-  
-  <rm:searchPath name="AnalyzerFramework">
-    <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
-      <rm:uri format="https://sdqweb.ipd.kit.edu/eclipse/palladio/analyzer/framework/nightly/"/>
     </rm:provider>
   </rm:searchPath>
   
