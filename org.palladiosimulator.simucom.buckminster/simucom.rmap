@@ -11,13 +11,20 @@
   <rm:locator pattern="^de\.uka\.ipd\.sdq\.simucom.*" searchPathRef="SimuCom" failOnError="true"/>
   <rm:locator pattern="^de\.uka\.ipd\.sdq\.simulation.*" searchPathRef="SimuCom" failOnError="true"/>
   <rm:locator pattern="^edu\.kit\.ipd\.sdq\.pcm\.codegen.*" searchPathRef="SimuCom" failOnError="true"/>
+  <rm:locator pattern="^org\.palladiosimulator\.analyzer.*" searchPathRef="AnalyzerFramework" failOnError="true"/>
   
   <rm:redirect pattern=".*"
-		href="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/Palladio/Core/trunk/PCM/org.palladiosimulator.pcm.buckminster/pcm.rmap" />
+		href="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/Palladio/Core/trunk/Editors/org.palladiosimulator.pcm.buckminster/editors.rmap" />
 
   <rm:searchPath name="SimuCom">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
       <rm:uri format="https://sdqweb.ipd.kit.edu/eclipse/palladio/analyser/simucom/nightly/"/>
+    </rm:provider>
+  </rm:searchPath>
+  
+  <rm:searchPath name="AnalyzerFramework">
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
+      <rm:uri format="https://sdqweb.ipd.kit.edu/eclipse/palladio/analyser/framework/nightly/"/>
     </rm:provider>
   </rm:searchPath>
   
