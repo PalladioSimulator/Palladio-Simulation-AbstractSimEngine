@@ -33,13 +33,6 @@ Service Effect Editor is also provided.
          unpack="false"/>
 
    <plugin
-         id="de.fzi.se.accuracy.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="de.fzi.se.accuracy.tests"
          download-size="0"
          install-size="0"

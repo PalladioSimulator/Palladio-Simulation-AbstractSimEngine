@@ -57,28 +57,7 @@
          unpack="false"/>
 
    <plugin
-         id="de.fzi.se.quality.edit.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="de.fzi.se.quality.editor"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="de.fzi.se.quality.editor.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="de.fzi.se.quality.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
