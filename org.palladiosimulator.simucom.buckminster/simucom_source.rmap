@@ -13,7 +13,7 @@
   <rm:locator pattern="^edu\.kit\.ipd\.sdq\.pcm\.codegen.*" searchPathRef="SimuCom" failOnError="true"/>
       
   <rm:redirect pattern=".*"
-		href="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/Palladio/Analyzer/Framework/trunk/org.palladiosimulator.analyzer.buckminster/analyzer.rmap" />
+		href="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/Palladio/Analyzer/SimuCom/trunk/org.palladiosimulator.simucom.buckminster/simucom.rmap" />
 
   <rm:searchPath name="SimuCom">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="svn" source="true">
