@@ -50,7 +50,7 @@
 			<metaModelPackage value="org.palladiosimulator.pcm.parameter.ParameterPackage"/>
 		</metaModel>
 		<metaModel id="completions.emf" class="oaw.type.emf.EmfMetaModel">
-			<metaModelPackage value="org.palladiosimulator.pcm.completions.CompletionsPackage"/>
+			<metaModelPackage value="org.palladiosimulator.analyzer.completions.CompletionsPackage"/>
 		</metaModel>		
 	    <metaModel id="pcm.reliability.emf" class="oaw.type.emf.EmfMetaModel">
 			<metaModelPackage value="org.palladiosimulator.pcm.reliability.ReliabilityPackage"/>
@@ -73,7 +73,7 @@
 			<metaModelPackage value="org.palladiosimulator.pcm.repository.RepositoryPackage"/>
 		</metaModel>
 		<metaModel id="completions.emf" class="oaw.type.emf.EmfMetaModel">
-			<metaModelPackage value="org.palladiosimulator.pcm.completions.CompletionsPackage"/>
+			<metaModelPackage value="org.palladiosimulator.analyzer.completions.CompletionsPackage"/>
 		</metaModel>		
 		<metaModel id="units.emf" class="oaw.type.emf.EmfMetaModel">
 			<metaModelPackage value="de.uka.ipd.sdq.units.UnitsPackage"/>

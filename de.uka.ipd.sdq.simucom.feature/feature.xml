@@ -18,7 +18,7 @@ loader.
       <import plugin="de.uka.ipd.sdq.probfunction" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.stoex" version="2.2.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.pcm" version="3.6.0" match="greaterOrEqual"/>
-      <import plugin="org.palladiosimulator.pcm.completions" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.analyzer.completions" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.featureconfig" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.featuremodel" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.pcm.resources" version="3.6.0" match="greaterOrEqual"/>

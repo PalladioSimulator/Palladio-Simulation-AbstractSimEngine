@@ -1,7 +1,7 @@
 package de.uka.ipd.sdq.pcm.transformations.builder.connectors;
 
-import org.palladiosimulator.pcm.completions.Completion;
-import org.palladiosimulator.pcm.completions.CompletionsFactory;
+import org.palladiosimulator.analyzer.completions.Completion;
+import org.palladiosimulator.analyzer.completions.CompletionsFactory;
 import org.palladiosimulator.pcm.core.composition.AssemblyConnector;
 import org.palladiosimulator.pcm.core.composition.CompositionFactory;
 import org.palladiosimulator.pcm.repository.RepositoryComponent;

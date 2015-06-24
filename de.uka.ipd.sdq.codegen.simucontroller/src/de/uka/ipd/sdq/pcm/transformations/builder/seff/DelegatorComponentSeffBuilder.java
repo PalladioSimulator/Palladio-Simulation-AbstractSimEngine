@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.palladiosimulator.pcm.completions.CompletionsFactory;
-import org.palladiosimulator.pcm.completions.DelegatingExternalCallAction;
+import org.palladiosimulator.analyzer.completions.CompletionsFactory;
+import org.palladiosimulator.analyzer.completions.DelegatingExternalCallAction;
 import org.palladiosimulator.pcm.repository.OperationProvidedRole;
 import org.palladiosimulator.pcm.repository.OperationRequiredRole;
 import org.palladiosimulator.pcm.repository.OperationSignature;

@@ -1,7 +1,7 @@
 package de.uka.ipd.sdq.pcm.codegen.simucom.transformations
 
 import com.google.inject.Inject
-import org.palladiosimulator.pcm.completions.DelegatingExternalCallAction
+import org.palladiosimulator.analyzer.completions.DelegatingExternalCallAction
 import org.palladiosimulator.pcm.reliability.FailureType
 import org.palladiosimulator.pcm.reliability.HardwareInducedFailureType
 import org.palladiosimulator.pcm.reliability.NetworkInducedFailureType

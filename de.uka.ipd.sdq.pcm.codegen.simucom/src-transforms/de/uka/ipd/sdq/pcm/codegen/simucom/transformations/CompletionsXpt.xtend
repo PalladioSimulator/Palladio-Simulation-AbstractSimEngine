@@ -4,8 +4,8 @@ import com.google.inject.Inject
 import de.uka.ipd.sdq.pcm.codegen.simucom.helper.M2TFileSystemAccess
 import org.palladiosimulator.pcm.repository.RepositoryComponent
 import org.palladiosimulator.pcm.system.System
-import org.palladiosimulator.pcm.completions.CompletionRepository
-import org.palladiosimulator.pcm.completions.Completion
+import org.palladiosimulator.analyzer.completions.CompletionRepository
+import org.palladiosimulator.analyzer.completions.Completion
 
 class CompletionsXpt {
 	@Inject M2TFileSystemAccess fsa

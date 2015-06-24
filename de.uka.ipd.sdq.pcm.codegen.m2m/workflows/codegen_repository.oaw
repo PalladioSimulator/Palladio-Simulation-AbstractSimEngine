@@ -103,7 +103,7 @@
 			<metaModelPackage value="org.palladiosimulator.pcm.reliability.ReliabilityPackage"/>
 		</metaModel>
 		<metaModel id="completions.emf" class="oaw.type.emf.EmfMetaModel">
-			<metaModelPackage value="org.palladiosimulator.pcm.completions.CompletionsPackage"/>
+			<metaModelPackage value="org.palladiosimulator.analyzer.completions.CompletionsPackage"/>
 		</metaModel>
 		<metaModel id="featuremodel.emf" class="oaw.type.emf.EmfMetaModel"> 
 			<metaModelPackage value="de.uka.ipd.sdq.featuremodel.featuremodelPackage"/>

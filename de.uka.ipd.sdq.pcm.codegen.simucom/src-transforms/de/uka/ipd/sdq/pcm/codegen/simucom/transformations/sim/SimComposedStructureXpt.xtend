@@ -1,7 +1,7 @@
 package de.uka.ipd.sdq.pcm.codegen.simucom.transformations.sim
 
 import com.google.inject.Inject
-import org.palladiosimulator.pcm.completions.Completion
+import org.palladiosimulator.analyzer.completions.Completion
 import org.palladiosimulator.pcm.core.composition.AssemblyContext
 import org.palladiosimulator.pcm.core.composition.ComposedStructure
 import org.palladiosimulator.pcm.core.entity.ComposedProvidingRequiringEntity

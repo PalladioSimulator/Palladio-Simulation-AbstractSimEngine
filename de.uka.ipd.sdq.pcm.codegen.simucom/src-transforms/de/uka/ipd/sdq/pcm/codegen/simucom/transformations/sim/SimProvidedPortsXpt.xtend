@@ -1,7 +1,7 @@
 package de.uka.ipd.sdq.pcm.codegen.simucom.transformations.sim
 
 import com.google.inject.Inject
-import org.palladiosimulator.pcm.completions.Completion
+import org.palladiosimulator.analyzer.completions.Completion
 import org.palladiosimulator.pcm.core.entity.ComposedProvidingRequiringEntity
 import de.uka.ipd.sdq.pcm.codegen.simucom.transformations.JavaCoreXpt
 import de.uka.ipd.sdq.pcm.codegen.simucom.transformations.JavaNamesExt

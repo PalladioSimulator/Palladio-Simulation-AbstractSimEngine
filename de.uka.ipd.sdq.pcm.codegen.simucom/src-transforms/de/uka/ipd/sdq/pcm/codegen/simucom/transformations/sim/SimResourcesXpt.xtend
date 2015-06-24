@@ -1,7 +1,7 @@
 package de.uka.ipd.sdq.pcm.codegen.simucom.transformations.sim
 
 import com.google.inject.Inject
-import org.palladiosimulator.pcm.completions.NetworkDemandParametricResourceDemand
+import org.palladiosimulator.analyzer.completions.NetworkDemandParametricResourceDemand
 import de.uka.ipd.sdq.pcm.codegen.simucom.helper.M2TFileSystemAccess
 import de.uka.ipd.sdq.pcm.codegen.simucom.transformations.JavaNamesExt
 import de.uka.ipd.sdq.pcm.codegen.simucom.transformations.ResourcesXpt

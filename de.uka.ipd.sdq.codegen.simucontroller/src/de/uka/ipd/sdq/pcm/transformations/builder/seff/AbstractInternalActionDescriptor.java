@@ -1,7 +1,7 @@
 package de.uka.ipd.sdq.pcm.transformations.builder.seff;
 
-import org.palladiosimulator.pcm.completions.CompletionsFactory;
-import org.palladiosimulator.pcm.completions.NetworkDemandParametricResourceDemand;
+import org.palladiosimulator.analyzer.completions.CompletionsFactory;
+import org.palladiosimulator.analyzer.completions.NetworkDemandParametricResourceDemand;
 import org.palladiosimulator.pcm.core.CoreFactory;
 import org.palladiosimulator.pcm.core.PCMRandomVariable;
 import org.palladiosimulator.pcm.resourcetype.CommunicationLinkResourceType;
