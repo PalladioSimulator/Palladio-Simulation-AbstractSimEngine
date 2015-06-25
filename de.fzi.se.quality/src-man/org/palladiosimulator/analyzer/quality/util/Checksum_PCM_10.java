@@ -9,8 +9,8 @@ import java.util.logging.Logger;
 import java.util.zip.CRC32;
 import java.util.zip.Checksum;
 
-import de.fzi.se.quality.qualityannotation.PCMServiceSpecification;
-import de.fzi.se.quality.qualityannotation.ServiceSpecification;
+import org.palladiosimulator.analyzer.quality.qualityannotation.PCMServiceSpecification;
+import org.palladiosimulator.analyzer.quality.qualityannotation.ServiceSpecification;
 import org.palladiosimulator.pcm.core.entity.ResourceRequiredRole;
 import org.palladiosimulator.pcm.parameter.VariableUsage;
 import org.palladiosimulator.pcm.repository.CollectionDataType;

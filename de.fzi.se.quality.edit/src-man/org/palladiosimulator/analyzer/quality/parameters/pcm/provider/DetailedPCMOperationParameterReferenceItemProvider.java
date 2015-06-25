@@ -6,7 +6,7 @@ package org.palladiosimulator.analyzer.quality.parameters.pcm.provider;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.palladiosimulator.analyzer.quality.qualityannotation.provider.QualityPalladioItemProvider;
 
-import de.fzi.se.quality.parameters.pcm.PCMOperationParameterReference;
+import org.palladiosimulator.analyzer.quality.parameters.pcm.PCMOperationParameterReference;
 
 /** Item provider for {@link PCMOperationParameterReference}.
  * @author groenda

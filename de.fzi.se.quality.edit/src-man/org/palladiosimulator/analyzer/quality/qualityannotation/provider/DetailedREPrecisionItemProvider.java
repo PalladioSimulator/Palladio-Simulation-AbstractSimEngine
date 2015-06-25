@@ -8,8 +8,8 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.palladiosimulator.analyzer.quality.edit.util.Helper;
 
-import de.fzi.se.quality.qualityannotation.QualityAnnotationPackage;
-import de.fzi.se.quality.qualityannotation.REPrecision;
+import org.palladiosimulator.analyzer.quality.qualityannotation.QualityAnnotationPackage;
+import org.palladiosimulator.analyzer.quality.qualityannotation.REPrecision;
 
 /**Text(REPrecision,x,y): NoC=x CP=y;
  * @author groenda

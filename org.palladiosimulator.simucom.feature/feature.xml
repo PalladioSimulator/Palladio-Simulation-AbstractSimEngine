@@ -30,7 +30,7 @@ loader.
       <import plugin="org.eclipse.xtend"/>
       <import plugin="org.eclipse.uml2.uml.ecore.importer"/>
       <import plugin="de.uka.ipd.sdq.scheduler" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="de.fzi.se.quality" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.analyzer.quality" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.apache.log4j" version="1.2.13" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.ecore.change"/>
@@ -99,7 +99,7 @@ loader.
       <import plugin="de.uka.ipd.sdq.units.edit" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.uml2.common.edit" version="1.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources" version="3.8.0" match="compatible"/>
-      <import plugin="de.fzi.se.quality.edit" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.analyzer.quality.edit" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.workflow.launchconfig" version="2.0.3" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.workflow.mdsd" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui"/>
@@ -171,21 +171,21 @@ loader.
          unpack="false"/>
 
    <plugin
-         id="de.fzi.se.quality"
+         id="org.palladiosimulator.analyzer.quality"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="de.fzi.se.quality.edit"
+         id="org.palladiosimulator.analyzer.quality.edit"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="de.fzi.se.quality.editor"
+         id="org.palladiosimulator.analyzer.quality.editor"
          download-size="0"
          install-size="0"
          version="0.0.0"

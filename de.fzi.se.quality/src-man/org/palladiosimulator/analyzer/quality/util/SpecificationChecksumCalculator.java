@@ -3,7 +3,7 @@
  */
 package org.palladiosimulator.analyzer.quality.util;
 
-import de.fzi.se.quality.qualityannotation.ServiceSpecification;
+import org.palladiosimulator.analyzer.quality.qualityannotation.ServiceSpecification;
 
 /**Interface for algorithm which calculate the checksum for a given specification.
  * @author groenda

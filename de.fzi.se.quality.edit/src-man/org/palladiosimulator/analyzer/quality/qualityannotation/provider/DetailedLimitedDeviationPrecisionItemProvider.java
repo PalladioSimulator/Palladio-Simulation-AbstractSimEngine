@@ -5,7 +5,7 @@ package org.palladiosimulator.analyzer.quality.qualityannotation.provider;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 
-import de.fzi.se.quality.qualityannotation.LimitedDeviationPrecision;
+import org.palladiosimulator.analyzer.quality.qualityannotation.LimitedDeviationPrecision;
 
 /**Text(LimitedDeviationPrecision): Limited: abs=x rel=y
  * @author groenda

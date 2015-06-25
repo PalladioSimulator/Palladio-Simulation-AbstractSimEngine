@@ -5,7 +5,7 @@ package org.palladiosimulator.analyzer.quality.parameters.pcm.provider;
 
 import org.eclipse.emf.common.notify.Adapter;
 
-import de.fzi.se.quality.parameters.pcm.PCMParameterReference;
+import org.palladiosimulator.analyzer.quality.parameters.pcm.PCMParameterReference;
 
 /**Adapter factory providing detailed information on {@link PCMParameterReference} instances.
  * @author groenda

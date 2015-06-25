@@ -8,10 +8,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xtend.expression.AbstractExpressionsUsingWorkflowComponent.GlobalVarDef;
 
-import de.fzi.se.quality.QualityPackage;
-import de.fzi.se.quality.parameters.ParametersPackage;
-import de.fzi.se.quality.parameters.pcm.PCMPackage;
-import de.fzi.se.quality.qualityannotation.QualityAnnotationPackage;
+import org.palladiosimulator.analyzer.quality.QualityPackage;
+import org.palladiosimulator.analyzer.quality.parameters.ParametersPackage;
+import org.palladiosimulator.analyzer.quality.parameters.pcm.PCMPackage;
+import org.palladiosimulator.analyzer.quality.qualityannotation.QualityAnnotationPackage;
 
 import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
 import org.palladiosimulator.analyzer.workflow.configurations.AbstractCodeGenerationWorkflowRunConfiguration;

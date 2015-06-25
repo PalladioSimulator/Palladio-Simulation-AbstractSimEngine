@@ -13,8 +13,8 @@ import org.eclipse.xtend.expression.AbstractExpressionsUsingWorkflowComponent.Gl
 
 import com.google.inject.Injector;
 
-import de.fzi.se.quality.QualityFactory;
-import de.fzi.se.quality.QualityRepository;
+import org.palladiosimulator.analyzer.quality.QualityFactory;
+import org.palladiosimulator.analyzer.quality.QualityRepository;
 import de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs.xtendworkflow.AllocationWorkflowComponent;
 import de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs.xtendworkflow.SystemWorkflowComponent;
 import de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs.xtendworkflow.UsageModelWorkflowComponent;

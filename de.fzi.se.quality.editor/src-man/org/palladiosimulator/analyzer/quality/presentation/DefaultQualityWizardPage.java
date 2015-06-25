@@ -15,10 +15,10 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Listener;
 
 import swing2swt.layout.FlowLayout;
-import de.fzi.se.quality.qualityannotation.PCMRECategory;
-import de.fzi.se.quality.qualityannotation.PCMRERequestCategory;
-import de.fzi.se.quality.qualityannotation.QualityAnnotationFactory;
-import de.fzi.se.quality.qualityannotation.REPrecision;
+import org.palladiosimulator.analyzer.quality.qualityannotation.PCMRECategory;
+import org.palladiosimulator.analyzer.quality.qualityannotation.PCMRERequestCategory;
+import org.palladiosimulator.analyzer.quality.qualityannotation.QualityAnnotationFactory;
+import org.palladiosimulator.analyzer.quality.qualityannotation.REPrecision;
 
 /**Wizard page which allows to set precision defaults for all categories of the PCM.
  * @author groenda

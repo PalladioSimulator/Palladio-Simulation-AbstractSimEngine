@@ -6,7 +6,7 @@ package org.palladiosimulator.analyzer.quality.util;
 import java.util.Arrays;
 import java.util.List;
 
-import de.fzi.se.quality.qualityannotation.ServiceSpecification;
+import org.palladiosimulator.analyzer.quality.qualityannotation.ServiceSpecification;
 
 /**Contains general utilities used for the validation of performance specifications.
  * Provides checksum calculation algorithms.

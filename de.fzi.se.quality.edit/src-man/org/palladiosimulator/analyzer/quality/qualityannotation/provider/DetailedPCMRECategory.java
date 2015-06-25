@@ -6,7 +6,7 @@ package org.palladiosimulator.analyzer.quality.qualityannotation.provider;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.palladiosimulator.analyzer.quality.edit.util.Helper;
 
-import de.fzi.se.quality.qualityannotation.PCMRECategory;
+import org.palladiosimulator.analyzer.quality.qualityannotation.PCMRECategory;
 
 /**
  * @author groenda

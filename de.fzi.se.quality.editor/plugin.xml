@@ -15,7 +15,7 @@
             id="org.eclipse.emf.ecore.Wizard.category.ID"
             name="%_UI_Wizard_category"/>
       <wizard
-            id="de.fzi.se.quality.presentation.QualityModelWizardID"
+            id="org.palladiosimulator.analyzer.quality.presentation.QualityModelWizardID"
             name="%_UI_QualityModelWizard_label"
             class="org.palladiosimulator.analyzer.quality.presentation.QualityModelWizard"
             category="org.eclipse.emf.ecore.Wizard.category.ID"
@@ -27,7 +27,7 @@
 
    <extension point="org.eclipse.ui.editors">
       <editor
-            id="de.fzi.se.quality.presentation.QualityEditorID"
+            id="org.palladiosimulator.analyzer.quality.presentation.QualityEditorID"
             name="%_UI_QualityEditor_label"
             icon="icons/full/obj16/QualityModelFile.gif"
             extensions="quality"
@@ -41,9 +41,9 @@
             id="org.eclipse.emf.ecore.Wizard.category.ID"
             name="%_UI_Wizard_category"/>
       <wizard
-            id="de.fzi.se.quality.qualityannotation.presentation.QualityAnnotationModelWizardID"
+            id="org.palladiosimulator.analyzer.quality.qualityannotation.presentation.QualityAnnotationModelWizardID"
             name="%_UI_QualityAnnotationModelWizard_label"
-            class="de.fzi.se.quality.qualityannotation.presentation.QualityAnnotationModelWizard"
+            class="org.palladiosimulator.analyzer.quality.qualityannotation.presentation.QualityAnnotationModelWizard"
             category="org.eclipse.emf.ecore.Wizard.category.ID"
             icon="icons/full/obj16/QualityAnnotationModelFile.gif">
          <description>%_UI_QualityAnnotationModelWizard_description</description>
@@ -53,12 +53,12 @@
 
    <extension point="org.eclipse.ui.editors">
       <editor
-            id="de.fzi.se.quality.qualityannotation.presentation.QualityAnnotationEditorID"
+            id="org.palladiosimulator.analyzer.quality.qualityannotation.presentation.QualityAnnotationEditorID"
             name="%_UI_QualityAnnotationEditor_label"
             icon="icons/full/obj16/QualityAnnotationModelFile.gif"
             extensions="qualityannotation"
-            class="de.fzi.se.quality.qualityannotation.presentation.QualityAnnotationEditor"
-            contributorClass="de.fzi.se.quality.qualityannotation.presentation.QualityAnnotationActionBarContributor">
+            class="org.palladiosimulator.analyzer.quality.qualityannotation.presentation.QualityAnnotationEditor"
+            contributorClass="org.palladiosimulator.analyzer.quality.qualityannotation.presentation.QualityAnnotationActionBarContributor">
       </editor>
    </extension>
 
@@ -67,9 +67,9 @@
             id="org.eclipse.emf.ecore.Wizard.category.ID"
             name="%_UI_Wizard_category"/>
       <wizard
-            id="de.fzi.se.quality.parameters.presentation.ParametersModelWizardID"
+            id="org.palladiosimulator.analyzer.quality.parameters.presentation.ParametersModelWizardID"
             name="%_UI_ParametersModelWizard_label"
-            class="de.fzi.se.quality.parameters.presentation.ParametersModelWizard"
+            class="org.palladiosimulator.analyzer.quality.parameters.presentation.ParametersModelWizard"
             category="org.eclipse.emf.ecore.Wizard.category.ID"
             icon="icons/full/obj16/ParametersModelFile.gif">
          <description>%_UI_ParametersModelWizard_description</description>
@@ -79,12 +79,12 @@
 
    <extension point="org.eclipse.ui.editors">
       <editor
-            id="de.fzi.se.quality.parameters.presentation.ParametersEditorID"
+            id="org.palladiosimulator.analyzer.quality.parameters.presentation.ParametersEditorID"
             name="%_UI_ParametersEditor_label"
             icon="icons/full/obj16/ParametersModelFile.gif"
             extensions="parameters"
-            class="de.fzi.se.quality.parameters.presentation.ParametersEditor"
-            contributorClass="de.fzi.se.quality.parameters.presentation.ParametersActionBarContributor">
+            class="org.palladiosimulator.analyzer.quality.parameters.presentation.ParametersEditor"
+            contributorClass="org.palladiosimulator.analyzer.quality.parameters.presentation.ParametersActionBarContributor">
       </editor>
    </extension>
 
@@ -93,9 +93,9 @@
             id="org.eclipse.emf.ecore.Wizard.category.ID"
             name="%_UI_Wizard_category"/>
       <wizard
-            id="de.fzi.se.quality.parameters.pcm.presentation.PCMModelWizardID"
+            id="org.palladiosimulator.analyzer.quality.parameters.pcm.presentation.PCMModelWizardID"
             name="%_UI_PCMModelWizard_label"
-            class="de.fzi.se.quality.parameters.pcm.presentation.PCMModelWizard"
+            class="org.palladiosimulator.analyzer.quality.parameters.pcm.presentation.PCMModelWizard"
             category="org.eclipse.emf.ecore.Wizard.category.ID"
             icon="icons/full/obj16/PCMModelFile.gif">
          <description>%_UI_PCMModelWizard_description</description>
@@ -105,12 +105,12 @@
 
    <extension point="org.eclipse.ui.editors">
       <editor
-            id="de.fzi.se.quality.parameters.pcm.presentation.PCMEditorID"
+            id="org.palladiosimulator.analyzer.quality.parameters.pcm.presentation.PCMEditorID"
             name="%_UI_PCMEditor_label"
             icon="icons/full/obj16/PCMModelFile.gif"
             extensions="pcm"
-            class="de.fzi.se.quality.parameters.pcm.presentation.PCMEditor"
-            contributorClass="de.fzi.se.quality.parameters.pcm.presentation.PCMActionBarContributor">
+            class="org.palladiosimulator.analyzer.quality.parameters.pcm.presentation.PCMEditor"
+            contributorClass="org.palladiosimulator.analyzer.quality.parameters.pcm.presentation.PCMActionBarContributor">
       </editor>
    </extension>
    <extension
@@ -119,7 +119,7 @@
             category="de.uka.ipd.sdq.pcmbench.palladio_modeling_category"
             class="org.palladiosimulator.analyzer.quality.presentation.DefaultQualityModelWizard"
             icon="icons/full/obj16/QualityModelFile.gif"
-            id="de.fzi.se.quality.presentation.DefaultQualityModelWizardID"
+            id="org.palladiosimulator.analyzer.quality.presentation.DefaultQualityModelWizardID"
             name="%_UI_DefaultQualityModelWizard_label">
          <description>
             %_UI_DefaultQualityModelWizard_description

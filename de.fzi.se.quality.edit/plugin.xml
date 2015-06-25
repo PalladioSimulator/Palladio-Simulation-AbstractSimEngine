@@ -13,7 +13,7 @@
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
             uri="http://fzi.de/PalladioComponentModel/Quality/0.2"
-            class="de.fzi.se.quality.provider.QualityItemProviderAdapterFactory"
+            class="org.palladiosimulator.analyzer.quality.provider.QualityItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
                org.eclipse.emf.edit.provider.IStructuredItemContentProvider
@@ -37,7 +37,7 @@
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
             uri="http://fzi.de/PalladioComponentModel/Quality/Parameters/0.2"
-            class="de.fzi.se.quality.parameters.provider.ParametersItemProviderAdapterFactory"
+            class="org.palladiosimulator.analyzer.quality.parameters.provider.ParametersItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
                org.eclipse.emf.edit.provider.IStructuredItemContentProvider

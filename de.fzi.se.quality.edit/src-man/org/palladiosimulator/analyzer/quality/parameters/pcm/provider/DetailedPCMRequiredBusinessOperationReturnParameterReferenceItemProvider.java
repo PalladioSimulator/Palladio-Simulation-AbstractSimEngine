@@ -6,7 +6,7 @@ package org.palladiosimulator.analyzer.quality.parameters.pcm.provider;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.palladiosimulator.pcm.ui.provider.SignaturePrinter;
 
-import de.fzi.se.quality.parameters.pcm.PCMRequiredBusinessOperationReturnParameterReference;
+import org.palladiosimulator.analyzer.quality.parameters.pcm.PCMRequiredBusinessOperationReturnParameterReference;
 
 /**Item provider with details for {@link PCMRequiredBusinessOperationReturnParameterReference}.
  * @author groenda

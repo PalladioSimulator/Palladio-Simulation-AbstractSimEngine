@@ -26,12 +26,12 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ISetSelectionTarget;
 
-import de.fzi.se.quality.QualityFactory;
-import de.fzi.se.quality.QualityRepository;
-import de.fzi.se.quality.qualityannotation.PCMRERequestCategory;
-import de.fzi.se.quality.qualityannotation.PCMServiceSpecification;
-import de.fzi.se.quality.qualityannotation.QualityAnnotation;
-import de.fzi.se.quality.qualityannotation.QualityAnnotationFactory;
+import org.palladiosimulator.analyzer.quality.QualityFactory;
+import org.palladiosimulator.analyzer.quality.QualityRepository;
+import org.palladiosimulator.analyzer.quality.qualityannotation.PCMRERequestCategory;
+import org.palladiosimulator.analyzer.quality.qualityannotation.PCMServiceSpecification;
+import org.palladiosimulator.analyzer.quality.qualityannotation.QualityAnnotation;
+import org.palladiosimulator.analyzer.quality.qualityannotation.QualityAnnotationFactory;
 import org.palladiosimulator.pcm.repository.BasicComponent;
 import org.palladiosimulator.pcm.repository.InfrastructureRequiredRole;
 import org.palladiosimulator.pcm.repository.OperationRequiredRole;

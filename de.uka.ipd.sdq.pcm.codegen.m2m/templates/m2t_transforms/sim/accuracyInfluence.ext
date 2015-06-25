@@ -11,7 +11,7 @@ String getResourceName(ResourceDemandingSEFF seff) : JAVA
 	;
 
 String getResourceName(CharacterisedPCMParameterPartition partition) : JAVA
-	de.uka.sdq.pcm.transformations.Helper.getResourceFileName(de.fzi.se.quality.qualityannotation.CharacterisedPCMParameterPartition)
+	de.uka.sdq.pcm.transformations.Helper.getResourceFileName(org.palladiosimulator.analyzer.quality.qualityannotation.CharacterisedPCMParameterPartition)
 	;
 
 // access to quality annotations

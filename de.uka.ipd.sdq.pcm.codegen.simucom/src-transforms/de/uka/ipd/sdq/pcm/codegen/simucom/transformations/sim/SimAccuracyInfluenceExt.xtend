@@ -1,14 +1,14 @@
 package de.uka.ipd.sdq.pcm.codegen.simucom.transformations.sim
 
-import de.fzi.se.quality.QualityRepository
-import de.fzi.se.quality.parameters.ParameterReference
-import de.fzi.se.quality.parameters.pcm.PCMComponentParameterReference
-import de.fzi.se.quality.parameters.pcm.PCMOperationParameterReference
-import de.fzi.se.quality.parameters.pcm.PCMParameterReference
-import de.fzi.se.quality.parameters.pcm.PCMRequiredBusinessOperationReturnParameterReference
-import de.fzi.se.quality.qualityannotation.CharacterisedPCMParameterPartition
-import de.fzi.se.quality.qualityannotation.PCMServiceSpecification
-import de.fzi.se.quality.qualityannotation.QualityAnnotation
+import org.palladiosimulator.analyzer.quality.QualityRepository
+import org.palladiosimulator.analyzer.quality.parameters.ParameterReference
+import org.palladiosimulator.analyzer.quality.parameters.pcm.PCMComponentParameterReference
+import org.palladiosimulator.analyzer.quality.parameters.pcm.PCMOperationParameterReference
+import org.palladiosimulator.analyzer.quality.parameters.pcm.PCMParameterReference
+import org.palladiosimulator.analyzer.quality.parameters.pcm.PCMRequiredBusinessOperationReturnParameterReference
+import org.palladiosimulator.analyzer.quality.qualityannotation.CharacterisedPCMParameterPartition
+import org.palladiosimulator.analyzer.quality.qualityannotation.PCMServiceSpecification
+import org.palladiosimulator.analyzer.quality.qualityannotation.QualityAnnotation
 import org.palladiosimulator.pcm.seff.ResourceDemandingSEFF
 import de.uka.ipd.sdq.pcm.transformations.Helper
 

@@ -15,9 +15,9 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import de.fzi.se.quality.qualityannotation.LimitedDeviationPrecision;
-import de.fzi.se.quality.qualityannotation.Precision;
-import de.fzi.se.quality.qualityannotation.QualityAnnotationFactory;
+import org.palladiosimulator.analyzer.quality.qualityannotation.LimitedDeviationPrecision;
+import org.palladiosimulator.analyzer.quality.qualityannotation.Precision;
+import org.palladiosimulator.analyzer.quality.qualityannotation.QualityAnnotationFactory;
 
 /**Creates a SWT Group for {@link Precision} selection.
  * @author groenda

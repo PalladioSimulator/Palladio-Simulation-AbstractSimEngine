@@ -1,7 +1,7 @@
 package de.uka.ipd.sdq.pcm.codegen.simucom.transformations.sim
 
 import com.google.inject.Inject
-import de.fzi.se.quality.qualityannotation.PCMParameterPartition
+import org.palladiosimulator.analyzer.quality.qualityannotation.PCMParameterPartition
 import org.palladiosimulator.pcm.core.entity.Entity
 import de.uka.ipd.sdq.pcm.codegen.simucom.transformations.CallsXpt
 import de.uka.ipd.sdq.pcm.codegen.simucom.transformations.JavaNamesExt

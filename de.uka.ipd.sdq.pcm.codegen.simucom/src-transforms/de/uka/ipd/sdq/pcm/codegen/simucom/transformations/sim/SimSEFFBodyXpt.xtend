@@ -1,9 +1,9 @@
 package de.uka.ipd.sdq.pcm.codegen.simucom.transformations.sim
 
 import com.google.inject.Inject
-import de.fzi.se.quality.parameters.pcm.PCMComponentParameterReference
-import de.fzi.se.quality.parameters.pcm.PCMOperationParameterReference
-import de.fzi.se.quality.qualityannotation.PCMParameterPartition
+import org.palladiosimulator.analyzer.quality.parameters.pcm.PCMComponentParameterReference
+import org.palladiosimulator.analyzer.quality.parameters.pcm.PCMOperationParameterReference
+import org.palladiosimulator.analyzer.quality.qualityannotation.PCMParameterPartition
 import org.palladiosimulator.analyzer.completions.DelegatingExternalCallAction
 import de.uka.ipd.sdq.pcm.codegen.simucom.transformations.JavaNamesExt
 import de.uka.ipd.sdq.pcm.codegen.simucom.transformations.PCMext

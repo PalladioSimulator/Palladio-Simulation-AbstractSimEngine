@@ -1,13 +1,13 @@
 package de.uka.ipd.sdq.pcm.codegen.simucom.transformations.sim
 
 import com.google.inject.Inject
-import de.fzi.se.quality.parameters.pcm.PCMComponentParameterReference
-import de.fzi.se.quality.parameters.pcm.PCMOperationParameterReference
-import de.fzi.se.quality.parameters.pcm.PCMRequiredBusinessOperationReturnParameterReference
-import de.fzi.se.quality.qualityannotation.CharacterisedPCMParameterPartition
-import de.fzi.se.quality.qualityannotation.CharacterisedPCMParameterPartitionInterval
-import de.fzi.se.quality.qualityannotation.CharacterisedPCMParameterPartitionRange
-import de.fzi.se.quality.qualityannotation.PCMParameterPartition
+import org.palladiosimulator.analyzer.quality.parameters.pcm.PCMComponentParameterReference
+import org.palladiosimulator.analyzer.quality.parameters.pcm.PCMOperationParameterReference
+import org.palladiosimulator.analyzer.quality.parameters.pcm.PCMRequiredBusinessOperationReturnParameterReference
+import org.palladiosimulator.analyzer.quality.qualityannotation.CharacterisedPCMParameterPartition
+import org.palladiosimulator.analyzer.quality.qualityannotation.CharacterisedPCMParameterPartitionInterval
+import org.palladiosimulator.analyzer.quality.qualityannotation.CharacterisedPCMParameterPartitionRange
+import org.palladiosimulator.analyzer.quality.qualityannotation.PCMParameterPartition
 import org.palladiosimulator.pcm.seff.AbstractAction
 import org.palladiosimulator.pcm.seff.ResourceDemandingSEFF
 

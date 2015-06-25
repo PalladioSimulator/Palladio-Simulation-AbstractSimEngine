@@ -6,7 +6,7 @@ package org.palladiosimulator.analyzer.quality.qualityannotation.provider;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.palladiosimulator.pcm.ui.provider.PalladioItemProvider;
 
-import de.fzi.se.quality.qualityannotation.PCMServiceSpecification;
+import org.palladiosimulator.analyzer.quality.qualityannotation.PCMServiceSpecification;
 
 /**Uses Palladio-TreeViewer to display target.
  * @author groenda

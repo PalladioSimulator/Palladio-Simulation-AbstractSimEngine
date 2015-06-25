@@ -5,7 +5,7 @@ package org.palladiosimulator.analyzer.quality.qualityannotation.provider;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 
-import de.fzi.se.quality.qualityannotation.CharacterisedPCMParameterPartitionRange;
+import org.palladiosimulator.analyzer.quality.qualityannotation.CharacterisedPCMParameterPartitionRange;
 
 /**
  * @author groenda
