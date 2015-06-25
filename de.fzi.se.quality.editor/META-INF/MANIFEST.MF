@@ -6,14 +6,14 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .,
  swt-grouplayout.jar,
  swing2swt.jar
-Bundle-Activator: de.fzi.se.quality.presentation.QualityEditorPlugin$Implementation
+Bundle-Activator: org.palladiosimulator.analyzer.quality.presentation.QualityEditorPlugin$Implementation
 Bundle-Vendor: sdq.ipd.uka.de
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: de.fzi.se.quality.parameters.pcm.presentation,
- de.fzi.se.quality.parameters.presentation,
- de.fzi.se.quality.presentation,
- de.fzi.se.quality.qualityannotation.presentation
+Export-Package: org.palladiosimulator.analyzer.quality.parameters.pcm.presentation,
+ org.palladiosimulator.analyzer.quality.parameters.presentation,
+ org.palladiosimulator.analyzer.quality.presentation,
+ org.palladiosimulator.analyzer.quality.qualityannotation.presentation
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources;visibility:=reexport,
  org.palladiosimulator.analyzer.quality.edit;bundle-version="1.0.0";visibility:=reexport,

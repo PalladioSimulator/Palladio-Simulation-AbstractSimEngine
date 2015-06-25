@@ -20,7 +20,7 @@
    <extension point="org.eclipse.emf.ecore.extension_parser">
       <parser
             type="quality"
-            class="de.fzi.se.quality.util.QualityResourceFactoryImpl"/>
+            class="org.palladiosimulator.analyzer.quality.util.QualityResourceFactoryImpl"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
@@ -62,4 +62,63 @@
             class="de.fzi.se.quality.parameters.pcm.util.PCMResourceFactoryImpl"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Quality -->
+      <package
+            uri="http://palladiosimulator.org/Analyzer/Quality/1.0"
+            class="org.palladiosimulator.analyzer.quality.QualityPackage"
+            genModel="model/Quality.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated Quality -->
+      <parser
+            type="quality"
+            class="org.palladiosimulator.analyzer.quality.util.QualityResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Quality -->
+      <package
+            uri="http://palladiosimulator.org/Analyzer/Quality/QualityAnnotation/1.0"
+            class="org.palladiosimulator.analyzer.quality.qualityannotation.QualityAnnotationPackage"
+            genModel="model/Quality.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated Quality -->
+      <parser
+            type="qualityannotation"
+            class="org.palladiosimulator.analyzer.quality.qualityannotation.util.QualityAnnotationResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Quality -->
+      <package
+            uri="http://palladiosimulator.org/Analyzer/Quality/Parameters/1.0"
+            class="org.palladiosimulator.analyzer.quality.parameters.ParametersPackage"
+            genModel="model/Quality.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated Quality -->
+      <parser
+            type="parameters"
+            class="org.palladiosimulator.analyzer.quality.parameters.util.ParametersResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Quality -->
+      <package
+            uri="http://palladiosimulator.org/Analyzer/Quality/Parameters/PCM/1.0"
+            class="org.palladiosimulator.analyzer.quality.parameters.pcm.PCMPackage"
+            genModel="model/Quality.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated Quality -->
+      <parser
+            type="quality_parameters_pcm"
+            class="org.palladiosimulator.analyzer.quality.parameters.pcm.util.PCMResourceFactoryImpl"/>
+   </extension>
 </plugin>

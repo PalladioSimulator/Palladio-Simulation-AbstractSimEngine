@@ -7,18 +7,18 @@ Bundle-ClassPath: .
 Bundle-Vendor: sdq.ipd.uka.de
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: de.fzi.se.quality,
- de.fzi.se.quality.impl,
- de.fzi.se.quality.parameters,
- de.fzi.se.quality.parameters.impl,
- de.fzi.se.quality.parameters.pcm,
- de.fzi.se.quality.parameters.pcm.impl,
- de.fzi.se.quality.parameters.pcm.util,
- de.fzi.se.quality.parameters.util,
- de.fzi.se.quality.qualityannotation,
- de.fzi.se.quality.qualityannotation.impl,
- de.fzi.se.quality.qualityannotation.util,
- de.fzi.se.quality.util
+Export-Package: org.palladiosimulator.analyzer.quality,
+ org.palladiosimulator.analyzer.quality.impl,
+ org.palladiosimulator.analyzer.quality.parameters,
+ org.palladiosimulator.analyzer.quality.parameters.impl,
+ org.palladiosimulator.analyzer.quality.parameters.pcm,
+ org.palladiosimulator.analyzer.quality.parameters.pcm.impl,
+ org.palladiosimulator.analyzer.quality.parameters.pcm.util,
+ org.palladiosimulator.analyzer.quality.parameters.util,
+ org.palladiosimulator.analyzer.quality.qualityannotation,
+ org.palladiosimulator.analyzer.quality.qualityannotation.impl,
+ org.palladiosimulator.analyzer.quality.qualityannotation.util,
+ org.palladiosimulator.analyzer.quality.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.ocl.ecore;visibility:=reexport,
