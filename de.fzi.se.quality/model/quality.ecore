@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="quality" nsURI="http://fzi.de/PalladioComponentModel/Quality/0.2"
-    nsPrefix="quality">
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="quality" nsURI="http://palladiosimulator.org/Analyzer/Quality/1.0"
+    nsPrefix="org.palladiosimulator.analyzer">
   <eClassifiers xsi:type="ecore:EClass" name="QualityRepository" eSuperTypes="platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.ecore#//Identifier">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Container for quality annotations."/>
@@ -13,8 +13,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="qualityRepository" ordered="false"
         lowerBound="1" eType="#//QualityRepository" eOpposite="#//QualityRepository/qualityStatements"/>
   </eClassifiers>
-  <eSubpackages name="qualityannotation" nsURI="http://fzi.de/PalladioComponentModel/Quality/QualityAnnotation/0.2"
-      nsPrefix="qualityannotation">
+  <eSubpackages name="qualityannotation" nsURI="http://palladiosimulator.org/Analyzer/Quality/QualityAnnotation/1.0"
+      nsPrefix="org.palladiosimulator.analyzer.quality">
     <eClassifiers xsi:type="ecore:EClass" name="ParameterValueDeviation">
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameterReference" ordered="false"
           lowerBound="1" eType="#//parameters/ParameterReference" containment="true"
@@ -904,8 +904,8 @@
           lowerBound="1" eType="ecore:EClass platform:/plugin/org.palladiosimulator.pcm/model/pcm.ecore#//seff/BranchAction"/>
     </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="parameters" nsURI="http://fzi.de/PalladioComponentModel/Quality/Parameters/0.2"
-      nsPrefix="parameters">
+  <eSubpackages name="parameters" nsURI="http://palladiosimulator.org/Analyzer/Quality/Parameters/1.0"
+      nsPrefix="org.palladiosimulator.analyzer.quality">
     <eClassifiers xsi:type="ecore:EClass" name="ParameterPartition" abstract="true"
         eSuperTypes="platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.ecore#//Identifier">
       <eStructuralFeatures xsi:type="ecore:EReference" name="qualityAnnotation" ordered="false"
@@ -977,8 +977,8 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameterValueDeviation"
           ordered="false" eType="#//qualityannotation/ParameterValueDeviation" eOpposite="#//qualityannotation/ParameterValueDeviation/parameterReference"/>
     </eClassifiers>
-    <eSubpackages name="pcm" nsURI="http://fzi.de/PalladioComponentModel/Quality/Parameters/PCM/0.2"
-        nsPrefix="pcmparameters">
+    <eSubpackages name="pcm" nsURI="http://palladiosimulator.org/Analyzer/Quality/Parameters/PCM/1.0"
+        nsPrefix="org.palladiosimulator.analyzer.quality.parameters">
       <eClassifiers xsi:type="ecore:EClass" name="PCMParameterReference" abstract="true"
           eSuperTypes="#//parameters/ParameterReference"/>
       <eClassifiers xsi:type="ecore:EClass" name="PCMParameterValue" eSuperTypes="#//parameters/ParameterValue">

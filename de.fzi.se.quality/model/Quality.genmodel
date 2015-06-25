@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/uml2/2.2.0/GenModel"
-    modelDirectory="/de.fzi.se.quality/src" modelPluginID="de.fzi.se.quality"
-    templateDirectory="/de.fzi.se.quality/templates" dynamicTemplates="true" modelName="Quality"
+    modelDirectory="/org.palladiosimulator.analyzer.quality/src" editDirectory="/org.palladiosimulator.analyzer.quality.edit/src"
+    editorDirectory="/org.palladiosimulator.analyzer.quality.editor/src" modelPluginID="org.palladiosimulator.analyzer.quality"
+    templateDirectory="/org.palladiosimulator.analyzer.quality/templates" dynamicTemplates="true"
+    modelName="Quality" modelPluginClass="" editPluginClass="org.palladiosimulator.analyzer.quality.provider.QualityEditPlugin"
+    editorPluginClass="org.palladiosimulator.analyzer.quality.presentation.QualityEditorPlugin"
     rootExtendsInterface="org.eclipse.emf.cdo.CDOObject" rootExtendsClass="org.eclipse.emf.internal.cdo.CDOObjectImpl"
-    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" featureDelegation="Dynamic"
-    complianceLevel="6.0" copyrightFields="false" runtimeVersion="2.3" usedGenPackages="platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.genmodel#//identifier platform:/plugin/org.palladiosimulator.pcm/model/pcm.genmodel#//pcm platform:/plugin/de.uka.ipd.sdq.stoex/model/stoex.genmodel#//stoex platform:/plugin/de.uka.ipd.sdq.units/model/Units.genmodel#//units platform:/plugin/de.uka.ipd.sdq.probfunction/model/ProbabilityFunction.genmodel#//probfunction"
+    codeFormatting="true" testSuiteClass="org.palladiosimulator.analyzer.quality.tests.QualityAllTests"
+    importerID="org.eclipse.emf.importer.ecore" featureDelegation="Dynamic" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.palladiosimulator.analyzer.quality.edit"
+    editorPluginID="org.palladiosimulator.analyzer.quality.editor" runtimeVersion="2.3"
+    usedGenPackages="platform:/plugin/de.uka.ipd.sdq.identifier/model/identifier.genmodel#//identifier platform:/plugin/org.palladiosimulator.pcm/model/pcm.genmodel#//pcm platform:/plugin/de.uka.ipd.sdq.stoex/model/stoex.genmodel#//stoex platform:/plugin/de.uka.ipd.sdq.units/model/Units.genmodel#//units platform:/plugin/de.uka.ipd.sdq.probfunction/model/ProbabilityFunction.genmodel#//probfunction"
     cleanup="true">
   <genAnnotations source="http://www.eclipse.org/emf/2002/GenModel/importer/org.eclipse.uml2.uml.ecore.importer">
     <details key="ECORE_TAGGED_VALUES" value="PROCESS"/>
@@ -31,7 +37,7 @@
   <modelPluginVariables>EMF_OCL=org.eclipse.ocl.ecore</modelPluginVariables>
   <modelPluginVariables>EMFT_OCL=org.eclipse.emf.ocl</modelPluginVariables>
   <modelPluginVariables>CDO=org.eclipse.emf.cdo</modelPluginVariables>
-  <genPackages xsi:type="genmodel:GenPackage" prefix="Quality" basePackage="de.fzi.se"
+  <genPackages xsi:type="genmodel:GenPackage" prefix="Quality" basePackage="org.palladiosimulator.analyzer"
       resource="XML" disposableProviderFactory="true" ecorePackage="quality.ecore#/">
     <genClasses xsi:type="genmodel:GenClass" ecoreClass="quality.ecore#//QualityRepository">
       <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
@@ -41,7 +47,7 @@
       <genFeatures xsi:type="genmodel:GenFeature" property="None" notify="false" createChild="false"
           ecoreFeature="ecore:EReference quality.ecore#//QualityStatement/qualityRepository"/>
     </genClasses>
-    <nestedGenPackages xsi:type="genmodel:GenPackage" prefix="QualityAnnotation" basePackage="de.fzi.se.quality"
+    <nestedGenPackages xsi:type="genmodel:GenPackage" prefix="QualityAnnotation" basePackage="org.palladiosimulator.analyzer.quality"
         resource="XML" disposableProviderFactory="true" ecorePackage="quality.ecore#//qualityannotation">
       <genEnums xsi:type="genmodel:GenEnum" typeSafeEnumCompatible="false" ecoreEnum="quality.ecore#//qualityannotation/PCMRERequestCategory">
         <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="quality.ecore#//qualityannotation/PCMRERequestCategory/Resource"/>
@@ -356,7 +362,7 @@
         </genOperations>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages xsi:type="genmodel:GenPackage" prefix="Parameters" basePackage="de.fzi.se.quality"
+    <nestedGenPackages xsi:type="genmodel:GenPackage" prefix="Parameters" basePackage="org.palladiosimulator.analyzer.quality"
         resource="XML" disposableProviderFactory="true" ecorePackage="quality.ecore#//parameters">
       <genClasses xsi:type="genmodel:GenClass" image="false" ecoreClass="quality.ecore#//parameters/ParameterPartition">
         <genFeatures xsi:type="genmodel:GenFeature" property="None" notify="false"
@@ -413,7 +419,7 @@
         <genFeatures xsi:type="genmodel:GenFeature" property="None" notify="false"
             createChild="false" ecoreFeature="ecore:EReference quality.ecore#//parameters/ParameterReference/parameterValueDeviation"/>
       </genClasses>
-      <nestedGenPackages xsi:type="genmodel:GenPackage" prefix="PCM" basePackage="de.fzi.se.quality.parameters"
+      <nestedGenPackages xsi:type="genmodel:GenPackage" prefix="PCM" basePackage="org.palladiosimulator.analyzer.quality.parameters"
           resource="XML" disposableProviderFactory="true" contentTypeIdentifier=""
           fileExtensions="quality_parameters_pcm" ecorePackage="quality.ecore#//parameters/pcm">
         <genClasses xsi:type="genmodel:GenClass" image="false" ecoreClass="quality.ecore#//parameters/pcm/PCMParameterReference"/>
