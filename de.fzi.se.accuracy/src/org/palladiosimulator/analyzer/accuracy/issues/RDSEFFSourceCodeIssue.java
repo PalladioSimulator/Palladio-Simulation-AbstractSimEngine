@@ -1,7 +1,7 @@
 /**
  *
  */
-package de.fzi.se.accuracy.issues;
+package org.palladiosimulator.analyzer.accuracy.issues;
 
 import de.uka.ipd.sdq.errorhandling.SeverityAndIssue;
 import de.uka.ipd.sdq.errorhandling.SeverityEnum;

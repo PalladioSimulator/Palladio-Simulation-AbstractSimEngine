@@ -1,7 +1,7 @@
 /**
  *
  */
-package de.fzi.se.accuracy.issues;
+package org.palladiosimulator.analyzer.accuracy.issues;
 
 import org.eclipse.emf.ecore.EObject;
 

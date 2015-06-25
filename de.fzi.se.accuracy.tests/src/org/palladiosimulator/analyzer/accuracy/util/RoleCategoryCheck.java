@@ -1,4 +1,4 @@
-package de.fzi.se.accuracy.util;
+package org.palladiosimulator.analyzer.accuracy.util;
 
 import org.palladiosimulator.pcm.core.entity.ResourceInterfaceRequiringEntity;
 import org.palladiosimulator.pcm.repository.InfrastructureRequiredRole;

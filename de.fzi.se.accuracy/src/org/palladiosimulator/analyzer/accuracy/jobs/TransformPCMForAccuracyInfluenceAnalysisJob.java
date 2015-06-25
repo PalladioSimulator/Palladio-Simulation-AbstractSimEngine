@@ -1,19 +1,17 @@
 /**
  *
  */
-package de.fzi.se.accuracy.jobs;
+package org.palladiosimulator.analyzer.accuracy.jobs;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
-
-import de.fzi.se.accuracy.transformation.AbstractAccuracyInfluenceSEFFTransformationStrategy;
-import de.fzi.se.accuracy.transformation.AccuracyInfluenceSEFFTransformationStrategyAsSpecified;
-import de.fzi.se.accuracy.transformation.AccuracyInfluenceSEFFTransformationStrategyMaximum;
-import de.fzi.se.accuracy.transformation.AccuracyInfluenceSEFFTransformationStrategyMinimum;
-
+import org.palladiosimulator.analyzer.accuracy.transformation.AbstractAccuracyInfluenceSEFFTransformationStrategy;
+import org.palladiosimulator.analyzer.accuracy.transformation.AccuracyInfluenceSEFFTransformationStrategyAsSpecified;
+import org.palladiosimulator.analyzer.accuracy.transformation.AccuracyInfluenceSEFFTransformationStrategyMaximum;
+import org.palladiosimulator.analyzer.accuracy.transformation.AccuracyInfluenceSEFFTransformationStrategyMinimum;
 import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
 import org.palladiosimulator.analyzer.workflow.configurations.AbstractPCMWorkflowRunConfiguration;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;

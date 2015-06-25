@@ -1,15 +1,13 @@
 /**
  *
  */
-package de.fzi.se.accuracy.transformation;
+package org.palladiosimulator.analyzer.accuracy.transformation;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import de.fzi.se.accuracy.issues.AccuracyIssueFactory;
-import de.fzi.se.accuracy.jobs.TransformPCMForAccuracyInfluenceAnalysisJob;
 import de.fzi.se.quality.QualityPackage;
 import de.fzi.se.quality.QualityRepository;
 import de.fzi.se.quality.qualityannotation.ExactlyAsSpecifiedPrecision;
@@ -25,6 +23,8 @@ import de.fzi.se.quality.util.QualityAnnotationLookup;
 import de.uka.ipd.sdq.errorhandling.SeverityAndIssue;
 import de.uka.ipd.sdq.errorhandling.SeverityEnum;
 
+import org.palladiosimulator.analyzer.accuracy.issues.AccuracyIssueFactory;
+import org.palladiosimulator.analyzer.accuracy.jobs.TransformPCMForAccuracyInfluenceAnalysisJob;
 import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
 import org.palladiosimulator.analyzer.workflow.runconfig.AccuracyInfluenceAnalysisState;
 import org.palladiosimulator.pcm.seff.AbstractAction;

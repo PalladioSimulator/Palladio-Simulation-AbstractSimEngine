@@ -1,7 +1,7 @@
 /**
  *
  */
-package de.fzi.se.accuracy.transformation;
+package org.palladiosimulator.analyzer.accuracy.transformation;
 
 import org.apache.log4j.Logger;
 
@@ -13,30 +13,30 @@ import de.fzi.se.quality.qualityannotation.util.QualityAnnotationSwitch;
 import static de.fzi.se.quality.util.StoExHelper.*;
 import org.palladiosimulator.pcm.core.PCMRandomVariable;
 
-/**Modifies a given PCM Random Variable according to the minimum allowed by a precision.
- * First set the random variable by {@link #setModifiedVariable(PCMRandomVariable)} then transform it by {@link PCMRandomVariableSpecificationAccuracyMinimumTrafo#doSwitch(org.eclipse.emf.ecore.EObject)}.
+/**Modifies a given PCM Random Variable according to the maximum allowed by a precision.
+ * First set the random variable by {@link #setModifiedVariable(PCMRandomVariable)} then transform it by {@link #doSwitch(org.eclipse.emf.ecore.EObject)}.
 
  * @author groenda
  *
  */
-public class PCMRandomVariableSpecificationAccuracyMinimumTrafo extends
+public class PCMRandomVariableSpecificationAccuracyMaximumTrafo extends
 		QualityAnnotationSwitch<Boolean> {
 	/** Logger for this class. */
-	private static final Logger LOGGER = Logger.getLogger(PCMRandomVariableSpecificationAccuracyMinimumTrafo.class);
+	private static final Logger LOGGER = Logger.getLogger(PCMRandomVariableSpecificationAccuracyMaximumTrafo.class);
 
 	/** The variable modified by the transformation when {@link #doSwitch(org.eclipse.emf.ecore.EObject)} is called. */
 	private PCMRandomVariable modifiedVariable;
 
-	/** Minimum value reported will not be smaller than this bound.*/
-	private String lowerLimit;
+	/** Maximal value reported will not be greater than this bound. */
+	private String upperLimit;
 
-	/**Sets the lower bound for the minimum.
-	 * The transformation will not result in values below this bound.
+	/**Sets the upper bound for the maximum.
+	 * The transformation will not result in values above this bound.
 	 * The bound is automatically reset after an invocation of {@link #doSwitch(org.eclipse.emf.ecore.EObject)}.
 	 * @param lowerLimit The lower bound.
 	 */
-	public void setLowerLimit(String lowerLimit) {
-		this.lowerLimit = lowerLimit;
+	public void setUpperLimit(String upperLimit) {
+		this.upperLimit = upperLimit;
 	}
 
 	/**Set the variable to modify upon invocation of {@link #doSwitch(org.eclipse.emf.ecore.EObject)}.
@@ -49,12 +49,12 @@ public class PCMRandomVariableSpecificationAccuracyMinimumTrafo extends
 	@Override
 	public Boolean caseNoPrecision(NoPrecision object) {
 		checkModifiedVariable();
-		if (lowerLimit == null) {
-			String msg = "Dynamic type inference of specifications to determine minimal value is not implemented (yet).";
+		if (upperLimit == null) {
+			String msg = "Dynamic type inference of specificaitons to determine maximal value is not implemented (yet).";
 			LOGGER.error(msg);
 			throw new IllegalArgumentException(msg);
 		} else {
-			modifiedVariable.setSpecification(lowerLimit);
+			modifiedVariable.setSpecification(upperLimit);
 		}
 		reset();
 		return true;
@@ -73,15 +73,14 @@ public class PCMRandomVariableSpecificationAccuracyMinimumTrafo extends
 	public Boolean caseLimitedDeviationPrecision(
 			LimitedDeviationPrecision object) {
 		checkModifiedVariable();
-		// newSpec = max(min(noc.specification - absolute, noc.specification - noc.specification * relative, 0);
 		String spec = modifiedVariable.getSpecification();
 		String abs = "" + object.getAbsolute();
 		String rel = "" + object.getRelative();
-		String min = "MinDeviation(" + spec + ", " + abs + ", " + rel + ")";
-		if (lowerLimit == null) {
-			modifiedVariable.setSpecification(min);
+		String max = "MaxDeviation(" + spec + ", " + abs + ", " + rel + ")";
+		if (upperLimit == null) {
+			modifiedVariable.setSpecification(max);
 		} else {
-			modifiedVariable.setSpecification(stoExMax(min, lowerLimit));
+			modifiedVariable.setSpecification(stoExMin(max, upperLimit));
 		}
 		reset();
 		return true;
@@ -111,6 +110,6 @@ public class PCMRandomVariableSpecificationAccuracyMinimumTrafo extends
 	 */
 	private void reset() {
 		modifiedVariable = null;
-		lowerLimit = null;
+		upperLimit = null;
 	}
 }

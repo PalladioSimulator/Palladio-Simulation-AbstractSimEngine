@@ -1,4 +1,4 @@
-package de.fzi.se.accuracy.jobs;
+package org.palladiosimulator.analyzer.accuracy.jobs;
 
 import java.util.ArrayList;
 import java.util.List;

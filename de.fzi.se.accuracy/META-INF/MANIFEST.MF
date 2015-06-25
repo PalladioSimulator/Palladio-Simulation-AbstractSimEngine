@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Accuracy Influence Analysis
-Bundle-SymbolicName: de.fzi.se.accuracy
+Bundle-SymbolicName: org.palladiosimulator.analyzer.accuracy
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: FZI Forschungszentrum Informatik, Forschungsbereich SE
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
@@ -11,6 +11,6 @@ Require-Bundle: org.palladiosimulator.analyzer.workflow;bundle-version="1.0.0",
  de.uka.ipd.sdq.errorhandling;bundle-version="1.0.0",
  de.fzi.se.quality;bundle-version="1.0.0";visibility:=reexport,
  org.palladiosimulator.pcm;bundle-version="4.0.0"
-Export-Package: de.fzi.se.accuracy.issues,
- de.fzi.se.accuracy.jobs,
- de.fzi.se.accuracy.transformation
+Export-Package: org.palladiosimulator.analyzer.accuracy.issues,
+ org.palladiosimulator.analyzer.accuracy.jobs,
+ org.palladiosimulator.analyzer.accuracy.transformation

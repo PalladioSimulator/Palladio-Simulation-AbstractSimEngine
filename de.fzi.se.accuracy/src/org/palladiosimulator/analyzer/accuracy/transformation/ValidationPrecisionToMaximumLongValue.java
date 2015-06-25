@@ -1,7 +1,7 @@
 /**
  *
  */
-package de.fzi.se.accuracy.transformation;
+package org.palladiosimulator.analyzer.accuracy.transformation;
 
 import org.apache.log4j.Logger;
 

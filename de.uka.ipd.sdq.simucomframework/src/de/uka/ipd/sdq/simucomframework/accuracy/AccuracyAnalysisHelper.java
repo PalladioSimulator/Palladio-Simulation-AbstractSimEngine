@@ -1,6 +1,6 @@
 package de.uka.ipd.sdq.simucomframework.accuracy;
 
-import de.fzi.se.accuracy.issues.AccuracyIssueFactory;
+import org.palladiosimulator.analyzer.accuracy.issues.AccuracyIssueFactory;
 import org.palladiosimulator.pcm.seff.AbstractAction;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
 import de.uka.ipd.sdq.simucomframework.variables.EvaluationProxy;

@@ -1,7 +1,7 @@
 /**
  *
  */
-package de.fzi.se.accuracy.util;
+package org.palladiosimulator.analyzer.accuracy.util;
 
 import java.io.File;
 import java.io.IOException;

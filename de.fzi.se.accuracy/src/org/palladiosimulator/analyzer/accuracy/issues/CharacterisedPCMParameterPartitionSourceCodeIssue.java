@@ -1,7 +1,7 @@
 /**
  *
  */
-package de.fzi.se.accuracy.issues;
+package org.palladiosimulator.analyzer.accuracy.issues;
 
 import de.fzi.se.quality.qualityannotation.CharacterisedPCMParameterPartition;
 import de.uka.ipd.sdq.errorhandling.SeverityAndIssue;

@@ -1,7 +1,7 @@
 /**
  *
  */
-package de.fzi.se.accuracy.transformation;
+package org.palladiosimulator.analyzer.accuracy.transformation;
 
 import de.fzi.se.quality.qualityannotation.REPrecision;
 
