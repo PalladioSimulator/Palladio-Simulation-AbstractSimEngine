@@ -7,7 +7,7 @@ Bundle-ClassPath: .,
  swt-grouplayout.jar,
  swing2swt.jar
 Bundle-Activator: org.palladiosimulator.analyzer.quality.presentation.QualityEditorPlugin$Implementation
-Bundle-Vendor: sdq.ipd.uka.de
+Bundle-Vendor: palladiosimulator.org
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.palladiosimulator.analyzer.quality.parameters.pcm.presentation,

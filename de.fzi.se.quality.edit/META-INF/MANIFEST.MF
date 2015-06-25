@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.palladiosimulator.analyzer.quality.edit;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.palladiosimulator.analyzer.quality.provider.QualityEditPlugin$Implementation
-Bundle-Vendor: sdq.ipd.uka.de
+Bundle-Vendor: palladiosimulator.org
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.palladiosimulator.analyzer.quality.parameters.pcm.provider,
