@@ -14,7 +14,7 @@
 
   <rm:searchPath name="SimuCom">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
-      <rm:uri format="https://sdqweb.ipd.kit.edu/eclipse/palladio/analyser/simucom/nightly/"/>
+      <rm:uri format="https://sdqweb.ipd.kit.edu/eclipse/palladio/analyzer/simucom/nightly/"/>
     </rm:provider>
   </rm:searchPath>
   
