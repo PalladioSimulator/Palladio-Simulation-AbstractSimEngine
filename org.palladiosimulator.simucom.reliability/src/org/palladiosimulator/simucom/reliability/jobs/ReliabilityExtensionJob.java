@@ -13,10 +13,9 @@ public class ReliabilityExtensionJob extends AbstractSimuComExtensionJob {
 
     @Override
     public final void execute(final IProgressMonitor monitor) throws JobFailedException, UserCanceledException {
-        ReliabilityExtensionJobConfiguration configuration = (ReliabilityExtensionJobConfiguration) getJobConfiguration();
+        final ReliabilityExtensionJobConfiguration configuration = (ReliabilityExtensionJobConfiguration) getJobConfiguration();
         if (configuration.isSimulateFailures()) {
             addCodeGenerationAdvice("simulation_template_methods_reliability");
         }
-        System.out.println("YES!!!");
     }
 }
