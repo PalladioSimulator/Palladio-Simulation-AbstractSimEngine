@@ -184,4 +184,18 @@ loader.
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="de.uka.ipd.sdq.simulation.abstractsimengine"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.uka.ipd.sdq.simulation.abstractsimengine.desmoj"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
