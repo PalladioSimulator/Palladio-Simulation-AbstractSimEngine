@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: de.fzi.se.quality.editor;singleton:=true
+Bundle-SymbolicName: org.palladiosimulator.analyzer.quality.editor;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .,
  swt-grouplayout.jar,
@@ -16,7 +16,7 @@ Export-Package: de.fzi.se.quality.parameters.pcm.presentation,
  de.fzi.se.quality.qualityannotation.presentation
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources;visibility:=reexport,
- de.fzi.se.quality.edit;bundle-version="1.0.0";visibility:=reexport,
+ org.palladiosimulator.analyzer.quality.edit;bundle-version="1.0.0";visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.edit.ui;visibility:=reexport,
  org.eclipse.ui.ide;visibility:=reexport,
