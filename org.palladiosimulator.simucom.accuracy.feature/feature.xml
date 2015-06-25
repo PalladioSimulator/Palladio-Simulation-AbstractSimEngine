@@ -21,19 +21,19 @@ Service Effect Editor is also provided.
       <import plugin="de.uka.ipd.sdq.errorhandling" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.fzi.se.quality" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui"/>
-      <import plugin="de.fzi.se.accuracy" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.analyzer.accuracy" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.pcm" version="4.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
-         id="de.fzi.se.accuracy"
+         id="org.palladiosimulator.analyzer.accuracy"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="de.fzi.se.accuracy.tests"
+         id="org.palladiosimulator.analyzer.accuracy.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"

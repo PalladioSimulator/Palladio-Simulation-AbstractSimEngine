@@ -40,7 +40,7 @@ loader.
       <import plugin="org.jscience" version="4.1.3" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.simulation.abstractsimengine" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.errorhandling" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="de.fzi.se.accuracy" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.analyzer.accuracy" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.reliability" version="3.1.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.simulation" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.edp2" version="2.0.0" match="greaterOrEqual"/>
@@ -192,7 +192,7 @@ loader.
          unpack="false"/>
 
    <plugin
-         id="de.fzi.se.accuracy"
+         id="org.palladiosimulator.analyzer.accuracy"
          download-size="0"
          install-size="0"
          version="0.0.0"

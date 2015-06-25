@@ -42,7 +42,7 @@ public class CreateSimuComMetaDataFilesJob extends AbstractCreateMetaDataFilesJo
             "de.uka.ipd.sdq.simucomframework", "de.uka.ipd.sdq.simucomframework.simucomstatus",
             "de.uka.ipd.sdq.simucomframework.variables", "org.apache.log4j", "org.eclipse.osgi",
             "de.uka.ipd.sdq.scheduler", "org.jscience", "org.palladiosimulator.probeframework",
-            "org.palladiosimulator.metricspec", "org.palladiosimulator.reliability", "de.fzi.se.accuracy",
+            "org.palladiosimulator.metricspec", "org.palladiosimulator.reliability", "org.palladiosimulator.analyzer.accuracy",
             "de.uka.ipd.sdq.probfunction.math", "org.palladiosimulator.measurementframework;bundle-version=\"1.0.0\"",
             "org.palladiosimulator.edp2;bundle-version=\"2.0.0\""
     };

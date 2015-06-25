@@ -70,7 +70,7 @@ implements IJob, IIssueReceiver {
 	}
 
 	/* (non-Javadoc)
-	 * @see de.fzi.se.accuracy.jobs.IIssueReceiver#addIssues(java.util.List)
+	 * @see org.palladiosimulator.analyzer.accuracy.jobs.IIssueReceiver#addIssues(java.util.List)
 	 */
 	public void addIssues(List<SeverityAndIssue> issues) {
 		if (issues != null) {
