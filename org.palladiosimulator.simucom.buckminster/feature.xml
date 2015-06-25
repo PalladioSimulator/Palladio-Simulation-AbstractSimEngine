@@ -13,17 +13,9 @@ loader.
    </description>
 
    <includes
-         id="org.palladiosimulator.simucom.accuracy.feature"
-         version="0.0.0"/>
-
-   <includes
          id="org.palladiosimulator.simucom.feature"
          version="0.0.0"/>
 
-   <includes
-         id="org.palladiosimulator.simucom.quality.feature"
-         version="0.0.0"/>
-         
    <requires>
       <import plugin="org.junit"/>
       <import plugin="de.uka.ipd.sdq.simucomframework"/>
