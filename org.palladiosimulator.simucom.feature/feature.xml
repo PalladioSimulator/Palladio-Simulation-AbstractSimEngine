@@ -85,10 +85,8 @@ loader.
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.equinox.event" version="1.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.osgi" version="3.10.2" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.emf.query"/>
-      <import plugin="org.apache.commons.collections15"/>
       <import plugin="org.eclipse.emf.cdo"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="de.uka.ipd.sdq.identifier" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.units" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.uml2.types" version="1.0.0" match="greaterOrEqual"/>
@@ -117,6 +115,11 @@ loader.
       <import plugin="de.uka.ipd.sdq.codegen.simucontroller" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.pcm" version="3.6.0" match="greaterOrEqual"/>
       <import feature="de.uka.ipd.sdq.simulation.abstractsimengine.feature" version="3.3.0" match="greaterOrEqual"/>
+      <import plugin="de.uka.ipd.sdq.pcm.codegen.m2m" version="3.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.swt" version="3.7.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.debug.ui" version="3.7.101" match="greaterOrEqual"/>
+      <import plugin="de.uka.ipd.sdq.simucomframework" version="1.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -168,13 +171,6 @@ loader.
          unpack="false"/>
 
    <plugin
-         id="org.palladiosimulator.reliability"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="de.fzi.se.quality"
          download-size="0"
          install-size="0"
@@ -218,6 +214,13 @@ loader.
 
    <plugin
          id="de.uka.ipd.sdq.simucom.rerunsimulation"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.palladiosimulator.simucom.reliability"
          download-size="0"
          install-size="0"
          version="0.0.0"
