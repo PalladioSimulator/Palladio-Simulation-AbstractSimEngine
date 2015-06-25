@@ -31,7 +31,7 @@ loader.
       <import plugin="org.eclipse.uml2.uml.ecore.importer"/>
       <import plugin="de.uka.ipd.sdq.scheduler" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.analyzer.quality" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.apache.log4j" version="1.2.13" match="greaterOrEqual"/>
+      <import plugin="org.apache.log4j"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.ecore.change"/>
       <import plugin="de.uka.ipd.sdq.statistics" version="1.0.0" match="greaterOrEqual"/>
@@ -58,7 +58,7 @@ loader.
       <import plugin="org.eclipse.pde.ui"/>
       <import plugin="de.uka.ipd.sdq.sensorframework"/>
       <import plugin="org.eclipse.emf.common.ui"/>
-      <import plugin="de.uka.ipd.sdq.workflow.launchconfig" version="1.1.0" match="greaterOrEqual"/>
+      <import plugin="de.uka.ipd.sdq.workflow.launchconfig"/>
       <import plugin="de.uka.ipd.sdq.sensorframework.dialogs"/>
       <import plugin="org.palladiosimulator.editors.dialogs"/>
       <import plugin="org.eclipse.osgi.services"/>
@@ -105,7 +105,7 @@ loader.
       <import plugin="org.eclipse.swt" version="3.7.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.debug.ui" version="3.7.101" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.simucomframework" version="1.0.0" match="greaterOrEqual"/>
-      <import feature="de.uka.ipd.sdq.simulation.abstractsimengine.feature" version="3.3.0" match="greaterOrEqual"/>
+      <import plugin="de.desmoj"/>
    </requires>
 
    <plugin
