@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pcm.repository:Repository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pcm.repository="http://palladiosimulator.org/PalladioComponentModel/Repository/1.0" xmlns:pcm.seff="http://palladiosimulator.org/PalladioComponentModel/SEFF/1.0" xmlns:stoex="http://sdq.ipd.uka.de/StochasticExpressions/1.0" id="_PFfcwKYFEduWZfldHy3B1Q" entityName="MediaStoreRepository">
+<pcm.repository:Repository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pcm.repository="http://palladiosimulator.org/PalladioComponentModel/Repository/1.0" xmlns:pcm.seff="http://palladiosimulator.org/PalladioComponentModel/SEFF/1.0" xmlns:stoex="http://sdq.ipd.uka.de/StochasticExpressions/2.2" id="_PFfcwKYFEduWZfldHy3B1Q" entityName="MediaStoreRepository">
   <components__Repository xsi:type="pcm.repository:BasicComponent" id="_RLTSs6YFEduWZfldHy3B1Q" entityName="WebGUI">
     <providedRoles_InterfaceProvidingEntity id="_R3NqkKYSEduWZfldHy3B1Q" providedInterface__ProvidedRole="_O42SdKYGEduWZfldHy3B1Q"/>
     <requiredRoles_InterfaceRequiringEntity id="_UejgQKYSEduWZfldHy3B1Q" requiredInterface__RequiredRole="_QW4WtKYGEduWZfldHy3B1Q"/>
