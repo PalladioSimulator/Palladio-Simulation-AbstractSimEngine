@@ -10,7 +10,7 @@
   <rm:locator pattern="^de\.uka\.ipd\.sdq\.simucom.*" searchPathRef="SimuCom" failOnError="true"/>
   <rm:locator pattern="^de\.uka\.ipd\.sdq\.simulation.*" searchPathRef="SimuCom" failOnError="true"/>
   
-  <rm:redirect pattern=".*"
+  <rm:redirect pattern="^org\.palladiosimulator\.reliability.*"
 		href="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/Palladio/Analyzer/Reliability/trunk/org.palladiosimulator.reliability.buckminster/reliability.rmap" />
 
   <rm:redirect pattern=".*"
