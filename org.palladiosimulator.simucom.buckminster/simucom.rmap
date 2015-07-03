@@ -4,7 +4,7 @@
   <rm:property key="resolveFrom" value="release"/>
 
   <rm:locator pattern="^org\.palladiosimulator\.simucom.*" searchPathRef="SimuCom" failOnError="true"/>
-  <rm:locator pattern="^de\.uka\.ipd\.sdq\.codegen.*" searchPathRef="SimuCom" failOnError="true"/>
+  <rm:locator pattern="^de\.uka\.ipd\.sdq\.codegen\.simucontroller.*" searchPathRef="SimuCom" failOnError="true"/>
   <rm:locator pattern="^de\.uka\.ipd\.sdq\.pcm\.codegen.*" searchPathRef="SimuCom" failOnError="true"/>
   <rm:locator pattern="^de\.uka\.ipd\.sdq\.scheduler.*" searchPathRef="SimuCom" failOnError="true"/>
   <rm:locator pattern="^de\.uka\.ipd\.sdq\.simucom.*" searchPathRef="SimuCom" failOnError="true"/>

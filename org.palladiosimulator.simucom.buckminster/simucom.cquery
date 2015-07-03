@@ -3,7 +3,7 @@
     <cq:advisorNode namePattern="^org\.palladiosimulator\.license$" sourceLevel="REQUIRE" useWorkspace="false"/>
     <cq:advisorNode namePattern="^org\.palladiosimulator\.branding$" sourceLevel="REQUIRE" useWorkspace="false"/>
     <cq:advisorNode namePattern="^org\.palladiosimulator\.simucom.*" sourceLevel="REQUIRE" useWorkspace="false"/>
-    <cq:advisorNode namePattern="^de\.uka\.ipd\.sdq\.codegen.*" sourceLevel="REQUIRE" useWorkspace="false"/>
+    <cq:advisorNode namePattern="^de\.uka\.ipd\.sdq\.codegen\.simucontroller.*" sourceLevel="REQUIRE" useWorkspace="false"/>
     <cq:advisorNode namePattern="^de\.uka\.ipd\.sdq\.pcm\.codegen.*" sourceLevel="REQUIRE" useWorkspace="false"/>
     <cq:advisorNode namePattern="^de\.uka\.ipd\.sdq\.scheduler.*" sourceLevel="REQUIRE" useWorkspace="false"/>
     <cq:advisorNode namePattern="^de\.uka\.ipd\.sdq\.simucom.*" sourceLevel="REQUIRE" useWorkspace="false"/>
