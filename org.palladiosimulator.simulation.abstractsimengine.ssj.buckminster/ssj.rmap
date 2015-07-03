@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
-  <rm:locator pattern="^org\.palladiosimulator\.simulation\.abstractsimengine.*$" searchPathRef="SSJAddon" failOnError="true"/>
 
-  <rm:redirect pattern=".*" href="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/Build/trunk/org.palladiosimulator.targetPlatformBuild/pcm_base.rmap"/>
+  <rm:property key="resolveFrom" value="release"/>
+
+  <rm:locator pattern="^org\.palladiosimulator\.simulation\.abstractsimengine\.ssj.*$" searchPathRef="SSJAddon" failOnError="true"/>
+
+  <rm:redirect pattern=".*" href="https://anonymous:anonymous@svnserver.informatik.kit.edu/i43/svn/code/Palladio/Analyzer/SimuCom/trunk/org.palladiosimulator.simucom.buckminster/simucom.rmap"/>
 
   <rm:searchPath name="SSJAddon">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="svn">
@@ -10,6 +13,12 @@
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
     </rm:provider>
+    <rm:provider resolutionFilter="(resolveFrom=nightly)" componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
+      <rm:uri format="https://sdqweb.ipd.kit.edu/eclipse/palladio/addons/ssj/nightly/"/>
+    </rm:provider>
+    <rm:provider resolutionFilter="(resolveFrom=release)" componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
+      <rm:uri format="https://sdqweb.ipd.kit.edu/eclipse/palladio/addons/ssj/releases/latest/"/>
+    </rm:provider>    
   </rm:searchPath>
 
 </rm:rmap>
