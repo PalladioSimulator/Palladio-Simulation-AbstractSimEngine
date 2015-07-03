@@ -3,7 +3,6 @@
       id="org.palladiosimulator.simucom.feature"
       label="Palladio SimuCom Analyzer"
       version="4.0.0.qualifier"
-      plugin="org.palladiosimulator.branding"
       license-feature="org.palladiosimulator.license"
       license-feature-version="1.0.0">
 
