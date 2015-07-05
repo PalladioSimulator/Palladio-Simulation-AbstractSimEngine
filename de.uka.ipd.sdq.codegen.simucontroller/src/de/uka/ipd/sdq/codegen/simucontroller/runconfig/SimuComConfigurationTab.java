@@ -38,14 +38,13 @@ import org.eclipse.swt.widgets.Text;
 import org.palladiosimulator.analyzer.workflow.ConstantsContainer;
 import org.palladiosimulator.editors.dialogs.selection.PalladioSelectEObjectDialog;
 import org.palladiosimulator.pcm.ui.provider.PalladioItemProviderAdapterFactory;
+import org.palladiosimulator.pcm.usagemodel.UsageModel;
+import org.palladiosimulator.pcm.usagemodel.UsageScenario;
+import org.palladiosimulator.pcm.usagemodel.provider.UsagemodelItemProviderAdapterFactory;
 import org.palladiosimulator.recorderframework.launch.RecorderTabGroup;
 import org.palladiosimulator.recorderframework.utils.RecorderExtensionHelper;
 
 import de.uka.ipd.sdq.codegen.simucontroller.SimuControllerImages;
-import org.palladiosimulator.pcm.usagemodel.UsageModel;
-import org.palladiosimulator.pcm.usagemodel.UsageScenario;
-import org.palladiosimulator.pcm.usagemodel.provider.UsagemodelItemProviderAdapterFactory;
-
 import de.uka.ipd.sdq.simucomframework.SimuComConfig;
 import de.uka.ipd.sdq.simulation.AbstractSimulationConfig;
 import de.uka.ipd.sdq.workflow.launchconfig.tabs.TabHelper;
@@ -103,18 +102,19 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
      * org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
      */
     @Override
-    public void createControl(Composite parent) {
+    public void createControl(final Composite parent) {
         final ModifyListener modifyListener = new ModifyListener() {
+
             @Override
-            public void modifyText(ModifyEvent e) {
+            public void modifyText(final ModifyEvent e) {
                 SimuComConfigurationTab.this.setDirty(true);
                 SimuComConfigurationTab.this.updateLaunchConfigurationDialog();
             }
         };
 
-        container = new Composite(parent, SWT.NONE);
-        container.setLayout(new GridLayout());
-        setControl(container);
+        this.container = new Composite(parent, SWT.NONE);
+        this.container.setLayout(new GridLayout());
+        setControl(this.container);
 
         /** Create Simulator section */
         createSimulatorGroup();
@@ -142,7 +142,7 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
      * Creates the simulator group, the first section of the SimuComConfigurationTab
      */
     protected void createSimulatorGroup() {
-        final Group simulatorGroup = new Group(container, SWT.NONE);
+        final Group simulatorGroup = new Group(this.container, SWT.NONE);
         simulatorGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
         final GridLayout simulatorLayout = new GridLayout();
         simulatorLayout.numColumns = 3;
@@ -155,17 +155,18 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         String[] simulatorNames = null;
         try {
             simulatorNames = SimulatorExtensionHelper.getSimulatorNames();
-        } catch (CoreException e1) {
+        } catch (final CoreException e1) {
             if (LOGGER.isEnabledFor(Level.WARN)) {
                 LOGGER.warn("Could not retrieve names of simulator extensions.", e1);
             }
         }
-        simulatorCombo = new Combo(simulatorGroup, SWT.READ_ONLY);
-        simulatorCombo.setItems(simulatorNames);
-        simulatorCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-        simulatorCombo.addSelectionListener(new SelectionAdapter() {
+        this.simulatorCombo = new Combo(simulatorGroup, SWT.READ_ONLY);
+        this.simulatorCombo.setItems(simulatorNames);
+        this.simulatorCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+        this.simulatorCombo.addSelectionListener(new SelectionAdapter() {
+
             @Override
-            public void widgetSelected(SelectionEvent e) {
+            public void widgetSelected(final SelectionEvent e) {
                 updateLaunchConfigurationDialog();
             }
         });
@@ -177,29 +178,29 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
      * @param modifyListener
      *            the ModifyListener which should be added to the elements
      */
-    protected void createExperimentRunGroup(ModifyListener modifyListener) {
-        final Group experimentrunGroup = new Group(container, SWT.NONE);
+    protected void createExperimentRunGroup(final ModifyListener modifyListener) {
+        final Group experimentrunGroup = new Group(this.container, SWT.NONE);
         experimentrunGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
         final GridLayout gridLayout = new GridLayout();
         gridLayout.numColumns = 2;
         experimentrunGroup.setLayout(gridLayout);
         experimentrunGroup.setText("Experiment Run");
 
-        Label nameLabel = new Label(experimentrunGroup, SWT.NONE);
+        final Label nameLabel = new Label(experimentrunGroup, SWT.NONE);
         nameLabel.setText("Experiment Name:");
 
-        nameField = new Text(experimentrunGroup, SWT.BORDER);
+        this.nameField = new Text(experimentrunGroup, SWT.BORDER);
         final GridData gd_nameField = new GridData(SWT.FILL, SWT.CENTER, true, false);
         gd_nameField.widthHint = 70;
-        nameField.setLayoutData(gd_nameField);
-        nameField.addModifyListener(modifyListener);
+        this.nameField.setLayoutData(gd_nameField);
+        this.nameField.addModifyListener(modifyListener);
     }
 
     /**
      * Creates the data set group, the third group of the SimuComConfigurationTab
      */
     protected void createDataSetGroup() {
-        final Group persistenceGroup = new Group(container, SWT.NONE);
+        final Group persistenceGroup = new Group(this.container, SWT.NONE);
         persistenceGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
         persistenceGroup.setLayout(new GridLayout(2, false));
         persistenceGroup.setText("Simulation Results");
@@ -208,18 +209,19 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         persistenceLabel.setText("Persistence Framework:");
 
         final List<String> recorderNames = RecorderExtensionHelper.getRecorderNames();
-        persistenceCombo = new Combo(persistenceGroup, SWT.READ_ONLY);
-        persistenceCombo.setItems(recorderNames.toArray(new String[recorderNames.size()]));
-        persistenceCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-        persistenceCombo.addSelectionListener(new SelectionAdapter() {
+        this.persistenceCombo = new Combo(persistenceGroup, SWT.READ_ONLY);
+        this.persistenceCombo.setItems(recorderNames.toArray(new String[recorderNames.size()]));
+        this.persistenceCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+        this.persistenceCombo.addSelectionListener(new SelectionAdapter() {
+
             @Override
-            public void widgetSelected(SelectionEvent e) {
+            public void widgetSelected(final SelectionEvent e) {
                 updateLaunchConfigurationDialog();
             }
         });
 
-        recorderTabGroup = new RecorderTabGroup();
-        CTabFolder tabFolder = TabHelper.createTabFolder(recorderTabGroup, getLaunchConfigurationDialog(),
+        this.recorderTabGroup = new RecorderTabGroup();
+        final CTabFolder tabFolder = TabHelper.createTabFolder(this.recorderTabGroup, getLaunchConfigurationDialog(),
                 getLaunchConfigurationDialog().getMode(), persistenceGroup, SWT.BORDER | SWT.FLAT);
         tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1));
     }
@@ -230,8 +232,8 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
      * @param modifyListener
      *            the ModifyListener which should be added to the elements
      */
-    protected void createStopConditionGroup(ModifyListener modifyListener) {
-        final Group stopConditionsGroup = new Group(container, SWT.NONE);
+    protected void createStopConditionGroup(final ModifyListener modifyListener) {
+        final Group stopConditionsGroup = new Group(this.container, SWT.NONE);
         stopConditionsGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
         final GridLayout gridLayout_1 = new GridLayout();
         gridLayout_1.numColumns = 3;
@@ -241,9 +243,9 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         final Label timeLabel = new Label(stopConditionsGroup, SWT.NONE);
         timeLabel.setText("Maximum simulation time:");
 
-        timeField = new Text(stopConditionsGroup, SWT.BORDER);
-        timeField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-        timeField.addModifyListener(modifyListener);
+        this.timeField = new Text(stopConditionsGroup, SWT.BORDER);
+        this.timeField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+        this.timeField.addModifyListener(modifyListener);
 
         final Label secLabel = new Label(stopConditionsGroup, SWT.NONE);
         secLabel.setText("Simulated Time Units");
@@ -251,9 +253,9 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         final Label maxLabel = new Label(stopConditionsGroup, SWT.NONE);
         maxLabel.setText("Maximum measurements count:");
 
-        maxMeasurementsField = new Text(stopConditionsGroup, SWT.BORDER);
-        maxMeasurementsField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-        maxMeasurementsField.addModifyListener(modifyListener);
+        this.maxMeasurementsField = new Text(stopConditionsGroup, SWT.BORDER);
+        this.maxMeasurementsField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+        this.maxMeasurementsField.addModifyListener(modifyListener);
     }
 
     /**
@@ -262,30 +264,31 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
      * @param modifyListener
      *            the ModifyListener which should be added to the elements
      */
-    protected void createConfidenceStopConditionGroup(ModifyListener modifyListener) {
-        final Group confidenceGroup = new Group(container, SWT.NONE);
+    protected void createConfidenceStopConditionGroup(final ModifyListener modifyListener) {
+        final Group confidenceGroup = new Group(this.container, SWT.NONE);
         confidenceGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
         final GridLayout confidenceLayout = new GridLayout();
         confidenceLayout.numColumns = 3;
         confidenceGroup.setLayout(confidenceLayout);
         confidenceGroup.setText("Confidence Stop Condition");
 
-        useConfidenceCheckBox = new Button(confidenceGroup, SWT.CHECK);
-        useConfidenceCheckBox.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-        useConfidenceCheckBox.setText("Stop when reaching confidence");
-        useConfidenceCheckBox.setSelection(false);
-        useConfidenceCheckBox.addSelectionListener(new SelectionAdapter() {
+        this.useConfidenceCheckBox = new Button(confidenceGroup, SWT.CHECK);
+        this.useConfidenceCheckBox.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+        this.useConfidenceCheckBox.setText("Stop when reaching confidence");
+        this.useConfidenceCheckBox.setSelection(false);
+        this.useConfidenceCheckBox.addSelectionListener(new SelectionAdapter() {
+
             @Override
-            public void widgetSelected(SelectionEvent e) {
+            public void widgetSelected(final SelectionEvent e) {
                 // enable level and half-with fields if and only if check box is checked
-                boolean selected = useConfidenceCheckBox.getSelection();
-                levelLabel.setEnabled(selected);
-                levelField.setEnabled(selected);
-                halfWidthLabel.setEnabled(selected);
-                halfWidthField.setEnabled(selected);
-                selectModelElementLabel.setEnabled(selected);
-                selectModelElementField.setEnabled(selected);
-                selectModelElementButton.setEnabled(selected);
+                final boolean selected = SimuComConfigurationTab.this.useConfidenceCheckBox.getSelection();
+                SimuComConfigurationTab.this.levelLabel.setEnabled(selected);
+                SimuComConfigurationTab.this.levelField.setEnabled(selected);
+                SimuComConfigurationTab.this.halfWidthLabel.setEnabled(selected);
+                SimuComConfigurationTab.this.halfWidthField.setEnabled(selected);
+                SimuComConfigurationTab.this.selectModelElementLabel.setEnabled(selected);
+                SimuComConfigurationTab.this.selectModelElementField.setEnabled(selected);
+                SimuComConfigurationTab.this.selectModelElementButton.setEnabled(selected);
                 enableBatchMeansSettings(selected);
 
                 SimuComConfigurationTab.this.updateLaunchConfigurationDialog();
@@ -293,37 +296,38 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
 
         });
 
-        levelLabel = new Label(confidenceGroup, SWT.NONE);
-        levelLabel.setText("Confidence level (%):");
-        levelLabel.setEnabled(false);
+        this.levelLabel = new Label(confidenceGroup, SWT.NONE);
+        this.levelLabel.setText("Confidence level (%):");
+        this.levelLabel.setEnabled(false);
 
-        levelField = new Text(confidenceGroup, SWT.BORDER);
-        levelField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
-        levelField.addModifyListener(modifyListener);
-        levelField.setEnabled(false);
+        this.levelField = new Text(confidenceGroup, SWT.BORDER);
+        this.levelField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+        this.levelField.addModifyListener(modifyListener);
+        this.levelField.setEnabled(false);
 
-        halfWidthLabel = new Label(confidenceGroup, SWT.NONE);
-        halfWidthLabel.setText("Confidence interval half-width (%):");
-        halfWidthLabel.setEnabled(false);
+        this.halfWidthLabel = new Label(confidenceGroup, SWT.NONE);
+        this.halfWidthLabel.setText("Confidence interval half-width (%):");
+        this.halfWidthLabel.setEnabled(false);
 
-        halfWidthField = new Text(confidenceGroup, SWT.BORDER);
-        halfWidthField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
-        halfWidthField.addModifyListener(modifyListener);
-        halfWidthField.setEnabled(false);
+        this.halfWidthField = new Text(confidenceGroup, SWT.BORDER);
+        this.halfWidthField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+        this.halfWidthField.addModifyListener(modifyListener);
+        this.halfWidthField.setEnabled(false);
 
-        selectModelElementLabel = new Label(confidenceGroup, SWT.NONE);
-        selectModelElementLabel.setText("Monitor Response Time of:");
-        selectModelElementLabel.setEnabled(false);
+        this.selectModelElementLabel = new Label(confidenceGroup, SWT.NONE);
+        this.selectModelElementLabel.setText("Monitor Response Time of:");
+        this.selectModelElementLabel.setEnabled(false);
 
-        selectModelElementField = new Text(confidenceGroup, SWT.BORDER);
-        selectModelElementField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-        selectModelElementField.addModifyListener(modifyListener);
-        selectModelElementField.setEditable(false);
-        selectModelElementField.setEnabled(false);
+        this.selectModelElementField = new Text(confidenceGroup, SWT.BORDER);
+        this.selectModelElementField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+        this.selectModelElementField.addModifyListener(modifyListener);
+        this.selectModelElementField.setEditable(false);
+        this.selectModelElementField.setEnabled(false);
 
-        selectModelElementButton = new Button(confidenceGroup, SWT.NONE);
-        selectModelElementButton.setText("Select Model Element...");
-        selectModelElementButton.addSelectionListener(new SelectionAdapter() {
+        this.selectModelElementButton = new Button(confidenceGroup, SWT.NONE);
+        this.selectModelElementButton.setText("Select Model Element...");
+        this.selectModelElementButton.addSelectionListener(new SelectionAdapter() {
+
             @Override
             public void widgetSelected(final SelectionEvent e) {
                 showSelectModelElementDialog();
@@ -331,55 +335,56 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         });
 
         /** Batch means configuration */
-        useAutomatedBatchMeansCheckBox = new Button(confidenceGroup, SWT.CHECK);
-        useAutomatedBatchMeansCheckBox.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-        useAutomatedBatchMeansCheckBox
-                .setText("Automatically determine batch size (Beware: Manual batch size can lead to invalid results, only use it care).");
-        useAutomatedBatchMeansCheckBox.setSelection(false);
-        useAutomatedBatchMeansCheckBox.addSelectionListener(new SelectionAdapter() {
+        this.useAutomatedBatchMeansCheckBox = new Button(confidenceGroup, SWT.CHECK);
+        this.useAutomatedBatchMeansCheckBox.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+        this.useAutomatedBatchMeansCheckBox.setText(
+                "Automatically determine batch size (Beware: Manual batch size can lead to invalid results, only use it care).");
+        this.useAutomatedBatchMeansCheckBox.setSelection(false);
+        this.useAutomatedBatchMeansCheckBox.addSelectionListener(new SelectionAdapter() {
+
             @Override
-            public void widgetSelected(SelectionEvent e) {
+            public void widgetSelected(final SelectionEvent e) {
                 // enable level and half-with fields if and only if check box is checked
-                boolean selected = useAutomatedBatchMeansCheckBox.getSelection();
-                batchSizeLabel.setEnabled(!selected);
-                batchSizeField.setEnabled(!selected);
-                minNumberOfBatchesLabel.setEnabled(!selected);
-                minNumberOfBatchesField.setEnabled(!selected);
+                final boolean selected = SimuComConfigurationTab.this.useAutomatedBatchMeansCheckBox.getSelection();
+                SimuComConfigurationTab.this.batchSizeLabel.setEnabled(!selected);
+                SimuComConfigurationTab.this.batchSizeField.setEnabled(!selected);
+                SimuComConfigurationTab.this.minNumberOfBatchesLabel.setEnabled(!selected);
+                SimuComConfigurationTab.this.minNumberOfBatchesField.setEnabled(!selected);
 
                 SimuComConfigurationTab.this.updateLaunchConfigurationDialog();
             }
         });
 
-        batchSizeLabel = new Label(confidenceGroup, SWT.NONE);
-        batchSizeLabel.setText("Batch size:");
-        batchSizeLabel.setEnabled(false);
+        this.batchSizeLabel = new Label(confidenceGroup, SWT.NONE);
+        this.batchSizeLabel.setText("Batch size:");
+        this.batchSizeLabel.setEnabled(false);
 
-        batchSizeField = new Text(confidenceGroup, SWT.BORDER);
-        batchSizeField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
-        batchSizeField.addModifyListener(modifyListener);
-        batchSizeField.setEnabled(false);
+        this.batchSizeField = new Text(confidenceGroup, SWT.BORDER);
+        this.batchSizeField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+        this.batchSizeField.addModifyListener(modifyListener);
+        this.batchSizeField.setEnabled(false);
 
-        minNumberOfBatchesLabel = new Label(confidenceGroup, SWT.NONE);
-        minNumberOfBatchesLabel.setText("Minimum number of batches:");
-        minNumberOfBatchesLabel.setEnabled(false);
+        this.minNumberOfBatchesLabel = new Label(confidenceGroup, SWT.NONE);
+        this.minNumberOfBatchesLabel.setText("Minimum number of batches:");
+        this.minNumberOfBatchesLabel.setEnabled(false);
 
-        minNumberOfBatchesField = new Text(confidenceGroup, SWT.BORDER);
-        minNumberOfBatchesField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
-        minNumberOfBatchesField.addModifyListener(modifyListener);
-        minNumberOfBatchesField.setEnabled(false);
+        this.minNumberOfBatchesField = new Text(confidenceGroup, SWT.BORDER);
+        this.minNumberOfBatchesField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+        this.minNumberOfBatchesField.addModifyListener(modifyListener);
+        this.minNumberOfBatchesField.setEnabled(false);
     }
 
     /**
      * The logging group, the sixth section of the SimuComConfigurationTab
      */
     protected void createLoggingGroup() {
-        final Group loggingGroup = new Group(container, SWT.NONE);
+        final Group loggingGroup = new Group(this.container, SWT.NONE);
         loggingGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false));
         loggingGroup.setText("Logging");
         loggingGroup.setLayout(new GridLayout());
-        checkLoggingButton = new Button(loggingGroup, SWT.CHECK);
-        checkLoggingButton.setText("Enable verbose logging");
-        checkLoggingButton.addSelectionListener(new SelectionAdapter() {
+        this.checkLoggingButton = new Button(loggingGroup, SWT.CHECK);
+        this.checkLoggingButton.setText("Enable verbose logging");
+        this.checkLoggingButton.addSelectionListener(new SelectionAdapter() {
 
             /*
              * (non-Javadoc)
@@ -388,11 +393,11 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
              * SelectionEvent)
              */
             @Override
-            public void widgetSelected(SelectionEvent e) {
+            public void widgetSelected(final SelectionEvent e) {
                 SimuComConfigurationTab.this.updateLaunchConfigurationDialog();
             }
         });
-        checkLoggingButton.setSelection(false);
+        this.checkLoggingButton.setSelection(false);
     }
 
     /**
@@ -402,8 +407,8 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
      * @param modifyListener
      *            the ModifyListener which should be added to the elements
      */
-    protected void createGeneratorSeedsGroup(ModifyListener modifyListener) {
-        final Group randomNumberGeneratorParametersGroup = new Group(container, SWT.NONE);
+    protected void createGeneratorSeedsGroup(final ModifyListener modifyListener) {
+        final Group randomNumberGeneratorParametersGroup = new Group(this.container, SWT.NONE);
         randomNumberGeneratorParametersGroup.setText("Random Number Generator Seed");
         final GridData gd_randomNumberGeneratorParametersGroup = new GridData(SWT.FILL, SWT.CENTER, true, false);
         randomNumberGeneratorParametersGroup.setLayoutData(gd_randomNumberGeneratorParametersGroup);
@@ -411,11 +416,12 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         gridLayout_3.numColumns = 12;
         randomNumberGeneratorParametersGroup.setLayout(gridLayout_3);
 
-        fixedSeedButton = new Button(randomNumberGeneratorParametersGroup, SWT.CHECK);
-        fixedSeedButton.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 12, 1));
-        fixedSeedButton.setText("Use a fixed seed in simulation run");
-        fixedSeedButton.setSelection(false);
-        fixedSeedButton.addSelectionListener(new SelectionAdapter() {
+        this.fixedSeedButton = new Button(randomNumberGeneratorParametersGroup, SWT.CHECK);
+        this.fixedSeedButton.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 12, 1));
+        this.fixedSeedButton.setText("Use a fixed seed in simulation run");
+        this.fixedSeedButton.setSelection(false);
+        this.fixedSeedButton.addSelectionListener(new SelectionAdapter() {
+
             /*
              * (non-Javadoc)
              * 
@@ -423,21 +429,21 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
              * SelectionEvent)
              */
             @Override
-            public void widgetSelected(SelectionEvent e) {
+            public void widgetSelected(final SelectionEvent e) {
                 SimuComConfigurationTab.this.setDirty(true);
                 SimuComConfigurationTab.this.updateLaunchConfigurationDialog();
             }
         });
 
-        seedText = new Text[6];
-        Label[] seedLabel = new Label[6];
+        this.seedText = new Text[6];
+        final Label[] seedLabel = new Label[6];
         for (int i = 0; i < 6; i++) {
             seedLabel[i] = new Label(randomNumberGeneratorParametersGroup, SWT.NONE);
             seedLabel[i].setText("Seed " + i);
-            seedText[i] = new Text(randomNumberGeneratorParametersGroup, SWT.BORDER);
-            seedText[i].setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-            seedText[i].addModifyListener(modifyListener);
-            seedText[i].setText(i + "");
+            this.seedText[i] = new Text(randomNumberGeneratorParametersGroup, SWT.BORDER);
+            this.seedText[i].setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+            this.seedText[i].addModifyListener(modifyListener);
+            this.seedText[i].setText(i + "");
         }
     }
 
@@ -446,31 +452,32 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
      * 
      * @param parentSelected
      */
-    private void enableBatchMeansSettings(boolean parentSelected) {
-        useAutomatedBatchMeansCheckBox.setEnabled(parentSelected);
+    private void enableBatchMeansSettings(final boolean parentSelected) {
+        this.useAutomatedBatchMeansCheckBox.setEnabled(parentSelected);
 
         // depend on useAutomatedBatchMeans, too
-        batchSizeLabel.setEnabled(parentSelected && !useAutomatedBatchMeansCheckBox.getSelection());
-        batchSizeField.setEnabled(parentSelected && !useAutomatedBatchMeansCheckBox.getSelection());
-        minNumberOfBatchesLabel.setEnabled(parentSelected && !useAutomatedBatchMeansCheckBox.getSelection());
-        minNumberOfBatchesField.setEnabled(parentSelected && !useAutomatedBatchMeansCheckBox.getSelection());
+        this.batchSizeLabel.setEnabled(parentSelected && !this.useAutomatedBatchMeansCheckBox.getSelection());
+        this.batchSizeField.setEnabled(parentSelected && !this.useAutomatedBatchMeansCheckBox.getSelection());
+        this.minNumberOfBatchesLabel.setEnabled(parentSelected && !this.useAutomatedBatchMeansCheckBox.getSelection());
+        this.minNumberOfBatchesField.setEnabled(parentSelected && !this.useAutomatedBatchMeansCheckBox.getSelection());
     }
 
     private void showSelectModelElementDialog() {
-        ResourceSet rs = loadModelFiles();
-        ArrayList<Object> filter = new ArrayList<Object>();
+        final ResourceSet rs = loadModelFiles();
+        final ArrayList<Object> filter = new ArrayList<Object>();
         filter.add(UsageModel.class);
         filter.add(UsageScenario.class);
-        PalladioSelectEObjectDialog dialog = new PalladioSelectEObjectDialog(this.getShell(), filter, rs);
+        final PalladioSelectEObjectDialog dialog = new PalladioSelectEObjectDialog(this.getShell(), filter, rs);
         if (dialog.open() == org.eclipse.jface.dialogs.Dialog.OK) {
-            EObject modelElement = dialog.getResult();
+            final EObject modelElement = dialog.getResult();
             if (modelElement instanceof UsageScenario) {
-                UsageScenario usageScenario = (UsageScenario) modelElement;
-                selectedModelElementURI = EcoreUtil.getURI(modelElement);
-                selectedModelElementName = usageScenario.getEntityName();
+                final UsageScenario usageScenario = (UsageScenario) modelElement;
+                this.selectedModelElementURI = EcoreUtil.getURI(modelElement);
+                this.selectedModelElementName = usageScenario.getEntityName();
                 updateModelElementField(usageScenario);
             } else {
-                MessageBox warningBox = new MessageBox(selectModelElementField.getShell(), SWT.ICON_WARNING | SWT.OK);
+                final MessageBox warningBox = new MessageBox(this.selectModelElementField.getShell(),
+                        SWT.ICON_WARNING | SWT.OK);
                 warningBox.setText("Warning");
                 warningBox.setMessage("No response times will be available for "
                         + "the selected model element. Please select a suitable " + "model element.");
@@ -479,10 +486,10 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         }
     }
 
-    private void updateModelElementField(UsageScenario modelElement) {
-        AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(
+    private void updateModelElementField(final UsageScenario modelElement) {
+        final AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(
                 new PalladioItemProviderAdapterFactory(new UsagemodelItemProviderAdapterFactory()));
-        selectModelElementField.setText(labelProvider.getText(modelElement));
+        this.selectModelElementField.setText(labelProvider.getText(modelElement));
     }
 
     /*
@@ -502,144 +509,147 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
      * ILaunchConfiguration)
      */
     @Override
-    public void initializeFrom(ILaunchConfiguration configuration) {
-        recorderTabGroup.initializeFrom(configuration);
+    public void initializeFrom(final ILaunchConfiguration configuration) {
+        this.recorderTabGroup.initializeFrom(configuration);
 
         initializeSimulatorGroup(configuration);
 
         try {
-            nameField.setText(configuration.getAttribute(AbstractSimulationConfig.EXPERIMENT_RUN, ""));
-        } catch (CoreException e) {
-            nameField.setText("MyRun");
+            this.nameField.setText(configuration.getAttribute(AbstractSimulationConfig.EXPERIMENT_RUN, ""));
+        } catch (final CoreException e) {
+            this.nameField.setText("MyRun");
         }
 
         try {
-            timeField.setText(configuration.getAttribute(AbstractSimulationConfig.SIMULATION_TIME, ""));
-        } catch (CoreException e) {
-            timeField.setText("150000");
+            this.timeField.setText(configuration.getAttribute(AbstractSimulationConfig.SIMULATION_TIME, ""));
+        } catch (final CoreException e) {
+            this.timeField.setText("150000");
         }
 
         try {
-            maxMeasurementsField.setText(configuration.getAttribute(AbstractSimulationConfig.MAXIMUM_MEASUREMENT_COUNT,
-                    ""));
-        } catch (CoreException e) {
-            maxMeasurementsField.setText("10000");
+            this.maxMeasurementsField
+                    .setText(configuration.getAttribute(AbstractSimulationConfig.MAXIMUM_MEASUREMENT_COUNT, ""));
+        } catch (final CoreException e) {
+            this.maxMeasurementsField.setText("10000");
         }
 
         try {
-            String persistenceFrameworkName = configuration.getAttribute(
-                    AbstractSimulationConfig.PERSISTENCE_RECORDER_NAME, "");
-            String[] items = persistenceCombo.getItems();
+            final String persistenceFrameworkName = configuration
+                    .getAttribute(AbstractSimulationConfig.PERSISTENCE_RECORDER_NAME, "");
+            final String[] items = this.persistenceCombo.getItems();
             for (int i = 0; i < items.length; i++) {
-                String str = items[i];
+                final String str = items[i];
                 if (str.equals(persistenceFrameworkName)) {
-                    persistenceCombo.select(i);
+                    this.persistenceCombo.select(i);
                 }
             }
-        } catch (CoreException e) {
+        } catch (final CoreException e) {
             if (LOGGER.isEnabledFor(Level.WARN)) {
                 LOGGER.warn("Could not access persistency recorder name.", e);
             }
         }
 
         try {
-            checkLoggingButton
+            this.checkLoggingButton
                     .setSelection(configuration.getAttribute(AbstractSimulationConfig.VERBOSE_LOGGING, false));
-        } catch (CoreException e) {
-            checkLoggingButton.setSelection(false);
+        } catch (final CoreException e) {
+            this.checkLoggingButton.setSelection(false);
         }
 
         try {
-            levelField.setText(configuration.getAttribute(SimuComConfig.CONFIDENCE_LEVEL, "95"));
-        } catch (CoreException e) {
-            levelField.setText("" + SimuComConfig.DEFAULT_CONFIDENCE_LEVEL);
+            this.levelField.setText(configuration.getAttribute(SimuComConfig.CONFIDENCE_LEVEL, "95"));
+        } catch (final CoreException e) {
+            this.levelField.setText("" + SimuComConfig.DEFAULT_CONFIDENCE_LEVEL);
         }
 
         try {
-            halfWidthField.setText(configuration.getAttribute(SimuComConfig.CONFIDENCE_HALFWIDTH, "10"));
-        } catch (CoreException e) {
-            halfWidthField.setText("" + SimuComConfig.DEFAULT_CONFIDENCE_HALFWIDTH);
+            this.halfWidthField.setText(configuration.getAttribute(SimuComConfig.CONFIDENCE_HALFWIDTH, "10"));
+        } catch (final CoreException e) {
+            this.halfWidthField.setText("" + SimuComConfig.DEFAULT_CONFIDENCE_HALFWIDTH);
         }
 
-        String defaultBatchSize = "" + SimuComConfig.DEFAULT_CONFIDENCE_BATCH_SIZE;
+        final String defaultBatchSize = "" + SimuComConfig.DEFAULT_CONFIDENCE_BATCH_SIZE;
         try {
-            batchSizeField.setText(configuration.getAttribute(SimuComConfig.CONFIDENCE_BATCH_SIZE, defaultBatchSize));
-        } catch (CoreException e) {
-            batchSizeField.setText(defaultBatchSize);
+            this.batchSizeField
+                    .setText(configuration.getAttribute(SimuComConfig.CONFIDENCE_BATCH_SIZE, defaultBatchSize));
+        } catch (final CoreException e) {
+            this.batchSizeField.setText(defaultBatchSize);
         }
 
-        String defaultMinNumberOfBatches = "" + SimuComConfig.DEFAULT_CONFIDENCE_MIN_NUMBER_OF_BATCHES;
+        final String defaultMinNumberOfBatches = "" + SimuComConfig.DEFAULT_CONFIDENCE_MIN_NUMBER_OF_BATCHES;
         try {
-            minNumberOfBatchesField.setText(configuration.getAttribute(SimuComConfig.CONFIDENCE_MIN_NUMBER_OF_BATCHES,
-                    defaultMinNumberOfBatches));
-        } catch (CoreException e) {
-            minNumberOfBatchesField.setText(defaultMinNumberOfBatches);
+            this.minNumberOfBatchesField.setText(configuration
+                    .getAttribute(SimuComConfig.CONFIDENCE_MIN_NUMBER_OF_BATCHES, defaultMinNumberOfBatches));
+        } catch (final CoreException e) {
+            this.minNumberOfBatchesField.setText(defaultMinNumberOfBatches);
         }
 
         try {
-            String usageFile = configuration.getAttribute(ConstantsContainer.USAGE_FILE, "");
-            modelFiles.clear();
+            final String usageFile = configuration.getAttribute(ConstantsContainer.USAGE_FILE, "");
+            this.modelFiles.clear();
             if (!usageFile.isEmpty()) {
-                modelFiles.add(usageFile);
+                this.modelFiles.add(usageFile);
             }
-        } catch (CoreException e) {
+        } catch (final CoreException e) {
         }
 
         try {
-            selectedModelElementURI = URI.createURI(configuration.getAttribute(
-                    SimuComConfig.CONFIDENCE_MODELELEMENT_URI, ""));
-            UsageScenario usageScenario = getUsageScenarioFromURI(selectedModelElementURI);
-            selectedModelElementName = usageScenario.getEntityName();
+            this.selectedModelElementURI = URI
+                    .createURI(configuration.getAttribute(SimuComConfig.CONFIDENCE_MODELELEMENT_URI, ""));
+            final UsageScenario usageScenario = getUsageScenarioFromURI(this.selectedModelElementURI);
+            this.selectedModelElementName = usageScenario.getEntityName();
             updateModelElementField(usageScenario);
-        } catch (Exception e) {
-            selectedModelElementURI = null;
-            selectedModelElementName = "";
-            selectModelElementField.setText("");
+        } catch (final Exception e) {
+            this.selectedModelElementURI = null;
+            this.selectedModelElementName = "";
+            this.selectModelElementField.setText("");
         }
 
         // decide how to enable / disable them after initialising the values.
         try {
-            boolean isAutomaticBatches = configuration.getAttribute(SimuComConfig.CONFIDENCE_USE_AUTOMATIC_BATCHES,
-                    false);
-            useAutomatedBatchMeansCheckBox.setSelection(isAutomaticBatches);
+            final boolean isAutomaticBatches = configuration
+                    .getAttribute(SimuComConfig.CONFIDENCE_USE_AUTOMATIC_BATCHES, false);
+            this.useAutomatedBatchMeansCheckBox.setSelection(isAutomaticBatches);
 
-            boolean select = configuration.getAttribute(SimuComConfig.USE_CONFIDENCE, false);
-            useConfidenceCheckBox.setSelection(select);
+            final boolean select = configuration.getAttribute(SimuComConfig.USE_CONFIDENCE, false);
+            this.useConfidenceCheckBox.setSelection(select);
 
-            levelLabel.setEnabled(select);
-            levelField.setEnabled(select);
-            halfWidthLabel.setEnabled(select);
-            halfWidthField.setEnabled(select);
-            selectModelElementLabel.setEnabled(select);
-            selectModelElementField.setEnabled(select);
-            selectModelElementButton.setEnabled(select);
+            this.levelLabel.setEnabled(select);
+            this.levelField.setEnabled(select);
+            this.halfWidthLabel.setEnabled(select);
+            this.halfWidthField.setEnabled(select);
+            this.selectModelElementLabel.setEnabled(select);
+            this.selectModelElementField.setEnabled(select);
+            this.selectModelElementButton.setEnabled(select);
 
             // needs the value of useAutomatedBatchMeansCheckBox to be initialised.
             enableBatchMeansSettings(select);
 
-        } catch (CoreException e) {
-            useConfidenceCheckBox.setSelection(false);
-            levelLabel.setEnabled(false);
-            levelField.setEnabled(false);
-            halfWidthLabel.setEnabled(false);
-            halfWidthField.setEnabled(false);
-            selectModelElementLabel.setEnabled(false);
-            selectModelElementField.setEnabled(false);
-            selectModelElementButton.setEnabled(false);
+        } catch (final CoreException e) {
+            this.useConfidenceCheckBox.setSelection(false);
+            this.levelLabel.setEnabled(false);
+            this.levelField.setEnabled(false);
+            this.halfWidthLabel.setEnabled(false);
+            this.halfWidthField.setEnabled(false);
+            this.selectModelElementLabel.setEnabled(false);
+            this.selectModelElementField.setEnabled(false);
+            this.selectModelElementButton.setEnabled(false);
             enableBatchMeansSettings(false);
 
         }
         try {
-            fixedSeedButton.setSelection(configuration.getAttribute(AbstractSimulationConfig.USE_FIXED_SEED, false));
-        } catch (CoreException e) {
-            fixedSeedButton.setSelection(false);
+            this.fixedSeedButton
+                    .setSelection(configuration.getAttribute(AbstractSimulationConfig.USE_FIXED_SEED, false));
+        } catch (final CoreException e) {
+            this.fixedSeedButton.setSelection(false);
         }
 
         for (int i = 0; i < 6; i++) {
             try {
-                seedText[i].setText(configuration.getAttribute(AbstractSimulationConfig.FIXED_SEED_PREFIX + i, i + ""));
-            } catch (CoreException e) {
-                seedText[i].setText(i + "");
+                this.seedText[i]
+                        .setText(configuration.getAttribute(AbstractSimulationConfig.FIXED_SEED_PREFIX + i, i + ""));
+            } catch (final CoreException e) {
+                this.seedText[i].setText(i + "");
             }
         }
     }
@@ -650,19 +660,19 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
      * @param configuration
      *            the given ILaunchConfiguration
      */
-    protected void initializeSimulatorGroup(ILaunchConfiguration configuration) {
+    protected void initializeSimulatorGroup(final ILaunchConfiguration configuration) {
         try {
-            String simulatorId = configuration.getAttribute(AbstractSimulationConfig.SIMULATOR_ID,
+            final String simulatorId = configuration.getAttribute(AbstractSimulationConfig.SIMULATOR_ID,
                     AbstractSimulationConfig.DEFAULT_SIMULATOR_ID);
-            String simulatorName = SimulatorExtensionHelper.getSimulatorNameForId(simulatorId);
-            String[] items = simulatorCombo.getItems();
+            final String simulatorName = SimulatorExtensionHelper.getSimulatorNameForId(simulatorId);
+            final String[] items = this.simulatorCombo.getItems();
             for (int i = 0; i < items.length; i++) {
-                String currentItemName = items[i];
+                final String currentItemName = items[i];
                 if (currentItemName.equals(simulatorName)) {
-                    simulatorCombo.select(i);
+                    this.simulatorCombo.select(i);
                 }
             }
-        } catch (CoreException e) {
+        } catch (final CoreException e) {
             if (LOGGER.isEnabledFor(Level.WARN)) {
                 LOGGER.warn("Could not initialise simulator selection.", e);
             }
@@ -676,40 +686,43 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
      * ILaunchConfigurationWorkingCopy)
      */
     @Override
-    public void performApply(ILaunchConfigurationWorkingCopy configuration) {
+    public void performApply(final ILaunchConfigurationWorkingCopy configuration) {
         // delegate this method call to recorder tab group
-        recorderTabGroup.performApply(configuration);
+        this.recorderTabGroup.performApply(configuration);
 
         // apply simulator selection
         applySimulatorGroup(configuration);
 
-        configuration.setAttribute(AbstractSimulationConfig.EXPERIMENT_RUN, nameField.getText());
+        configuration.setAttribute(AbstractSimulationConfig.EXPERIMENT_RUN, this.nameField.getText());
         configuration.setAttribute(AbstractSimulationConfig.VARIATION_ID,
                 AbstractSimulationConfig.DEFAULT_VARIATION_NAME); // TODO Add text field for
                                                                   // manually stating variation
                                                                   // names.
-        configuration.setAttribute(AbstractSimulationConfig.SIMULATION_TIME, timeField.getText());
-        configuration.setAttribute(AbstractSimulationConfig.MAXIMUM_MEASUREMENT_COUNT, maxMeasurementsField.getText());
-        configuration.setAttribute(AbstractSimulationConfig.PERSISTENCE_RECORDER_NAME, persistenceCombo.getText());
-        configuration.setAttribute(AbstractSimulationConfig.VERBOSE_LOGGING, checkLoggingButton.getSelection());
-        configuration.setAttribute(SimuComConfig.USE_CONFIDENCE, useConfidenceCheckBox.getSelection());
-        configuration.setAttribute(SimuComConfig.CONFIDENCE_LEVEL, levelField.getText());
-        configuration.setAttribute(SimuComConfig.CONFIDENCE_HALFWIDTH, halfWidthField.getText());
-        configuration.setAttribute(SimuComConfig.CONFIDENCE_MODELELEMENT_NAME, selectedModelElementName);
-        configuration.setAttribute(AbstractSimulationConfig.USE_FIXED_SEED, fixedSeedButton.getSelection());
+        configuration.setAttribute(AbstractSimulationConfig.SIMULATION_TIME, this.timeField.getText());
+        configuration.setAttribute(AbstractSimulationConfig.MAXIMUM_MEASUREMENT_COUNT,
+                this.maxMeasurementsField.getText());
+        configuration.setAttribute(AbstractSimulationConfig.PERSISTENCE_RECORDER_NAME, this.persistenceCombo.getText());
+        configuration.setAttribute(AbstractSimulationConfig.VERBOSE_LOGGING, this.checkLoggingButton.getSelection());
+        configuration.setAttribute(SimuComConfig.USE_CONFIDENCE, this.useConfidenceCheckBox.getSelection());
+        configuration.setAttribute(SimuComConfig.CONFIDENCE_LEVEL, this.levelField.getText());
+        configuration.setAttribute(SimuComConfig.CONFIDENCE_HALFWIDTH, this.halfWidthField.getText());
+        configuration.setAttribute(SimuComConfig.CONFIDENCE_MODELELEMENT_NAME, this.selectedModelElementName);
+        configuration.setAttribute(AbstractSimulationConfig.USE_FIXED_SEED, this.fixedSeedButton.getSelection());
         for (int i = 0; i < 6; i++) {
-            configuration.setAttribute(AbstractSimulationConfig.FIXED_SEED_PREFIX + i, seedText[i].getText());
+            configuration.setAttribute(AbstractSimulationConfig.FIXED_SEED_PREFIX + i, this.seedText[i].getText());
         }
 
-        if (selectedModelElementURI != null) {
-            configuration.setAttribute(SimuComConfig.CONFIDENCE_MODELELEMENT_URI, selectedModelElementURI.toString());
+        if (this.selectedModelElementURI != null) {
+            configuration.setAttribute(SimuComConfig.CONFIDENCE_MODELELEMENT_URI,
+                    this.selectedModelElementURI.toString());
         } else {
             configuration.setAttribute(SimuComConfig.CONFIDENCE_MODELELEMENT_URI, "");
         }
         configuration.setAttribute(SimuComConfig.CONFIDENCE_USE_AUTOMATIC_BATCHES,
-                useAutomatedBatchMeansCheckBox.getSelection());
-        configuration.setAttribute(SimuComConfig.CONFIDENCE_BATCH_SIZE, batchSizeField.getText());
-        configuration.setAttribute(SimuComConfig.CONFIDENCE_MIN_NUMBER_OF_BATCHES, minNumberOfBatchesField.getText());
+                this.useAutomatedBatchMeansCheckBox.getSelection());
+        configuration.setAttribute(SimuComConfig.CONFIDENCE_BATCH_SIZE, this.batchSizeField.getText());
+        configuration.setAttribute(SimuComConfig.CONFIDENCE_MIN_NUMBER_OF_BATCHES,
+                this.minNumberOfBatchesField.getText());
     }
 
     /**
@@ -718,14 +731,14 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
      * @param configuration
      *            the configuration where the values should be written to
      */
-    protected void applySimulatorGroup(ILaunchConfigurationWorkingCopy configuration) {
+    protected void applySimulatorGroup(final ILaunchConfigurationWorkingCopy configuration) {
         try {
             // find simulator id for the given simulator name
-            String simulatorId = SimulatorExtensionHelper.getSimulatorIdForName(simulatorCombo.getText());
+            final String simulatorId = SimulatorExtensionHelper.getSimulatorIdForName(this.simulatorCombo.getText());
             configuration.setAttribute(AbstractSimulationConfig.SIMULATOR_ID, simulatorId);
-        } catch (CoreException e) {
+        } catch (final CoreException e) {
             if (LOGGER.isEnabledFor(Level.ERROR)) {
-                LOGGER.error("Failed to retrieve the id for simulator \"" + simulatorCombo.getText() + "\"");
+                LOGGER.error("Failed to retrieve the id for simulator \"" + this.simulatorCombo.getText() + "\"");
             }
         }
     }
@@ -737,14 +750,14 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
      * ILaunchConfigurationWorkingCopy)
      */
     @Override
-    public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
+    public void setDefaults(final ILaunchConfigurationWorkingCopy configuration) {
         // delegate this method call to recorder tab group
-        if (recorderTabGroup != null) {
-            recorderTabGroup.setDefaults(configuration);
+        if (this.recorderTabGroup != null) {
+            this.recorderTabGroup.setDefaults(configuration);
         }
 
-        configuration
-                .setAttribute(AbstractSimulationConfig.SIMULATOR_ID, AbstractSimulationConfig.DEFAULT_SIMULATOR_ID);
+        configuration.setAttribute(AbstractSimulationConfig.SIMULATOR_ID,
+                AbstractSimulationConfig.DEFAULT_SIMULATOR_ID);
         configuration.setAttribute(AbstractSimulationConfig.EXPERIMENT_RUN,
                 AbstractSimulationConfig.DEFAULT_EXPERIMENT_RUN);
         configuration.setAttribute(AbstractSimulationConfig.VARIATION_ID,
@@ -792,101 +805,101 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
      * ILaunchConfiguration)
      */
     @Override
-    public boolean isValid(ILaunchConfiguration launchConfig) {
+    public boolean isValid(final ILaunchConfiguration launchConfig) {
         setErrorMessage(null);
 
-        //Validation of simulator group
+        // Validation of simulator group
         if (!isSimulatorGroupValid()) {
             return false;
         }
-        if (nameField.getText().equals("")) {
+        if (this.nameField.getText().equals("")) {
             setErrorMessage("ExperimentRun name is missing!");
             return false;
         }
-        if (timeField.getText().equals("")) {
+        if (this.timeField.getText().equals("")) {
             setErrorMessage("Simulation time is missing!");
             return false;
         }
-        if (maxMeasurementsField.getText().equals("")) {
+        if (this.maxMeasurementsField.getText().equals("")) {
             setErrorMessage("Maximum Measurement counter is missing!");
             return false;
         }
-        String persistenceFrameworkName = persistenceCombo.getText();
+        final String persistenceFrameworkName = this.persistenceCombo.getText();
         if (persistenceFrameworkName == null || persistenceFrameworkName.isEmpty()) {
             setErrorMessage("Persistence Framework is missing!");
             return false;
         }
         // delegate validation to persistence framework tabs
-        ILaunchConfigurationTab[] recorderTabs = recorderTabGroup.getTabs();
-        for (ILaunchConfigurationTab tab : recorderTabs) {
-            if (tab.getName().equals(persistenceFrameworkName) && !tab.isValid(launchConfig)) {
+        final ILaunchConfigurationTab[] recorderTabs = this.recorderTabGroup.getTabs();
+        for (final ILaunchConfigurationTab tab : recorderTabs) {
+            if (persistenceFrameworkName.contains(tab.getName()) && !tab.isValid(launchConfig)) {
                 setErrorMessage(persistenceFrameworkName + ": " + tab.getErrorMessage());
                 return false;
             }
         }
         // check confidence level
-        if (useConfidenceCheckBox.getSelection() && "".equals(levelField.getText())) {
+        if (this.useConfidenceCheckBox.getSelection() && "".equals(this.levelField.getText())) {
             setErrorMessage("Confidence level is missing!");
             return false;
-        } else if (useConfidenceCheckBox.getSelection() && "".equals(halfWidthField.getText())) {
+        } else if (this.useConfidenceCheckBox.getSelection() && "".equals(this.halfWidthField.getText())) {
             setErrorMessage("Confidence interval half-width is missing!");
             return false;
-        } else if (useConfidenceCheckBox.getSelection() && "".equals(selectModelElementField.getText())) {
+        } else if (this.useConfidenceCheckBox.getSelection() && "".equals(this.selectModelElementField.getText())) {
             setErrorMessage("Specify the usage scenario for which the confidence interval should be determined.");
             return false;
-        } else if (useConfidenceCheckBox.getSelection() && !"".equals(levelField.getText())) {
+        } else if (this.useConfidenceCheckBox.getSelection() && !"".equals(this.levelField.getText())) {
             try {
-                double level = Double.parseDouble(levelField.getText());
+                final double level = Double.parseDouble(this.levelField.getText());
                 if (level < 0 || level > 100) {
                     setErrorMessage("Confidence level has to be a percentage!");
                     return false;
                 }
-            } catch (NumberFormatException ex) {
+            } catch (final NumberFormatException ex) {
                 setErrorMessage("Confidence level has to be an number!");
                 return false;
             }
         }
         // check confidence interval half-width
-        if (useConfidenceCheckBox.getSelection() && halfWidthField.getText().equals("")) {
+        if (this.useConfidenceCheckBox.getSelection() && this.halfWidthField.getText().equals("")) {
             setErrorMessage("Confidence interval half-width is missing!");
             return false;
-        } else if (useConfidenceCheckBox.getSelection() && halfWidthField.getText().length() > 0) {
+        } else if (this.useConfidenceCheckBox.getSelection() && this.halfWidthField.getText().length() > 0) {
             try {
-                int halfWidth = Integer.parseInt(halfWidthField.getText());
+                final int halfWidth = Integer.parseInt(this.halfWidthField.getText());
                 if (halfWidth < 0 || halfWidth > 100) {
                     setErrorMessage("Half-width has to be a percentage!");
                     return false;
                 }
-            } catch (NumberFormatException ex) {
+            } catch (final NumberFormatException ex) {
                 setErrorMessage("Half-width has to be an integer!");
                 return false;
             }
         }
         // check, whether a model element is selected
-        if (useConfidenceCheckBox.getSelection() && selectedModelElementURI == null) {
+        if (this.useConfidenceCheckBox.getSelection() && this.selectedModelElementURI == null) {
             setErrorMessage("Select a model element whose response times are " + "to be monitored!");
         }
 
         // check validity of batch size and number settings
-        if (useConfidenceCheckBox.getSelection() && !useAutomatedBatchMeansCheckBox.getSelection()) {
-            if ("".equals(batchSizeField.getText())) {
+        if (this.useConfidenceCheckBox.getSelection() && !this.useAutomatedBatchMeansCheckBox.getSelection()) {
+            if ("".equals(this.batchSizeField.getText())) {
                 setErrorMessage("Batch size has to be specified if not determined automatically.");
                 return false;
-            } else if ("".equals(minNumberOfBatchesField.getText())) {
+            } else if ("".equals(this.minNumberOfBatchesField.getText())) {
                 setErrorMessage("Minimum number of batches have to be specified if not determined automatically.");
                 return false;
             }
 
             try {
-                Integer.parseInt(batchSizeField.getText());
-            } catch (NumberFormatException ex) {
+                Integer.parseInt(this.batchSizeField.getText());
+            } catch (final NumberFormatException ex) {
                 setErrorMessage("Batch size has to be an integer!");
                 return false;
             }
 
             try {
-                Integer.parseInt(minNumberOfBatchesField.getText());
-            } catch (NumberFormatException ex) {
+                Integer.parseInt(this.minNumberOfBatchesField.getText());
+            } catch (final NumberFormatException ex) {
                 setErrorMessage("Minimum number of batches has to be an integer!");
                 return false;
             }
@@ -895,12 +908,12 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
 
         return true;
     }
-    
+
     /**
      * Validation of the simulator group
      */
     protected boolean isSimulatorGroupValid() {
-        String simulatorName = simulatorCombo.getText();
+        final String simulatorName = this.simulatorCombo.getText();
         if (simulatorName == null || simulatorName.isEmpty()) {
             setErrorMessage("Simulator implementation is missing!");
             return false;
@@ -910,45 +923,45 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
     }
 
     @Override
-    public void activated(ILaunchConfigurationWorkingCopy configuration) {
+    public void activated(final ILaunchConfigurationWorkingCopy configuration) {
         try {
-            String usageFile = configuration.getAttribute(ConstantsContainer.USAGE_FILE, "");
+            final String usageFile = configuration.getAttribute(ConstantsContainer.USAGE_FILE, "");
 
             if (!usageFile.isEmpty()) {
                 // Prevent reloading the model elements when usage file has not
                 // changed
-                if (!modelFiles.contains(usageFile)) {
-                    modelFiles.clear();
-                    modelFiles.add(usageFile);
+                if (!this.modelFiles.contains(usageFile)) {
+                    this.modelFiles.clear();
+                    this.modelFiles.add(usageFile);
 
-                    selectedModelElementURI = URI.createURI(configuration.getAttribute(
-                            SimuComConfig.CONFIDENCE_MODELELEMENT_URI, ""));
-                    UsageScenario usageScenario = getUsageScenarioFromURI(selectedModelElementURI);
-                    selectedModelElementName = usageScenario.getEntityName();
+                    this.selectedModelElementURI = URI
+                            .createURI(configuration.getAttribute(SimuComConfig.CONFIDENCE_MODELELEMENT_URI, ""));
+                    final UsageScenario usageScenario = getUsageScenarioFromURI(this.selectedModelElementURI);
+                    this.selectedModelElementName = usageScenario.getEntityName();
                     updateModelElementField(usageScenario);
                 }
             }
-        } catch (Exception e) {
-            selectedModelElementURI = null;
-            selectedModelElementName = "";
-            selectModelElementField.setText("");
+        } catch (final Exception e) {
+            this.selectedModelElementURI = null;
+            this.selectedModelElementName = "";
+            this.selectModelElementField.setText("");
         }
 
     }
 
     @Override
-    public void deactivated(ILaunchConfigurationWorkingCopy workingCopy) {
+    public void deactivated(final ILaunchConfigurationWorkingCopy workingCopy) {
     }
 
     private ResourceSet loadModelFiles() {
-        ResourceSet rs = new ResourceSetImpl();
-        for (String file : modelFiles) {
+        final ResourceSet rs = new ResourceSetImpl();
+        for (final String file : this.modelFiles) {
             try {
                 rs.getResource(URI.createURI(file), true);
-            } catch (Exception ex) {
+            } catch (final Exception ex) {
                 try {
                     rs.getResource(URI.createFileURI(file), true);
-                } catch (Exception exInner) {
+                } catch (final Exception exInner) {
                 }
             }
         }
@@ -956,9 +969,9 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         return rs;
     }
 
-    private UsageScenario getUsageScenarioFromURI(URI selectedModelElementURI) throws Exception {
-        ResourceSet rs = loadModelFiles();
-        EObject selectedModelElement = rs.getEObject(selectedModelElementURI, false);
+    private UsageScenario getUsageScenarioFromURI(final URI selectedModelElementURI) throws Exception {
+        final ResourceSet rs = loadModelFiles();
+        final EObject selectedModelElement = rs.getEObject(selectedModelElementURI, false);
 
         if (selectedModelElement != null && selectedModelElement instanceof UsageScenario) {
             return (UsageScenario) selectedModelElement;
