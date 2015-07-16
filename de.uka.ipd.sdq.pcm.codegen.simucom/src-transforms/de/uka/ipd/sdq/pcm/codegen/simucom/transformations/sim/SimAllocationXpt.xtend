@@ -11,7 +11,7 @@ import de.uka.ipd.sdq.pcm.codegen.simucom.transformations.PCMext
 import org.palladiosimulator.pcm.repository.CompositeComponent
 import org.palladiosimulator.pcm.subsystem.SubSystem
 import org.palladiosimulator.pcm.system.System
-import javax.annotation.processing.Completion
+import org.palladiosimulator.analyzer.completions.Completion
 
 class SimAllocationXpt extends AllocationXpt {
 	@Inject extension M2TFileSystemAccess fsa

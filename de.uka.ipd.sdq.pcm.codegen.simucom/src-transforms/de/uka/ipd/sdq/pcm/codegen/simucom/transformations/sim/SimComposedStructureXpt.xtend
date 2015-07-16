@@ -1,7 +1,6 @@
 package de.uka.ipd.sdq.pcm.codegen.simucom.transformations.sim
 
 import com.google.inject.Inject
-import org.palladiosimulator.analyzer.completions.Completion
 import org.palladiosimulator.pcm.core.composition.AssemblyContext
 import org.palladiosimulator.pcm.core.composition.ComposedStructure
 import org.palladiosimulator.pcm.core.entity.ComposedProvidingRequiringEntity
@@ -12,6 +11,7 @@ import org.palladiosimulator.pcm.repository.BasicComponent
 import org.palladiosimulator.pcm.repository.CompositeComponent
 import org.palladiosimulator.pcm.subsystem.SubSystem
 import org.palladiosimulator.pcm.system.System
+import org.palladiosimulator.analyzer.completions.Completion
 
 class SimComposedStructureXpt extends ComposedStructureXpt {
 	@Inject extension PCMext
@@ -59,7 +59,7 @@ class SimComposedStructureXpt extends ComposedStructureXpt {
 		this.model = model; 
 		«ELSE»
 		public «cpre.className()» (String assemblyContextURI, de.uka.ipd.sdq.simucomframework.model.SimuComModel model) {
-	    this.assemblyContext = (org.palladiosimulator.pcm.core.composition.AssemblyContext) org.palladiosimulator.commons.emfutils.EMFLoadHelper.loadModel(assemblyContextURI);
+	    this.assemblyContext = (org.palladiosimulator.pcm.core.composition.AssemblyContext) org.palladiosimulator.commons.emfutils.EMFLoadHelper.loadAndResolveEObject(assemblyContextURI);
 	
 		
 		this.model = model;
