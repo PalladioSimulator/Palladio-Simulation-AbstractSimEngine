@@ -26,7 +26,7 @@ import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
 public class SimulatedResourceContainer extends AbstractSimulatedResourceContainer {
 
     private final List<SimulatedResourceContainer> nestedResourceContainers;
-    private final SimulatedResourceContainer parentResourceContainer;
+    private SimulatedResourceContainer parentResourceContainer;
 
     public SimulatedResourceContainer(final SimuComModel myModel, final String containerID) {
         this(myModel,containerID,new LinkedList<SimulatedResourceContainer>(),null);
@@ -68,6 +68,16 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
                     + ": Nested resource container " + nestedResourceContainerId + " is not available.");
         }
         nestedResourceContainers.add((SimulatedResourceContainer) resourceContainer);
+    }
+    
+    public void setParentResourceContainer(final String parentResourceContainerId) {
+        final AbstractSimulatedResourceContainer resourceContainer = myModel.getResourceRegistry()
+                .getResourceContainer(parentResourceContainerId);
+        if ((resourceContainer == null) || (!(resourceContainer instanceof SimulatedResourceContainer))) {
+            throw new RuntimeException("Could not initialize resouce container " + this.myContainerID
+                    + ": Parent resource container " + parentResourceContainerId + " is not available.");
+        }
+        parentResourceContainer = (SimulatedResourceContainer) resourceContainer;
     }
 
     public void addActiveResource(final ProcessingResourceSpecification activeResource,
