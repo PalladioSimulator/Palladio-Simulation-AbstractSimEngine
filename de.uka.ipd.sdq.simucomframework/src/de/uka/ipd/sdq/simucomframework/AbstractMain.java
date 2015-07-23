@@ -7,12 +7,16 @@ import java.util.Observer;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.palladiosimulator.edp2.models.measuringpoint.MeasuringPointRepository;
 import org.palladiosimulator.edp2.models.measuringpoint.MeasuringpointFactory;
 import org.palladiosimulator.edp2.models.measuringpoint.StringMeasuringPoint;
+import org.palladiosimulator.metricspec.MetricSetDescription;
+import org.palladiosimulator.metricspec.constants.MetricDescriptionConstants;
+import org.palladiosimulator.metricspec.util.builder.MetricSetDescriptionBuilder;
 import org.palladiosimulator.probeframework.calculator.Calculator;
 import org.palladiosimulator.probeframework.probes.EventProbeList;
 import org.palladiosimulator.probeframework.probes.TriggeredProbe;
@@ -36,17 +40,17 @@ import de.uka.ipd.sdq.simulation.preferences.SimulationPreferencesHelper;
 /**
  * Base class for simulation instances. It contains a generic simulation start and stop logic as
  * well as basic error handling mechanisms.
- * 
+ *
  * The code generated for each SimuCom instance contains the class main.SimuComControl that inherits
  * from this one and provides the missing information.
- * 
+ *
  * Excerpt from main.SimuComControl: public class SimuComControl extends
  * de.uka.ipd.sdq.simucomframework.AbstractMain
- * 
+ *
  * TODO This class currently serves too many concerns, e.g., creation of execution result
  * calculators and mixing of usage response time calculator creation and handling of stop
  * conditions. Therefore, some refactorings are needed. [Lehrig]
- * 
+ *
  * @author Steffen Becker, Sebastian Lehrig
  */
 public abstract class AbstractMain implements ISimulationControl, BundleActivator {
@@ -71,7 +75,7 @@ public abstract class AbstractMain implements ISimulationControl, BundleActivato
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext )
      */
     @Override
@@ -83,7 +87,7 @@ public abstract class AbstractMain implements ISimulationControl, BundleActivato
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
      */
     @Override
@@ -93,7 +97,7 @@ public abstract class AbstractMain implements ISimulationControl, BundleActivato
 
     /**
      * Run a simulation using the given configuration and report to the given observer
-     * 
+     *
      * @param statusObserver
      *            Observer to notify about the simulation's progress
      * @param config
@@ -179,7 +183,7 @@ public abstract class AbstractMain implements ISimulationControl, BundleActivato
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see de.uka.ipd.sdq.simucomframework.ISimuComControl#startSimulation(de.uka
      * .ipd.sdq.simucomframework.SimuComConfig, de.uka.ipd.sdq.simucomframework.IStatusObserver,
      * boolean)
@@ -208,17 +212,33 @@ public abstract class AbstractMain implements ISimulationControl, BundleActivato
         if (model.getConfiguration().getSimulateFailures()) {
             final StringMeasuringPoint mp = this.measuringpointFactory.createStringMeasuringPoint();
             mp.setMeasuringPoint("System execution results");
-            MeasuringPointRepository myMeasurementPointRepository = MeasuringpointFactory.eINSTANCE.createMeasuringPointRepository();
+            final MeasuringPointRepository myMeasurementPointRepository = MeasuringpointFactory.eINSTANCE.createMeasuringPointRepository();
             myMeasurementPointRepository.getMeasuringPoints().add(mp);
             mp.setMeasuringPointRepository(myMeasurementPointRepository);
 
+            final MetricSetDescription metricSetDescription = MetricSetDescriptionBuilder.
+                    newMetricSetDescriptionBuilder().
+                    name("Execution Result Over Time").
+                    textualDescription("This metric records execution results over time, i.e., tuples of (execution result, point in time").
+                    id(EcoreUtil.generateUUID()).
+                    subsumedMetrics(
+                            Arrays.asList(
+                                    model.getFailureStatistics().getExecutionResultProbe().getMetricDesciption(),
+                                    MetricDescriptionConstants.POINT_IN_TIME_METRIC)).
+                                    build();
+
             model.getProbeFrameworkContext()
-                    .getCalculatorFactory()
-                    .buildExecutionResultCalculator(
-                            mp,
-                            new EventProbeList(model.getFailureStatistics().getExecutionResultProbe(), Arrays
-                                    .asList((TriggeredProbe) new TakeCurrentSimulationTimeProbe(this.model
-                                            .getSimulationControl()))));
+            .getCalculatorFactory()
+            .buildExecutionResultCalculator(
+                    mp,
+                    new EventProbeList(
+                            metricSetDescription,
+                            model.getFailureStatistics().getExecutionResultProbe(),
+                            Arrays.asList(
+                                    (TriggeredProbe) new TakeCurrentSimulationTimeProbe(this.model.getSimulationControl())
+                                    )
+                            )
+                    );
         }
     }
 
@@ -236,7 +256,7 @@ public abstract class AbstractMain implements ISimulationControl, BundleActivato
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see de.uka.ipd.sdq.simucomframework.ISimuComControl#startSimulation(de.uka
      * .ipd.sdq.simucomframework.SimuComConfig, de.uka.ipd.sdq.simucomframework.IStatusObserver,
      * boolean)
@@ -249,7 +269,7 @@ public abstract class AbstractMain implements ISimulationControl, BundleActivato
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see de.uka.ipd.sdq.simucomframework.ISimuComControl#stopSimulation()
      */
     @Override
@@ -260,7 +280,7 @@ public abstract class AbstractMain implements ISimulationControl, BundleActivato
     /**
      * Template method pattern. Child classes have to implement this to return workload drivers to
      * use in the simulation. The workload drivers are used to generate the simulated users.
-     * 
+     *
      * @param config
      *            the simulation configuration data
      * @return Workload drivers to use in the simulation run
@@ -270,14 +290,14 @@ public abstract class AbstractMain implements ISimulationControl, BundleActivato
     /**
      * Template method to return a factory which can be used to instanciate the simulated resource
      * environment.
-     * 
+     *
      * @return A factory which is used to create the simulated resource environment
      */
     protected abstract IResourceContainerFactory getResourceContainerFactory();
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see de.uka.ipd.sdq.simucomframework.ISimuComControl#getStatus()
      */
     @Override
