@@ -65,6 +65,7 @@ class SimJavaCoreXpt extends JavaCoreXpt {
 	
 		
 		private org.palladiosimulator.pcm.core.composition.AssemblyContext assemblyContext = null;
+		private final String completeAssemblyContextID;
 		private final java.util.Map<String,java.util.List<org.palladiosimulator.probeframework.probes.Probe>> startStopProbes = new java.util.HashMap<String,java.util.List<org.palladiosimulator.probeframework.probes.Probe>>();
 		
 		public org.palladiosimulator.pcm.core.composition.AssemblyContext getAssemblyContext() {
@@ -79,7 +80,8 @@ class SimJavaCoreXpt extends JavaCoreXpt {
 		
 		«rc.passiveResourceDecls»
 		
-		public «rc.javaName()» (String assemblyContextURI, de.uka.ipd.sdq.simucomframework.model.SimuComModel model) {
+		public «rc.javaName()» (String completeAssemblyContextID, String assemblyContextURI, de.uka.ipd.sdq.simucomframework.model.SimuComModel model) {
+			this.completeAssemblyContextID = completeAssemblyContextID;
 			this.assemblyContext = (org.palladiosimulator.pcm.core.composition.AssemblyContext) org.palladiosimulator.commons.emfutils.EMFLoadHelper.loadAndResolveEObject(assemblyContextURI);
 			this.model = model;
 			
@@ -118,7 +120,7 @@ class SimJavaCoreXpt extends JavaCoreXpt {
 	def containerAvailabilityCheck(OperationSignature os) '''
 		// Simulate a failure if one or multiple of the processing resources
 		// required by the executing resource container are currently unavailable:
-		de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer container = ctx.findResource(this.assemblyContext.getId());
+		de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer container = ctx.findResource(this.completeAssemblyContextID);
 		java.util.List<de.uka.ipd.sdq.simucomframework.resources.AbstractScheduledResource> failedResources = container.getFailedResources();
 		if(failedResources.size() > 0){
 			double randValue = ctx.getModel().getConfiguration().getRandomGenerator().random();

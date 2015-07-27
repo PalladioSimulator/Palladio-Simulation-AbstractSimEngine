@@ -29,14 +29,14 @@ class SimResourcesXpt extends ResourcesXpt {
 	def dispatch resourceDemand(ParametricResourceDemand prd) '''
 	    {
 	      double demand = de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter.toDouble(ctx.evaluate("«prd.specification_ParametericResourceDemand.specification.specificationString()»",Double.class));
-	      ctx.findResource(this.assemblyContext.getId()).loadActiveResource(ctx.getThread(),"«prd.requiredResource_ParametricResourceDemand.id»",demand);
+	      ctx.findResource(this.completeAssemblyContextID).loadActiveResource(ctx.getThread(),"«prd.requiredResource_ParametricResourceDemand.id»",demand);
 	    }
 	'''
 	
 	def dispatch resourceDemand(NetworkDemandParametricResourceDemand ndprd) '''
 	    {
 	      double demand = de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter.toDouble(ctx.evaluate("«ndprd.specification_ParametericResourceDemand.specification.specificationString()»",Double.class));
-	      ctx.findResource(this.assemblyContext.getId()).loadActiveResource(ctx.getThread(),"«ndprd.requiredCommunicationLinkResource_ParametricResourceDemand.id»",demand);
+	      ctx.findResource(this.completeAssemblyContextID).loadActiveResource(ctx.getThread(),"«ndprd.requiredCommunicationLinkResource_ParametricResourceDemand.id»",demand);
 	    }
 	'''
 	

@@ -127,7 +127,7 @@ class SimSEFFBodyXpt extends SEFFBodyXpt {
 	{
 	  //TODO Here, a resource demand of 0 is issued to a hard-coded resource "CPU" (ID = "_oro4gG3fEdy4YaaT-RYrLQ")
 	double demand = de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter.toDouble(ctx.evaluate("0", Double.class));
-	ctx.findResource(this.assemblyContext.getId()).loadActiveResource(ctx.getThread(), "_oro4gG3fEdy4YaaT-RYrLQ", demand);
+	ctx.findResource(this.completeAssemblyContextID).loadActiveResource(ctx.getThread(), "_oro4gG3fEdy4YaaT-RYrLQ", demand);
 	}
 	if (pr_«aa.passiveresource_AcquireAction.id.javaVariableName()» == null) {
 		// Initialize Resource First...

@@ -58,7 +58,7 @@ class SimComposedStructureXpt extends ComposedStructureXpt {
 		public «cpre.className()»(de.uka.ipd.sdq.simucomframework.model.SimuComModel model) {
 		this.model = model; 
 		«ELSE»
-		public «cpre.className()» (String assemblyContextURI, de.uka.ipd.sdq.simucomframework.model.SimuComModel model) {
+		public «cpre.className()» (String completeAssemblyContextID, String assemblyContextURI, de.uka.ipd.sdq.simucomframework.model.SimuComModel model) {
 	    this.assemblyContext = (org.palladiosimulator.pcm.core.composition.AssemblyContext) org.palladiosimulator.commons.emfutils.EMFLoadHelper.loadAndResolveEObject(assemblyContextURI);
 	
 		
@@ -82,8 +82,12 @@ class SimComposedStructureXpt extends ComposedStructureXpt {
 	override componentConstructorParametersTM(AssemblyContext obj) {
 		if ((obj.parentStructure__AssemblyContext instanceof CompositeComponent) ||
 			(obj.parentStructure__AssemblyContext instanceof SubSystem) ||
-			(obj.parentStructure__AssemblyContext instanceof Completion) ||
-			(obj.parentStructure__AssemblyContext instanceof System)) '''"«obj.eResource.URI + '#' + obj.id»"''' else '''this.assemblyContext'''
+			(obj.parentStructure__AssemblyContext instanceof Completion))
+			'''"«obj.id»" + completeAssemblyContextID, "«obj.eResource.URI + '#' + obj.id»"'''
+		else if (obj.parentStructure__AssemblyContext instanceof System)
+			'''"«obj.id»", "«obj.eResource.URI + '#' + obj.id»"'''
+		else
+			'''this.assemblyContext'''
 	}
 
 	override childMemberVarInitTM(AssemblyContext context) {
