@@ -152,7 +152,7 @@ public class RecorderAttachingCalculatorFactoryDecorator implements ICalculatorF
     }
 
     @Override
-    public Calculator buildReconfigurationTimeCalculator(MeasuringPoint measuringPoint, List<Probe> probes) {
-        return setupRecorder(decoratedCalculatorFactory.buildReconfigurationTimeCalculator(measuringPoint, probes));
+    public Calculator buildReconfigurationTimeCalculator(MeasuringPoint measuringPoint, Probe probe) {
+        return setupRecorder(decoratedCalculatorFactory.buildReconfigurationTimeCalculator(measuringPoint, probe));
     }
 }
