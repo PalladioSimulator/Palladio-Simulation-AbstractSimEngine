@@ -29,11 +29,11 @@ public class TakePassiveResourceStateProbe extends BasicObjectStateProbe<IPassiv
     }
 
     /**
-     * Measures the difference of capacity and available resources as requested from the passive
-     * resource (observed state object).
+     * Measures the available resources as available within the passive resource (observed state
+     * object).
      */
     @Override
     protected Measure<Long, Dimensionless> getBasicMeasure(final RequestContext measurementContext) {
-        return Measure.valueOf(getStateObject().getCapacity() - getStateObject().getAvailable(), Dimensionless.UNIT);
+        return Measure.valueOf(getStateObject().getAvailable(), Dimensionless.UNIT);
     }
 }
