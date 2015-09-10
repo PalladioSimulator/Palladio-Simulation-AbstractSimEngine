@@ -9,10 +9,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-
-import de.uka.ipd.sdq.codegen.simucontroller.runconfig.AbstractSimulationWorkflowConfiguration;
-import de.uka.ipd.sdq.featureconfig.Configuration;
-
 import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
 import org.palladiosimulator.analyzer.workflow.jobs.CreatePluginProjectJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadMiddlewareConfigurationIntoBlackboardJob;
@@ -27,6 +23,9 @@ import org.palladiosimulator.pcm.repository.Repository;
 import org.palladiosimulator.pcm.repository.RepositoryFactory;
 import org.palladiosimulator.pcm.resourceenvironment.ResourceContainer;
 import org.palladiosimulator.pcm.resourceenvironment.ResourceenvironmentPackage;
+
+import de.uka.ipd.sdq.codegen.simucontroller.runconfig.AbstractSimulationWorkflowConfiguration;
+import de.uka.ipd.sdq.featureconfig.Configuration;
 import de.uka.ipd.sdq.pcm.transformations.builder.connectors.ConnectorReplacingBuilder;
 import de.uka.ipd.sdq.pcm.transformations.builder.util.PCMAndCompletionModelHolder;
 import de.uka.ipd.sdq.workflow.jobs.CleanupFailedException;
@@ -66,23 +65,15 @@ public class ApplyConnectorCompletionsJob implements IBlackboardInteractingJob<M
         }
         ResourceSetPartition completionRepositoryPartition = new ResourceSetPartition();
         Repository completionRepository = RepositoryFactory.eINSTANCE.createRepository();
-        completionRepository.setEntityName("CompletionsRepository");
+        String completionRepositoryName = "CompletionsRepository";
+        completionRepository.setEntityName(completionRepositoryName);
         
         IFolder completionFolder = getOrCreateCompletionFolder();
         
-        final URI completionFolderURI = URI.createURI(completionFolder.getLocation().toOSString());
+        final URI completionFolderURI = URI.createFileURI(completionFolder.getLocation().toOSString());
         
-        // IProject project = CreatePluginProjectJob.getProject(configuration.getStoragePluginID());
-        // IFolder modelFolder = project.getFolder("model");
-        // URI u = pcmModels.getAllocation().eResource().getURI().trimSegments(1);
-        // u = u.appendSegment("completions.repository");
-        //
-        //
-        // String modelBasePath = modelFolder.getLocation().toOSString();
-        // String tempDir = modelBasePath;
-
-        // FIXME: need to add proper end to the URI as in CreateWorkingCopyOfModelsJob lines 104 - 114 
-        Resource r = completionRepositoryPartition.getResourceSet().createResource(completionFolderURI);
+        URI completionRepositoryURI = completionFolderURI.appendSegment("completions.repository");
+        Resource r = completionRepositoryPartition.getResourceSet().createResource(completionRepositoryURI);
         r.getContents().add(completionRepository);
         this.blackboard.addPartition(COMPLETION_REPOSITORY_PARTITION, completionRepositoryPartition);
 
