@@ -1,5 +1,8 @@
 package de.uka.ipd.sdq.simucomframework.variables.converter;
 
+import de.uka.ipd.sdq.simucomframework.variables.EvaluationProxy;
+import de.uka.ipd.sdq.simucomframework.variables.StackContext;
+
 /**
  * Helper class for basic type conversions
  * 
@@ -20,6 +23,10 @@ public class NumberConverter {
         } else if (o instanceof Integer) {
             int i = (Integer) o;
             return i;
+        } else if (o instanceof EvaluationProxy){
+        	EvaluationProxy proxy = (EvaluationProxy)o;
+        	Object evaluatedStoEx = StackContext.evaluateStatic(proxy.getStoEx(), proxy.getStackFrame());
+        	return toDouble(evaluatedStoEx);
         }
         throw new RuntimeException("Can't case " + o + " to double!");
     }
