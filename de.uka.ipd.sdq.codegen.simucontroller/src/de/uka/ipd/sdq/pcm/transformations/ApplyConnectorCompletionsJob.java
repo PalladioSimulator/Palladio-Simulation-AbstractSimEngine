@@ -1,16 +1,20 @@
 package de.uka.ipd.sdq.pcm.transformations;
 
+import java.io.IOException;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 
-import de.uka.ipd.sdq.codegen.simucontroller.SimuControllerPlugin;
 import de.uka.ipd.sdq.codegen.simucontroller.runconfig.AbstractSimulationWorkflowConfiguration;
 import de.uka.ipd.sdq.featureconfig.Configuration;
 
 import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
+import org.palladiosimulator.analyzer.workflow.jobs.CreatePluginProjectJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadMiddlewareConfigurationIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
 import org.palladiosimulator.pcm.allocation.AllocationContext;
@@ -38,6 +42,8 @@ public class ApplyConnectorCompletionsJob implements IBlackboardInteractingJob<M
 
     public static final String COMPLETION_REPOSITORY_PARTITION = "de.uka.ipd.sdq.pcm.completionRepositoryPartition";
 
+	private static final String COMPLETIONS_FOLDER = "connector-completion";
+
     private MDSDBlackboard blackboard;
     private final AbstractSimulationWorkflowConfiguration configuration;
 
@@ -61,8 +67,11 @@ public class ApplyConnectorCompletionsJob implements IBlackboardInteractingJob<M
         ResourceSetPartition completionRepositoryPartition = new ResourceSetPartition();
         Repository completionRepository = RepositoryFactory.eINSTANCE.createRepository();
         completionRepository.setEntityName("CompletionsRepository");
-        String tempDir = SimuControllerPlugin.getDefault().getStateLocation().append("temp").toOSString();
-
+        
+        IFolder completionFolder = getOrCreateCompletionFolder();
+        
+        final URI completionFolderURI = URI.createURI(completionFolder.getLocation().toOSString());
+        
         // IProject project = CreatePluginProjectJob.getProject(configuration.getStoragePluginID());
         // IFolder modelFolder = project.getFolder("model");
         // URI u = pcmModels.getAllocation().eResource().getURI().trimSegments(1);
@@ -72,8 +81,8 @@ public class ApplyConnectorCompletionsJob implements IBlackboardInteractingJob<M
         // String modelBasePath = modelFolder.getLocation().toOSString();
         // String tempDir = modelBasePath;
 
-        // u
-        Resource r = completionRepositoryPartition.getResourceSet().createResource(URI.createFileURI(tempDir));
+        // FIXME: need to add proper end to the URI as in CreateWorkingCopyOfModelsJob lines 104 - 114 
+        Resource r = completionRepositoryPartition.getResourceSet().createResource(completionFolderURI);
         r.getContents().add(completionRepository);
         this.blackboard.addPartition(COMPLETION_REPOSITORY_PARTITION, completionRepositoryPartition);
 
@@ -110,6 +119,22 @@ public class ApplyConnectorCompletionsJob implements IBlackboardInteractingJob<M
             }
 
         }.transform();
+        
+        try{
+        	completionRepositoryPartition.storeAllResources();
+        } catch (final IOException e) {
+            if(LOGGER.isEnabledFor(Level.ERROR)) {
+                LOGGER.error("Unable to serialize the working copy of the completion models." ,e);
+            }
+        }
+    }
+    
+    private IFolder getOrCreateCompletionFolder() throws JobFailedException{
+        assert (this.configuration != null);
+        final IProject project = CreatePluginProjectJob.getProject(this.configuration.getStoragePluginID());
+        assert (project != null);
+        
+        return CreatePluginProjectJob.getOrCreateFolder(project, COMPLETIONS_FOLDER);
     }
 
     /**
