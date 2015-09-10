@@ -12,6 +12,7 @@ import org.palladiosimulator.pcm.repository.CompositeComponent
 import org.palladiosimulator.pcm.subsystem.SubSystem
 import org.palladiosimulator.pcm.system.System
 import org.palladiosimulator.analyzer.completions.Completion
+import org.palladiosimulator.pcm.core.entity.ComposedProvidingRequiringEntity
 
 class SimAllocationXpt extends AllocationXpt {
 	@Inject extension M2TFileSystemAccess fsa
@@ -61,7 +62,7 @@ class SimAllocationXpt extends AllocationXpt {
 			if ((context.assemblyContext_AllocationContext.parentStructure__AssemblyContext instanceof SubSystem)
 				|| (context.assemblyContext_AllocationContext.parentStructure__AssemblyContext instanceof Completion))
 					context.assemblyContext_AllocationContext.id + system.getParentSubsystemsIdConcatenationFor(
-						(context.assemblyContext_AllocationContext.parentStructure__AssemblyContext) as SubSystem
+						(context.assemblyContext_AllocationContext.parentStructure__AssemblyContext) as ComposedProvidingRequiringEntity
 					)
 			else
 				context.assemblyContext_AllocationContext.id
