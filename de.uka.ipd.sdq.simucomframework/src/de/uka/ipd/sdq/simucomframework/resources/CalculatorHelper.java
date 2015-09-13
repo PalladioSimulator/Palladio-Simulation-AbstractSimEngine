@@ -58,7 +58,7 @@ public final class CalculatorHelper {
             .createMeasuringPointRepository();
 
     /**
-     * Sets up a {@link WaitingTimeCalculator} for the specified resource. Also a
+     * Sets up a WaitingTimeCalculator for the specified resource. Also a
      * {@link IPassiveResourceSensor} will be registered at the resource which gets notified of
      * events that are relevant for calculating the waiting time. When such an event arrives, an
      * appropriate {@link BasicMeasurement} will be taken and published at the
@@ -109,7 +109,7 @@ public final class CalculatorHelper {
     }
 
     /**
-     * Sets up a {@link HoldingTimeCalculator} for the specified resource. Also a
+     * Sets up a HoldingTimeCalculator for the specified resource. Also a
      * {@link IPassiveResourceSensor} will be registered at the resource which gets notified of
      * events that are relevant for calculating the hold time. When such an event arrives, an
      * appropriate {@link BasicMeasurement} will be taken and published at the

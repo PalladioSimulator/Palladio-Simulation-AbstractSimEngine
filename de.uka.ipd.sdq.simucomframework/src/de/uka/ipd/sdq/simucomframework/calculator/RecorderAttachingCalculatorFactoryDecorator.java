@@ -92,9 +92,10 @@ public class RecorderAttachingCalculatorFactoryDecorator implements ICalculatorF
      * {@inheritDoc}
      */
     @Override
-    public Calculator buildOverallStateOfActiveResourceCalculator(final MeasuringPoint measuringPoint, final Probe probe) {
-        return setupRecorder(decoratedCalculatorFactory.buildOverallStateOfActiveResourceCalculator(measuringPoint,
-                probe));
+    public Calculator buildOverallStateOfActiveResourceCalculator(final MeasuringPoint measuringPoint,
+            final Probe probe) {
+        return setupRecorder(
+                decoratedCalculatorFactory.buildOverallStateOfActiveResourceCalculator(measuringPoint, probe));
     }
 
     @Override
@@ -105,8 +106,8 @@ public class RecorderAttachingCalculatorFactoryDecorator implements ICalculatorF
     @Override
     public Calculator buildOverallStateOfPassiveResourceCalculator(final MeasuringPoint measuringPoint,
             final Probe probe) {
-        return setupRecorder(decoratedCalculatorFactory.buildOverallStateOfPassiveResourceCalculator(measuringPoint,
-                probe));
+        return setupRecorder(
+                decoratedCalculatorFactory.buildOverallStateOfPassiveResourceCalculator(measuringPoint, probe));
     }
 
     /**
@@ -129,9 +130,10 @@ public class RecorderAttachingCalculatorFactoryDecorator implements ICalculatorF
      * {@inheritDoc}
      */
     @Override
-    public Calculator buildNumberOfResourceContainersCalculator(final MeasuringPoint measuringPoint, final Probe probe) {
-        return setupRecorder(decoratedCalculatorFactory
-                .buildNumberOfResourceContainersCalculator(measuringPoint, probe));
+    public Calculator buildNumberOfResourceContainersCalculator(final MeasuringPoint measuringPoint,
+            final Probe probe) {
+        return setupRecorder(
+                decoratedCalculatorFactory.buildNumberOfResourceContainersCalculator(measuringPoint, probe));
     }
 
     private Calculator setupRecorder(final Calculator calculator) {
@@ -152,7 +154,12 @@ public class RecorderAttachingCalculatorFactoryDecorator implements ICalculatorF
     }
 
     @Override
-    public Calculator buildReconfigurationTimeCalculator(MeasuringPoint measuringPoint, Probe probe) {
+    public Calculator buildReconfigurationTimeCalculator(final MeasuringPoint measuringPoint, final Probe probe) {
         return setupRecorder(decoratedCalculatorFactory.buildReconfigurationTimeCalculator(measuringPoint, probe));
+    }
+
+    @Override
+    public Calculator buildCostOverTimeCalculator(final MeasuringPoint measuringPoint, final Probe probes) {
+        return setupRecorder(decoratedCalculatorFactory.buildCostOverTimeCalculator(measuringPoint, probes));
     }
 }
