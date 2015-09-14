@@ -41,7 +41,7 @@ public class ApplyConnectorCompletionsJob implements IBlackboardInteractingJob<M
 
     public static final String COMPLETION_REPOSITORY_PARTITION = "de.uka.ipd.sdq.pcm.completionRepositoryPartition";
 
-	private static final String COMPLETIONS_FOLDER = "connector-completion";
+	private static final String COMPLETIONS_FOLDER = "model/connector-completion";
 
     private MDSDBlackboard blackboard;
     private final AbstractSimulationWorkflowConfiguration configuration;
