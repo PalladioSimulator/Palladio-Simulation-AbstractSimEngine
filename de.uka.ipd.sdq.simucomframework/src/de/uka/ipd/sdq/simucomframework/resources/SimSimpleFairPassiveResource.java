@@ -40,7 +40,6 @@ public class SimSimpleFairPassiveResource extends AbstractSimResource implements
     private long available;
     private final String passiveResourceID;
     private final boolean simulateFailures;
-    private final SimuComModel simuComModel;
 
     // provides observer functionality to this resource
     private final PassiveResourceObservee observee;
@@ -48,18 +47,30 @@ public class SimSimpleFairPassiveResource extends AbstractSimResource implements
     private final AssemblyContext assemblyContext;
 
     public SimSimpleFairPassiveResource(final PassiveResource resource, final AssemblyContext assemblyContext,
-            final SimuComModel simuComModel, final Long capacity) {
-        super(simuComModel, capacity, resource.getEntityName(), resource.getId() + ":" + assemblyContext.getId());
+            final SchedulerModel model, final Long capacity) {
+        super(model, capacity, resource.getEntityName(), resource.getId() + ":" + assemblyContext.getId());
         this.resource = resource;
         this.assemblyContext = assemblyContext;
 
-        this.simuComModel = simuComModel;
         this.waitingQueue = new ArrayDeque<IWaitingProcess>();
-        this.myModel = simuComModel;
+        this.myModel = model;
         this.passiveResourceID = resource.getId();
         this.observee = new PassiveResourceObservee();
         this.available = capacity;
-        this.simulateFailures = simuComModel.getConfiguration().getSimulateFailures();
+
+		/*
+		 * The following workaround can be removed once failure simulation has been factored out of this class or has
+		 * been made independent of SimuComModel.
+		 * 
+		 * Actually, neither this class nor the failure-enhanced class should prescribe the concrete simulation model
+		 * because this excludes simulators other than SimuCom from reusing this class. Instead, this class should
+		 * require an abstract (!) simulation model like ISimulationModel.
+		 */        
+		if (myModel instanceof SimuComModel) {
+			this.simulateFailures = ((SimuComModel) model).getConfiguration().getSimulateFailures();
+		} else {
+			this.simulateFailures = false;
+		}
     }
 
     private boolean canProceed(final ISchedulableProcess process, final long num) {
@@ -130,6 +141,8 @@ public class SimSimpleFairPassiveResource extends AbstractSimResource implements
         if (!simulateFailures || !timeout) {
             return;
         }
+		// this cast is safe because simulateFailure is true if and only if myModel is a SimuComModel
+		SimuComModel simuComModel = (SimuComModel) myModel;
         if (timeoutValue == 0.0) {
             FailureException.raise(
                     simuComModel,
