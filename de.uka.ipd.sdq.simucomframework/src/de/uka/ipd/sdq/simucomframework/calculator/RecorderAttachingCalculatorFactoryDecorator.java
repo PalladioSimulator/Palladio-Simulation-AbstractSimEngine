@@ -162,4 +162,9 @@ public class RecorderAttachingCalculatorFactoryDecorator implements ICalculatorF
     public Calculator buildCostOverTimeCalculator(final MeasuringPoint measuringPoint, final Probe probes) {
         return setupRecorder(decoratedCalculatorFactory.buildCostOverTimeCalculator(measuringPoint, probes));
     }
+
+    @Override
+    public Calculator buildOptimisationTimeCalculator(MeasuringPoint measuringPoint, Probe probe) {
+        return setupRecorder(decoratedCalculatorFactory.buildOptimisationTimeCalculator(measuringPoint, probe));
+    }
 }
