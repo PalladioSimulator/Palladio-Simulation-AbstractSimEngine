@@ -113,11 +113,13 @@ public class ClosedWorkloadUser extends SimuComSimProcess implements IUser {
      */
     @Override
     public void scenarioRunner(final SimuComSimProcess thread) {
-        final double thinkTimeEvaluation = Context.evaluateStatic(this.thinkTime, Double.class, null);
-        this.hold(thinkTimeEvaluation);
+    	// execute
         ((TriggeredProbe) this.usageStartStopProbes.get(0)).takeMeasurement(getRequestContext());
         this.scenarioRunner.scenarioRunner(thread);
         ((TriggeredProbe) this.usageStartStopProbes.get(1)).takeMeasurement(getRequestContext());
+        // think
+        final double thinkTimeEvaluation = Context.evaluateStatic(this.thinkTime, Double.class, null);
+        this.hold(thinkTimeEvaluation);
     }
 
     /*
