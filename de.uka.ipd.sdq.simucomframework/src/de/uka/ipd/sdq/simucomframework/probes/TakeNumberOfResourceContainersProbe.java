@@ -4,50 +4,37 @@ import javax.measure.Measure;
 import javax.measure.quantity.Dimensionless;
 
 import org.palladiosimulator.metricspec.constants.MetricDescriptionConstants;
-import org.palladiosimulator.probeframework.probes.BasicEventProbe;
-
-import de.uka.ipd.sdq.simucomframework.ResourceRegistry;
-import de.uka.ipd.sdq.simucomframework.resources.IResourceEnvironmentListener;
-import de.uka.ipd.sdq.simucomframework.resources.SimulatedResourceContainer;
+import org.palladiosimulator.pcm.resourceenvironment.ResourceEnvironment;
+import org.palladiosimulator.probeframework.measurement.RequestContext;
+import org.palladiosimulator.probeframework.probes.BasicObjectStateProbe;
 
 /**
- * Probes the number of resource containers within a resource environment. The probe listens to a
- * resource registry (event source type), informing about any changes within the resource
- * environment. Therefore, the probe has to implement the <code>IResourceEnvironmentListener</code>
- * interface and to register itself in the <code>registerListener</code> method to this resource
- * registry.
+ * Probes the number of resource containers within a resource environment.
  * 
  * @author Sebastian Lehrig
  */
-public class TakeNumberOfResourceContainersProbe extends BasicEventProbe<ResourceRegistry, Long, Dimensionless>
-        implements IResourceEnvironmentListener {
+public class TakeNumberOfResourceContainersProbe
+        extends BasicObjectStateProbe<ResourceEnvironment, Long, Dimensionless> {
 
     /**
      * Default constructor.
      * 
      * @param resourceRegistry
-     *            The event source is a resource registry, thus, notifying about newly available and
-     *            shut-down resource containers.
+     *            The observer object is a ResourceEnvironment, thus, allowing to request the
+     *            current number of included resource containers.
      */
-    public TakeNumberOfResourceContainersProbe(final ResourceRegistry resourceRegistry) {
-        super(resourceRegistry, MetricDescriptionConstants.NUMBER_OF_RESOURCE_CONTAINERS);
+    public TakeNumberOfResourceContainersProbe(final ResourceEnvironment resourceEnvironment) {
+        super(resourceEnvironment, MetricDescriptionConstants.NUMBER_OF_RESOURCE_CONTAINERS);
     }
 
     /**
-     * Registers this class as an observer of the resource registry (event source type).
+     * Measures the current number of resource containers the ResourceEnvironment (observed state
+     * object).
      */
     @Override
-    protected void registerListener() {
-        this.eventSource.addObserver(this);
+    protected Measure<Long, Dimensionless> getBasicMeasure(final RequestContext measurementContext) {
+        return Measure.valueOf(new Long(getStateObject().getResourceContainer_ResourceEnvironment().size()),
+                Dimensionless.UNIT);
     }
 
-    @Override
-    public void addedResourceContainer(final SimulatedResourceContainer container, final long totalContainers) {
-        notify(Measure.valueOf(totalContainers, Dimensionless.UNIT));
-    }
-
-    @Override
-    public void removedResourceContainer(final SimulatedResourceContainer container, final long totalContainers) {
-        notify(Measure.valueOf(totalContainers, Dimensionless.UNIT));
-    }
 }

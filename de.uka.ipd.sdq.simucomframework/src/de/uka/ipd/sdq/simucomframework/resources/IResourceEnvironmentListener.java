@@ -1,5 +1,7 @@
 package de.uka.ipd.sdq.simucomframework.resources;
 
+import org.palladiosimulator.pcm.resourceenvironment.ResourceContainer;
+
 /**
  * Listener for resource environment changes.
  * 
@@ -7,8 +9,8 @@ package de.uka.ipd.sdq.simucomframework.resources;
  */
 public interface IResourceEnvironmentListener {
 
-    public void addedResourceContainer(final SimulatedResourceContainer container, long totalContainers);
+    public void addedResourceContainer(final ResourceContainer container, long totalContainers);
 
-    public void removedResourceContainer(final SimulatedResourceContainer container, long totalContainers);
+    public void removedResourceContainer(final ResourceContainer container, long totalContainers);
 
 }

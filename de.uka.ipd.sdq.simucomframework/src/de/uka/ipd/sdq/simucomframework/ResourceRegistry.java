@@ -5,13 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.palladiosimulator.commons.designpatterns.AbstractObservable;
-import org.palladiosimulator.commons.designpatterns.IAbstractObservable;
-
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
 import de.uka.ipd.sdq.simucomframework.resources.AbstractScheduledResource;
 import de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer;
-import de.uka.ipd.sdq.simucomframework.resources.IResourceEnvironmentListener;
 import de.uka.ipd.sdq.simucomframework.resources.SimulatedLinkingResourceContainer;
 import de.uka.ipd.sdq.simucomframework.resources.SimulatedResourceContainer;
 
@@ -21,13 +17,10 @@ import de.uka.ipd.sdq.simucomframework.resources.SimulatedResourceContainer;
  *
  * @author Steffen Becker, Sebastian Lehrig
  */
-public class ResourceRegistry implements IAbstractObservable<IResourceEnvironmentListener> {
+public class ResourceRegistry {
 
     /** ResourceContainerID -> ResourceContainer Object */
     private final Map<String, AbstractSimulatedResourceContainer> resourceContainerHash = new HashMap<String, AbstractSimulatedResourceContainer>();
-
-    /** Delegator object used for implementing IAbstractObservable (c.f., "Delegator pattern") */
-    private final AbstractObservable<IResourceEnvironmentListener> observableDelegate;
 
     private final SimuComModel myModel;
 
@@ -40,8 +33,6 @@ public class ResourceRegistry implements IAbstractObservable<IResourceEnvironmen
     public ResourceRegistry(final SimuComModel model) {
         super();
         this.myModel = model;
-        this.observableDelegate = new AbstractObservable<IResourceEnvironmentListener>() {
-        };
     }
 
     /**
@@ -51,8 +42,8 @@ public class ResourceRegistry implements IAbstractObservable<IResourceEnvironmen
      *            the resource container to add
      */
     public void addResourceContainer(final SimulatedResourceContainer container) {
-        assert (!resourceContainerHash.containsKey(container.getResourceContainerID()));
-        resourceContainerHash.put(container.getResourceContainerID(), container);
+        assert (!this.resourceContainerHash.containsKey(container.getResourceContainerID()));
+        this.resourceContainerHash.put(container.getResourceContainerID(), container);
     }
 
     /**
@@ -63,13 +54,11 @@ public class ResourceRegistry implements IAbstractObservable<IResourceEnvironmen
      * @return The simulated resource container object
      */
     public AbstractSimulatedResourceContainer createResourceContainer(final String containerID) {
-        if (!resourceContainerHash.containsKey(containerID)) {
-            final SimulatedResourceContainer container = new SimulatedResourceContainer(myModel, containerID);
-            resourceContainerHash.put(container.getResourceContainerID(), container);
-            this.observableDelegate.getEventDispatcher()
-            .addedResourceContainer(container, resourceContainerHash.size());
+        if (!this.resourceContainerHash.containsKey(containerID)) {
+            final SimulatedResourceContainer container = new SimulatedResourceContainer(this.myModel, containerID);
+            this.resourceContainerHash.put(container.getResourceContainerID(), container);
         }
-        return resourceContainerHash.get(containerID);
+        return this.resourceContainerHash.get(containerID);
     }
 
     /**
@@ -82,11 +71,12 @@ public class ResourceRegistry implements IAbstractObservable<IResourceEnvironmen
      *         simulation to unify resource container and link resource behavior.
      */
     public AbstractSimulatedResourceContainer createLinkingResourceContainer(final String containerID) {
-        if (!resourceContainerHash.containsKey(containerID)) {
-            final SimulatedLinkingResourceContainer container = new SimulatedLinkingResourceContainer(myModel, containerID);
-            resourceContainerHash.put(containerID, container);
+        if (!this.resourceContainerHash.containsKey(containerID)) {
+            final SimulatedLinkingResourceContainer container = new SimulatedLinkingResourceContainer(this.myModel,
+                    containerID);
+            this.resourceContainerHash.put(containerID, container);
         }
-        return resourceContainerHash.get(containerID);
+        return this.resourceContainerHash.get(containerID);
     }
 
     /**
@@ -96,13 +86,13 @@ public class ResourceRegistry implements IAbstractObservable<IResourceEnvironmen
      *            the linking resource container to add
      */
     public void addLinkingResourceContainer(final SimulatedLinkingResourceContainer container) {
-        assert (!resourceContainerHash.containsKey(container.getResourceContainerID()));
-        resourceContainerHash.put(container.getResourceContainerID(), container);
+        assert (!this.resourceContainerHash.containsKey(container.getResourceContainerID()));
+        this.resourceContainerHash.put(container.getResourceContainerID(), container);
     }
 
     public List<SimulatedLinkingResourceContainer> getLinkingResourceContainers() {
         final List<SimulatedLinkingResourceContainer> resourceContainers = new ArrayList<SimulatedLinkingResourceContainer>();
-        for (final AbstractSimulatedResourceContainer container : resourceContainerHash.values()) {
+        for (final AbstractSimulatedResourceContainer container : this.resourceContainerHash.values()) {
             if (container instanceof SimulatedLinkingResourceContainer) {
                 resourceContainers.add((SimulatedLinkingResourceContainer) container);
             }
@@ -112,7 +102,7 @@ public class ResourceRegistry implements IAbstractObservable<IResourceEnvironmen
 
     public List<SimulatedResourceContainer> getSimulatedResourceContainers() {
         final List<SimulatedResourceContainer> resourceContainers = new ArrayList<SimulatedResourceContainer>();
-        for (final AbstractSimulatedResourceContainer container : resourceContainerHash.values()) {
+        for (final AbstractSimulatedResourceContainer container : this.resourceContainerHash.values()) {
             if (container instanceof SimulatedResourceContainer) {
                 resourceContainers.add((SimulatedResourceContainer) container);
             }
@@ -126,7 +116,7 @@ public class ResourceRegistry implements IAbstractObservable<IResourceEnvironmen
      * @return True if the given ID is known in the resource registry
      */
     public boolean containsResourceContainer(final String resourceContainerID) {
-        return resourceContainerHash.containsKey(resourceContainerID);
+        return this.resourceContainerHash.containsKey(resourceContainerID);
     }
 
     /**
@@ -138,7 +128,7 @@ public class ResourceRegistry implements IAbstractObservable<IResourceEnvironmen
      */
     public AbstractSimulatedResourceContainer getResourceContainer(final String resourceContainerID) {
         assert containsResourceContainer(resourceContainerID);
-        return resourceContainerHash.get(resourceContainerID);
+        return this.resourceContainerHash.get(resourceContainerID);
     }
 
     /**
@@ -151,13 +141,8 @@ public class ResourceRegistry implements IAbstractObservable<IResourceEnvironmen
     public AbstractSimulatedResourceContainer removeResourceContainerFromRegistry(final String resourceContainerID) {
         AbstractSimulatedResourceContainer container = null;
         if (containsResourceContainer(resourceContainerID)) {
-            container = resourceContainerHash.get(resourceContainerID);
-            resourceContainerHash.remove(resourceContainerID);
-
-            if (container instanceof SimulatedResourceContainer) {
-                this.observableDelegate.getEventDispatcher().removedResourceContainer(
-                        (SimulatedResourceContainer) container, resourceContainerHash.size());
-            }
+            container = this.resourceContainerHash.get(resourceContainerID);
+            this.resourceContainerHash.remove(resourceContainerID);
         }
         return container;
     }
@@ -167,7 +152,7 @@ public class ResourceRegistry implements IAbstractObservable<IResourceEnvironmen
      */
     public void activateAllActiveResources() {
         final ArrayList<AbstractScheduledResource> resources = new ArrayList<AbstractScheduledResource>();
-        for (final AbstractSimulatedResourceContainer src : resourceContainerHash.values()) {
+        for (final AbstractSimulatedResourceContainer src : this.resourceContainerHash.values()) {
             resources.addAll(src.getActiveResources());
         }
         for (final AbstractScheduledResource sar : resources) {
@@ -180,7 +165,7 @@ public class ResourceRegistry implements IAbstractObservable<IResourceEnvironmen
      */
     public void deactivateAllActiveResources() {
         final List<AbstractScheduledResource> resources = new ArrayList<AbstractScheduledResource>();
-        for (final AbstractSimulatedResourceContainer src : resourceContainerHash.values()) {
+        for (final AbstractSimulatedResourceContainer src : this.resourceContainerHash.values()) {
             resources.addAll(src.getActiveResources());
         }
         for (final AbstractScheduledResource sar : resources) {
@@ -192,21 +177,4 @@ public class ResourceRegistry implements IAbstractObservable<IResourceEnvironmen
         // TODO Is it necessary to deactivate passive resources here or is this
         // already done elsewhere?
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addObserver(final IResourceEnvironmentListener observer) {
-        observableDelegate.addObserver(observer);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void removeObserver(final IResourceEnvironmentListener observer) {
-        observableDelegate.removeObserver(observer);
-    }
-
 }
