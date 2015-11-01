@@ -15,6 +15,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -22,6 +23,7 @@ import org.eclipse.swt.widgets.Text;
 import org.palladiosimulator.analyzer.workflow.ConstantsContainer;
 
 import de.uka.ipd.sdq.featureinstance.FeatureConfigWidget;
+import de.uka.ipd.sdq.simulation.AbstractSimulationConfig;
 import de.uka.ipd.sdq.workflow.launchconfig.ImageRegistryHelper;
 import de.uka.ipd.sdq.workflow.launchconfig.tabs.TabHelper;
 
@@ -39,15 +41,25 @@ public class FeatureOptionsTab extends AbstractLaunchConfigurationTab {
     private static final String FEATURE_OPTIONS_TAB_IMAGE_PATH = "icons/feature_tab.gif";
 
     private static final String TITLE_FEATURE_CONFIG_SECTION = "PCM2EJB Feature Configuration File";
-    private static final String LABEL_SIMULATE_NETWORK = "Simulate middleware marshalling / demarshalling of remote calls.";
+    
+    private static final String LABEL_SIMULATE_NETWORK = "Simulate full middleware marshalling / demarshalling of remote calls.";
+    private static final String LABEL_SIMULATE_THROUGHPUT_OF_LINKING_RESOURCE = "Simulate throughput of remote calls.";
+    private static final String LABEL_SIMULATE_NO_THROUGHPUT_OF_LINKING_RESOURCE = "Do not simulate throughput of remote calls.";
+    private static final String[] COMBO_SIMULATE_ITEMS = {
+    		FeatureOptionsTab.LABEL_SIMULATE_NETWORK, 
+    		FeatureOptionsTab.LABEL_SIMULATE_THROUGHPUT_OF_LINKING_RESOURCE, 
+    		FeatureOptionsTab.LABEL_SIMULATE_NO_THROUGHPUT_OF_LINKING_RESOURCE
+    		};
+    
     private static final String SIMULATE_NETWORK_EXPLANATION = "Latency is always simulated if linking resources connect containers. The linking resource is treated as a FCFS resource.";
 
     // Default values
     private static final Boolean DEFAULT_SIMULATE_FAILURES = false;
     private static final Boolean DEFAULT_SIMULATE_LINKING_RESOURCES = false;
+    private static final Boolean DEFAULT_SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES = true;
     private static final String DEFAULT_FEATURE_CONFIGURATION_FILE_LABEL = "Feature Configuration File";
     // UI elements
-    private Button simulateLinkingResourcesButton;
+    private Combo simulateLinkingResourceCombo;
     private Button simulateFailuresButton;
     private Text textFeatureConfig;
     private Text textTargetConfig;
@@ -128,11 +140,12 @@ public class FeatureOptionsTab extends AbstractLaunchConfigurationTab {
         final GridData gd_networkingGroup = new GridData(SWT.FILL, SWT.CENTER, true, false);
         networkingGroup.setLayoutData(gd_networkingGroup);
         networkingGroup.setLayout(new GridLayout());
-        simulateLinkingResourcesButton = new Button(networkingGroup, SWT.CHECK);
+        
+        simulateLinkingResourceCombo = new Combo(networkingGroup, SWT.READ_ONLY);
         final GridData gd_simulateLinkingResourcesButton = new GridData(SWT.FILL, SWT.CENTER, true, false);
-        simulateLinkingResourcesButton.setLayoutData(gd_simulateLinkingResourcesButton);
-        simulateLinkingResourcesButton.setText(FeatureOptionsTab.LABEL_SIMULATE_NETWORK);
-        simulateLinkingResourcesButton.addSelectionListener(selectionListener);
+        simulateLinkingResourceCombo.setLayoutData(gd_simulateLinkingResourcesButton);
+        simulateLinkingResourceCombo.setItems(COMBO_SIMULATE_ITEMS);
+        simulateLinkingResourceCombo.addSelectionListener(selectionListener);
 
         Label simulateLinkingResourceLabel = new Label(networkingGroup, SWT.NONE);
         simulateLinkingResourceLabel.setText(SIMULATE_NETWORK_EXPLANATION);
@@ -279,12 +292,33 @@ public class FeatureOptionsTab extends AbstractLaunchConfigurationTab {
      * .debug.core.ILaunchConfiguration)
      */
     public void initializeFrom(ILaunchConfiguration configuration) {
-        try {
-            simulateLinkingResourcesButton.setSelection(configuration.getAttribute(
-                    ConstantsContainer.SIMULATE_LINKING_RESOURCES, true));
-        } catch (CoreException e) {
-            simulateLinkingResourcesButton.setSelection(true);
-        }
+    	try {
+    		
+    		String selectedItem = LABEL_SIMULATE_NO_THROUGHPUT_OF_LINKING_RESOURCE;
+
+    		Boolean simulateLinkingResourceChoice = configuration
+    				.getAttribute(ConstantsContainer.SIMULATE_LINKING_RESOURCES, DEFAULT_SIMULATE_LINKING_RESOURCES);
+    		if (simulateLinkingResourceChoice){
+    			selectedItem = LABEL_SIMULATE_NETWORK;
+    		} else {    		
+    			Boolean simulateThroughputOfLinkingResource = configuration
+    					.getAttribute(ConstantsContainer.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES, DEFAULT_SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES);
+    			if (simulateThroughputOfLinkingResource){
+    				selectedItem = LABEL_SIMULATE_THROUGHPUT_OF_LINKING_RESOURCE;
+    			}
+    		}
+
+    		final String[] items = this.simulateLinkingResourceCombo.getItems();
+    		for (int i = 0; i < items.length; i++) {
+    			final String str = items[i];
+    			if (str.equals(selectedItem)) {
+    				this.simulateLinkingResourceCombo.select(i);
+    			}
+    		}
+    	} catch (CoreException e1) {
+    		this.simulateLinkingResourceCombo.select(1);
+    	}
+
         try {
             simulateFailuresButton.setSelection(configuration.getAttribute(ConstantsContainer.SIMULATE_FAILURES, true));
         } catch (CoreException e) {
@@ -312,8 +346,27 @@ public class FeatureOptionsTab extends AbstractLaunchConfigurationTab {
      * .debug.core.ILaunchConfigurationWorkingCopy)
      */
     public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-        configuration.setAttribute(ConstantsContainer.SIMULATE_LINKING_RESOURCES,
-                this.simulateLinkingResourcesButton.getSelection());
+    	
+    	if (LABEL_SIMULATE_NO_THROUGHPUT_OF_LINKING_RESOURCE.equals(
+    			this.simulateLinkingResourceCombo.getText())){
+    		configuration.setAttribute(ConstantsContainer.SIMULATE_LINKING_RESOURCES,
+    				false);
+    		configuration.setAttribute(ConstantsContainer.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES, 
+    				false);
+    	} else if (LABEL_SIMULATE_THROUGHPUT_OF_LINKING_RESOURCE.equals(
+    			this.simulateLinkingResourceCombo.getText())){
+    		configuration.setAttribute(ConstantsContainer.SIMULATE_LINKING_RESOURCES,
+    				false);
+    		configuration.setAttribute(ConstantsContainer.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES, 
+    				true);
+    	} else if (LABEL_SIMULATE_NETWORK.equals(
+    			this.simulateLinkingResourceCombo.getText())){
+    		configuration.setAttribute(ConstantsContainer.SIMULATE_LINKING_RESOURCES,
+    				true);
+    		configuration.setAttribute(ConstantsContainer.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES, 
+    				true);
+    	}     	
+
         configuration.setAttribute(ConstantsContainer.SIMULATE_FAILURES, this.simulateFailuresButton.getSelection());
         configuration.setAttribute(ConstantsContainer.FEATURE_CONFIG, textFeatureConfig.getText());
         // FIXME: re-enable
@@ -346,6 +399,7 @@ public class FeatureOptionsTab extends AbstractLaunchConfigurationTab {
      */
     public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
         configuration.setAttribute(ConstantsContainer.SIMULATE_LINKING_RESOURCES, DEFAULT_SIMULATE_LINKING_RESOURCES);
+        configuration.setAttribute(ConstantsContainer.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES, DEFAULT_SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES);
         configuration.setAttribute(ConstantsContainer.SIMULATE_FAILURES, DEFAULT_SIMULATE_FAILURES);
         ;
         configuration.setAttribute(ConstantsContainer.FEATURE_CONFIG,

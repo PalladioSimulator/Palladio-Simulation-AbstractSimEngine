@@ -60,6 +60,7 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
     private static final Logger LOGGER = Logger.getLogger(SimuComConfigurationTab.class);
 
     private Text nameField;
+    private Text variationField;
     private Text timeField;
     private Text maxMeasurementsField;
     private Button checkLoggingButton;
@@ -194,6 +195,15 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         gd_nameField.widthHint = 70;
         this.nameField.setLayoutData(gd_nameField);
         this.nameField.addModifyListener(modifyListener);
+        
+        final Label variationLabel = new Label(experimentrunGroup, SWT.NONE);
+        variationLabel.setText("Variation Name:");
+        
+        this.variationField = new Text(experimentrunGroup, SWT.BORDER);
+        final GridData gd_variationField = new GridData(SWT.FILL, SWT.CENTER, true, false);
+        gd_variationField.widthHint = 70;
+        this.variationField.setLayoutData(gd_variationField);
+        this.variationField.addModifyListener(modifyListener);
     }
 
     /**
@@ -519,6 +529,12 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         } catch (final CoreException e) {
             this.nameField.setText("MyRun");
         }
+        
+        try {
+            this.variationField.setText(configuration.getAttribute(AbstractSimulationConfig.VARIATION_ID, ""));
+        } catch (final CoreException e) {
+            this.variationField.setText(AbstractSimulationConfig.DEFAULT_VARIATION_NAME);
+        }
 
         try {
             this.timeField.setText(configuration.getAttribute(AbstractSimulationConfig.SIMULATION_TIME, ""));
@@ -694,10 +710,8 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         applySimulatorGroup(configuration);
 
         configuration.setAttribute(AbstractSimulationConfig.EXPERIMENT_RUN, this.nameField.getText());
-        configuration.setAttribute(AbstractSimulationConfig.VARIATION_ID,
-                AbstractSimulationConfig.DEFAULT_VARIATION_NAME); // TODO Add text field for
-                                                                  // manually stating variation
-                                                                  // names.
+        configuration.setAttribute(AbstractSimulationConfig.VARIATION_ID, this.variationField.getText());
+
         configuration.setAttribute(AbstractSimulationConfig.SIMULATION_TIME, this.timeField.getText());
         configuration.setAttribute(AbstractSimulationConfig.MAXIMUM_MEASUREMENT_COUNT,
                 this.maxMeasurementsField.getText());
@@ -816,6 +830,7 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
             setErrorMessage("ExperimentRun name is missing!");
             return false;
         }
+        /* No requirements for variationField*/
         if (this.timeField.getText().equals("")) {
             setErrorMessage("Simulation time is missing!");
             return false;

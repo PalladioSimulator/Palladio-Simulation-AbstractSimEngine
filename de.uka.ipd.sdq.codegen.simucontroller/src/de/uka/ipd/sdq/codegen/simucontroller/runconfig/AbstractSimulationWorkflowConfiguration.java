@@ -15,6 +15,7 @@ public abstract class AbstractSimulationWorkflowConfiguration extends AbstractCo
     private Map<String, Object> attributes = null;
 
     private boolean simulateLinkingResources;
+    private boolean simulateThroughputOfLinkingResources;
 
     private String featureConfigFile;
 
@@ -25,11 +26,20 @@ public abstract class AbstractSimulationWorkflowConfiguration extends AbstractCo
     public boolean getSimulateLinkingResources() {
         return simulateLinkingResources;
     }
+    
+    public boolean getSimulateThroughputOfLinkingResources() {
+        return simulateThroughputOfLinkingResources;
+    }
 
     public void setSimulateLinkingResources(boolean simulateLinkingResources) {
         checkFixed();
         this.simulateLinkingResources = simulateLinkingResources;
         this.setLoadMiddlewareAndCompletionFiles(simulateLinkingResources);
+    }
+    
+    public void setSimulateThroughputOfLinkingResources(boolean simulateThroughputOfLinkingResources) {
+        checkFixed();
+        this.simulateThroughputOfLinkingResources = simulateThroughputOfLinkingResources;
     }
 
     public abstract AbstractSimulationConfig getSimulationConfiguration();
@@ -80,6 +90,7 @@ public abstract class AbstractSimulationWorkflowConfiguration extends AbstractCo
         AbstractSimulationWorkflowConfiguration config = (AbstractSimulationWorkflowConfiguration) super.clone();
         config.featureConfigFile = this.featureConfigFile;
         config.simulateLinkingResources = this.simulateLinkingResources;
+        config.simulateThroughputOfLinkingResources = this.simulateThroughputOfLinkingResources;
         return config;
     }
 

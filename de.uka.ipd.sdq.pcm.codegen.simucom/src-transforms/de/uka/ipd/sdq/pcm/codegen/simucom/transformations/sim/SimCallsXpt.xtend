@@ -232,7 +232,7 @@ class SimCallsXpt extends CallsXpt {
 				// If the call goes over network, simulate the link latency and the possibility of a communication link failure.
 				// Do this only in case that the "simulate linking resources" option is deactivated, because otherwise,
 				// completions handle the link behaviour.
-				if (!ctx.getModel().getConfig().getSimulateLinkingResources()) {
+				if (!ctx.getModel().getConfiguration().getSimulateLinkingResources()) {
 					de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer fromContainer = null;
 					de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer toContainer = null;
 					try {
@@ -261,17 +261,19 @@ class SimCallsXpt extends CallsXpt {
 								}
 							} catch(de.uka.ipd.sdq.simucomframework.variables.exceptions.ValueNotInFrameException valueNotInFrameException) {
 								try {
-									// if no stream.BYTESIZE variable is available, the demand is calculated by summing up all the sent variables with BYTESIZE characterization  
-									java.util.ArrayList<java.util.Map.Entry<String, Object>> stackFrameContent = stackframe.getContents();
-									for (java.util.Map.Entry<String, Object> entry : stackFrameContent) {
-										if (entry.getKey().endsWith("BYTESIZE")){
-											if (entry.getKey().contains(".INNER.")){
-												// TODO: include logic to determine proper BYTESIZE of the call, take from completions code. 
-												logger.warn("Network demand cannot be properly determined for INNER BYTESIZE characterizations yet, the simulation will assume that there is just a single element in the collection. Please enable the ''simulate middleware marshalling / demarshalling of remote calls'' in the feature settings tab or directly define the BYTESIZE of the collection.");
+									if (ctx.getModel().getConfiguration().getSimulateThroughputOfLinkingResources()){
+										// if no stream.BYTESIZE variable is available, the demand is calculated by summing up all the sent variables with BYTESIZE characterization  
+										java.util.ArrayList<java.util.Map.Entry<String, Object>> stackFrameContent = stackframe.getContents();
+										for (java.util.Map.Entry<String, Object> entry : stackFrameContent) {
+											if (entry.getKey().endsWith("BYTESIZE")){
+												if (entry.getKey().contains(".INNER.")){
+													// TODO: include logic to determine proper BYTESIZE of the call, take from completions code. 
+													logger.warn("Network demand cannot be properly determined for INNER BYTESIZE characterizations yet, the simulation will assume that there is just a single element in the collection. Please enable the ''simulate middleware marshalling / demarshalling of remote calls'' in the feature settings tab or directly define the BYTESIZE of the collection.");
+												}
+												demand += de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter.toDouble(entry.getValue());
 											}
-											demand += de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter.toDouble(entry.getValue());
 										}
-									}
+									} // else the demand stays 0.0
 								} catch (RuntimeException e){
 									logger.error("Cannot cast BYTESIZE characterization of the following variable to double for calculating the network demand in "+this.getClass()+": "+e.getMessage());
 								}

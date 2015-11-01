@@ -46,7 +46,12 @@ public class SimuComConfig extends AbstractSimulationConfig implements Serializa
 
     /** SimuCom configuration tab */
     public static final String SIMULATE_FAILURES = "simulateFailures";
+    
+    /** whether to simulate linking resources in detail, including marshalling/demarshalling, with Steffen's completions. */
     public static final String SIMULATE_LINKING_RESOURCES = "simulateLinkingResources";
+    /** whether to include throughput in the simulation without marshaling/demarshalling. */ 
+    public static final String SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES = "simulateThroughputOfLinkingResources";
+    
     public static final String USE_CONFIDENCE = "useConfidenceStopCondition";
     public static final String CONFIDENCE_LEVEL = "confidenceLevel";
     public static final String CONFIDENCE_HALFWIDTH = "confidenceHalfWidth";
@@ -62,6 +67,7 @@ public class SimuComConfig extends AbstractSimulationConfig implements Serializa
 
     private boolean simulateFailures = false;
     private boolean simulateLinkingResources = false;
+    private boolean simulateThroughputOfLinkingResources = true;
     private boolean useConfidence = false;
     private int confidenceLevel = 0;
     private int confidenceHalfWidth = 0;
@@ -96,6 +102,10 @@ public class SimuComConfig extends AbstractSimulationConfig implements Serializa
 
             if (configuration.containsKey(SIMULATE_LINKING_RESOURCES)) {
                 this.simulateLinkingResources = (Boolean) configuration.get(SIMULATE_LINKING_RESOURCES);
+            }
+            
+            if (configuration.containsKey(SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES)) {
+                this.simulateThroughputOfLinkingResources = (Boolean) configuration.get(SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES);
             }
 
             // confidence information is optional in the map. It this.useConfidence defaults to
@@ -137,6 +147,10 @@ public class SimuComConfig extends AbstractSimulationConfig implements Serializa
 
     public boolean getSimulateLinkingResources() {
         return simulateLinkingResources;
+    }
+    
+    public boolean getSimulateThroughputOfLinkingResources() {
+        return simulateThroughputOfLinkingResources;
     }
 
     public boolean isUseConfidence() {
@@ -184,6 +198,7 @@ public class SimuComConfig extends AbstractSimulationConfig implements Serializa
         config.recorderName = new String(this.recorderName);
         config.simulateFailures = this.simulateFailures;
         config.simulateLinkingResources = this.simulateLinkingResources;
+        config.simulateThroughputOfLinkingResources = this.simulateThroughputOfLinkingResources;
         config.simuTime = this.simuTime;
         config.useConfidence = this.useConfidence;
 

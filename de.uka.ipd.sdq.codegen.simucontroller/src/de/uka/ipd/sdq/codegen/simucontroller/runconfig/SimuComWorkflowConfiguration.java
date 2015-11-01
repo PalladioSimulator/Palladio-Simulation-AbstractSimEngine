@@ -44,6 +44,7 @@ public class SimuComWorkflowConfiguration extends AbstractSimulationWorkflowConf
         this.simuComConfig = simuComConfig;
         this.simulateFailures = simuComConfig.getSimulateFailures();
         this.setSimulateLinkingResources(simuComConfig.getSimulateLinkingResources());
+        this.setSimulateThroughputOfLinkingResources(simuComConfig.getSimulateThroughputOfLinkingResources());
         this.setDebug(simuComConfig.isDebug());
     }
 

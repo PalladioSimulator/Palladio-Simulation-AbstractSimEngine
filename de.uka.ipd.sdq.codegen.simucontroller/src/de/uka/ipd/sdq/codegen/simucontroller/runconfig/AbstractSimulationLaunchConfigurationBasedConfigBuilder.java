@@ -31,6 +31,7 @@ public abstract class AbstractSimulationLaunchConfigurationBasedConfigBuilder ex
             config.setInteractive(true);
 
         config.setSimulateLinkingResources(getBooleanAttribute(ConstantsContainer.SIMULATE_LINKING_RESOURCES));
+        config.setSimulateThroughputOfLinkingResources(getBooleanAttribute(ConstantsContainer.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES));
 
         // This loads the feature config for Steffen's Connector Completions
         // TODO: Integrate this in CIP process.
