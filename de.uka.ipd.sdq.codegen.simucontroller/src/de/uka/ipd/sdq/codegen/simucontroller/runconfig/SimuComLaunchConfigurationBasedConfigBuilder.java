@@ -24,7 +24,7 @@ public class SimuComLaunchConfigurationBasedConfigBuilder extends
         super.fillConfiguration(configuration);
 
         SimuComWorkflowConfiguration config = (SimuComWorkflowConfiguration) configuration;
-        config.setSimulateFailures(getBooleanAttribute(ConstantsContainer.SIMULATE_FAILURES));
+        config.setSimulateFailures(getBooleanAttribute(SimuComConfig.SIMULATE_FAILURES));
 
         // accuracy analysis
         config.setAccuracyInfluenceAnalysisEnabled(getBooleanAttribute(ConstantsContainer.ANALYSE_ACCURACY));

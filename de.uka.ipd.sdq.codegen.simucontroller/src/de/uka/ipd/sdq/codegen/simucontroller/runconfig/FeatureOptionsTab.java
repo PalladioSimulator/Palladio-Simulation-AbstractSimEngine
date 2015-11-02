@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Text;
 import org.palladiosimulator.analyzer.workflow.ConstantsContainer;
 
 import de.uka.ipd.sdq.featureinstance.FeatureConfigWidget;
+import de.uka.ipd.sdq.simucomframework.SimuComConfig;
 import de.uka.ipd.sdq.simulation.AbstractSimulationConfig;
 import de.uka.ipd.sdq.workflow.launchconfig.ImageRegistryHelper;
 import de.uka.ipd.sdq.workflow.launchconfig.tabs.TabHelper;
@@ -41,6 +42,7 @@ public class FeatureOptionsTab extends AbstractLaunchConfigurationTab {
     private static final String FEATURE_OPTIONS_TAB_IMAGE_PATH = "icons/feature_tab.gif";
 
     private static final String TITLE_FEATURE_CONFIG_SECTION = "PCM2EJB Feature Configuration File";
+    
     
     private static final String LABEL_SIMULATE_NETWORK = "Simulate full middleware marshalling / demarshalling of remote calls.";
     private static final String LABEL_SIMULATE_THROUGHPUT_OF_LINKING_RESOURCE = "Simulate throughput of remote calls.";
@@ -297,12 +299,12 @@ public class FeatureOptionsTab extends AbstractLaunchConfigurationTab {
     		String selectedItem = LABEL_SIMULATE_NO_THROUGHPUT_OF_LINKING_RESOURCE;
 
     		Boolean simulateLinkingResourceChoice = configuration
-    				.getAttribute(ConstantsContainer.SIMULATE_LINKING_RESOURCES, DEFAULT_SIMULATE_LINKING_RESOURCES);
+    				.getAttribute(SimuComConfig.SIMULATE_LINKING_RESOURCES, DEFAULT_SIMULATE_LINKING_RESOURCES);
     		if (simulateLinkingResourceChoice){
     			selectedItem = LABEL_SIMULATE_NETWORK;
     		} else {    		
     			Boolean simulateThroughputOfLinkingResource = configuration
-    					.getAttribute(ConstantsContainer.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES, DEFAULT_SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES);
+    					.getAttribute(SimuComConfig.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES, DEFAULT_SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES);
     			if (simulateThroughputOfLinkingResource){
     				selectedItem = LABEL_SIMULATE_THROUGHPUT_OF_LINKING_RESOURCE;
     			}
@@ -320,7 +322,7 @@ public class FeatureOptionsTab extends AbstractLaunchConfigurationTab {
     	}
 
         try {
-            simulateFailuresButton.setSelection(configuration.getAttribute(ConstantsContainer.SIMULATE_FAILURES, true));
+            simulateFailuresButton.setSelection(configuration.getAttribute(SimuComConfig.SIMULATE_FAILURES, true));
         } catch (CoreException e) {
             simulateFailuresButton.setSelection(false);
         }
@@ -349,25 +351,25 @@ public class FeatureOptionsTab extends AbstractLaunchConfigurationTab {
     	
     	if (LABEL_SIMULATE_NO_THROUGHPUT_OF_LINKING_RESOURCE.equals(
     			this.simulateLinkingResourceCombo.getText())){
-    		configuration.setAttribute(ConstantsContainer.SIMULATE_LINKING_RESOURCES,
+    		configuration.setAttribute(SimuComConfig.SIMULATE_LINKING_RESOURCES,
     				false);
-    		configuration.setAttribute(ConstantsContainer.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES, 
+    		configuration.setAttribute(SimuComConfig.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES, 
     				false);
     	} else if (LABEL_SIMULATE_THROUGHPUT_OF_LINKING_RESOURCE.equals(
     			this.simulateLinkingResourceCombo.getText())){
-    		configuration.setAttribute(ConstantsContainer.SIMULATE_LINKING_RESOURCES,
+    		configuration.setAttribute(SimuComConfig.SIMULATE_LINKING_RESOURCES,
     				false);
-    		configuration.setAttribute(ConstantsContainer.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES, 
+    		configuration.setAttribute(SimuComConfig.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES, 
     				true);
     	} else if (LABEL_SIMULATE_NETWORK.equals(
     			this.simulateLinkingResourceCombo.getText())){
-    		configuration.setAttribute(ConstantsContainer.SIMULATE_LINKING_RESOURCES,
+    		configuration.setAttribute(SimuComConfig.SIMULATE_LINKING_RESOURCES,
     				true);
-    		configuration.setAttribute(ConstantsContainer.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES, 
+    		configuration.setAttribute(SimuComConfig.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES, 
     				true);
     	}     	
 
-        configuration.setAttribute(ConstantsContainer.SIMULATE_FAILURES, this.simulateFailuresButton.getSelection());
+        configuration.setAttribute(SimuComConfig.SIMULATE_FAILURES, this.simulateFailuresButton.getSelection());
         configuration.setAttribute(ConstantsContainer.FEATURE_CONFIG, textFeatureConfig.getText());
         // FIXME: re-enable
         // configuration.setAttribute(ConstantsContainer.FEATURE_CONFIG_TARGET,
@@ -398,9 +400,9 @@ public class FeatureOptionsTab extends AbstractLaunchConfigurationTab {
      * debug.core.ILaunchConfigurationWorkingCopy)
      */
     public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-        configuration.setAttribute(ConstantsContainer.SIMULATE_LINKING_RESOURCES, DEFAULT_SIMULATE_LINKING_RESOURCES);
-        configuration.setAttribute(ConstantsContainer.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES, DEFAULT_SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES);
-        configuration.setAttribute(ConstantsContainer.SIMULATE_FAILURES, DEFAULT_SIMULATE_FAILURES);
+        configuration.setAttribute(SimuComConfig.SIMULATE_LINKING_RESOURCES, DEFAULT_SIMULATE_LINKING_RESOURCES);
+        configuration.setAttribute(SimuComConfig.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES, DEFAULT_SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES);
+        configuration.setAttribute(SimuComConfig.SIMULATE_FAILURES, DEFAULT_SIMULATE_FAILURES);
         ;
         configuration.setAttribute(ConstantsContainer.FEATURE_CONFIG,
                 ConstantsContainer.DEFAULT_FEATURE_CONFIGURATION_FILE);

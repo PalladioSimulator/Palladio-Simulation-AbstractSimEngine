@@ -46,7 +46,6 @@ public class SimuComConfig extends AbstractSimulationConfig implements Serializa
 
     /** SimuCom configuration tab */
     public static final String SIMULATE_FAILURES = "simulateFailures";
-    
     /** whether to simulate linking resources in detail, including marshalling/demarshalling, with Steffen's completions. */
     public static final String SIMULATE_LINKING_RESOURCES = "simulateLinkingResources";
     /** whether to include throughput in the simulation without marshaling/demarshalling. */ 
