@@ -52,7 +52,7 @@ public class RecorderAttachingCalculatorFactoryDecorator implements ICalculatorF
      */
     @Override
     public Calculator buildResponseTimeCalculator(final MeasuringPoint measuringPoint, final List<Probe> probes) {
-        return setupRecorder(decoratedCalculatorFactory.buildResponseTimeCalculator(measuringPoint, probes));
+        return setupRecorder(this.decoratedCalculatorFactory.buildResponseTimeCalculator(measuringPoint, probes));
     }
 
     /**
@@ -61,7 +61,8 @@ public class RecorderAttachingCalculatorFactoryDecorator implements ICalculatorF
     @Override
     public Calculator buildDemandBasedWaitingTimeCalculator(final MeasuringPoint measuringPoint,
             final List<Probe> probes) {
-        return setupRecorder(decoratedCalculatorFactory.buildDemandBasedWaitingTimeCalculator(measuringPoint, probes));
+        return setupRecorder(
+                this.decoratedCalculatorFactory.buildDemandBasedWaitingTimeCalculator(measuringPoint, probes));
     }
 
     /**
@@ -69,7 +70,7 @@ public class RecorderAttachingCalculatorFactoryDecorator implements ICalculatorF
      */
     @Override
     public Calculator buildWaitingTimeCalculator(final MeasuringPoint measuringPoint, final List<Probe> probes) {
-        return setupRecorder(decoratedCalculatorFactory.buildWaitingTimeCalculator(measuringPoint, probes));
+        return setupRecorder(this.decoratedCalculatorFactory.buildWaitingTimeCalculator(measuringPoint, probes));
     }
 
     /**
@@ -77,7 +78,7 @@ public class RecorderAttachingCalculatorFactoryDecorator implements ICalculatorF
      */
     @Override
     public Calculator buildHoldingTimeCalculator(final MeasuringPoint measuringPoint, final List<Probe> probes) {
-        return setupRecorder(decoratedCalculatorFactory.buildHoldingTimeCalculator(measuringPoint, probes));
+        return setupRecorder(this.decoratedCalculatorFactory.buildHoldingTimeCalculator(measuringPoint, probes));
     }
 
     /**
@@ -85,7 +86,8 @@ public class RecorderAttachingCalculatorFactoryDecorator implements ICalculatorF
      */
     @Override
     public Calculator buildStateOfActiveResourceCalculator(final MeasuringPoint measuringPoint, final Probe probe) {
-        return setupRecorder(decoratedCalculatorFactory.buildStateOfActiveResourceCalculator(measuringPoint, probe));
+        return setupRecorder(
+                this.decoratedCalculatorFactory.buildStateOfActiveResourceCalculator(measuringPoint, probe));
     }
 
     /**
@@ -95,19 +97,20 @@ public class RecorderAttachingCalculatorFactoryDecorator implements ICalculatorF
     public Calculator buildOverallStateOfActiveResourceCalculator(final MeasuringPoint measuringPoint,
             final Probe probe) {
         return setupRecorder(
-                decoratedCalculatorFactory.buildOverallStateOfActiveResourceCalculator(measuringPoint, probe));
+                this.decoratedCalculatorFactory.buildOverallStateOfActiveResourceCalculator(measuringPoint, probe));
     }
 
     @Override
     public Calculator buildStateOfPassiveResourceCalculator(final MeasuringPoint measuringPoint, final Probe probe) {
-        return setupRecorder(decoratedCalculatorFactory.buildStateOfPassiveResourceCalculator(measuringPoint, probe));
+        return setupRecorder(
+                this.decoratedCalculatorFactory.buildStateOfPassiveResourceCalculator(measuringPoint, probe));
     }
 
     @Override
     public Calculator buildOverallStateOfPassiveResourceCalculator(final MeasuringPoint measuringPoint,
             final Probe probe) {
         return setupRecorder(
-                decoratedCalculatorFactory.buildOverallStateOfPassiveResourceCalculator(measuringPoint, probe));
+                this.decoratedCalculatorFactory.buildOverallStateOfPassiveResourceCalculator(measuringPoint, probe));
     }
 
     /**
@@ -115,7 +118,7 @@ public class RecorderAttachingCalculatorFactoryDecorator implements ICalculatorF
      */
     @Override
     public Calculator buildResourceDemandCalculator(final MeasuringPoint measuringPoint, final Probe probe) {
-        return setupRecorder(decoratedCalculatorFactory.buildResourceDemandCalculator(measuringPoint, probe));
+        return setupRecorder(this.decoratedCalculatorFactory.buildResourceDemandCalculator(measuringPoint, probe));
     }
 
     /**
@@ -123,7 +126,7 @@ public class RecorderAttachingCalculatorFactoryDecorator implements ICalculatorF
      */
     @Override
     public Calculator buildExecutionResultCalculator(final MeasuringPoint measuringPoint, final Probe probe) {
-        return setupRecorder(decoratedCalculatorFactory.buildExecutionResultCalculator(measuringPoint, probe));
+        return setupRecorder(this.decoratedCalculatorFactory.buildExecutionResultCalculator(measuringPoint, probe));
     }
 
     /**
@@ -133,7 +136,7 @@ public class RecorderAttachingCalculatorFactoryDecorator implements ICalculatorF
     public Calculator buildNumberOfResourceContainersCalculator(final MeasuringPoint measuringPoint,
             final Probe probe) {
         return setupRecorder(
-                decoratedCalculatorFactory.buildNumberOfResourceContainersCalculator(measuringPoint, probe));
+                this.decoratedCalculatorFactory.buildNumberOfResourceContainersCalculator(measuringPoint, probe));
     }
 
     private Calculator setupRecorder(final Calculator calculator) {
@@ -155,16 +158,21 @@ public class RecorderAttachingCalculatorFactoryDecorator implements ICalculatorF
 
     @Override
     public Calculator buildReconfigurationTimeCalculator(final MeasuringPoint measuringPoint, final Probe probe) {
-        return setupRecorder(decoratedCalculatorFactory.buildReconfigurationTimeCalculator(measuringPoint, probe));
+        return setupRecorder(this.decoratedCalculatorFactory.buildReconfigurationTimeCalculator(measuringPoint, probe));
     }
 
     @Override
     public Calculator buildCostOverTimeCalculator(final MeasuringPoint measuringPoint, final Probe probes) {
-        return setupRecorder(decoratedCalculatorFactory.buildCostOverTimeCalculator(measuringPoint, probes));
+        return setupRecorder(this.decoratedCalculatorFactory.buildCostOverTimeCalculator(measuringPoint, probes));
     }
 
     @Override
-    public Calculator buildOptimisationTimeCalculator(MeasuringPoint measuringPoint, Probe probe) {
-        return setupRecorder(decoratedCalculatorFactory.buildOptimisationTimeCalculator(measuringPoint, probe));
+    public Calculator buildOptimisationTimeCalculator(final MeasuringPoint measuringPoint, final Probe probe) {
+        return setupRecorder(this.decoratedCalculatorFactory.buildOptimisationTimeCalculator(measuringPoint, probe));
+    }
+
+    @Override
+    public Calculator buildAggregatedCostOverTimeCalculator(final MeasuringPoint measuringPoint, final Probe probe) {
+        return setupRecorder(this.decoratedCalculatorFactory.buildAggregatedCostOverTimeCalculator(measuringPoint, probe));
     }
 }
