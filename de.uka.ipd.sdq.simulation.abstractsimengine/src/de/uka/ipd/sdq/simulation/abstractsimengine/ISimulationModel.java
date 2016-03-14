@@ -1,36 +1,39 @@
 package de.uka.ipd.sdq.simulation.abstractsimengine;
 
 /**
- * The simulation model is the central class of a discrete-event system simulator.
+ * The simulated model is the central class of a discrete-event system simulator.
  * <p>
- * Its <code>init</code> method is the entry point of each simulation run in that it schedules
+ * Its {@link #init()} method is the entry point of each simulation run in that it schedules
  * initial events that put the simulation into operation. For this, the simulation model relies on a
  * simulation library (which is also referred to as simulation engine), which offers means to create
  * and schedule events (or processes, respectively), which are then executed at the intended
  * simulation time.
  * <p>
- * The methods <code>getSimEngineFactory</code> and <code>getSimulationControl</code> both provide
- * access to simulation library services, where the former focuses on the creation of events and
- * processes, for instance, and the latter offers means to control the simulation run (e.g. to start
- * and stop the simulation).
+ * The methods {@link #getSimEngineFactory()} and {@link #getSimulationControl()} both provide
+ * access to simulation library services.
  * <p>
  * Notice, that the term <i>model</i> refers to the circumstance that the simulation model is an
  * abstraction of a real-world system in that it imitates the system's behaviour.
  * 
  * @author Steffen Becker (this code has been factored out from SimuCom)
  * @author Philipp Merkle
+ * @author Henning Groenda Clarification and maintenance on documentation.
  * 
- * @param <M>
- *            the type of the simulation model
  */
 public interface ISimulationModel {
 
+    /** Offers means to control the simulation run, e.g. to start and stop the simulation.
+     * @return Controller for the event-based simulation.
+     */
     public ISimulationControl getSimulationControl();
 
     public void setSimulationControl(ISimulationControl control);
 
     public void setSimulationEngineFactory(ISimEngineFactory factory);
 
+    /** Creation of new elements, e.g. events and processes, in the simulation.
+     * @return Factory to create element in the event-based simulation.
+     */
     public ISimEngineFactory getSimEngineFactory();
 
     /**
