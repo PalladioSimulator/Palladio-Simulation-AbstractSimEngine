@@ -59,7 +59,13 @@ public abstract class AbstractScheduledResource extends SimuComEntity implements
 
         this.description = description;
         this.numberOfInstances = numberOfInstances;
-        this.schedulingStrategyID = schedulingStrategyID;
+        if (schedulingStrategyID.equals("ProcessorSharing")) {
+        	this.schedulingStrategyID = SchedulingStrategy.PROCESSOR_SHARING;
+        } else if (schedulingStrategyID.equals("Delay")) {
+        	this.schedulingStrategyID = SchedulingStrategy.DELAY;
+        } else {
+            this.schedulingStrategyID = schedulingStrategyID;
+        }
         this.resourceTypeID = resourceTypeID;
         this.resourceContainerID = resourceContainerID;
         this.requiredByContainer = requiredByContainer;
