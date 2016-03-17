@@ -12,7 +12,7 @@ import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
 
 /**
- * @author Steffen Becker, Sebastian Lehrig
+ * @author Steffen Becker, Sebastian Lehrig, groenda
  */
 public class ScheduledResource extends AbstractScheduledResource {
 
@@ -22,7 +22,6 @@ public class ScheduledResource extends AbstractScheduledResource {
 
     private static long resourceId = 1;
     private String processingRate;
-    private double totalDemandedTime;
 
     // For resources that can become unavailable (SimulatedActiveResources):
     private final double mttf;
@@ -142,7 +141,6 @@ public class ScheduledResource extends AbstractScheduledResource {
         // registerProcessWindows(process, aResource);
         final double concreteDemand = calculateDemand(abstractDemand);
         fireDemand(concreteDemand);
-        this.totalDemandedTime += concreteDemand;
         getUnderlyingResource().process(process, resourceServiceID, parameterMap, concreteDemand);
     }
 
@@ -164,13 +162,8 @@ public class ScheduledResource extends AbstractScheduledResource {
             this.repairedEvent.removeEvent();
         }
 
-        // calculate overall utilization and inform listeners
-        final double totalTime = getModel().getSimulationControl().getCurrentSimulationTime() * getNumberOfInstances();
-        if (totalDemandedTime > totalTime) {
-            totalDemandedTime = totalTime;
-        }
-        fireOverallUtilization(totalDemandedTime, totalTime);
-
+        fireOverallUtilization(0,0); // Probes take their own values instead of using these
+        
         getUnderlyingResource().stop();
     }
 
@@ -232,16 +225,8 @@ public class ScheduledResource extends AbstractScheduledResource {
 
     @Override
     public void update(final long state, final int instanceId) {
-        if (getNumberOfInstances() == 1) {
-            super.update(state, instanceId);
-        } else {
-            // calculate overall utilization and inform listeners
-            final double totalTime = getModel().getSimulationControl().getCurrentSimulationTime()
-                    * getNumberOfInstances();
-            if (totalDemandedTime > totalTime) {
-                totalDemandedTime = totalTime;
-            }
-            fireOverallUtilization(totalDemandedTime, totalTime);
-        }
+        super.update(state, instanceId);
+        fireOverallUtilization(0,0); // Probes take their own values instead of using these
     }
+
 }
