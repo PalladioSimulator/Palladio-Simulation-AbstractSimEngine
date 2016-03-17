@@ -13,10 +13,11 @@ import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
  * @author Steffen Becker
  *
  */
-public class OpenWorkload extends SimuComSimProcess implements IWorkloadDriver {
+public class OpenWorkload extends SimuComSimProcess implements ICancellableWorkloadDriver {
 
     private String interArrivalTime;
     private final IUserFactory userFactory;
+    private boolean cancelled = false;
 
     private static final Logger LOGGER = Logger.getLogger(OpenWorkload.class.getName());
 
@@ -42,7 +43,13 @@ public class OpenWorkload extends SimuComSimProcess implements IWorkloadDriver {
 
     @Override
     public void run() {
+        cancelled = false;
         this.scheduleAt(0);
+    }
+    
+    @Override
+    public void cancel() {
+        this.cancelled = true;
     }
 
     @Override
@@ -50,7 +57,7 @@ public class OpenWorkload extends SimuComSimProcess implements IWorkloadDriver {
 
         // As long as the simulation is running, new OpenWorkloadUsers are
         // generated and started:
-        while (getModel().getSimulationControl().isRunning()) {
+        while (getModel().getSimulationControl().isRunning() && !this.cancelled) {
 
             try {
                 // Generate and execute the new user:

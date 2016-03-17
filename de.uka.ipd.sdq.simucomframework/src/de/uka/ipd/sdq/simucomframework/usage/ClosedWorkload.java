@@ -10,7 +10,7 @@ import java.util.Queue;
  * @author Steffen Becker
  *
  */
-public class ClosedWorkload implements IWorkloadDriver {
+public class ClosedWorkload implements ICancellableWorkloadDriver {
 
     private final int population;
     private final IUserFactory userFactory;
@@ -39,6 +39,11 @@ public class ClosedWorkload implements IWorkloadDriver {
     @Override
     public void run() {
         startUsers(population);
+    }
+    
+    @Override
+    public void cancel() {
+        this.setPopulation(0);
     }
 
     @Override

@@ -1,6 +1,9 @@
 package de.uka.ipd.sdq.simucomframework.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Level;
@@ -47,7 +50,7 @@ public class SimuComModel extends SchedulerModel {
     protected static final Logger LOGGER = Logger.getLogger(SimuComModel.class);
 
     protected ResourceRegistry resourceRegistry;
-    private IWorkloadDriver[] workloadDrivers;
+    private Collection<IWorkloadDriver> workloadDrivers;
     private SimulationResult status = SimulationResult.OK;
     private Throwable errorMessage;
     private final SimuComConfig config;
@@ -75,6 +78,7 @@ public class SimuComModel extends SchedulerModel {
         resourceRegistry = new ResourceRegistry(this);
         this.simulationStatus = status;
         issues = new ArrayList<SeverityAndIssue>();
+        this.workloadDrivers = new ArrayList<IWorkloadDriver>();
 
         // TODO: All following uses of static objects have severy issues. Nobody really thought of
         // e.g. running Simucom in parallel (e.g. to utilise many cores)!
@@ -178,6 +182,15 @@ public class SimuComModel extends SchedulerModel {
             w.run();
         }
     }
+    
+    /**
+     * Returns the current collection of active workload drivers (simulated usage scenarios)
+     * 
+     * @return the collection of active workload drivers
+     */
+    public Collection<IWorkloadDriver> getUsageScenarios() {
+        return this.workloadDrivers;
+    }
 
     /**
      * Add the given usage scenarios to this simulation run
@@ -186,7 +199,7 @@ public class SimuComModel extends SchedulerModel {
      *            Usage scenarios to execute during this simulation run
      */
     public void setUsageScenarios(final IWorkloadDriver[] workload) {
-        this.workloadDrivers = workload;
+        this.workloadDrivers.addAll(Arrays.asList(workload));
     }
 
     /**
