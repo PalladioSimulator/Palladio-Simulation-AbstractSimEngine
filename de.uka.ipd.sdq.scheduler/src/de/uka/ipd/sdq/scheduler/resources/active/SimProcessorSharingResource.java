@@ -1,6 +1,8 @@
 package de.uka.ipd.sdq.scheduler.resources.active;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map.Entry;
 
 import org.apache.log4j.Level;
@@ -34,7 +36,7 @@ public class SimProcessorSharingResource extends AbstractActiveResource {
             toNow();
             running_processes.remove(last);
 
-            fireStateChange(running_processes.size(), 0);
+            reportCoreUsage();
 
             fireDemandCompleted(last);
             LoggingWrapper.log(last + " finished.");
@@ -47,10 +49,16 @@ public class SimProcessorSharingResource extends AbstractActiveResource {
     private final ProcessingFinishedEvent processingFinished;
     private final Hashtable<ISchedulableProcess, Double> running_processes = new Hashtable<ISchedulableProcess, Double>();
     private double last_time;
+    /** Keeps track of the current number of processes assigned to each core. */
+    private final List<Integer> numberProcessesOnCore;
 
-    public SimProcessorSharingResource(final SchedulerModel model, final String name, final String id, final long i) {
-        super(model, i, name, id);
+    public SimProcessorSharingResource(final SchedulerModel model, final String name, final String id, final long capacity) {
+        super(model, capacity, name, id);
         this.processingFinished = new ProcessingFinishedEvent(model);
+        this.numberProcessesOnCore = new ArrayList<Integer>((int) getCapacity());
+        for (int i = 0; i < getCapacity(); i++) {
+        	numberProcessesOnCore.add(0);
+        }
     }
 
     public void scheduleNextEvent() {
@@ -62,7 +70,7 @@ public class SimProcessorSharingResource extends AbstractActiveResource {
         }
         processingFinished.removeEvent();
         if (shortest != null) {
-            double remainingTime = running_processes.get(shortest) * getSpeed();
+            double remainingTime = running_processes.get(shortest) * getProcessingDelayFactorPerProcess();
 
             // avoid trouble caused by rounding issues
             remainingTime = remainingTime < JIFFY ? 0.0 : remainingTime;
@@ -76,17 +84,17 @@ public class SimProcessorSharingResource extends AbstractActiveResource {
     private void toNow() {
         final double now = getModel().getSimulationControl().getCurrentSimulationTime();
         double passed_time = now - last_time;
+        double processedDemandperThread = passed_time / getProcessingDelayFactorPerProcess();
         if (MathTools.less(0, passed_time)) {
-            passed_time /= getSpeed();
             for (final Entry<ISchedulableProcess, Double> e : running_processes.entrySet()) {
-                final double rem = e.getValue() - passed_time;
+                final double rem = e.getValue() - processedDemandperThread;
                 e.setValue(rem);
             }
         }
         last_time = now;
     }
 
-    private double getSpeed() {
+    private double getProcessingDelayFactorPerProcess() {
         final double speed = (double) running_processes.size() / (double) getCapacity();
         return speed < 1.0 ? 1.0 : speed;
     }
@@ -110,13 +118,58 @@ public class SimProcessorSharingResource extends AbstractActiveResource {
 
         running_processes.put(process, demand);
 
-        fireStateChange(running_processes.size(), 0);
+        reportCoreUsage();
 
         scheduleNextEvent();
         process.passivate();
     }
 
-    @Override
+	/**Report core usage for each individual (virtual) core.
+	 * The first core always has the most processes, which ensures backward-compatibility
+	 * to the time when only one core was reported to be used if at least on process was running.
+	 */
+	private void reportCoreUsage() {
+		if (running_processes.size() < getCapacity()) {
+			for (int i = 0; i < getCapacity(); i++) {
+				if (i < running_processes.size()) {
+					// one process active on respective core
+					assignProcessesAndFireStateChange(1,i);
+				} else {
+					// no process active on respective core
+					assignProcessesAndFireStateChange(0,i);
+				}
+			}
+		} else { // distribute across cores
+			int minNumberProcessPerCore = (int) Math.floor((double) running_processes.size() / (double) getCapacity());
+			int numberAdditionalProcesses = (int) (running_processes.size() - (minNumberProcessPerCore * getCapacity()));
+			int numberProcessesAtCore;
+ 			for (int i = 0; i < getCapacity(); i++) {
+				// distribute processes evenly across cores. The first
+				// (getCapactity()-1) cores can have one additional process
+				// beyond the minimal number of processes.
+				if (numberAdditionalProcesses > 0) {
+					numberProcessesAtCore = minNumberProcessPerCore + 1;
+					numberAdditionalProcesses--;
+				} else {
+					numberProcessesAtCore = minNumberProcessPerCore;
+				}
+				assignProcessesAndFireStateChange(numberProcessesAtCore, i);
+			}
+		}
+	}
+
+    /**Assigns the provided number of processes to a core and fires a state change event if necessary.
+     * @param targetNumberProcessesAtCore New number of active processes on the core. 
+     * @param coreNumber Number of the core, starting with 0.
+     */
+    private void assignProcessesAndFireStateChange(int targetNumberProcessesAtCore, int coreNumber) {
+    	if (!numberProcessesOnCore.get(coreNumber).equals(targetNumberProcessesAtCore)) {
+    		numberProcessesOnCore.set(coreNumber, targetNumberProcessesAtCore);
+    		fireStateChange(targetNumberProcessesAtCore, coreNumber);
+    	}
+	}
+
+	@Override
     public double getRemainingDemand(final ISchedulableProcess process) {
         if (!running_processes.contains(process)) {
             return 0.0;
@@ -156,7 +209,7 @@ public class SimProcessorSharingResource extends AbstractActiveResource {
 
     @Override
     public int getQueueLengthFor(final SchedulerEntity schedulerEntity, final int coreID) {
-        return this.running_processes.size();
+    	return numberProcessesOnCore.get(coreID);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package de.uka.ipd.sdq.simucomframework.resources;
 
-import static org.palladiosimulator.metricspec.constants.MetricDescriptionConstants.OVERALL_STATE_OF_ACTIVE_RESOURCE_METRIC;
 import static org.palladiosimulator.metricspec.constants.MetricDescriptionConstants.RESOURCE_DEMAND_METRIC_TUPLE;
 import static org.palladiosimulator.metricspec.constants.MetricDescriptionConstants.STATE_OF_ACTIVE_RESOURCE_METRIC_TUPLE;
 import static org.palladiosimulator.metricspec.constants.MetricDescriptionConstants.STATE_OF_PASSIVE_RESOURCE_METRIC_TUPLE;
@@ -15,6 +14,7 @@ import org.palladiosimulator.edp2.models.measuringpoint.MeasuringpointFactory;
 import org.palladiosimulator.edp2.models.measuringpoint.ResourceURIMeasuringPoint;
 import org.palladiosimulator.measurementframework.BasicMeasurement;
 import org.palladiosimulator.metricspec.MetricSetDescription;
+import org.palladiosimulator.metricspec.constants.MetricDescriptionConstants;
 import org.palladiosimulator.pcmmeasuringpoint.ActiveResourceMeasuringPoint;
 import org.palladiosimulator.pcmmeasuringpoint.AssemblyPassiveResourceMeasuringPoint;
 import org.palladiosimulator.pcmmeasuringpoint.LinkingResourceMeasuringPoint;
@@ -35,6 +35,7 @@ import de.uka.ipd.sdq.simucomframework.probes.TakeCurrentSimulationTimeProbe;
 import de.uka.ipd.sdq.simucomframework.probes.TakePassiveResourceStateProbe;
 import de.uka.ipd.sdq.simucomframework.probes.TakeScheduledResourceDemandProbe;
 import de.uka.ipd.sdq.simucomframework.probes.TakeScheduledResourceStateProbe;
+import de.uka.ipd.sdq.simucomframework.probes.TakeScheduledResourceUtilization;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimulationControl;
 
 /**
@@ -228,19 +229,19 @@ public final class CalculatorHelper {
             final SimuComModel model, final MeasuringPoint measuringPoint, final int replicaID) {
         final ProbeFrameworkContext ctx = model.getProbeFrameworkContext();
 
-        final TriggeredProbe scheduledResourceProbe = getTriggeredProbeSetWithCurrentTime(
-                STATE_OF_ACTIVE_RESOURCE_METRIC_TUPLE, model.getSimulationControl(),
-                new TakeScheduledResourceStateProbe(scheduledResource, replicaID));
-        ctx.getCalculatorFactory().buildStateOfActiveResourceCalculator(measuringPoint, scheduledResourceProbe);
+		final TriggeredProbe scheduledResourceProbe = getTriggeredProbeSetWithCurrentTime(
+				STATE_OF_ACTIVE_RESOURCE_METRIC_TUPLE, model.getSimulationControl(),
+				new TakeScheduledResourceStateProbe(scheduledResource, replicaID));
+		ctx.getCalculatorFactory().buildStateOfActiveResourceCalculator(measuringPoint, scheduledResourceProbe);
 
-        scheduledResource.addStateListener(new IStateListener() {
-
-            @Override
-            public void stateChanged(final long state, final int instanceId) {
-                scheduledResourceProbe.takeMeasurement();
-            }
-
-        }, replicaID);
+		scheduledResource.addStateListener(new IStateListener() {
+	
+				@Override
+				public void stateChanged(final long state, final int instanceId) {
+					scheduledResourceProbe.takeMeasurement();
+				}
+	
+			}, replicaID);
 
         scheduledResourceProbe.takeMeasurement();
     }
@@ -265,8 +266,8 @@ public final class CalculatorHelper {
     public static void setupOverallUtilizationCalculator(final AbstractScheduledResource scheduledResource,
             final SimuComModel model, final MeasuringPoint measuringPoint) {
         final TriggeredProbe scheduledResourceProbe = getTriggeredProbeSetWithCurrentTime(
-                OVERALL_STATE_OF_ACTIVE_RESOURCE_METRIC, model.getSimulationControl(),
-                new TakeScheduledResourceStateProbe(scheduledResource, 0));
+                MetricDescriptionConstants.UTILIZATION_OF_ACTIVE_RESOURCE_TUPLE, model.getSimulationControl(),
+                new TakeScheduledResourceUtilization(scheduledResource));
         model.getProbeFrameworkContext().getCalculatorFactory()
                 .buildOverallStateOfActiveResourceCalculator(measuringPoint, scheduledResourceProbe);
 
@@ -373,7 +374,7 @@ public final class CalculatorHelper {
         return createMeasuringPoint(scheduledResource, 0);
     }
 
-    private static MeasuringPoint createMeasuringPoint(final AbstractScheduledResource scheduledResource,
+    public static MeasuringPoint createMeasuringPoint(final AbstractScheduledResource scheduledResource,
             final int replicaID) {
         final MeasuringPoint measuringPoint;
 
