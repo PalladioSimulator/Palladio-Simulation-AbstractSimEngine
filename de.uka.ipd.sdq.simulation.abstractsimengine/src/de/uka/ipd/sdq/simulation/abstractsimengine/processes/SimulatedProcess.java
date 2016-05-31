@@ -151,5 +151,10 @@ public abstract class SimulatedProcess implements ISimProcess {
             }
         }
     }
+    
+    @Override
+    public void preempt() {
+    	processStrategy.finishProcess();
+    }
 
 }

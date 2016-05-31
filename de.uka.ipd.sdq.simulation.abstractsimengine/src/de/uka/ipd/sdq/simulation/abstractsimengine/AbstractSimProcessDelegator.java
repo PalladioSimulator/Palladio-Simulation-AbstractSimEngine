@@ -80,6 +80,11 @@ public abstract class AbstractSimProcessDelegator extends AbstractSimEntityDeleg
     public void removeProcessListener(ISimProcessListener l) {
         delegate.removeProcessListener(l);
     }
+    
+    @Override
+    public void preempt() {
+    	delegate.preempt();
+    }
 
     // public boolean isScheduled() {
     // return delegate.isScheduled();

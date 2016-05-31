@@ -39,6 +39,8 @@ public interface ISimProcess extends IEntity {
      * Returns whether this process has finished its execution.
      */
     public boolean isTerminated();
+    
+    public void preempt();
 
     public void addProcessListener(ISimProcessListener l);
 
