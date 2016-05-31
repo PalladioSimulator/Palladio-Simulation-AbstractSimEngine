@@ -94,7 +94,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
         // and number of cores
         if (schedulingStrategyID.equals(SchedulingStrategy.PROCESSOR_SHARING)) {
             if (r.getNumberOfInstances() == 1) {
-                CalculatorHelper.setupActiveResourceStateCalculator(r, this.myModel);
+                CalculatorHelper.setupActiveResourceStateCalculators(r, this.myModel);
             } else {
                 CalculatorHelper.setupOverallUtilizationCalculator(r, this.myModel);
             }
@@ -102,7 +102,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
                 || schedulingStrategyID.equals(SchedulingStrategy.FCFS)) {
             assert (r.getNumberOfInstances() == 1) : "DELAY and FCFS resources are expected to "
                     + "have exactly one core";
-            CalculatorHelper.setupActiveResourceStateCalculator(r, this.myModel);
+            CalculatorHelper.setupActiveResourceStateCalculators(r, this.myModel);
         } else {
             // Use an OverallUtilizationCalculator by default.
             CalculatorHelper.setupOverallUtilizationCalculator(r, this.myModel);
