@@ -25,7 +25,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.palladiosimulator.analyzer.workflow.ConstantsContainer;
 import org.palladiosimulator.analyzer.workflow.runconfig.ConfigurationTab;
-import org.palladiosimulator.editors.dialogs.selection.PalladioSelectEObjectDialog;
+import org.palladiosimulator.editors.commons.dialogs.selection.PalladioSelectEObjectDialog;
 
 /**
  * The class extends ConfigurationTab by CheckBox. User can decide whether that generated instance
