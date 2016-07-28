@@ -118,17 +118,19 @@ class SimJavaCoreXpt extends JavaCoreXpt {
 	}
 	
 	def containerAvailabilityCheck(OperationSignature os) '''
-		// Simulate a failure if one or multiple of the processing resources
-		// required by the executing resource container are currently unavailable:
-		de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer container = ctx.findResource(this.completeAssemblyContextID);
-		java.util.List<de.uka.ipd.sdq.simucomframework.resources.AbstractScheduledResource> failedResources = container.getFailedResources();
-		if(failedResources.size() > 0){
-			double randValue = ctx.getModel().getConfiguration().getRandomGenerator().random();
-			int index = (int)Math.floor(randValue * failedResources.size());
-			de.uka.ipd.sdq.simucomframework.exceptions.FailureException.raise(
-				this.getModel(),this.getModel().getFailureStatistics().getInternalHardwareFailureType(
-							container.getResourceContainerID(),
-							failedResources.get(index).getResourceTypeId()));
+		if (this.getModel().getConfiguration().getSimulateFailures()) {
+			// Simulate a failure if one or multiple of the processing resources
+			// required by the executing resource container are currently unavailable:
+			de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer container = ctx.findResource(this.completeAssemblyContextID);
+			java.util.List<de.uka.ipd.sdq.simucomframework.resources.AbstractScheduledResource> failedResources = container.getFailedResources();
+			if(failedResources.size() > 0){
+				double randValue = ctx.getModel().getConfiguration().getRandomGenerator().random();
+				int index = (int)Math.floor(randValue * failedResources.size());
+				de.uka.ipd.sdq.simucomframework.exceptions.FailureException.raise(
+					this.getModel(),this.getModel().getFailureStatistics().getInternalHardwareFailureType(
+								container.getResourceContainerID(),
+								failedResources.get(index).getResourceTypeId()));
+			}
 		}
 	'''
 	

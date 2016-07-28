@@ -342,7 +342,7 @@ class PCMext {
 	def String getParentSubsystemsIdConcatenationFor(System s, ComposedStructure toMatch) {
 		val r = s.getParentIdConcatenationFor(toMatch);
 		if (r == null)
-			return "";
+			throw new Exception("Could not find parent structure for "+s.getId());
 		return r.split(" ").last();
 	}
 
@@ -357,6 +357,10 @@ class PCMext {
 
 	def private dispatch String getParentIdConcatenationFor(SubSystem s, ComposedStructure toMatch) {
 		s.getSystemParentIdConcatenationFor(toMatch)
+	}
+	
+	def private dispatch String getParentIdConcatenationFor(Completion c, ComposedStructure toMatch) {
+		c.getSystemParentIdConcatenationFor(toMatch)
 	}
 
 	def private String getSystemParentIdConcatenationFor(ComposedStructure s, ComposedStructure toMatch) {
