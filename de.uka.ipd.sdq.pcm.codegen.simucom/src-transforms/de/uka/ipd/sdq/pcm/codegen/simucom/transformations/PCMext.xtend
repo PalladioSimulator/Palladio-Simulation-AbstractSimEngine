@@ -340,7 +340,10 @@ class PCMext {
 	}
 
 	def String getParentSubsystemsIdConcatenationFor(System s, ComposedStructure toMatch) {
-		s.getParentIdConcatenationFor(toMatch).split(" ").last();
+		val r = s.getParentIdConcatenationFor(toMatch);
+		if (r == null)
+			return "";
+		return r.split(" ").last();
 	}
 
 	// Polymorphic switch: Execute getParentIdConcatenationFor for SubSystems and Systems.

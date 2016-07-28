@@ -2,8 +2,6 @@ package de.uka.ipd.sdq.pcm.transformations.builder.connectors;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-
-import de.uka.ipd.sdq.featureconfig.FeatureConfig;
 import org.palladiosimulator.pcm.allocation.AllocationContext;
 import org.palladiosimulator.pcm.core.composition.AssemblyConnector;
 import org.palladiosimulator.pcm.core.composition.AssemblyContext;
@@ -16,6 +14,8 @@ import org.palladiosimulator.pcm.repository.OperationRequiredRole;
 import org.palladiosimulator.pcm.repository.ProvidedRole;
 import org.palladiosimulator.pcm.resourceenvironment.LinkingResource;
 import org.palladiosimulator.pcm.resourceenvironment.ResourceContainer;
+
+import de.uka.ipd.sdq.featureconfig.FeatureConfig;
 import de.uka.ipd.sdq.pcm.transformations.FeatureUtils;
 import de.uka.ipd.sdq.pcm.transformations.builder.IBuilder;
 import de.uka.ipd.sdq.pcm.transformations.builder.IComponentBuilder;
@@ -25,7 +25,7 @@ import de.uka.ipd.sdq.pcm.transformations.builder.util.PCMAndCompletionModelHold
 
 /**
  * This builder replaces a given connector with a component built by the given component builder.
- * 
+ *
  * @author Snowball
  *
  */
@@ -78,39 +78,34 @@ public class ConnectorReplacingBuilder implements IBuilder {
     private IClientServerConnectorCompletionComponentBuilder configureCompletionComponentBuilder() {
         IComponentBuilder builder = null;
         IClientServerConnectorCompletionComponentBuilder result;
-        ResourceContainer clientContainer = null;
+        final ResourceContainer clientContainer = findContainer(this.connector.getRequiringAssemblyContext_AssemblyConnector());
         ResourceContainer serverContainer = null;
 
         if (linkingRes != null) {
-            // TODO
-            // Hauck: Changed code here because of changed metamodel. Please check.
             if ((linkingRes.getConnectedResourceContainers_LinkingResource() != null)
                     && (linkingRes.getConnectedResourceContainers_LinkingResource().size() > 1)) {
-                clientContainer = linkingRes.getConnectedResourceContainers_LinkingResource().get(0);
-                serverContainer = linkingRes.getConnectedResourceContainers_LinkingResource().get(1);
-                // clientContainer = linkingRes.getFromResourceContainer_LinkingResource().get(0);
-                // serverContainer = linkingRes.getToResourceContainer_LinkingResource().get(0);
+                serverContainer = findContainer(this.connector.getProvidingAssemblyContext_AssemblyConnector());
                 builder = new NetworkLoadingComponentBuilder(models, connector.getRequiredRole_AssemblyConnector()
                         .getRequiredInterface__OperationRequiredRole(), linkingRes);
+            } else {
+                throw new RuntimeException("Found Linking resource which does not connect the expected containers. "
+                        + "This should not happen.");
             }
         } else {
-            clientContainer = findContainer(this.connector.getRequiringAssemblyContext_AssemblyConnector());
             serverContainer = clientContainer;
             builder = new LocalCommunicationComponentBuilder(models, connector.getRequiredRole_AssemblyConnector()
                     .getRequiredInterface__OperationRequiredRole());
         }
-        /***************************************************************
-         * Lucka: Commented to avoid encryption and authentication effects on a connector per
-         * default --> will be moved in for this purpose designed completion
-         ****************************************************************
-         * if (FeatureUtils.hasFeature(featureConfig,"Encryption")) builder = new
-         * PairwiseMiddlewareInteractingInnerConnectorCompletionBuilder
-         * (models,connector,clientContainer,serverContainer,builder,"encrypt","decrypt"); if
-         * (FeatureUtils.hasFeature(featureConfig,"Authentication")) builder = new
-         * ConfigurableMiddlewareCallingConnectorCompletionBuilder
-         * (models,connector,clientContainer,serverContainer
-         * ,builder,"createCredentials","checkCredentials",null,null);
-         ****************************************************************/
+
+        if (FeatureUtils.hasFeature(featureConfig, "Encryption")) {
+            builder = new PairwiseMiddlewareInteractingInnerConnectorCompletionBuilder(models, connector,
+                    clientContainer, serverContainer, builder, "encrypt", "decrypt");
+        }
+        if (FeatureUtils.hasFeature(featureConfig, "Authentication")) {
+            builder = new ConfigurableMiddlewareCallingConnectorCompletionBuilder(models, connector, clientContainer,
+                    serverContainer, builder, "createCredentials", "checkCredentials", null, null);
+        }
+
         result = new MarshallingConnectorCompletionBuilder(models, connector, clientContainer, serverContainer, builder);
 
         return result;
@@ -126,7 +121,7 @@ public class ConnectorReplacingBuilder implements IBuilder {
                 componentBuilder.getClientSideMiddlewareRole(),
                 componentBuilder.getAssemblyContext(),
                 (OperationProvidedRole) clientMWContext.getAssemblyContext_AllocationContext()
-                        .getEncapsulatedComponent__AssemblyContext().getProvidedRoles_InterfaceProvidingEntity().get(0),
+                .getEncapsulatedComponent__AssemblyContext().getProvidedRoles_InterfaceProvidingEntity().get(0),
                 clientMWContext.getAssemblyContext_AllocationContext());
         final AllocationContext serverMWContext = findServerSideMiddlewareAllocationContext();
         assert (serverMWContext.getAssemblyContext_AllocationContext().getEncapsulatedComponent__AssemblyContext()
@@ -135,7 +130,7 @@ public class ConnectorReplacingBuilder implements IBuilder {
                 componentBuilder.getServerSideMiddlewareRole(),
                 componentBuilder.getAssemblyContext(),
                 (OperationProvidedRole) serverMWContext.getAssemblyContext_AllocationContext()
-                        .getEncapsulatedComponent__AssemblyContext().getProvidedRoles_InterfaceProvidingEntity().get(0),
+                .getEncapsulatedComponent__AssemblyContext().getProvidedRoles_InterfaceProvidingEntity().get(0),
                 serverMWContext.getAssemblyContext_AllocationContext());
     }
 
@@ -197,7 +192,7 @@ public class ConnectorReplacingBuilder implements IBuilder {
      * Search through all allocation contexts of the given resource container to find the one which
      * contains the component which is the one providing the given interface. If such an allocation
      * context cannot be found, a RuntimeException is thrown.
-     * 
+     *
      * @param resourceContainer
      *            the resource container to be searched through
      * @param interfaceToSearch
@@ -209,7 +204,7 @@ public class ConnectorReplacingBuilder implements IBuilder {
         for (final AllocationContext context : models.getAllocation().getAllocationContexts_Allocation()) {
             if (context.getResourceContainer_AllocationContext() == resourceContainer
                     && context.getAssemblyContext_AllocationContext().getEncapsulatedComponent__AssemblyContext()
-                            .getProvidedRoles_InterfaceProvidingEntity().size() > 0) {
+                    .getProvidedRoles_InterfaceProvidingEntity().size() > 0) {
                 final ProvidedRole providedRole = context.getAssemblyContext_AllocationContext()
                         .getEncapsulatedComponent__AssemblyContext().getProvidedRoles_InterfaceProvidingEntity().get(0);
                 if (providedRole instanceof OperationProvidedRole) {
@@ -233,7 +228,7 @@ public class ConnectorReplacingBuilder implements IBuilder {
 
     /**
      * Retrieve the linking resource for the given assembly connector
-     * 
+     *
      * @param con
      *            The connector to retrieve the linking resource for
      * @return The linking resource on which the given connector is deployed
@@ -256,7 +251,7 @@ public class ConnectorReplacingBuilder implements IBuilder {
         if (findContainer(con.getRequiringAssemblyContext_AssemblyConnector()) != findContainer(con
                 .getProvidingAssemblyContext_AssemblyConnector())) {
             throw new RuntimeException("AssemblyConnector " + con.getEntityName()
-                    + " links different ResourceContainer, but there is no linking resource between the containers!");
+            + " links different ResourceContainer, but there is no linking resource between the containers!");
         }
         return null;
     }
