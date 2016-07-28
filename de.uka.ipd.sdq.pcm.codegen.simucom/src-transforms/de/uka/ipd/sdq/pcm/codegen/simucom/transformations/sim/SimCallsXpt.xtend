@@ -69,7 +69,7 @@ class SimCallsXpt extends CallsXpt {
 			«signature.entryLevelSystemCallActionDescription(call).startResponseTimeMeasurementTM»
 		«ENDIF»
 		«IF (call instanceof ExternalCallAction || call instanceof InternalAction)»			
-	        «signature.handleRemoteExternalCall(prefix)»
+	        «signature.handleRemoteExternalCall(prefix, "stackframe")»
 	    «ENDIF»
 		de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe<Object> callResult =
 	'''
@@ -110,7 +110,7 @@ class SimCallsXpt extends CallsXpt {
 	//«REM»This generic post call does not include simulation of network failures and latency. «ENDREM»
 	def genericPostCall(OperationSignature signature, Object call, String prefix, List<VariableUsage> outParameterUsages) '''
 		«IF (call instanceof ExternalCallAction)»
-			«signature.handleRemoteExternalCall(prefix)»
+			«signature.handleRemoteExternalCall(prefix, "callResult")»
 			// Stop the time measurement
 			«signature.externalCallActionDescription(call).endResponseTimeMeasurementTM»
 		«ELSE»
@@ -162,7 +162,7 @@ class SimCallsXpt extends CallsXpt {
 	def genericPostCall(InfrastructureSignature is, Object call, String prefix) '''
 		// Stop the time measurement
 		«IF (call instanceof InternalAction)»
-		    «is.handleRemoteExternalCall(prefix)»
+		    «is.handleRemoteExternalCall(prefix, "callResult")»
 			«is.internalActionDescription(call).endResponseTimeMeasurementTM»
 		«ELSE»
 			«/* ERROR "OAW GENERATION ERROR [m2t_transforms/sim/calls.xpt]: GenericPostCall(Object call, List[VariableUsage] outParameterUsages) does not support a call for the provided action type." */»
@@ -216,15 +216,15 @@ class SimCallsXpt extends CallsXpt {
 		«is.genericPostCall(call, prefix)»
 	'''
 	
-	def dispatch handleRemoteExternalCall(OperationSignature os, String prefix) '''
-		«os.handleNetworkLatencyAndFailures(prefix)»
+	def dispatch handleRemoteExternalCall(OperationSignature os, String prefix, String nameOfStackframe) '''
+		«os.handleNetworkLatencyAndFailures(prefix, nameOfStackframe)»
 	'''
 	
-	def dispatch handleRemoteExternalCall(InfrastructureSignature is, String prefix) '''
-		«is.handleNetworkLatencyAndFailures(prefix)»
+	def dispatch handleRemoteExternalCall(InfrastructureSignature is, String prefix, String nameOfStackframe) '''
+		«is.handleNetworkLatencyAndFailures(prefix, nameOfStackframe)»
 	'''
 
-	def handleNetworkLatencyAndFailures(Signature signature, String prefix) '''
+	def handleNetworkLatencyAndFailures(Signature signature, String prefix, String nameOfStackframe) '''
 «««				«REM»
 «««					Options for moving this code into the framework should be checked.
 «««					The main problem is how to find out if an external call goes over a network link or not.
@@ -263,7 +263,7 @@ class SimCallsXpt extends CallsXpt {
 								try {
 									if (ctx.getModel().getConfiguration().getSimulateThroughputOfLinkingResources()){
 										// if no stream.BYTESIZE variable is available, the demand is calculated by summing up all the sent variables with BYTESIZE characterization  
-										java.util.ArrayList<java.util.Map.Entry<String, Object>> stackFrameContent = stackframe.getContents();
+										java.util.ArrayList<java.util.Map.Entry<String, Object>> stackFrameContent = «nameOfStackframe».getContents();
 										for (java.util.Map.Entry<String, Object> entry : stackFrameContent) {
 											if (entry.getKey().endsWith("BYTESIZE")){
 												if (entry.getKey().contains(".INNER.")){
