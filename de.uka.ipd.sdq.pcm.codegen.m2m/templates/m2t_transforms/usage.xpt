@@ -1,11 +1,11 @@
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
-«IMPORT system»
-«IMPORT core::composition»
-«IMPORT usagemodel»
-«IMPORT core::entity»
-«IMPORT repository»
-«IMPORT allocation»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«IMPORT systemÂ»
+Â«IMPORT core::compositionÂ»
+Â«IMPORT usagemodelÂ»
+Â«IMPORT core::entityÂ»
+Â«IMPORT repositoryÂ»
+Â«IMPORT allocationÂ»
 
 //-----------------------------------
 // For a usage model generate for each
@@ -13,10 +13,10 @@
 // and finally (optionally) a main class which can be run
 // standalone
 //-----------------------------------
-«DEFINE UsageModel(Allocation a) FOR UsageModel»
-	«EXPAND UsageScenarioTM(a) FOREACH this.usageScenario_UsageModel»
-	«EXPAND MainTM FOR this»
-«ENDDEFINE» 
+Â«DEFINE UsageModel(Allocation a) FOR UsageModelÂ»
+	Â«EXPAND UsageScenarioTM(a) FOREACH this.usageScenario_UsageModelÂ»
+	Â«EXPAND MainTM FOR thisÂ»
+Â«ENDDEFINEÂ» 
 
 //------------------------------------
 // Template method to generate a main
@@ -24,46 +24,46 @@
 // in the usage model. Can be used to 
 // generate runnable test drivers
 //------------------------------------
-«DEFINE MainTM FOR UsageModel»
-«ENDDEFINE»
+Â«DEFINE MainTM FOR UsageModelÂ»
+Â«ENDDEFINEÂ»
 
 //------------------------------------
 // Template method to generate a class
 // implementing the usage scenario driver
 //------------------------------------
-«DEFINE UsageScenarioTM(Allocation a) FOR UsageScenario»
-«ENDDEFINE»
+Â«DEFINE UsageScenarioTM(Allocation a) FOR UsageScenarioÂ»
+Â«ENDDEFINEÂ»
 
 
 //----------------------
 // Generic helper methods
 //----------------------
-«DEFINE SystemMemberVar FOR OperationProvidedRole»
-   protected «this.providedInterface__OperationProvidedRole.fqn()» «this.portMemberVar()» = null;
-«ENDDEFINE»
+Â«DEFINE SystemMemberVar FOR OperationProvidedRoleÂ»
+   protected Â«this.providedInterface__OperationProvidedRole.fqn()Â» Â«this.portMemberVar()Â» = null;
+Â«ENDDEFINEÂ»
 
-«DEFINE SystemMemberVar FOR InfrastructureProvidedRole»
-   protected «this.providedInterface__InfrastructureProvidedRole.fqn()» «this.portMemberVar()» = null;
-«ENDDEFINE»
+Â«DEFINE SystemMemberVar FOR InfrastructureProvidedRoleÂ»
+   protected Â«this.providedInterface__InfrastructureProvidedRole.fqn()Â» Â«this.portMemberVar()Â» = null;
+Â«ENDDEFINEÂ»
 
-«DEFINE UserActions FOR AbstractUserAction»
-   «EXPAND m2t_transforms::user_actions::UserAction FOR this»
-   «IF !Stop.isInstance(this)»
-      «EXPAND UserActions FOR this.successor»
-   «ENDIF»
-«ENDDEFINE»
+Â«DEFINE UserActions FOR AbstractUserActionÂ»
+   Â«EXPAND m2t_transforms::user_actions::UserAction FOR thisÂ»
+   Â«IF !Stop.isInstance(this)Â»
+      Â«EXPAND UserActions FOR this.successorÂ»
+   Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE DummyRequiredSystemTM(System s) FOR OperationRequiredRole»
+Â«DEFINE DummyRequiredSystemTM(System s) FOR OperationRequiredRoleÂ»
 	null 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE DummyRequiredSystemTM(System s) FOR InfrastructureRequiredRole»
+Â«DEFINE DummyRequiredSystemTM(System s) FOR InfrastructureRequiredRoleÂ»
 	null 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE UsageScenarioConstructorContextInit(Allocation a) FOR UsageScenario»
+Â«DEFINE UsageScenarioConstructorContextInit(Allocation a) FOR UsageScenarioÂ»
 	// Initialise local interface pointer pointing to system roles
-	«FOREACH this.querySystemCalls().providedRole_EntryLevelSystemCall.toSet() AS pr»
-		«pr.portMemberVar()» = my«pr.providingEntity_ProvidedRole.javaName()».«pr.portGetter()»();
-	«ENDFOREACH»
-«ENDDEFINE»
+	Â«FOREACH this.querySystemCalls().providedRole_EntryLevelSystemCall.toSet() AS prÂ»
+		Â«pr.portMemberVar()Â» = myÂ«pr.providingEntity_ProvidedRole.javaName()Â».Â«pr.portGetter()Â»();
+	Â«ENDFOREACHÂ»
+Â«ENDDEFINEÂ»

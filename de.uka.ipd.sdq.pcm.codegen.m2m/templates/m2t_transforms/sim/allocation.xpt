@@ -1,14 +1,14 @@
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
-«IMPORT repository»
-«IMPORT entity»
-«IMPORT system»
-«IMPORT pcm::subsystem»
-«IMPORT core::composition»
-«IMPORT allocation»
-«IMPORT resourceenvironment»
-«IMPORT resourcerepository»
-«IMPORT completions»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«IMPORT repositoryÂ»
+Â«IMPORT entityÂ»
+Â«IMPORT systemÂ»
+Â«IMPORT pcm::subsystemÂ»
+Â«IMPORT core::compositionÂ»
+Â«IMPORT allocationÂ»
+Â«IMPORT resourceenvironmentÂ»
+Â«IMPORT resourcerepositoryÂ»
+Â«IMPORT completionsÂ»
 
 //------------------------------
 // Allocation Context
@@ -17,60 +17,60 @@
 //     to retrieve the resource container of the component in the 
 //     current context
 //------------------------------
-«DEFINE Allocation FOR Allocation»
-	«EXPAND m2t_transforms::sim::resources::ResourceEnvironmentRoot FOR this.targetResourceEnvironment_Allocation»
-	«FILE this.fqnAllocationContext().fqnToDirectoryPath()+".java"»
-		package «this.fqnAllocationContextPackage()»;
+Â«DEFINE Allocation FOR AllocationÂ»
+	Â«EXPAND m2t_transforms::sim::resources::ResourceEnvironmentRoot FOR this.targetResourceEnvironment_AllocationÂ»
+	Â«FILE this.fqnAllocationContext().fqnToDirectoryPath()+".java"Â»
+		package Â«this.fqnAllocationContextPackage()Â»;
 		 
-		public class «this.fqnAllocationContextClass()» 
+		public class Â«this.fqnAllocationContextClass()Â» 
 		extends de.uka.ipd.sdq.simucomframework.Context {
-			public «this.fqnAllocationContextClass()»(de.uka.ipd.sdq.simucomframework.model.SimuComModel myModel) {
+			public Â«this.fqnAllocationContextClass()Â»(de.uka.ipd.sdq.simucomframework.model.SimuComModel myModel) {
 				super(myModel);
 			}
 			
 			protected void initialiseAssemblyContextLookup() {
-				«EXPAND AssemblyContextLink(this.system_Allocation) FOREACH this.allocationContexts_Allocation»
+				Â«EXPAND AssemblyContextLink(this.system_Allocation) FOREACH this.allocationContexts_AllocationÂ»
 			}
 		}
-	«ENDFILE»
-«ENDDEFINE»
+	Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
 // The following rule assumes the current 1:1 relationship between allocation context and
 // assembly context!
 // Additionally, it assumes that a SubSystem is only used once in the system (it will cause an error if 
 // it is used multiple times and the inner components are directly allocated.
-«DEFINE AssemblyContextLink(System system) FOR AllocationContext»
+Â«DEFINE AssemblyContextLink(System system) FOR AllocationContextÂ»
 	
-	«LET (SubSystem.isInstance(this.assemblyContext_AllocationContext.parentStructure__AssemblyContext)
+	Â«LET (SubSystem.isInstance(this.assemblyContext_AllocationContext.parentStructure__AssemblyContext)
 	|| Completion.isInstance(this.assemblyContext_AllocationContext.parentStructure__AssemblyContext)) ? 
 	this.assemblyContext_AllocationContext.id+system.getParentSubsystemsIdConcatenationFor((SubSystem)this.assemblyContext_AllocationContext.parentStructure__AssemblyContext) :
-	this.assemblyContext_AllocationContext.id AS fullAssemblyContextID»
+	this.assemblyContext_AllocationContext.id AS fullAssemblyContextIDÂ»
 	
-	linkAssemblyContextAndResourceContainer("«fullAssemblyContextID»","«this.resourceContainer_AllocationContext.id»");
+	linkAssemblyContextAndResourceContainer("Â«fullAssemblyContextIDÂ»","Â«this.resourceContainer_AllocationContext.idÂ»");
 	
 	
-	«IF CompositeComponent.isInstance(this.assemblyContext_AllocationContext.encapsulatedComponent__AssemblyContext) 
+	Â«IF CompositeComponent.isInstance(this.assemblyContext_AllocationContext.encapsulatedComponent__AssemblyContext) 
 	|| SubSystem.isInstance(this.assemblyContext_AllocationContext.encapsulatedComponent__AssemblyContext)
-	|| Completion.isInstance(this.assemblyContext_AllocationContext.encapsulatedComponent__AssemblyContext)»
-		«EXPAND CompositeAllocation(this, fullAssemblyContextID, system) FOREACH ((CompositeComponent)this.assemblyContext_AllocationContext.encapsulatedComponent__AssemblyContext).assemblyContexts__ComposedStructure»
-	«ENDIF»
+	|| Completion.isInstance(this.assemblyContext_AllocationContext.encapsulatedComponent__AssemblyContext)Â»
+		Â«EXPAND CompositeAllocation(this, fullAssemblyContextID, system) FOREACH ((CompositeComponent)this.assemblyContext_AllocationContext.encapsulatedComponent__AssemblyContext).assemblyContexts__ComposedStructureÂ»
+	Â«ENDIFÂ»
 
-	«ENDLET»
+	Â«ENDLETÂ»
 	 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE CompositeAllocation(AllocationContext allocCxt, String parentid, System system) FOR AssemblyContext»
-    «REM»Store this context id (1) alone and (2) together with parent id and then
+Â«DEFINE CompositeAllocation(AllocationContext allocCxt, String parentid, System system) FOR AssemblyContextÂ»
+    Â«REMÂ»Store this context id (1) alone and (2) together with parent id and then
          recursively call this definition for the child components.  
          Thus, all combinations of subsystems, composite components and basic components are 
          hopefully covered. 
          TODO: Some combinations might be superfluous and could be excluded here. 
-         But test throurouhly with also composite components inside nested subsystems... «ENDREM»
-	linkAssemblyContextAndResourceContainer("«this.id»"+"«parentid»","«allocCxt.resourceContainer_AllocationContext.id»");
-	«IF CompositeComponent.isInstance(this.encapsulatedComponent__AssemblyContext)
+         But test throurouhly with also composite components inside nested subsystems... Â«ENDREMÂ»
+	linkAssemblyContextAndResourceContainer("Â«this.idÂ»"+"Â«parentidÂ»","Â«allocCxt.resourceContainer_AllocationContext.idÂ»");
+	Â«IF CompositeComponent.isInstance(this.encapsulatedComponent__AssemblyContext)
 	|| SubSystem.isInstance(this.encapsulatedComponent__AssemblyContext)
-	|| Completion.isInstance(this.encapsulatedComponent__AssemblyContext) »
-		«EXPAND CompositeAllocation(allocCxt, this.id+parentid, system) FOREACH ((CompositeComponent)this.encapsulatedComponent__AssemblyContext).assemblyContexts__ComposedStructure»
-		«EXPAND CompositeAllocation(allocCxt, this.id, system) FOREACH ((CompositeComponent)this.encapsulatedComponent__AssemblyContext).assemblyContexts__ComposedStructure»
-	«ENDIF»
-«ENDDEFINE»
+	|| Completion.isInstance(this.encapsulatedComponent__AssemblyContext) Â»
+		Â«EXPAND CompositeAllocation(allocCxt, this.id+parentid, system) FOREACH ((CompositeComponent)this.encapsulatedComponent__AssemblyContext).assemblyContexts__ComposedStructureÂ»
+		Â«EXPAND CompositeAllocation(allocCxt, this.id, system) FOREACH ((CompositeComponent)this.encapsulatedComponent__AssemblyContext).assemblyContexts__ComposedStructureÂ»
+	Â«ENDIFÂ»
+Â«ENDDEFINEÂ»

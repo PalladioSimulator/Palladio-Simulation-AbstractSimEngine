@@ -1,172 +1,172 @@
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
-«IMPORT repository»
-«IMPORT seff»
-«IMPORT system»
-«IMPORT core::entity»
-«IMPORT core::composition»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«IMPORT repositoryÂ»
+Â«IMPORT seffÂ»
+Â«IMPORT systemÂ»
+Â«IMPORT core::entityÂ»
+Â«IMPORT core::compositionÂ»
 
 // This set of templates expands the Component Context Pattern by Markus Voelter, which uses a
 // combined port to combine all required interfaces and this combined port is stored in the 
 // main implementation and made settable by the component environment
 //
-«DEFINE RequiredInterfaces FOR InterfaceRequiringEntity»
-   «EXPAND ComponentContextInterface FOR this»
-   «EXPAND ComponentContextImpl FOR this»
-   «EXPAND ComponentContextMemberVar FOR this»
-   «EXPAND ComponentContextSetter FOR this»
-«ENDDEFINE»
+Â«DEFINE RequiredInterfaces FOR InterfaceRequiringEntityÂ»
+   Â«EXPAND ComponentContextInterface FOR thisÂ»
+   Â«EXPAND ComponentContextImpl FOR thisÂ»
+   Â«EXPAND ComponentContextMemberVar FOR thisÂ»
+   Â«EXPAND ComponentContextSetter FOR thisÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComponentContextInterface FOR InterfaceRequiringEntity»
-   «FILE this.fqnContextInterface().fqnToDirectoryPath()+".java"»
-      package «this.fqnContextPackage()»;
+Â«DEFINE ComponentContextInterface FOR InterfaceRequiringEntityÂ»
+   Â«FILE this.fqnContextInterface().fqnToDirectoryPath()+".java"Â»
+      package Â«this.fqnContextPackage()Â»;
 
-      // Component context interface for «this.javaName()»
-      public interface «this.contextInterfaceName()»
+      // Component context interface for Â«this.javaName()Â»
+      public interface Â«this.contextInterfaceName()Â»
       {
-         «EXPAND ContextInterfaceGetterSignature FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole)»
-         «EXPAND ContextInterfaceGetterSignature FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole)»
-         «EXPAND ContextInterfaceSetterSignature FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole)»
-         «EXPAND ContextInterfaceSetterSignature FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole)»
+         Â«EXPAND ContextInterfaceGetterSignature FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole)Â»
+         Â«EXPAND ContextInterfaceGetterSignature FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole)Â»
+         Â«EXPAND ContextInterfaceSetterSignature FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole)Â»
+         Â«EXPAND ContextInterfaceSetterSignature FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole)Â»
          
-         «EXPAND ContextInterfaceAdditionsTM FOR this»
+         Â«EXPAND ContextInterfaceAdditionsTM FOR thisÂ»
       }
-   «ENDFILE»
-«ENDDEFINE»
+   Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComponentContextImpl FOR InterfaceRequiringEntity»
-   «FILE this.fqnContext().fqnToDirectoryPath()+".java"»
-      package «this.fqnContextPackage()»;
+Â«DEFINE ComponentContextImpl FOR InterfaceRequiringEntityÂ»
+   Â«FILE this.fqnContext().fqnToDirectoryPath()+".java"Â»
+      package Â«this.fqnContextPackage()Â»;
 
-      // Component context class for «this.javaName()»
-      public class «this.contextClassName()» implements «this.fqnContextInterface()», java.io.Serializable
+      // Component context class for Â«this.javaName()Â»
+      public class Â«this.contextClassName()Â» implements Â«this.fqnContextInterface()Â», java.io.Serializable
       {
-         «EXPAND ContextInterfaceMemberVar FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole)»
-         «EXPAND ContextInterfaceMemberVar FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole)»
-         «EXPAND ContextInterfaceGetter FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole)»
-         «EXPAND ContextInterfaceGetter FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole)»
-         «EXPAND ContextInterfaceSetter FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole)»
-         «EXPAND ContextInterfaceSetter FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole)»
+         Â«EXPAND ContextInterfaceMemberVar FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole)Â»
+         Â«EXPAND ContextInterfaceMemberVar FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole)Â»
+         Â«EXPAND ContextInterfaceGetter FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole)Â»
+         Â«EXPAND ContextInterfaceGetter FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole)Â»
+         Â«EXPAND ContextInterfaceSetter FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole)Â»
+         Â«EXPAND ContextInterfaceSetter FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole)Â»
 
-         public «this.contextClassName()» () {
+         public Â«this.contextClassName()Â» () {
          }
          
-         «IF this.requiredRoles_InterfaceRequiringEntity.size > 0»
-         public «this.contextClassName()» (
-            «EXPAND ContextInterfaceVar FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole) SEPARATOR ","»
-            «IF this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole).size > 0»
-            	«IF this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole).size > 0», «ENDIF»
-            	«EXPAND ContextInterfaceVar FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole) SEPARATOR ","»
-            «ENDIF»
+         Â«IF this.requiredRoles_InterfaceRequiringEntity.size > 0Â»
+         public Â«this.contextClassName()Â» (
+            Â«EXPAND ContextInterfaceVar FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole) SEPARATOR ","Â»
+            Â«IF this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole).size > 0Â»
+            	Â«IF this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole).size > 0Â», Â«ENDIFÂ»
+            	Â«EXPAND ContextInterfaceVar FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole) SEPARATOR ","Â»
+            Â«ENDIFÂ»
             ) {
-            «EXPAND ContextInterfaceInitialisation FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole)»
-            «EXPAND ContextInterfaceInitialisation FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole)»
+            Â«EXPAND ContextInterfaceInitialisation FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole)Â»
+            Â«EXPAND ContextInterfaceInitialisation FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole)Â»
          }
-         «ENDIF»
+         Â«ENDIFÂ»
          
-         «EXPAND ComponentContextImplAdditionsTM FOR this»
+         Â«EXPAND ComponentContextImplAdditionsTM FOR thisÂ»
       }
-   «ENDFILE»
-«ENDDEFINE»
+   Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComponentContextMemberVar FOR InterfaceRequiringEntity»
-   protected «this.fqnContextInterface()» myContext = null;
-«ENDDEFINE»
+Â«DEFINE ComponentContextMemberVar FOR InterfaceRequiringEntityÂ»
+   protected Â«this.fqnContextInterface()Â» myContext = null;
+Â«ENDDEFINEÂ»
 
-«DEFINE ComponentContextSetter FOR InterfaceRequiringEntity»
-   public void setContext(«this.fqnContextInterface()» myContext) {
+Â«DEFINE ComponentContextSetter FOR InterfaceRequiringEntityÂ»
+   public void setContext(Â«this.fqnContextInterface()Â» myContext) {
       this.myContext = myContext;
-      «IF ComposedStructure.isInstance(this)»
+      Â«IF ComposedStructure.isInstance(this)Â»
       	initInnerComponents();
-      «ENDIF»
+      Â«ENDIFÂ»
    }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComponentContextSetterDefinition FOR InterfaceRequiringEntity»
-   public void setContext(«this.fqnContextInterface()» myContext);
-«ENDDEFINE»
+Â«DEFINE ComponentContextSetterDefinition FOR InterfaceRequiringEntityÂ»
+   public void setContext(Â«this.fqnContextInterface()Â» myContext);
+Â«ENDDEFINEÂ»
 
-«DEFINE ContextInterfaceVar FOR OperationRequiredRole»
-   «this.requiredInterface__OperationRequiredRole.fqn()» «this.javaName().toFirstLower()»
-«ENDDEFINE»
+Â«DEFINE ContextInterfaceVar FOR OperationRequiredRoleÂ»
+   Â«this.requiredInterface__OperationRequiredRole.fqn()Â» Â«this.javaName().toFirstLower()Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ContextInterfaceVar FOR InfrastructureRequiredRole»
-   «this.requiredInterface__InfrastructureRequiredRole.fqn()» «this.javaName().toFirstLower()»
-«ENDDEFINE»
+Â«DEFINE ContextInterfaceVar FOR InfrastructureRequiredRoleÂ»
+   Â«this.requiredInterface__InfrastructureRequiredRole.fqn()Â» Â«this.javaName().toFirstLower()Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ContextInterfaceInitialisation FOR OperationRequiredRole»
-   this.«this.javaName().toFirstLower()» = «this.javaName().toFirstLower()»;
-«ENDDEFINE»
+Â«DEFINE ContextInterfaceInitialisation FOR OperationRequiredRoleÂ»
+   this.Â«this.javaName().toFirstLower()Â» = Â«this.javaName().toFirstLower()Â»;
+Â«ENDDEFINEÂ»
 
-«DEFINE ContextInterfaceInitialisation FOR InfrastructureRequiredRole»
-   this.«this.javaName().toFirstLower()» = «this.javaName().toFirstLower()»;
-«ENDDEFINE»
+Â«DEFINE ContextInterfaceInitialisation FOR InfrastructureRequiredRoleÂ»
+   this.Â«this.javaName().toFirstLower()Â» = Â«this.javaName().toFirstLower()Â»;
+Â«ENDDEFINEÂ»
 
-«DEFINE ContextInterfaceMemberVar FOR OperationRequiredRole»
-   protected «this.requiredInterface__OperationRequiredRole.fqn()» «this.javaName().toFirstLower()» = null;
-«ENDDEFINE»
+Â«DEFINE ContextInterfaceMemberVar FOR OperationRequiredRoleÂ»
+   protected Â«this.requiredInterface__OperationRequiredRole.fqn()Â» Â«this.javaName().toFirstLower()Â» = null;
+Â«ENDDEFINEÂ»
 
-«DEFINE ContextInterfaceMemberVar FOR InfrastructureRequiredRole»
-   protected «this.requiredInterface__InfrastructureRequiredRole.fqn()» «this.javaName().toFirstLower()» = null;
-«ENDDEFINE»
+Â«DEFINE ContextInterfaceMemberVar FOR InfrastructureRequiredRoleÂ»
+   protected Â«this.requiredInterface__InfrastructureRequiredRole.fqn()Â» Â«this.javaName().toFirstLower()Â» = null;
+Â«ENDDEFINEÂ»
 
-«DEFINE ContextInterfaceGetter FOR OperationRequiredRole»
-   public «this.requiredInterface__OperationRequiredRole.fqn()» getRole«this.javaName()»() {
-   	  if («this.javaName().toFirstLower()» == null) {
+Â«DEFINE ContextInterfaceGetter FOR OperationRequiredRoleÂ»
+   public Â«this.requiredInterface__OperationRequiredRole.fqn()Â» getRoleÂ«this.javaName()Â»() {
+   	  if (Â«this.javaName().toFirstLower()Â» == null) {
    	  	  throw new RuntimeException("Attempt to retrieve unbounded port. Check your architecture! "+
-   	  	  		"Role «this.entityName» <«this.id»> RequiringEntity «this.requiringEntity_RequiredRole.entityName»");
+   	  	  		"Role Â«this.entityNameÂ» <Â«this.idÂ»> RequiringEntity Â«this.requiringEntity_RequiredRole.entityNameÂ»");
       }
-      return «this.javaName().toFirstLower()»;
+      return Â«this.javaName().toFirstLower()Â»;
    }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ContextInterfaceGetter FOR InfrastructureRequiredRole»
-   public «this.requiredInterface__InfrastructureRequiredRole.fqn()» getRole«this.javaName()»() {
-   	  if («this.javaName().toFirstLower()» == null) {
+Â«DEFINE ContextInterfaceGetter FOR InfrastructureRequiredRoleÂ»
+   public Â«this.requiredInterface__InfrastructureRequiredRole.fqn()Â» getRoleÂ«this.javaName()Â»() {
+   	  if (Â«this.javaName().toFirstLower()Â» == null) {
    	  	  throw new RuntimeException("Attempt to retrieve unbounded port. Check your architecture! "+
-   	  	  		"Role «this.entityName» <«this.id»> RequiringEntity «this.requiringEntity_RequiredRole.entityName»");
+   	  	  		"Role Â«this.entityNameÂ» <Â«this.idÂ»> RequiringEntity Â«this.requiringEntity_RequiredRole.entityNameÂ»");
       }
-      return «this.javaName().toFirstLower()»;
+      return Â«this.javaName().toFirstLower()Â»;
    }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ContextInterfaceSetter FOR OperationRequiredRole»
-   public void setRole«this.javaName()»(«this.requiredInterface__OperationRequiredRole.fqn()» newValue) {
-      this.«this.javaName().toFirstLower()» = newValue;
+Â«DEFINE ContextInterfaceSetter FOR OperationRequiredRoleÂ»
+   public void setRoleÂ«this.javaName()Â»(Â«this.requiredInterface__OperationRequiredRole.fqn()Â» newValue) {
+      this.Â«this.javaName().toFirstLower()Â» = newValue;
    }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ContextInterfaceSetter FOR InfrastructureRequiredRole»
-   public void setRole«this.javaName()»(«this.requiredInterface__InfrastructureRequiredRole.fqn()» newValue) {
-      this.«this.javaName().toFirstLower()» = newValue;
+Â«DEFINE ContextInterfaceSetter FOR InfrastructureRequiredRoleÂ»
+   public void setRoleÂ«this.javaName()Â»(Â«this.requiredInterface__InfrastructureRequiredRole.fqn()Â» newValue) {
+      this.Â«this.javaName().toFirstLower()Â» = newValue;
    }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ContextInterfaceGetterSignature FOR OperationRequiredRole»
-   «this.requiredInterface__OperationRequiredRole.fqn()» getRole«this.javaName()»();
-«ENDDEFINE»
+Â«DEFINE ContextInterfaceGetterSignature FOR OperationRequiredRoleÂ»
+   Â«this.requiredInterface__OperationRequiredRole.fqn()Â» getRoleÂ«this.javaName()Â»();
+Â«ENDDEFINEÂ»
 
-«DEFINE ContextInterfaceGetterSignature FOR InfrastructureRequiredRole»
-   «this.requiredInterface__InfrastructureRequiredRole.fqn()» getRole«this.javaName()»();
-«ENDDEFINE»
+Â«DEFINE ContextInterfaceGetterSignature FOR InfrastructureRequiredRoleÂ»
+   Â«this.requiredInterface__InfrastructureRequiredRole.fqn()Â» getRoleÂ«this.javaName()Â»();
+Â«ENDDEFINEÂ»
 
-«DEFINE ContextInterfaceSetterSignature FOR OperationRequiredRole»
-   void setRole«this.javaName()»(«this.requiredInterface__OperationRequiredRole.fqn()» newValue);
-«ENDDEFINE»
+Â«DEFINE ContextInterfaceSetterSignature FOR OperationRequiredRoleÂ»
+   void setRoleÂ«this.javaName()Â»(Â«this.requiredInterface__OperationRequiredRole.fqn()Â» newValue);
+Â«ENDDEFINEÂ»
 
-«DEFINE ContextInterfaceSetterSignature FOR InfrastructureRequiredRole»
-   void setRole«this.javaName()»(«this.requiredInterface__InfrastructureRequiredRole.fqn()» newValue);
-«ENDDEFINE»
+Â«DEFINE ContextInterfaceSetterSignature FOR InfrastructureRequiredRoleÂ»
+   void setRoleÂ«this.javaName()Â»(Â«this.requiredInterface__InfrastructureRequiredRole.fqn()Â» newValue);
+Â«ENDDEFINEÂ»
 
 // ----------------------------------
 // Template method to add information to the component context
 // (here: to the interface)
 // ----------------------------------
-«DEFINE ContextInterfaceAdditionsTM FOR InterfaceRequiringEntity»
-«ENDDEFINE»
+Â«DEFINE ContextInterfaceAdditionsTM FOR InterfaceRequiringEntityÂ»
+Â«ENDDEFINEÂ»
 
 // ----------------------------------
 // Template method to add information to the component context
 // ----------------------------------
-«DEFINE ComponentContextImplAdditionsTM FOR InterfaceRequiringEntity»
-«ENDDEFINE»
+Â«DEFINE ComponentContextImplAdditionsTM FOR InterfaceRequiringEntityÂ»
+Â«ENDDEFINEÂ»

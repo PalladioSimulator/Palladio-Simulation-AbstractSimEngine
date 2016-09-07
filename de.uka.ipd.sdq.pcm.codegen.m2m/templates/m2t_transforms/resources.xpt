@@ -1,26 +1,26 @@
-«IMPORT repository»
-«IMPORT seff»
-«IMPORT seff::seff_performance»
-«IMPORT resourcetype»
-«IMPORT resourceenvironment»
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
+Â«IMPORT repositoryÂ»
+Â«IMPORT seffÂ»
+Â«IMPORT seff::seff_performanceÂ»
+Â«IMPORT resourcetypeÂ»
+Â«IMPORT resourceenvironmentÂ»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
 
 // For each resource demand load a resource
-«DEFINE ResourceDemands FOR AbstractInternalControlFlowAction»
-	«EXPAND ResourceDemandTM FOREACH this.resourceDemand_Action»
-	«EXPAND ResourceDemandTM FOREACH this.resourceCall__Action»
-«ENDDEFINE»
+Â«DEFINE ResourceDemands FOR AbstractInternalControlFlowActionÂ»
+	Â«EXPAND ResourceDemandTM FOREACH this.resourceDemand_ActionÂ»
+	Â«EXPAND ResourceDemandTM FOREACH this.resourceCall__ActionÂ»
+Â«ENDDEFINEÂ»
 
 // What to do with the actual demand is target dependant
-«DEFINE ResourceDemandTM FOR ParametricResourceDemand»
-	«ERROR "OAW GENERATION ERROR [m2t_transforms/resources.xpt]: ResourceDemandTM is a template method and must be overridden"»
-«ENDDEFINE»
+Â«DEFINE ResourceDemandTM FOR ParametricResourceDemandÂ»
+	Â«ERROR "OAW GENERATION ERROR [m2t_transforms/resources.xpt]: ResourceDemandTM is a template method and must be overridden"Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ResourceDemandTM FOR ResourceCall»
-	«ERROR "OAW GENERATION ERROR [m2t_transforms/resources.xpt]: ResourceDemandTM is a template method and must be overridden"»
-«ENDDEFINE»
+Â«DEFINE ResourceDemandTM FOR ResourceCallÂ»
+	Â«ERROR "OAW GENERATION ERROR [m2t_transforms/resources.xpt]: ResourceDemandTM is a template method and must be overridden"Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE PassiveResourceInitTM FOR PassiveResource»
-	«ERROR "OAW GENERATION ERROR [m2t_transforms/resources.xpt]: PassiveResourceInitTM is a template method and must be overridden"»
-«ENDDEFINE»
+Â«DEFINE PassiveResourceInitTM FOR PassiveResourceÂ»
+	Â«ERROR "OAW GENERATION ERROR [m2t_transforms/resources.xpt]: PassiveResourceInitTM is a template method and must be overridden"Â»
+Â«ENDDEFINEÂ»

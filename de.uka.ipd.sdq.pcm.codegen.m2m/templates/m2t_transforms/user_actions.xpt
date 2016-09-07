@@ -1,37 +1,37 @@
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
-«IMPORT system»
-«IMPORT core::composition»
-«IMPORT usagemodel»
-«IMPORT core::entity»
-«IMPORT repository»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«IMPORT systemÂ»
+Â«IMPORT core::compositionÂ»
+Â«IMPORT usagemodelÂ»
+Â«IMPORT core::entityÂ»
+Â«IMPORT repositoryÂ»
 
-«DEFINE UserAction FOR AbstractUserAction»
+Â«DEFINE UserAction FOR AbstractUserActionÂ»
 	// Unknown user action - bad!
-	«ERROR "OAW GENERATION ERROR [m2t_transforms/user_actions.xpt]: Unknown user action!"»
-«ENDDEFINE»
+	Â«ERROR "OAW GENERATION ERROR [m2t_transforms/user_actions.xpt]: Unknown user action!"Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE UserAction FOR Start»
-«ENDDEFINE»
+Â«DEFINE UserAction FOR StartÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE UserAction FOR Stop»
-«ENDDEFINE»
+Â«DEFINE UserAction FOR StopÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE UserAction FOR EntryLevelSystemCall»
-			// Set the priority for «this.entityName»	
-			thread.setPriority(«this.priority»);
-    «EXPAND m2t_transforms::calls::Call(
+Â«DEFINE UserAction FOR EntryLevelSystemCallÂ»
+			// Set the priority for Â«this.entityNameÂ»	
+			thread.setPriority(Â«this.priorityÂ»);
+    Â«EXPAND m2t_transforms::calls::Call(
     	this, 
     	this.providedRole_EntryLevelSystemCall.portMemberVar()+".",
     	this.inputParameterUsages_EntryLevelSystemCall,
-    	{}) FOR this.operationSignature__EntryLevelSystemCall»
-«ENDDEFINE»
+    	{}) FOR this.operationSignature__EntryLevelSystemCallÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE UserAction FOR Loop»
-«ENDDEFINE»
+Â«DEFINE UserAction FOR LoopÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE UserAction FOR Branch»
-«ENDDEFINE»
+Â«DEFINE UserAction FOR BranchÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE UserAction FOR Delay»
-«ENDDEFINE»
+Â«DEFINE UserAction FOR DelayÂ»
+Â«ENDDEFINEÂ»

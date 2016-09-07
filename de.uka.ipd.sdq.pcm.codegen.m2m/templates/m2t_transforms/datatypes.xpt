@@ -1,33 +1,33 @@
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
-«IMPORT repository»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«IMPORT repositoryÂ»
 
-«DEFINE DataType FOR DataType»
-	«ERROR "OAW GENERATION ERROR [m2t_transforms/datatypes.xpt]: Unknown Datatype found"»
-«ENDDEFINE»
+Â«DEFINE DataType FOR DataTypeÂ»
+	Â«ERROR "OAW GENERATION ERROR [m2t_transforms/datatypes.xpt]: Unknown Datatype found"Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE DataType FOR PrimitiveDataType»
-	«IF this.type == PrimitiveTypeEnum::INT»
+Â«DEFINE DataType FOR PrimitiveDataTypeÂ»
+	Â«IF this.type == PrimitiveTypeEnum::INTÂ»
 		int
-	«ENDIF»
-	«IF this.type == PrimitiveTypeEnum::DOUBLE»
+	Â«ENDIFÂ»
+	Â«IF this.type == PrimitiveTypeEnum::DOUBLEÂ»
 		double
-	«ENDIF»
-	«IF this.type == PrimitiveTypeEnum::CHAR»
+	Â«ENDIFÂ»
+	Â«IF this.type == PrimitiveTypeEnum::CHARÂ»
 		char
-	«ENDIF»
-	«IF this.type == PrimitiveTypeEnum::BYTE»
+	Â«ENDIFÂ»
+	Â«IF this.type == PrimitiveTypeEnum::BYTEÂ»
 		byte
-	«ENDIF»
-	«IF this.type == PrimitiveTypeEnum::STRING»
+	Â«ENDIFÂ»
+	Â«IF this.type == PrimitiveTypeEnum::STRINGÂ»
 		String
-	«ENDIF»
-«ENDDEFINE»
+	Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE DataType FOR CollectionDataType»
-	«EXPAND DataType FOR this.innerType_CollectionDataType»[]
-«ENDDEFINE»
+Â«DEFINE DataType FOR CollectionDataTypeÂ»
+	Â«EXPAND DataType FOR this.innerType_CollectionDataTypeÂ»[]
+Â«ENDDEFINEÂ»
 
-«DEFINE DataType FOR CompositeDataType»
-	«this.entityName»
-«ENDDEFINE»
+Â«DEFINE DataType FOR CompositeDataTypeÂ»
+	Â«this.entityNameÂ»
+Â«ENDDEFINEÂ»

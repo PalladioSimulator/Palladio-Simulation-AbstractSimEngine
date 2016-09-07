@@ -1,86 +1,86 @@
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
-«IMPORT repository»
-«IMPORT seff»
-«IMPORT system»
-«IMPORT core::entity»
-«IMPORT core::composition»
-«IMPORT completions»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«IMPORT repositoryÂ»
+Â«IMPORT seffÂ»
+Â«IMPORT systemÂ»
+Â«IMPORT core::entityÂ»
+Â«IMPORT core::compositionÂ»
+Â«IMPORT completionsÂ»
 
-«DEFINE PortDelegationDelegatingCall FOR OperationSignature»
-	return myComponent.«this.interface__OperationSignature.javaName().toFirstLower()»_«this.javaSignature()»(
-	     «EXPAND m2t_transforms::java_core::ParameterUsageListTM FOR this»);
-«ENDDEFINE»
+Â«DEFINE PortDelegationDelegatingCall FOR OperationSignatureÂ»
+	return myComponent.Â«this.interface__OperationSignature.javaName().toFirstLower()Â»_Â«this.javaSignature()Â»(
+	     Â«EXPAND m2t_transforms::java_core::ParameterUsageListTM FOR thisÂ»);
+Â«ENDDEFINEÂ»
 
-«DEFINE PortDelegationDelegatingCall FOR InfrastructureSignature»
-	return myComponent.«this.infrastructureInterface__InfrastructureSignature.javaName().toFirstLower()»_«this.javaSignature()»(
-	     «EXPAND m2t_transforms::java_core::ParameterUsageListTM FOR this»);
-«ENDDEFINE»
+Â«DEFINE PortDelegationDelegatingCall FOR InfrastructureSignatureÂ»
+	return myComponent.Â«this.infrastructureInterface__InfrastructureSignature.javaName().toFirstLower()Â»_Â«this.javaSignature()Â»(
+	     Â«EXPAND m2t_transforms::java_core::ParameterUsageListTM FOR thisÂ»);
+Â«ENDDEFINEÂ»
 
-«DEFINE ComposedStructurePortDelegationDelegatingCall(ComposedProvidingRequiringEntity cs) FOR OperationSignature»
-	//logger.debug("Entering port of composed structure «cs.entityName»");
-	«EXPAND PrePortCode FOR cs»
-	«EXPAND m2t_transforms::java_core::ReturnTypeTM FOR this» result = myInnerPort.«this.javaSignature()»(
-	     «EXPAND m2t_transforms::java_core::ParameterUsageListTM FOR this»);
-	«EXPAND PostPortCode FOR cs»
+Â«DEFINE ComposedStructurePortDelegationDelegatingCall(ComposedProvidingRequiringEntity cs) FOR OperationSignatureÂ»
+	//logger.debug("Entering port of composed structure Â«cs.entityNameÂ»");
+	Â«EXPAND PrePortCode FOR csÂ»
+	Â«EXPAND m2t_transforms::java_core::ReturnTypeTM FOR thisÂ» result = myInnerPort.Â«this.javaSignature()Â»(
+	     Â«EXPAND m2t_transforms::java_core::ParameterUsageListTM FOR thisÂ»);
+	Â«EXPAND PostPortCode FOR csÂ»
 	return result;
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComposedStructurePortDelegationDelegatingCall(ComposedProvidingRequiringEntity cs) FOR InfrastructureSignature»
-	//logger.debug("Entering port of composed structure «cs.entityName»");
-	«EXPAND PrePortCode FOR cs»
-	«EXPAND m2t_transforms::java_core::ReturnTypeTM FOR this» result = myInnerPort.«this.javaSignature()»(
-	     «EXPAND m2t_transforms::java_core::ParameterUsageListTM FOR this»);
-	«EXPAND PostPortCode FOR cs»
+Â«DEFINE ComposedStructurePortDelegationDelegatingCall(ComposedProvidingRequiringEntity cs) FOR InfrastructureSignatureÂ»
+	//logger.debug("Entering port of composed structure Â«cs.entityNameÂ»");
+	Â«EXPAND PrePortCode FOR csÂ»
+	Â«EXPAND m2t_transforms::java_core::ReturnTypeTM FOR thisÂ» result = myInnerPort.Â«this.javaSignature()Â»(
+	     Â«EXPAND m2t_transforms::java_core::ParameterUsageListTM FOR thisÂ»);
+	Â«EXPAND PostPortCode FOR csÂ»
 	return result;
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE PrePortCode FOR ComposedProvidingRequiringEntity»
-«ENDDEFINE»
+Â«DEFINE PrePortCode FOR ComposedProvidingRequiringEntityÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE PrePortCode FOR Completion»
+Â«DEFINE PrePortCode FOR CompletionÂ»
 	ctx.setEvaluationMode(de.uka.ipd.sdq.simucomframework.variables.stoexvisitor.VariableMode.RETURN_DEFAULT_ON_NOT_FOUND);
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE PostPortCode FOR ComposedProvidingRequiringEntity»
-«ENDDEFINE»
+Â«DEFINE PostPortCode FOR ComposedProvidingRequiringEntityÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE PostPortCode FOR Completion»
+Â«DEFINE PostPortCode FOR CompletionÂ»
 	ctx.setEvaluationMode(de.uka.ipd.sdq.simucomframework.variables.stoexvisitor.VariableMode.EXCEPTION_ON_NOT_FOUND);
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComponentPortHelperMethods FOR OperationProvidedRole»
+Â«DEFINE ComponentPortHelperMethods FOR OperationProvidedRoleÂ»
 	     public org.palladiosimulator.pcm.core.composition.AssemblyContext getComponentAssemblyContext() {
 	     	return this.myComponent.getAssemblyContext();
 	     }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComponentPortHelperMethods FOR InfrastructureProvidedRole»
+Â«DEFINE ComponentPortHelperMethods FOR InfrastructureProvidedRoleÂ»
 	     public org.palladiosimulator.pcm.core.composition.AssemblyContext getComponentAssemblyContext() {
 	     	return this.myComponent.getAssemblyContext();
 	     }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComposedComponentPortHelperMethods FOR OperationInterface»
+Â«DEFINE ComposedComponentPortHelperMethods FOR OperationInterfaceÂ»
 	     public org.palladiosimulator.pcm.core.composition.AssemblyContext getComponentAssemblyContext() {
 	     	return this.myInnerPort.getComponentAssemblyContext();
 	     }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComposedComponentPortHelperMethods FOR InfrastructureInterface»
+Â«DEFINE ComposedComponentPortHelperMethods FOR InfrastructureInterfaceÂ»
 	     public org.palladiosimulator.pcm.core.composition.AssemblyContext getComponentAssemblyContext() {
 	     	return this.myInnerPort.getComponentAssemblyContext();
 	     }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE DummyComponentPortHelperMethod FOR OperationInterface»
+Â«DEFINE DummyComponentPortHelperMethod FOR OperationInterfaceÂ»
 			public org.palladiosimulator.pcm.core.composition.AssemblyContext getComponentAssemblyContext() {
 				return null;
 			}
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE DummyComponentPortHelperMethod FOR InfrastructureInterface»
+Â«DEFINE DummyComponentPortHelperMethod FOR InfrastructureInterfaceÂ»
 			public org.palladiosimulator.pcm.core.composition.AssemblyContext getComponentAssemblyContext() {
 				return null;
 			}
-«ENDDEFINE»
+Â«ENDDEFINEÂ»

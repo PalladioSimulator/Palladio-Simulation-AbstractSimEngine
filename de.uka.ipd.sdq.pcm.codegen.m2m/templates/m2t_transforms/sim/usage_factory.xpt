@@ -1,70 +1,70 @@
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
-«EXTENSION m2t_transforms::sim::measuringPoint»
-«IMPORT system»
-«IMPORT core::composition»
-«IMPORT usagemodel»
-«IMPORT core::entity»
-«IMPORT repository»
-«IMPORT allocation»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«EXTENSION m2t_transforms::sim::measuringPointÂ»
+Â«IMPORT systemÂ»
+Â«IMPORT core::compositionÂ»
+Â«IMPORT usagemodelÂ»
+Â«IMPORT core::entityÂ»
+Â«IMPORT repositoryÂ»
+Â«IMPORT allocationÂ»
 
 //------------------------------------
 // Generate a factory which can generate closed 
 // or open workload users for simucom
 //------------------------------------
-«DEFINE UsageScenarioFactory FOR UsageScenario»
-	«LET this.querySystemCalls().providedRole_EntryLevelSystemCall.providingEntity_ProvidedRole.uniqueSystemList() AS systemList»
-		«FILE this.implementationPackage().fqnToDirectoryPath() + "/" + this.javaName() + "Factory.java"»
-			package «this.implementationPackage()»;
-			public class «this.javaName()+"Factory"» 
-			extends «EXPAND UsageFactoryBaseClass FOR this.workload_UsageScenario»
+Â«DEFINE UsageScenarioFactory FOR UsageScenarioÂ»
+	Â«LET this.querySystemCalls().providedRole_EntryLevelSystemCall.providingEntity_ProvidedRole.uniqueSystemList() AS systemListÂ»
+		Â«FILE this.implementationPackage().fqnToDirectoryPath() + "/" + this.javaName() + "Factory.java"Â»
+			package Â«this.implementationPackage()Â»;
+			public class Â«this.javaName()+"Factory"Â» 
+			extends Â«EXPAND UsageFactoryBaseClass FOR this.workload_UsageScenarioÂ»
 			{
-				«EXPAND FactoryConstructor FOR this»
+				Â«EXPAND FactoryConstructor FOR thisÂ»
 				
 				public de.uka.ipd.sdq.simucomframework.usage.IScenarioRunner createScenarioRunner() {
-					return new «this.implementationPackage()+"."+this.javaName()»(model,«EXPAND m2t_transforms::sim::usage::SystemVariableParameter FOREACH systemList SEPARATOR ","»);
+					return new Â«this.implementationPackage()+"."+this.javaName()Â»(model,Â«EXPAND m2t_transforms::sim::usage::SystemVariableParameter FOREACH systemList SEPARATOR ","Â»);
 				}
 			}
-		«ENDFILE»
-	«ENDLET»
-«ENDDEFINE» 
+		Â«ENDFILEÂ»
+	Â«ENDLETÂ»
+Â«ENDDEFINEÂ» 
 
-«DEFINE UsageFactoryBaseClass FOR Workload»
-	«ERROR "OAW GENERATION ERROR [m2t_transforms/sim/usage_factory.xpt]: AbstractWorkload found! This is impossible!"»
-«ENDDEFINE»
+Â«DEFINE UsageFactoryBaseClass FOR WorkloadÂ»
+	Â«ERROR "OAW GENERATION ERROR [m2t_transforms/sim/usage_factory.xpt]: AbstractWorkload found! This is impossible!"Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE UsageFactoryBaseClass FOR ClosedWorkload»
+Â«DEFINE UsageFactoryBaseClass FOR ClosedWorkloadÂ»
 de.uka.ipd.sdq.simucomframework.usage.ClosedWorkloadUserFactory
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE UsageFactoryBaseClass FOR OpenWorkload»
+Â«DEFINE UsageFactoryBaseClass FOR OpenWorkloadÂ»
 de.uka.ipd.sdq.simucomframework.usage.OpenWorkloadUserFactory
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE FactoryConstructor FOR UsageScenario»
-	«LET this.querySystemCalls().providedRole_EntryLevelSystemCall.providingEntity_ProvidedRole.uniqueSystemList() AS systemList»
+Â«DEFINE FactoryConstructor FOR UsageScenarioÂ»
+	Â«LET this.querySystemCalls().providedRole_EntryLevelSystemCall.providingEntity_ProvidedRole.uniqueSystemList() AS systemListÂ»
 		private final de.uka.ipd.sdq.simucomframework.model.SimuComModel model;
-		«FOREACH systemList AS system»
-		private «system.fqn()» my«system.javaName()» = null;
-		«ENDFOREACH»
-		public «this.javaName()+"Factory"»(de.uka.ipd.sdq.simucomframework.model.SimuComModel model, String usageID, «EXPAND m2t_transforms::sim::usage::SystemVariableDecl FOREACH systemList SEPARATOR ","»){
-			«EXPAND FactoryConstructor FOR this.workload_UsageScenario»
+		Â«FOREACH systemList AS systemÂ»
+		private Â«system.fqn()Â» myÂ«system.javaName()Â» = null;
+		Â«ENDFOREACHÂ»
+		public Â«this.javaName()+"Factory"Â»(de.uka.ipd.sdq.simucomframework.model.SimuComModel model, String usageID, Â«EXPAND m2t_transforms::sim::usage::SystemVariableDecl FOREACH systemList SEPARATOR ","Â»){
+			Â«EXPAND FactoryConstructor FOR this.workload_UsageScenarioÂ»
 			this.model = model;
-			«FOREACH systemList AS system»
-			this.my«system.javaName()» = my«system.javaName()»; 
-			«ENDFOREACH»
+			Â«FOREACH systemList AS systemÂ»
+			this.myÂ«system.javaName()Â» = myÂ«system.javaName()Â»; 
+			Â«ENDFOREACHÂ»
 		}
-	«ENDLET»
-«ENDDEFINE»
+	Â«ENDLETÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE FactoryConstructor FOR Workload»
-	«ERROR "OAW GENERATION ERROR [m2t_transforms/sim/usage_factory.xpt]: AbstractWorkload found! This is impossible!"»
-«ENDDEFINE»
+Â«DEFINE FactoryConstructor FOR WorkloadÂ»
+	Â«ERROR "OAW GENERATION ERROR [m2t_transforms/sim/usage_factory.xpt]: AbstractWorkload found! This is impossible!"Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE FactoryConstructor FOR ClosedWorkload»
-	super(model, "«this.thinkTime_ClosedWorkload.specification.specificationString()»", "«this.usageScenario_Workload.getResourceURI()»");
-«ENDDEFINE»
+Â«DEFINE FactoryConstructor FOR ClosedWorkloadÂ»
+	super(model, "Â«this.thinkTime_ClosedWorkload.specification.specificationString()Â»", "Â«this.usageScenario_Workload.getResourceURI()Â»");
+Â«ENDDEFINEÂ»
 
-«DEFINE FactoryConstructor FOR OpenWorkload»
-	super(model, "«this.usageScenario_Workload.getResourceURI()»");
-«ENDDEFINE»
+Â«DEFINE FactoryConstructor FOR OpenWorkloadÂ»
+	super(model, "Â«this.usageScenario_Workload.getResourceURI()Â»");
+Â«ENDDEFINEÂ»

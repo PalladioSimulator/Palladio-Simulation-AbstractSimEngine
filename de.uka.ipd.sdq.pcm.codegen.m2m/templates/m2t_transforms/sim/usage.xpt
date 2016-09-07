@@ -1,14 +1,14 @@
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
-«IMPORT system»
-«IMPORT core::composition»
-«IMPORT usagemodel»
-«IMPORT core::entity»
-«IMPORT repository»
-«IMPORT allocation»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«IMPORT systemÂ»
+Â«IMPORT core::compositionÂ»
+Â«IMPORT usagemodelÂ»
+Â«IMPORT core::entityÂ»
+Â«IMPORT repositoryÂ»
+Â«IMPORT allocationÂ»
 
-«DEFINE Main FOR UsageModel»
-	«FILE "main/SimuComControl.java"»
+Â«DEFINE Main FOR UsageModelÂ»
+	Â«FILE "main/SimuComControl.java"Â»
 		package main;
 		
 		/**
@@ -23,16 +23,16 @@
 			// Override abstract framework method and return the workloads of this usage model
 			protected de.uka.ipd.sdq.simucomframework.usage.IWorkloadDriver[] getWorkloads(
 				de.uka.ipd.sdq.simucomframework.SimuComConfig config) {
-				«LET this.usageScenario_UsageModel.querySystemCalls().providedRole_EntryLevelSystemCall.providingEntity_ProvidedRole.uniqueSystemList() AS systemList»
-					// Create «systemList.size» System(s)
-					«FOREACH systemList AS system»
-						«system.fqn()» my«system.javaName()» = new «system.fqn()»(getModel());
-						«EXPAND UsageScenarioConstructorContextInit(this) FOR system»
-					«ENDFOREACH»
+				Â«LET this.usageScenario_UsageModel.querySystemCalls().providedRole_EntryLevelSystemCall.providingEntity_ProvidedRole.uniqueSystemList() AS systemListÂ»
+					// Create Â«systemList.sizeÂ» System(s)
+					Â«FOREACH systemList AS systemÂ»
+						Â«system.fqn()Â» myÂ«system.javaName()Â» = new Â«system.fqn()Â»(getModel());
+						Â«EXPAND UsageScenarioConstructorContextInit(this) FOR systemÂ»
+					Â«ENDFOREACHÂ»
 				return new de.uka.ipd.sdq.simucomframework.usage.IWorkloadDriver[] {
-					«EXPAND WorkloadDriver FOREACH this.usageScenario_UsageModel SEPARATOR ","»
+					Â«EXPAND WorkloadDriver FOREACH this.usageScenario_UsageModel SEPARATOR ","Â»
 				};
-				«ENDLET»
+				Â«ENDLETÂ»
 			}
 
 			// Return the generated resource container class
@@ -41,50 +41,50 @@
 			}
 						
 		}
-	«ENDFILE»
-«ENDDEFINE»
+	Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE UsageScenarioConstructorContextInit(UsageModel usageModel) FOR System»
-		«this.fqnContext()» context«this.javaName()» = 
-			new «this.fqnContext()»
+Â«DEFINE UsageScenarioConstructorContextInit(UsageModel usageModel) FOR SystemÂ»
+		Â«this.fqnContext()Â» contextÂ«this.javaName()Â» = 
+			new Â«this.fqnContext()Â»
 				(
-				«EXPAND m2t_transforms::usage::DummyRequiredSystemTM(this) FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole) SEPARATOR ","»
-				«IF this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole).size > 0» 
-				«IF this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole).size > 0», «ENDIF»
-				«EXPAND m2t_transforms::usage::DummyRequiredSystemTM(this) FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole) SEPARATOR ","»
-				«ENDIF»
+				Â«EXPAND m2t_transforms::usage::DummyRequiredSystemTM(this) FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole) SEPARATOR ","Â»
+				Â«IF this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole).size > 0Â» 
+				Â«IF this.requiredRoles_InterfaceRequiringEntity.typeSelect(OperationRequiredRole).size > 0Â», Â«ENDIFÂ»
+				Â«EXPAND m2t_transforms::usage::DummyRequiredSystemTM(this) FOREACH this.requiredRoles_InterfaceRequiringEntity.typeSelect(InfrastructureRequiredRole) SEPARATOR ","Â»
+				Â«ENDIFÂ»
 				);
       	// read UserData
       	de.uka.ipd.sdq.simucomframework.variables.userdata.UserData userData
       	   = new de.uka.ipd.sdq.simucomframework.variables.userdata.UserData();
-      	«EXPAND initUserData FOREACH usageModel.userData_UsageModel»
+      	Â«EXPAND initUserData FOREACH usageModel.userData_UsageModelÂ»
       	
-      	context«this.javaName()».setUserData(userData);
+      	contextÂ«this.javaName()Â».setUserData(userData);
       	
-      	my«this.javaName()».setContext(context«this.javaName()»);
+      	myÂ«this.javaName()Â».setContext(contextÂ«this.javaName()Â»);
       	
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE initUserData FOR UserData»
-«FOREACH this.userDataParameterUsages_UserData AS pu»
-	«FOREACH pu.variableCharacterisation_VariableUsage AS vc»
+Â«DEFINE initUserData FOR UserDataÂ»
+Â«FOREACH this.userDataParameterUsages_UserData AS puÂ»
+	Â«FOREACH pu.variableCharacterisation_VariableUsage AS vcÂ»
 	  userData.addUserData(
-      	"«this.assemblyContext_userData.id»",
-        "«pu.parameterUsageLHS()+'.'+vc.type.toString()»",
-		new de.uka.ipd.sdq.simucomframework.variables.EvaluationProxy("«vc.specification_VariableCharacterisation.specification.specificationString()»",
+      	"Â«this.assemblyContext_userData.idÂ»",
+        "Â«pu.parameterUsageLHS()+'.'+vc.type.toString()Â»",
+		new de.uka.ipd.sdq.simucomframework.variables.EvaluationProxy("Â«vc.specification_VariableCharacterisation.specification.specificationString()Â»",
 		  	new de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe<Object>()));
-	«ENDFOREACH»
-«ENDFOREACH»
+	Â«ENDFOREACHÂ»
+Â«ENDFOREACHÂ»
   
   
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
 
-«DEFINE UsageScenario(Allocation a) FOR UsageScenario»
-	«EXPAND m2t_transforms::sim::usage_factory::UsageScenarioFactory FOR this»
-	«FILE this.implementationPackage().fqnToDirectoryPath() + "/" + this.javaName() + ".java"»
-		package «this.implementationPackage()»;
-		public class «this.javaName()» 
+Â«DEFINE UsageScenario(Allocation a) FOR UsageScenarioÂ»
+	Â«EXPAND m2t_transforms::sim::usage_factory::UsageScenarioFactory FOR thisÂ»
+	Â«FILE this.implementationPackage().fqnToDirectoryPath() + "/" + this.javaName() + ".java"Â»
+		package Â«this.implementationPackage()Â»;
+		public class Â«this.javaName()Â» 
 		implements de.uka.ipd.sdq.simucomframework.usage.IScenarioRunner
 		{
 			/** Default EMF factory for measuring points. */
@@ -92,18 +92,18 @@
     
 			private static java.util.Map<String,java.util.List<org.palladiosimulator.probeframework.probes.Probe>> startStopProbes = null;
 			
-			«EXPAND m2t_transforms::usage::SystemMemberVar FOREACH this.querySystemCalls().providedRole_EntryLevelSystemCall.toSet()»
+			Â«EXPAND m2t_transforms::usage::SystemMemberVar FOREACH this.querySystemCalls().providedRole_EntryLevelSystemCall.toSet()Â»
 			
 			
 			// Workaround to specify and retrieve the priority for a system call
 			public int getPriorityForEntryLevelSystemCallID(String id){
 				int defaultPriority = 0;
-			«FOREACH this.querySystemCalls() AS entrycall»
-				// priority for EntrySystemLevelCall «entrycall.providedRole_EntryLevelSystemCall.entityName»: «entrycall.priority»
-				if(id.equalsIgnoreCase("«entrycall.providedRole_EntryLevelSystemCall.id»")){
-					return «entrycall.priority»;
+			Â«FOREACH this.querySystemCalls() AS entrycallÂ»
+				// priority for EntrySystemLevelCall Â«entrycall.providedRole_EntryLevelSystemCall.entityNameÂ»: Â«entrycall.priorityÂ»
+				if(id.equalsIgnoreCase("Â«entrycall.providedRole_EntryLevelSystemCall.idÂ»")){
+					return Â«entrycall.priorityÂ»;
 				} 
-			«ENDFOREACH»
+			Â«ENDFOREACHÂ»
 				return defaultPriority;
 			}
 			
@@ -116,18 +116,18 @@
 				return this.simuComModel;
 			}
 			
-			«EXPAND UsageScenarioConstructor(a) FOR this»
+			Â«EXPAND UsageScenarioConstructor(a) FOR thisÂ»
 			
-			«EXPAND ScenarioRunner(this) FOR this.scenarioBehaviour_UsageScenario»
+			Â«EXPAND ScenarioRunner(this) FOR this.scenarioBehaviour_UsageScenarioÂ»
 			
 			private void setupCalculators() {
-				«EXPAND InitCalculatorsTM FOR this»
+				Â«EXPAND InitCalculatorsTM FOR thisÂ»
 			}
 		}
-	«ENDFILE»
-«ENDDEFINE» 
+	Â«ENDFILEÂ»
+Â«ENDDEFINEÂ» 
 
-«DEFINE ScenarioRunner(UsageScenario us) FOR ScenarioBehaviour»
+Â«DEFINE ScenarioRunner(UsageScenario us) FOR ScenarioBehaviourÂ»
 	public void scenarioRunner(de.uka.ipd.sdq.simucomframework.SimuComSimProcess thread) {
 		
 		// Store our thread in the context. The thread is used later to suspend execution in case
@@ -135,62 +135,62 @@
 		ctx.setSimProcess(thread);
 		
 		// Here comes the usage scenario code...
-		«EXPAND m2t_transforms::usage::UserActions FOR this.actions_ScenarioBehaviour.typeSelect(Start).get(0)»
+		Â«EXPAND m2t_transforms::usage::UserActions FOR this.actions_ScenarioBehaviour.typeSelect(Start).get(0)Â»
 			
 		
 		// A run through this usage model is complete
 		// The counter for main measurements is incremented by the SimuComSimProcess.internalLifeCycle that called this  
 		// ctx.getModel().increaseMainMeasurementsCount();
 	}
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE WorkloadDriver FOR UsageScenario»
-	new «EXPAND WorkloadClass(this) FOR this.workload_UsageScenario»
-«ENDDEFINE»
+Â«DEFINE WorkloadDriver FOR UsageScenarioÂ»
+	new Â«EXPAND WorkloadClass(this) FOR this.workload_UsageScenarioÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE WorkloadClass(UsageScenario u) FOR Workload»
-	«ERROR "OAW GENERATION ERROR [m2t_transforms/sim/usage.xpt]: AbstractWorkload found! This is imposible!"»
-«ENDDEFINE»
+Â«DEFINE WorkloadClass(UsageScenario u) FOR WorkloadÂ»
+	Â«ERROR "OAW GENERATION ERROR [m2t_transforms/sim/usage.xpt]: AbstractWorkload found! This is imposible!"Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE WorkloadClass(UsageScenario u) FOR ClosedWorkload»
-	«LET u.querySystemCalls().providedRole_EntryLevelSystemCall.providingEntity_ProvidedRole.uniqueSystemList() AS systemList»
+Â«DEFINE WorkloadClass(UsageScenario u) FOR ClosedWorkloadÂ»
+	Â«LET u.querySystemCalls().providedRole_EntryLevelSystemCall.providingEntity_ProvidedRole.uniqueSystemList() AS systemListÂ»
 		de.uka.ipd.sdq.simucomframework.usage.ClosedWorkload(
-			new «u.implementationPackage()+"."+u.javaName()+"Factory"»(getModel(),"«u.entityName.javaString()»",«EXPAND SystemVariableParameter FOREACH systemList SEPARATOR ","»),
-			«this.population»)
-	«ENDLET»
-«ENDDEFINE»
+			new Â«u.implementationPackage()+"."+u.javaName()+"Factory"Â»(getModel(),"Â«u.entityName.javaString()Â»",Â«EXPAND SystemVariableParameter FOREACH systemList SEPARATOR ","Â»),
+			Â«this.populationÂ»)
+	Â«ENDLETÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE SystemVariableParameter FOR System»
-	my«this.javaName()»
-«ENDDEFINE»
+Â«DEFINE SystemVariableParameter FOR SystemÂ»
+	myÂ«this.javaName()Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE SystemVariableDecl FOR System»
-	«this.fqn()» my«this.javaName()»
-«ENDDEFINE»
+Â«DEFINE SystemVariableDecl FOR SystemÂ»
+	Â«this.fqn()Â» myÂ«this.javaName()Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE WorkloadClass(UsageScenario u) FOR OpenWorkload»
-	«LET u.querySystemCalls().providedRole_EntryLevelSystemCall.providingEntity_ProvidedRole.uniqueSystemList() AS systemList»
+Â«DEFINE WorkloadClass(UsageScenario u) FOR OpenWorkloadÂ»
+	Â«LET u.querySystemCalls().providedRole_EntryLevelSystemCall.providingEntity_ProvidedRole.uniqueSystemList() AS systemListÂ»
 		de.uka.ipd.sdq.simucomframework.usage.OpenWorkload(getModel(),
-			new «u.implementationPackage()+"."+u.javaName()+"Factory"»(getModel(),"«u.entityName.javaString()»",«EXPAND SystemVariableParameter FOREACH systemList SEPARATOR ","»),
-			"«this.interArrivalTime_OpenWorkload.specification.specificationString()»")
-	«ENDLET»
-«ENDDEFINE»
+			new Â«u.implementationPackage()+"."+u.javaName()+"Factory"Â»(getModel(),"Â«u.entityName.javaString()Â»",Â«EXPAND SystemVariableParameter FOREACH systemList SEPARATOR ","Â»),
+			"Â«this.interArrivalTime_OpenWorkload.specification.specificationString()Â»")
+	Â«ENDLETÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE UsageScenarioConstructor(Allocation a) FOR UsageScenario»
-	«LET this.querySystemCalls().providedRole_EntryLevelSystemCall.providingEntity_ProvidedRole.uniqueSystemList() AS systemList»
-		public «this.javaName()»(de.uka.ipd.sdq.simucomframework.model.SimuComModel model,«EXPAND SystemVariableDecl FOREACH systemList SEPARATOR ","») {
+Â«DEFINE UsageScenarioConstructor(Allocation a) FOR UsageScenarioÂ»
+	Â«LET this.querySystemCalls().providedRole_EntryLevelSystemCall.providingEntity_ProvidedRole.uniqueSystemList() AS systemListÂ»
+		public Â«this.javaName()Â»(de.uka.ipd.sdq.simucomframework.model.SimuComModel model,Â«EXPAND SystemVariableDecl FOREACH systemList SEPARATOR ","Â») {
 			this.simuComModel = model;
-			ctx = new «a.fqnAllocationContext()»(model);
+			ctx = new Â«a.fqnAllocationContext()Â»(model);
 			ctx.getStack().createAndPushNewStackFrame();
-			«EXPAND m2t_transforms::usage::UsageScenarioConstructorContextInit(a) FOR this»
+			Â«EXPAND m2t_transforms::usage::UsageScenarioConstructorContextInit(a) FOR thisÂ»
 			if (startStopProbes == null) {
 			    startStopProbes = new java.util.HashMap<String,java.util.List<org.palladiosimulator.probeframework.probes.Probe>>();
 				setupCalculators();
 			}
 		}
-	«ENDLET»
-«ENDDEFINE»
+	Â«ENDLETÂ»
+Â«ENDDEFINEÂ»
 
-«REM»Template Method for the calculator initialization«ENDREM»
-«DEFINE InitCalculatorsTM FOR UsageScenario»
-«ENDDEFINE»
+Â«REMÂ»Template Method for the calculator initializationÂ«ENDREMÂ»
+Â«DEFINE InitCalculatorsTM FOR UsageScenarioÂ»
+Â«ENDDEFINEÂ»

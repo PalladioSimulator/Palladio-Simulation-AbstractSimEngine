@@ -1,22 +1,22 @@
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
-«IMPORT system»
-«IMPORT core::composition»
-«IMPORT usagemodel»
-«IMPORT core::entity»
-«IMPORT repository»
-«IMPORT allocation»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«IMPORT systemÂ»
+Â«IMPORT core::compositionÂ»
+Â«IMPORT usagemodelÂ»
+Â«IMPORT core::entityÂ»
+Â«IMPORT repositoryÂ»
+Â«IMPORT allocationÂ»
 
-«DEFINE BuildScripts FOR UsageModel»
-	«EXPAND BuildProperties FOR this»
-	«EXPAND FileList FOR this»
-	«EXPAND ClientXML FOR this»
-	«EXPAND ApplicationXML FOR this»
-«ENDDEFINE» 
+Â«DEFINE BuildScripts FOR UsageModelÂ»
+	Â«EXPAND BuildProperties FOR thisÂ»
+	Â«EXPAND FileList FOR thisÂ»
+	Â«EXPAND ClientXML FOR thisÂ»
+	Â«EXPAND ApplicationXML FOR thisÂ»
+Â«ENDDEFINEÂ» 
 
-«DEFINE BuildProperties FOR UsageModel»
-	«FILE "build.properties" EAR»
-	«PROTECT CSTART '#' CEND '#' ID "build-properties"»
+Â«DEFINE BuildProperties FOR UsageModelÂ»
+	Â«FILE "build.properties" EARÂ»
+	Â«PROTECT CSTART '#' CEND '#' ID "build-properties"Â»
 # Name of the application to build
 projectname=pcm-generated-default-name
 
@@ -37,82 +37,82 @@ sun-appserver-dir=C:/sun/sdk/bin
 
 # Name of the Directory in which to place the final jars/ears
 output=output
-	«ENDPROTECT»
-	«ENDFILE»
-«ENDDEFINE»
+	Â«ENDPROTECTÂ»
+	Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE FileList FOR UsageModel»
-	«FILE "generated-filesets.xml" EAR»
+Â«DEFINE FileList FOR UsageModelÂ»
+	Â«FILE "generated-filesets.xml" EARÂ»
 <project name="generated-filesets">
 
 	<fileset id="client-classes" dir="${dist-dir}">
-		«FOREACH this.usageScenario_UsageModel AS us»
-		<include name="«us.basePackageName().fqnToDirectoryPath()»/**/*.class" />
-		«ENDFOREACH»
+		Â«FOREACH this.usageScenario_UsageModel AS usÂ»
+		<include name="Â«us.basePackageName().fqnToDirectoryPath()Â»/**/*.class" />
+		Â«ENDFOREACHÂ»
 		<include name="*.class" />
 		<include name="META-INF/application-client.xml" />
 	</fileset>
 
 	<fileset id="ejb-classes" dir="${dist-dir}">
-		«EXPAND IncludeClasses FOREACH this.usageScenario_UsageModel.scenarioBehaviour_UsageScenario.actions_ScenarioBehaviour.typeSelect(usagemodel::EntryLevelSystemCall).providedRole_EntryLevelSystemCall.providingEntity_ProvidedRole.typeSelect(system::System).toSet()»
+		Â«EXPAND IncludeClasses FOREACH this.usageScenario_UsageModel.scenarioBehaviour_UsageScenario.actions_ScenarioBehaviour.typeSelect(usagemodel::EntryLevelSystemCall).providedRole_EntryLevelSystemCall.providingEntity_ProvidedRole.typeSelect(system::System).toSet()Â»
 		<include name="META-INF/ejb-jar.xml" />
 	</fileset>
 
 </project>	
-	«ENDFILE»
-«ENDDEFINE»
+	Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE IncludeClasses FOR Repository»
-	<include name="«this.javaName().toLowerCase().fqnToDirectoryPath()»/**/*.class" />
-«ENDDEFINE»
+Â«DEFINE IncludeClasses FOR RepositoryÂ»
+	<include name="Â«this.javaName().toLowerCase().fqnToDirectoryPath()Â»/**/*.class" />
+Â«ENDDEFINEÂ»
 
-«DEFINE IncludeClasses FOR System»
-	<include name="«this.javaName().toLowerCase().fqnToDirectoryPath()»/**/*.class" />
-	«EXPAND IncludeClasses FOREACH this.collectRepositories()»  
-«ENDDEFINE»
+Â«DEFINE IncludeClasses FOR SystemÂ»
+	<include name="Â«this.javaName().toLowerCase().fqnToDirectoryPath()Â»/**/*.class" />
+	Â«EXPAND IncludeClasses FOREACH this.collectRepositories()Â»  
+Â«ENDDEFINEÂ»
 
-«DEFINE ClientXML FOR UsageModel»
-«FILE "META-INF/application-client.xml"»
+Â«DEFINE ClientXML FOR UsageModelÂ»
+Â«FILE "META-INF/application-client.xml"Â»
 <?xml version="1.0" encoding="UTF-8"?>
-«PROTECT CSTART '<!--' CEND '-->' ID "ClientXML" DISABLE»
+Â«PROTECT CSTART '<!--' CEND '-->' ID "ClientXML" DISABLEÂ»
 <application-client version="5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application-client_5.xsd">
     <display-name>@@projectname@@-Client</display-name>
-    «EXPAND EJBClientRef FOREACH this.usageScenario_UsageModel.scenarioBehaviour_UsageScenario.actions_ScenarioBehaviour.typeSelect(usagemodel::EntryLevelSystemCall).providedRole_EntryLevelSystemCall.toSet()»
+    Â«EXPAND EJBClientRef FOREACH this.usageScenario_UsageModel.scenarioBehaviour_UsageScenario.actions_ScenarioBehaviour.typeSelect(usagemodel::EntryLevelSystemCall).providedRole_EntryLevelSystemCall.toSet()Â»
 </application-client>	
-«ENDPROTECT»
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDPROTECTÂ»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE EJBClientRef FOR OperationProvidedRole»
+Â«DEFINE EJBClientRef FOR OperationProvidedRoleÂ»
     <ejb-ref>
-        <ejb-ref-name>ejb/«this.providedInterface__OperationProvidedRole.javaName()»</ejb-ref-name>
+        <ejb-ref-name>ejb/Â«this.providedInterface__OperationProvidedRole.javaName()Â»</ejb-ref-name>
 	    <ejb-ref-type>Session</ejb-ref-type> 
-	    <remote>«this.providedInterface__OperationProvidedRole.fqn()»</remote>
-	    «LET ((System)this.providingEntity_ProvidedRole).connectors__ComposedStructure.typeSelect(ProvidedDelegationConnector).select(pdc|pdc.outerProvidedRole_ProvidedDelegationConnector==this).get(0) AS delegationConnector»
-			«LET delegationConnector.assemblyContext_ProvidedDelegationConnector AS componentContext»
-			    <ejb-link>«componentContext.encapsulatedComponent__AssemblyContext.javaName()»_«this.providedInterface__OperationProvidedRole.javaName()»_«componentContext.id»</ejb-link> 
-			«ENDLET»
-	    «ENDLET»
+	    <remote>Â«this.providedInterface__OperationProvidedRole.fqn()Â»</remote>
+	    Â«LET ((System)this.providingEntity_ProvidedRole).connectors__ComposedStructure.typeSelect(ProvidedDelegationConnector).select(pdc|pdc.outerProvidedRole_ProvidedDelegationConnector==this).get(0) AS delegationConnectorÂ»
+			Â«LET delegationConnector.assemblyContext_ProvidedDelegationConnector AS componentContextÂ»
+			    <ejb-link>Â«componentContext.encapsulatedComponent__AssemblyContext.javaName()Â»_Â«this.providedInterface__OperationProvidedRole.javaName()Â»_Â«componentContext.idÂ»</ejb-link> 
+			Â«ENDLETÂ»
+	    Â«ENDLETÂ»
     </ejb-ref>
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE EJBClientRef FOR InfrastructureProvidedRole»
+Â«DEFINE EJBClientRef FOR InfrastructureProvidedRoleÂ»
     <ejb-ref>
-        <ejb-ref-name>ejb/«this.providedInterface__InfrastructureProvidedRole.javaName()»</ejb-ref-name>
+        <ejb-ref-name>ejb/Â«this.providedInterface__InfrastructureProvidedRole.javaName()Â»</ejb-ref-name>
 	    <ejb-ref-type>Session</ejb-ref-type> 
-	    <remote>«this.providedInterface__InfrastructureProvidedRole.fqn()»</remote>
-	    «LET ((System)this.providingEntity_ProvidedRole).connectors__ComposedStructure.typeSelect(ProvidedDelegationConnector).select(pdc|pdc.outerProvidedRole_ProvidedDelegationConnector==this).get(0) AS delegationConnector»
-			«LET delegationConnector.assemblyContext_ProvidedDelegationConnector AS componentContext»
-			    <ejb-link>«componentContext.encapsulatedComponent__AssemblyContext.javaName()»_«this.providedInterface__InfrastructureProvidedRole.javaName()»_«componentContext.id»</ejb-link> 
-			«ENDLET»
-	    «ENDLET»
+	    <remote>Â«this.providedInterface__InfrastructureProvidedRole.fqn()Â»</remote>
+	    Â«LET ((System)this.providingEntity_ProvidedRole).connectors__ComposedStructure.typeSelect(ProvidedDelegationConnector).select(pdc|pdc.outerProvidedRole_ProvidedDelegationConnector==this).get(0) AS delegationConnectorÂ»
+			Â«LET delegationConnector.assemblyContext_ProvidedDelegationConnector AS componentContextÂ»
+			    <ejb-link>Â«componentContext.encapsulatedComponent__AssemblyContext.javaName()Â»_Â«this.providedInterface__InfrastructureProvidedRole.javaName()Â»_Â«componentContext.idÂ»</ejb-link> 
+			Â«ENDLETÂ»
+	    Â«ENDLETÂ»
     </ejb-ref>
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ApplicationXML FOR UsageModel»
-«FILE "META-INF/application.xml" EAR»
+Â«DEFINE ApplicationXML FOR UsageModelÂ»
+Â«FILE "META-INF/application.xml" EARÂ»
 <?xml version="1.0" encoding="UTF-8"?>
-«PROTECT CSTART '<!--' CEND '-->' ID "ApplicationXML" DISABLE»
+Â«PROTECT CSTART '<!--' CEND '-->' ID "ApplicationXML" DISABLEÂ»
 <application version="5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd">
   <display-name>@@projectname@@</display-name>
   <module>
@@ -122,6 +122,6 @@ output=output
     <ejb>@@projectname@@-ejb.jar</ejb>
   </module>
 </application>
-«ENDPROTECT»
-«ENDFILE»	
-«ENDDEFINE»
+Â«ENDPROTECTÂ»
+Â«ENDFILEÂ»	
+Â«ENDDEFINEÂ»

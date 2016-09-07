@@ -1,68 +1,68 @@
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
-«IMPORT system»
-«IMPORT core::composition»
-«IMPORT usagemodel»
-«IMPORT core::entity»
-«IMPORT repository»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«IMPORT systemÂ»
+Â«IMPORT core::compositionÂ»
+Â«IMPORT usagemodelÂ»
+Â«IMPORT core::entityÂ»
+Â«IMPORT repositoryÂ»
 
-«DEFINE DummyComponent(System s) FOR OperationRequiredRole»
-	«FILE (s.implementationPackage()+"."+this.fqnDummyComponent()).fqnToDirectoryPath()+".java"»
-		package «s.implementationPackage()».«this.fqnDummyComponentPackage()»;
+Â«DEFINE DummyComponent(System s) FOR OperationRequiredRoleÂ»
+	Â«FILE (s.implementationPackage()+"."+this.fqnDummyComponent()).fqnToDirectoryPath()+".java"Â»
+		package Â«s.implementationPackage()Â».Â«this.fqnDummyComponentPackage()Â»;
 				
-		public class «this.dummyComponentName()» 
-		implements «this.requiredInterface__OperationRequiredRole.fqn()» {
+		public class Â«this.dummyComponentName()Â» 
+		implements Â«this.requiredInterface__OperationRequiredRole.fqn()Â» {
 			private static org.apache.log4j.Logger logger = 
-				org.apache.log4j.Logger.getLogger(«this.dummyComponentName()».class.getName());
-			«EXPAND DummyComponentPortHelperMethodTM FOR this.requiredInterface__OperationRequiredRole»
-			«EXPAND DummyMethod(s,this) FOREACH this.requiredInterface__OperationRequiredRole.signatures__OperationInterface»
+				org.apache.log4j.Logger.getLogger(Â«this.dummyComponentName()Â».class.getName());
+			Â«EXPAND DummyComponentPortHelperMethodTM FOR this.requiredInterface__OperationRequiredRoleÂ»
+			Â«EXPAND DummyMethod(s,this) FOREACH this.requiredInterface__OperationRequiredRole.signatures__OperationInterfaceÂ»
 		}
-	«ENDFILE»
-«ENDDEFINE»
+	Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE DummyComponent(System s) FOR InfrastructureRequiredRole»
-	«FILE (s.implementationPackage()+"."+this.fqnDummyComponent()).fqnToDirectoryPath()+".java"»
-		package «s.implementationPackage()».«this.fqnDummyComponentPackage()»;
+Â«DEFINE DummyComponent(System s) FOR InfrastructureRequiredRoleÂ»
+	Â«FILE (s.implementationPackage()+"."+this.fqnDummyComponent()).fqnToDirectoryPath()+".java"Â»
+		package Â«s.implementationPackage()Â».Â«this.fqnDummyComponentPackage()Â»;
 				
-		public class «this.dummyComponentName()» 
-		implements «this.requiredInterface__InfrastructureRequiredRole.fqn()» {
+		public class Â«this.dummyComponentName()Â» 
+		implements Â«this.requiredInterface__InfrastructureRequiredRole.fqn()Â» {
 			private static org.apache.log4j.Logger logger = 
-				org.apache.log4j.Logger.getLogger(«this.dummyComponentName()».class.getName());
-			«EXPAND DummyComponentPortHelperMethodTM FOR this.requiredInterface__InfrastructureRequiredRole»
-			«EXPAND DummyMethod(s,this) FOREACH this.requiredInterface__InfrastructureRequiredRole.infrastructureSignatures__InfrastructureInterface»
+				org.apache.log4j.Logger.getLogger(Â«this.dummyComponentName()Â».class.getName());
+			Â«EXPAND DummyComponentPortHelperMethodTM FOR this.requiredInterface__InfrastructureRequiredRoleÂ»
+			Â«EXPAND DummyMethod(s,this) FOREACH this.requiredInterface__InfrastructureRequiredRole.infrastructureSignatures__InfrastructureInterfaceÂ»
 		}
-	«ENDFILE»
-«ENDDEFINE»
+	Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE DummyComponentPortHelperMethodTM FOR OperationInterface»
-«REM»can stay empty«ENDREM»
-«ENDDEFINE»
+Â«DEFINE DummyComponentPortHelperMethodTM FOR OperationInterfaceÂ»
+Â«REMÂ»can stay emptyÂ«ENDREMÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE DummyComponentPortHelperMethodTM FOR InfrastructureInterface»
-«REM»can stay empty«ENDREM»
-«ENDDEFINE»
+Â«DEFINE DummyComponentPortHelperMethodTM FOR InfrastructureInterfaceÂ»
+Â«REMÂ»can stay emptyÂ«ENDREMÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE DummyMethod(System s, OperationRequiredRole r) FOR OperationSignature»
-	public «EXPAND m2t_transforms::java_core::OperationSignature FOR this» {
-		«EXPAND DummyMethodBodyTM(s,r) FOR this»
+Â«DEFINE DummyMethod(System s, OperationRequiredRole r) FOR OperationSignatureÂ»
+	public Â«EXPAND m2t_transforms::java_core::OperationSignature FOR thisÂ» {
+		Â«EXPAND DummyMethodBodyTM(s,r) FOR thisÂ»
 	}
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE DummyMethod(System s, InfrastructureRequiredRole r) FOR InfrastructureSignature»
-	public «EXPAND m2t_transforms::java_core::InfrastructureSignature FOR this» {
-		«EXPAND DummyMethodBodyTM(s,r) FOR this»
+Â«DEFINE DummyMethod(System s, InfrastructureRequiredRole r) FOR InfrastructureSignatureÂ»
+	public Â«EXPAND m2t_transforms::java_core::InfrastructureSignature FOR thisÂ» {
+		Â«EXPAND DummyMethodBodyTM(s,r) FOR thisÂ»
 	}
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
 //---------------------------------------------
 // Template method to generate code for the body
 // of dummy components attached to the unbound
 // system required roles
 //---------------------------------------------
-«DEFINE DummyMethodBodyTM(System s,OperationRequiredRole r) FOR OperationSignature»
+Â«DEFINE DummyMethodBodyTM(System s,OperationRequiredRole r) FOR OperationSignatureÂ»
 	// No implementation provided yet
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE DummyMethodBodyTM(System s,InfrastructureRequiredRole r) FOR InfrastructureSignature»
+Â«DEFINE DummyMethodBodyTM(System s,InfrastructureRequiredRole r) FOR InfrastructureSignatureÂ»
 	// No implementation provided yet
-«ENDDEFINE»
+Â«ENDDEFINEÂ»

@@ -1,233 +1,233 @@
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
-«IMPORT repository»
-«IMPORT seff»
-«IMPORT system»
-«IMPORT core::entity»
-«IMPORT core::composition»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«IMPORT repositoryÂ»
+Â«IMPORT seffÂ»
+Â«IMPORT systemÂ»
+Â«IMPORT core::entityÂ»
+Â«IMPORT core::compositionÂ»
 
 // Generate a class for each provided role implementing the interface of that role
 // This so called port delegates to implementations in the main component class
 // Additionally, generate a local member variable for my provided roles/ports and a
 // respective getter
-«DEFINE ProvidedPorts FOR InterfaceProvidingEntity»
-	«EXPAND PortImplFile FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(OperationProvidedRole)»
-	«EXPAND PortImplFile FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(InfrastructureProvidedRole)»
-   	«EXPAND PortMemberVars FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(OperationProvidedRole)»
-   	«EXPAND PortMemberVars FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(InfrastructureProvidedRole)»
-   	«EXPAND PortGetter FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(OperationProvidedRole)»
-   	«EXPAND PortGetter FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(InfrastructureProvidedRole)»
-«ENDDEFINE»
+Â«DEFINE ProvidedPorts FOR InterfaceProvidingEntityÂ»
+	Â«EXPAND PortImplFile FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(OperationProvidedRole)Â»
+	Â«EXPAND PortImplFile FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(InfrastructureProvidedRole)Â»
+   	Â«EXPAND PortMemberVars FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(OperationProvidedRole)Â»
+   	Â«EXPAND PortMemberVars FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(InfrastructureProvidedRole)Â»
+   	Â«EXPAND PortGetter FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(OperationProvidedRole)Â»
+   	Â«EXPAND PortGetter FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(InfrastructureProvidedRole)Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ProvidedPorts FOR ComposedProvidingRequiringEntity»
-	«EXPAND ComposedStructurePortImplFile(this) FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(OperationProvidedRole)»
-	«EXPAND ComposedStructurePortImplFile(this) FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(InfrastructureProvidedRole)»
-	«EXPAND ContextPortGetter(this) FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(OperationProvidedRole)»
-	«EXPAND ContextPortGetter(this) FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(InfrastructureProvidedRole)»
-   	«EXPAND PortGetter FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(OperationProvidedRole)»
-   	«EXPAND PortGetter FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(InfrastructureProvidedRole)»
-«ENDDEFINE»
+Â«DEFINE ProvidedPorts FOR ComposedProvidingRequiringEntityÂ»
+	Â«EXPAND ComposedStructurePortImplFile(this) FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(OperationProvidedRole)Â»
+	Â«EXPAND ComposedStructurePortImplFile(this) FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(InfrastructureProvidedRole)Â»
+	Â«EXPAND ContextPortGetter(this) FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(OperationProvidedRole)Â»
+	Â«EXPAND ContextPortGetter(this) FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(InfrastructureProvidedRole)Â»
+   	Â«EXPAND PortGetter FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(OperationProvidedRole)Â»
+   	Â«EXPAND PortGetter FOREACH this.providedRoles_InterfaceProvidingEntity.typeSelect(InfrastructureProvidedRole)Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE PortImplFile FOR OperationProvidedRole»
-   «FILE this.fqnPortPackage().fqnToDirectoryPath()+"/"+this.portClassName()+".java"»
-	  package «this.fqnPortPackage()»;
-      «EXPAND PortImpl FOR this»
-   «ENDFILE» 
-«ENDDEFINE»
+Â«DEFINE PortImplFile FOR OperationProvidedRoleÂ»
+   Â«FILE this.fqnPortPackage().fqnToDirectoryPath()+"/"+this.portClassName()+".java"Â»
+	  package Â«this.fqnPortPackage()Â»;
+      Â«EXPAND PortImpl FOR thisÂ»
+   Â«ENDFILEÂ» 
+Â«ENDDEFINEÂ»
 
-«DEFINE PortImplFile FOR InfrastructureProvidedRole»
-   «FILE this.fqnPortPackage().fqnToDirectoryPath()+"/"+this.portClassName()+".java"»
-	  package «this.fqnPortPackage()»;
-      «EXPAND PortImpl FOR this»
-   «ENDFILE» 
-«ENDDEFINE»
+Â«DEFINE PortImplFile FOR InfrastructureProvidedRoleÂ»
+   Â«FILE this.fqnPortPackage().fqnToDirectoryPath()+"/"+this.portClassName()+".java"Â»
+	  package Â«this.fqnPortPackage()Â»;
+      Â«EXPAND PortImpl FOR thisÂ»
+   Â«ENDFILEÂ» 
+Â«ENDDEFINEÂ»
 
-«DEFINE ComposedStructurePortImplFile(ComposedProvidingRequiringEntity cs) FOR OperationProvidedRole»
-   «FILE this.fqnPortPackage().fqnToDirectoryPath()+"/"+this.portClassName()+".java"»
-	  package «this.fqnPortPackage()»;
-      «EXPAND ComposedStructurePortImpl(cs) FOR this»
-   «ENDFILE» 
-«ENDDEFINE»
+Â«DEFINE ComposedStructurePortImplFile(ComposedProvidingRequiringEntity cs) FOR OperationProvidedRoleÂ»
+   Â«FILE this.fqnPortPackage().fqnToDirectoryPath()+"/"+this.portClassName()+".java"Â»
+	  package Â«this.fqnPortPackage()Â»;
+      Â«EXPAND ComposedStructurePortImpl(cs) FOR thisÂ»
+   Â«ENDFILEÂ» 
+Â«ENDDEFINEÂ»
 
-«DEFINE ComposedStructurePortImplFile(ComposedProvidingRequiringEntity cs) FOR InfrastructureProvidedRole»
-   «FILE this.fqnPortPackage().fqnToDirectoryPath()+"/"+this.portClassName()+".java"»
-	  package «this.fqnPortPackage()»;
-      «EXPAND ComposedStructurePortImpl(cs) FOR this»
-   «ENDFILE» 
-«ENDDEFINE»
+Â«DEFINE ComposedStructurePortImplFile(ComposedProvidingRequiringEntity cs) FOR InfrastructureProvidedRoleÂ»
+   Â«FILE this.fqnPortPackage().fqnToDirectoryPath()+"/"+this.portClassName()+".java"Â»
+	  package Â«this.fqnPortPackage()Â»;
+      Â«EXPAND ComposedStructurePortImpl(cs) FOR thisÂ»
+   Â«ENDFILEÂ» 
+Â«ENDDEFINEÂ»
 
-«DEFINE PortImpl FOR OperationProvidedRole»
-	  // Port class for «this.portClassName()» 
-	  public class «this.portClassName()» implements «this.providedInterface__OperationProvidedRole.fqn()», java.io.Serializable
+Â«DEFINE PortImpl FOR OperationProvidedRoleÂ»
+	  // Port class for Â«this.portClassName()Â» 
+	  public class Â«this.portClassName()Â» implements Â«this.providedInterface__OperationProvidedRole.fqn()Â», java.io.Serializable
 	  {
-	     protected «this.providingEntity_ProvidedRole.fqnInterface()» myComponent = null;
+	     protected Â«this.providingEntity_ProvidedRole.fqnInterface()Â» myComponent = null;
 	     
-	     public «this.portClassName()»(){}
+	     public Â«this.portClassName()Â»(){}
 
-	     public «this.portClassName()»(«this.providingEntity_ProvidedRole.fqnInterface()» myComponent){
+	     public Â«this.portClassName()Â»(Â«this.providingEntity_ProvidedRole.fqnInterface()Â» myComponent){
 	        this.myComponent = myComponent;
 	     }
 	     
-	     «EXPAND ComponentPortHelperMethodsTM FOR this»
-	     «EXPAND PortDelegator FOREACH this.providedInterface__OperationProvidedRole.signatures__OperationInterface»
+	     Â«EXPAND ComponentPortHelperMethodsTM FOR thisÂ»
+	     Â«EXPAND PortDelegator FOREACH this.providedInterface__OperationProvidedRole.signatures__OperationInterfaceÂ»
 	  }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE PortImpl FOR InfrastructureProvidedRole»
-	  // Port class for «this.portClassName()»
-	  public class «this.portClassName()» implements «this.providedInterface__InfrastructureProvidedRole.fqn()»
+Â«DEFINE PortImpl FOR InfrastructureProvidedRoleÂ»
+	  // Port class for Â«this.portClassName()Â»
+	  public class Â«this.portClassName()Â» implements Â«this.providedInterface__InfrastructureProvidedRole.fqn()Â»
 	  {
-	     protected «this.providingEntity_ProvidedRole.fqnInterface()» myComponent = null;
+	     protected Â«this.providingEntity_ProvidedRole.fqnInterface()Â» myComponent = null;
 	     
-	     public «this.portClassName()»(){}
+	     public Â«this.portClassName()Â»(){}
 
-	     public «this.portClassName()»(«this.providingEntity_ProvidedRole.fqnInterface()» myComponent){
+	     public Â«this.portClassName()Â»(Â«this.providingEntity_ProvidedRole.fqnInterface()Â» myComponent){
 	        this.myComponent = myComponent;
 	     }
 	     
-	     «EXPAND ComponentPortHelperMethodsTM FOR this»
-	     «EXPAND PortDelegator FOREACH this.providedInterface__InfrastructureProvidedRole.infrastructureSignatures__InfrastructureInterface»
+	     Â«EXPAND ComponentPortHelperMethodsTM FOR thisÂ»
+	     Â«EXPAND PortDelegator FOREACH this.providedInterface__InfrastructureProvidedRole.infrastructureSignatures__InfrastructureInterfaceÂ»
 	  }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComponentPortHelperMethodsTM FOR OperationProvidedRole»
-«REM»Template method to add helper methods to a component port. «ENDREM»
-«ENDDEFINE»
+Â«DEFINE ComponentPortHelperMethodsTM FOR OperationProvidedRoleÂ»
+Â«REMÂ»Template method to add helper methods to a component port. Â«ENDREMÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComponentPortHelperMethodsTM FOR InfrastructureProvidedRole»
-«REM»Template method to add helper methods to a component port. «ENDREM»
-«ENDDEFINE»
+Â«DEFINE ComponentPortHelperMethodsTM FOR InfrastructureProvidedRoleÂ»
+Â«REMÂ»Template method to add helper methods to a component port. Â«ENDREMÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComposedStructurePortImpl(ComposedProvidingRequiringEntity cs) FOR OperationProvidedRole»
-	  // Port class for «this.portClassName()»
-	  public class «this.portClassName()» implements «this.providedInterface__OperationProvidedRole.fqn()», java.io.Serializable
+Â«DEFINE ComposedStructurePortImpl(ComposedProvidingRequiringEntity cs) FOR OperationProvidedRoleÂ»
+	  // Port class for Â«this.portClassName()Â»
+	  public class Â«this.portClassName()Â» implements Â«this.providedInterface__OperationProvidedRole.fqn()Â», java.io.Serializable
 	  {
 		private static org.apache.log4j.Logger logger = 
-			org.apache.log4j.Logger.getLogger(«this.portClassName()».class.getName());
+			org.apache.log4j.Logger.getLogger(Â«this.portClassName()Â».class.getName());
 	  
-	     protected «this.providedInterface__OperationProvidedRole.fqn()» myInnerPort = null;
+	     protected Â«this.providedInterface__OperationProvidedRole.fqn()Â» myInnerPort = null;
 	     
-	     public «this.portClassName()»(«this.providedInterface__OperationProvidedRole.fqn()» myInnerPort){
+	     public Â«this.portClassName()Â»(Â«this.providedInterface__OperationProvidedRole.fqn()Â» myInnerPort){
 	        this.myInnerPort = myInnerPort;
 	     }
 	 	 
-	 	 «EXPAND ComposedComponentPortHelperMethodsTM FOR this.providedInterface__OperationProvidedRole»    
+	 	 Â«EXPAND ComposedComponentPortHelperMethodsTM FOR this.providedInterface__OperationProvidedRoleÂ»    
 	     
-	     «EXPAND ComposedStructurePortDelegator(cs) FOREACH this.providedInterface__OperationProvidedRole.signatures__OperationInterface»
+	     Â«EXPAND ComposedStructurePortDelegator(cs) FOREACH this.providedInterface__OperationProvidedRole.signatures__OperationInterfaceÂ»
 	  }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComposedStructurePortImpl(ComposedProvidingRequiringEntity cs) FOR InfrastructureProvidedRole»
-	  // Port class for «this.portClassName()»
-	  public class «this.portClassName()» implements «this.providedInterface__InfrastructureProvidedRole.fqn()»
+Â«DEFINE ComposedStructurePortImpl(ComposedProvidingRequiringEntity cs) FOR InfrastructureProvidedRoleÂ»
+	  // Port class for Â«this.portClassName()Â»
+	  public class Â«this.portClassName()Â» implements Â«this.providedInterface__InfrastructureProvidedRole.fqn()Â»
 	  {
 		private static org.apache.log4j.Logger logger = 
-			org.apache.log4j.Logger.getLogger(«this.portClassName()».class.getName());
+			org.apache.log4j.Logger.getLogger(Â«this.portClassName()Â».class.getName());
 	  
-	     protected «this.providedInterface__InfrastructureProvidedRole.fqn()» myInnerPort = null;
+	     protected Â«this.providedInterface__InfrastructureProvidedRole.fqn()Â» myInnerPort = null;
 	     
-	     public «this.portClassName()»(«this.providedInterface__InfrastructureProvidedRole.fqn()» myInnerPort){
+	     public Â«this.portClassName()Â»(Â«this.providedInterface__InfrastructureProvidedRole.fqn()Â» myInnerPort){
 	        this.myInnerPort = myInnerPort;
 	     }
 	 	 
-	 	 «EXPAND ComposedComponentPortHelperMethodsTM FOR this.providedInterface__InfrastructureProvidedRole»    
+	 	 Â«EXPAND ComposedComponentPortHelperMethodsTM FOR this.providedInterface__InfrastructureProvidedRoleÂ»    
 	     
-	     «EXPAND ComposedStructurePortDelegator(cs) FOREACH this.providedInterface__InfrastructureProvidedRole.infrastructureSignatures__InfrastructureInterface»
+	     Â«EXPAND ComposedStructurePortDelegator(cs) FOREACH this.providedInterface__InfrastructureProvidedRole.infrastructureSignatures__InfrastructureInterfaceÂ»
 	  }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComposedComponentPortHelperMethodsTM FOR OperationInterface»
-«REM»Can stay empty«ENDREM»
-«ENDDEFINE»
+Â«DEFINE ComposedComponentPortHelperMethodsTM FOR OperationInterfaceÂ»
+Â«REMÂ»Can stay emptyÂ«ENDREMÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComposedComponentPortHelperMethodsTM FOR InfrastructureInterface»
-«REM»Can stay empty«ENDREM»
-«ENDDEFINE»
+Â«DEFINE ComposedComponentPortHelperMethodsTM FOR InfrastructureInterfaceÂ»
+Â«REMÂ»Can stay emptyÂ«ENDREMÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE PortDelegator FOR OperationSignature»
-   public «EXPAND m2t_transforms::java_core::OperationSignature FOR this» {
-   	  «EXPAND PortDelegationDelegatingCallTM FOR this»
+Â«DEFINE PortDelegator FOR OperationSignatureÂ»
+   public Â«EXPAND m2t_transforms::java_core::OperationSignature FOR thisÂ» {
+   	  Â«EXPAND PortDelegationDelegatingCallTM FOR thisÂ»
    }   
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE PortDelegator FOR InfrastructureSignature»
-   public «EXPAND m2t_transforms::java_core::InfrastructureSignature FOR this» {
-   	  «EXPAND PortDelegationDelegatingCallTM FOR this»
+Â«DEFINE PortDelegator FOR InfrastructureSignatureÂ»
+   public Â«EXPAND m2t_transforms::java_core::InfrastructureSignature FOR thisÂ» {
+   	  Â«EXPAND PortDelegationDelegatingCallTM FOR thisÂ»
    }   
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComposedStructurePortDelegator(ComposedProvidingRequiringEntity cs) FOR OperationSignature»
-   public «EXPAND m2t_transforms::java_core::OperationSignature FOR this» {
-   	  «EXPAND ComposedStructurePortDelegationDelegatingCallTM(cs) FOR this»
+Â«DEFINE ComposedStructurePortDelegator(ComposedProvidingRequiringEntity cs) FOR OperationSignatureÂ»
+   public Â«EXPAND m2t_transforms::java_core::OperationSignature FOR thisÂ» {
+   	  Â«EXPAND ComposedStructurePortDelegationDelegatingCallTM(cs) FOR thisÂ»
    }   
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComposedStructurePortDelegator(ComposedProvidingRequiringEntity cs) FOR InfrastructureSignature»
-   public «EXPAND m2t_transforms::java_core::InfrastructureSignature FOR this» {
-   	  «EXPAND ComposedStructurePortDelegationDelegatingCallTM(cs) FOR this»
+Â«DEFINE ComposedStructurePortDelegator(ComposedProvidingRequiringEntity cs) FOR InfrastructureSignatureÂ»
+   public Â«EXPAND m2t_transforms::java_core::InfrastructureSignature FOR thisÂ» {
+   	  Â«EXPAND ComposedStructurePortDelegationDelegatingCallTM(cs) FOR thisÂ»
    }   
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE PortDelegationDelegatingCallTM FOR OperationSignature»
-	«ERROR "OAW GENERATION ERROR [m2t_transforms/provided_ports.xpt]: PortDelegationDelegatingCallTM must be overridden"»
-«ENDDEFINE»
+Â«DEFINE PortDelegationDelegatingCallTM FOR OperationSignatureÂ»
+	Â«ERROR "OAW GENERATION ERROR [m2t_transforms/provided_ports.xpt]: PortDelegationDelegatingCallTM must be overridden"Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE PortDelegationDelegatingCallTM FOR InfrastructureSignature»
-	«ERROR "OAW GENERATION ERROR [m2t_transforms/provided_ports.xpt]: PortDelegationDelegatingCallTM must be overridden"»
-«ENDDEFINE»
+Â«DEFINE PortDelegationDelegatingCallTM FOR InfrastructureSignatureÂ»
+	Â«ERROR "OAW GENERATION ERROR [m2t_transforms/provided_ports.xpt]: PortDelegationDelegatingCallTM must be overridden"Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComposedStructurePortDelegationDelegatingCallTM(ComposedProvidingRequiringEntity cs) FOR OperationSignature»
-	«ERROR "OAW GENERATION ERROR [m2t_transforms/provided_ports.xpt]: ComposedStructurePortDelegationDelegatingCallTM must be overridden"»
-«ENDDEFINE»
+Â«DEFINE ComposedStructurePortDelegationDelegatingCallTM(ComposedProvidingRequiringEntity cs) FOR OperationSignatureÂ»
+	Â«ERROR "OAW GENERATION ERROR [m2t_transforms/provided_ports.xpt]: ComposedStructurePortDelegationDelegatingCallTM must be overridden"Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComposedStructurePortDelegationDelegatingCallTM(ComposedProvidingRequiringEntity cs) FOR InfrastructureSignature»
-	«ERROR "OAW GENERATION ERROR [m2t_transforms/provided_ports.xpt]: ComposedStructurePortDelegationDelegatingCallTM must be overridden"»
-«ENDDEFINE»
+Â«DEFINE ComposedStructurePortDelegationDelegatingCallTM(ComposedProvidingRequiringEntity cs) FOR InfrastructureSignatureÂ»
+	Â«ERROR "OAW GENERATION ERROR [m2t_transforms/provided_ports.xpt]: ComposedStructurePortDelegationDelegatingCallTM must be overridden"Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE PortMemberVars FOR OperationProvidedRole»
-    protected «this.fqnPort()» «this.portMemberVar()» = new «this.fqnPort()»(this);
-«ENDDEFINE»
+Â«DEFINE PortMemberVars FOR OperationProvidedRoleÂ»
+    protected Â«this.fqnPort()Â» Â«this.portMemberVar()Â» = new Â«this.fqnPort()Â»(this);
+Â«ENDDEFINEÂ»
 
-«DEFINE PortMemberVars FOR InfrastructureProvidedRole»
-    protected «this.fqnPort()» «this.portMemberVar()» = new «this.fqnPort()»(this);
-«ENDDEFINE»
+Â«DEFINE PortMemberVars FOR InfrastructureProvidedRoleÂ»
+    protected Â«this.fqnPort()Â» Â«this.portMemberVar()Â» = new Â«this.fqnPort()Â»(this);
+Â«ENDDEFINEÂ»
 
-«DEFINE ContextPortGetter(ComposedStructure cs) FOR OperationProvidedRole»
-    protected «this.fqnPort()» «this.portMemberVar()» = null;
-«ENDDEFINE»
+Â«DEFINE ContextPortGetter(ComposedStructure cs) FOR OperationProvidedRoleÂ»
+    protected Â«this.fqnPort()Â» Â«this.portMemberVar()Â» = null;
+Â«ENDDEFINEÂ»
 
-«DEFINE ContextPortGetter(ComposedStructure cs) FOR InfrastructureProvidedRole»
-    protected «this.fqnPort()» «this.portMemberVar()» = null;
-«ENDDEFINE»
+Â«DEFINE ContextPortGetter(ComposedStructure cs) FOR InfrastructureProvidedRoleÂ»
+    protected Â«this.fqnPort()Â» Â«this.portMemberVar()Â» = null;
+Â«ENDDEFINEÂ»
 
-«DEFINE PortGetter FOR OperationProvidedRole»
-   public «this.providedInterface__OperationProvidedRole.fqn()» «this.portGetter()» () {
-      return «this.portMemberVar()»;
+Â«DEFINE PortGetter FOR OperationProvidedRoleÂ»
+   public Â«this.providedInterface__OperationProvidedRole.fqn()Â» Â«this.portGetter()Â» () {
+      return Â«this.portMemberVar()Â»;
    }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE PortGetter FOR InfrastructureProvidedRole»
-   public «this.providedInterface__InfrastructureProvidedRole.fqn()» «this.portGetter()» () {
-      return «this.portMemberVar()»;
+Â«DEFINE PortGetter FOR InfrastructureProvidedRoleÂ»
+   public Â«this.providedInterface__InfrastructureProvidedRole.fqn()Â» Â«this.portGetter()Â» () {
+      return Â«this.portMemberVar()Â»;
    }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE PortGetterDefinition FOR OperationProvidedRole»
-«REM»Definition of port getter which is generated by provided_ports.xpt#PortGetter. Need this in interface to access component on EJB Server.«ENDREM»
-public «this.providedInterface__OperationProvidedRole.fqn()» «this.portGetter()» ();
-«ENDDEFINE»
+Â«DEFINE PortGetterDefinition FOR OperationProvidedRoleÂ»
+Â«REMÂ»Definition of port getter which is generated by provided_ports.xpt#PortGetter. Need this in interface to access component on EJB Server.Â«ENDREMÂ»
+public Â«this.providedInterface__OperationProvidedRole.fqn()Â» Â«this.portGetter()Â» ();
+Â«ENDDEFINEÂ»
 
-«DEFINE PortGetterDefinition FOR InfrastructureProvidedRole»
-«REM»Definition of port getter which is generated by provided_ports.xpt#PortGetter. Need this in interface to access component on EJB Server.«ENDREM»
-public «this.providedInterface__InfrastructureProvidedRole.fqn()» «this.portGetter()» ();
-«ENDDEFINE»
+Â«DEFINE PortGetterDefinition FOR InfrastructureProvidedRoleÂ»
+Â«REMÂ»Definition of port getter which is generated by provided_ports.xpt#PortGetter. Need this in interface to access component on EJB Server.Â«ENDREMÂ»
+public Â«this.providedInterface__InfrastructureProvidedRole.fqn()Â» Â«this.portGetter()Â» ();
+Â«ENDDEFINEÂ»
 
 // Generate method signatures for basic component port getters
-«DEFINE ComponentPortGetter FOR OperationProvidedRole»
-   public «this.providedInterface__OperationProvidedRole.fqn()» «this.portGetter()» ();
-«ENDDEFINE»
+Â«DEFINE ComponentPortGetter FOR OperationProvidedRoleÂ»
+   public Â«this.providedInterface__OperationProvidedRole.fqn()Â» Â«this.portGetter()Â» ();
+Â«ENDDEFINEÂ»
 
 // Generate method signatures for basic component port getters
-«DEFINE ComponentPortGetter FOR InfrastructureProvidedRole»
-   public «this.providedInterface__InfrastructureProvidedRole.fqn()» «this.portGetter()» ();
-«ENDDEFINE»
+Â«DEFINE ComponentPortGetter FOR InfrastructureProvidedRoleÂ»
+   public Â«this.providedInterface__InfrastructureProvidedRole.fqn()Â» Â«this.portGetter()Â» ();
+Â«ENDDEFINEÂ»

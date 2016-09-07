@@ -1,33 +1,33 @@
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
-«EXTENSION m2t_transforms::sim::measuringPoint»
-«IMPORT repository»
-«IMPORT seff::seff_performance»
-«IMPORT resourcetype»
-«IMPORT completions»
-«IMPORT resourceenvironment»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«EXTENSION m2t_transforms::sim::measuringPointÂ»
+Â«IMPORT repositoryÂ»
+Â«IMPORT seff::seff_performanceÂ»
+Â«IMPORT resourcetypeÂ»
+Â«IMPORT completionsÂ»
+Â«IMPORT resourceenvironmentÂ»
 
 // ----------------------------
 // Templates to generate simulated resources and resource environments
 // ----------------------------
 
 // Old: Load the resource demand on a simulated resource
-«DEFINE ResourceDemand FOR ParametricResourceDemand»
+Â«DEFINE ResourceDemand FOR ParametricResourceDemandÂ»
     {
-      double demand = de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter.toDouble(ctx.evaluate("«this.specification_ParametericResourceDemand.specification.specificationString()»",Double.class));
-      ctx.findResource(this.assemblyContext.getId()).loadActiveResource(ctx.getThread(),"«this.requiredResource_ParametricResourceDemand.id»",demand);
+      double demand = de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter.toDouble(ctx.evaluate("Â«this.specification_ParametericResourceDemand.specification.specificationString()Â»",Double.class));
+      ctx.findResource(this.assemblyContext.getId()).loadActiveResource(ctx.getThread(),"Â«this.requiredResource_ParametricResourceDemand.idÂ»",demand);
     }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ResourceDemand FOR NetworkDemandParametricResourceDemand»
+Â«DEFINE ResourceDemand FOR NetworkDemandParametricResourceDemandÂ»
     {
-      double demand = de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter.toDouble(ctx.evaluate("«this.specification_ParametericResourceDemand.specification.specificationString()»",Double.class));
-      ctx.findResource(this.assemblyContext.getId()).loadActiveResource(ctx.getThread(),"«this.requiredCommunicationLinkResource_ParametricResourceDemand.id»",demand);
+      double demand = de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter.toDouble(ctx.evaluate("Â«this.specification_ParametericResourceDemand.specification.specificationString()Â»",Double.class));
+      ctx.findResource(this.assemblyContext.getId()).loadActiveResource(ctx.getThread(),"Â«this.requiredCommunicationLinkResource_ParametricResourceDemand.idÂ»",demand);
     }
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
 // New: Load resource demand using ResourceInterfaces and additional Parameters
-«DEFINE ResourceDemand FOR ResourceCall»
+Â«DEFINE ResourceDemand FOR ResourceCallÂ»
    {
             
       java.util.HashMap<String, java.io.Serializable> parameterMap = new java.util.HashMap<>();
@@ -36,14 +36,14 @@
       java.io.Serializable solvedSpecification;
       
    	 			
-   	 	«FOREACH this.signature__ResourceCall.parameter__ResourceSignature AS parm »
-   	  	«FOREACH this.inputVariableUsages__CallAction AS spec »		
-   	  		if("«spec.namedReference__VariableUsage.referenceName.javaString()»".equals("«parm.parameterName.javaString()»")){       
+   	 	Â«FOREACH this.signature__ResourceCall.parameter__ResourceSignature AS parm Â»
+   	  	Â«FOREACH this.inputVariableUsages__CallAction AS spec Â»		
+   	  		if("Â«spec.namedReference__VariableUsage.referenceName.javaString()Â»".equals("Â«parm.parameterName.javaString()Â»")){       
    	  		
    	  			//remove Brackets [] from specification String	
-   	  			specificationString = (String)"«spec.variableCharacterisation_VariableUsage.specification_VariableCharacterisation.specification.specificationString()»".subSequence(1, "«spec.variableCharacterisation_VariableUsage.specification_VariableCharacterisation.specification.specificationString()»".length() - 1);
+   	  			specificationString = (String)"Â«spec.variableCharacterisation_VariableUsage.specification_VariableCharacterisation.specification.specificationString()Â»".subSequence(1, "Â«spec.variableCharacterisation_VariableUsage.specification_VariableCharacterisation.specification.specificationString()Â»".length() - 1);
    	  	
-   	  			typeString = "«parm.dataType__Parameter.toString()»";
+   	  			typeString = "Â«parm.dataType__Parameter.toString()Â»";
        			
        			solvedSpecification = null;     		
        			
@@ -65,29 +65,29 @@
        				throw new RuntimeException("Just Primitive Data Types are supported.");
        			}
    	  		  	  		                 
-               parameterMap.put("«spec.namedReference__VariableUsage.referenceName.javaString()»", solvedSpecification);            
+               parameterMap.put("Â«spec.namedReference__VariableUsage.referenceName.javaString()Â»", solvedSpecification);            
             }  	  	
             	
-    	«ENDFOREACH»		     
-   	 «ENDFOREACH»
+    	Â«ENDFOREACHÂ»		     
+   	 Â«ENDFOREACHÂ»
    	 	
-      double demand = de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter.toDouble(ctx.evaluate("«this.numberOfCalls__ResourceCall.specification.specificationString()»",Double.class));
+      double demand = de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter.toDouble(ctx.evaluate("Â«this.numberOfCalls__ResourceCall.specification.specificationString()Â»",Double.class));
       if(parameterMap.size()>=1){
-      	ctx.findResource(this.assemblyContext.getId()).loadActiveResource(ctx.getThread(), "«this.resourceRequiredRole__ResourceCall.requiredResourceInterface__ResourceRequiredRole.id»", «this.signature__ResourceCall.resourceServiceId», parameterMap, demand);     	
+      	ctx.findResource(this.assemblyContext.getId()).loadActiveResource(ctx.getThread(), "Â«this.resourceRequiredRole__ResourceCall.requiredResourceInterface__ResourceRequiredRole.idÂ»", Â«this.signature__ResourceCall.resourceServiceIdÂ», parameterMap, demand);     	
       }else{
-      	ctx.findResource(this.assemblyContext.getId()).loadActiveResource(ctx.getThread(), "«this.resourceRequiredRole__ResourceCall.requiredResourceInterface__ResourceRequiredRole.id»", «this.signature__ResourceCall.resourceServiceId», demand);     	
+      	ctx.findResource(this.assemblyContext.getId()).loadActiveResource(ctx.getThread(), "Â«this.resourceRequiredRole__ResourceCall.requiredResourceInterface__ResourceRequiredRole.idÂ»", Â«this.signature__ResourceCall.resourceServiceIdÂ», demand);     	
       }
      
    } 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
 // ----------------------------
 // Templates for a simulated resource environment
 // Generate a class which contains the model information
 // and sets up simulated resources accordingly
 // ----------------------------
-«DEFINE ResourceEnvironmentRoot FOR resourceenvironment::ResourceEnvironment»
-	«FILE "main/ResourceEnvironment.java"»
+Â«DEFINE ResourceEnvironmentRoot FOR resourceenvironment::ResourceEnvironmentÂ»
+	Â«FILE "main/ResourceEnvironment.java"Â»
 		package main;
 		
 		public class ResourceEnvironment implements de.uka.ipd.sdq.simucomframework.resources.IResourceContainerFactory {
@@ -98,47 +98,47 @@
 				return instance;
 			}
 		
-		   «EXPAND ResourceContainerInit FOR this»
+		   Â«EXPAND ResourceContainerInit FOR thisÂ»
 		}
-	«ENDFILE»
-«ENDDEFINE»
+	Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ResourceContainerInit FOR ResourceEnvironment»
+Â«DEFINE ResourceContainerInit FOR ResourceEnvironmentÂ»
 	public String[] getResourceContainerIDList() {
 		java.util.List<String> resourceContainerIds = new java.util.ArrayList<String>();
-		«EXPAND ResourceContainerAdd FOREACH this.resourceContainer_ResourceEnvironment»
+		Â«EXPAND ResourceContainerAdd FOREACH this.resourceContainer_ResourceEnvironmentÂ»
 		return resourceContainerIds.toArray(new String[]{});
 	}
 
 	public String[] getLinkingResourceContainerIDList() {
 		return new String[] { 
-			«FOREACH this.linkingResources__ResourceEnvironment AS rc SEPARATOR ","»
-				"«rc.id»"
-			«ENDFOREACH»
+			Â«FOREACH this.linkingResources__ResourceEnvironment AS rc SEPARATOR ","Â»
+				"Â«rc.idÂ»"
+			Â«ENDFOREACHÂ»
 		};
 	}
 	
 	public java.util.ArrayList<String> getFromResourceContainerID(String linkingResourceContainerID) {
 		java.util.ArrayList<String> resultList = new java.util.ArrayList<String>();
-		«FOREACH this.linkingResources__ResourceEnvironment AS rc»
-			if(linkingResourceContainerID.equals("«rc.id»")) {
-			«FOREACH rc.connectedResourceContainers_LinkingResource.id AS id»
-				resultList.add("«id»");
-			«ENDFOREACH»
+		Â«FOREACH this.linkingResources__ResourceEnvironment AS rcÂ»
+			if(linkingResourceContainerID.equals("Â«rc.idÂ»")) {
+			Â«FOREACH rc.connectedResourceContainers_LinkingResource.id AS idÂ»
+				resultList.add("Â«idÂ»");
+			Â«ENDFOREACHÂ»
 			}
-		«ENDFOREACH»
+		Â«ENDFOREACHÂ»
 		return resultList;
 	}
 	
 	public java.util.ArrayList<String> getToResourceContainerID(String linkingResourceContainerID) {
 		java.util.ArrayList<String> resultList = new java.util.ArrayList<String>();
-		«FOREACH this.linkingResources__ResourceEnvironment AS rc»
-			if (linkingResourceContainerID.equals("«rc.id»")) {
-			«FOREACH rc.connectedResourceContainers_LinkingResource.id AS id»
-				resultList.add("«id»");
-			«ENDFOREACH»
+		Â«FOREACH this.linkingResources__ResourceEnvironment AS rcÂ»
+			if (linkingResourceContainerID.equals("Â«rc.idÂ»")) {
+			Â«FOREACH rc.connectedResourceContainers_LinkingResource.id AS idÂ»
+				resultList.add("Â«idÂ»");
+			Â«ENDFOREACHÂ»
 			}
-		«ENDFOREACH»
+		Â«ENDFOREACHÂ»
 		return resultList;
 	}
 	
@@ -152,107 +152,107 @@
 	}
 	
 	public void fillResourceContainerWithResources(de.uka.ipd.sdq.simucomframework.resources.SimulatedResourceContainer rc) {
-		«EXPAND ResourceContainerCaseResources FOREACH this.resourceContainer_ResourceEnvironment»
+		Â«EXPAND ResourceContainerCaseResources FOREACH this.resourceContainer_ResourceEnvironmentÂ»
 			throw new RuntimeException("Unknown resource container should be initialised. This should never happen");	
 	}
 	
 	public void fillResourceContainerWithNestedResourceContainers(de.uka.ipd.sdq.simucomframework.resources.SimulatedResourceContainer rc) {
-		«EXPAND ResourceContainerCaseResourceContainers FOREACH this.resourceContainer_ResourceEnvironment»
+		Â«EXPAND ResourceContainerCaseResourceContainers FOREACH this.resourceContainer_ResourceEnvironmentÂ»
 			throw new RuntimeException("Unknown resource container should be initialised. This should never happen");	
 	}
 
 	public void fillLinkingResourceContainer(de.uka.ipd.sdq.simucomframework.resources.SimulatedLinkingResourceContainer rc) {
-		«EXPAND LinkingResourceCase FOREACH this.linkingResources__ResourceEnvironment SEPARATOR " else "»
-		«IF this.linkingResources__ResourceEnvironment.size > 0»
+		Â«EXPAND LinkingResourceCase FOREACH this.linkingResources__ResourceEnvironment SEPARATOR " else "Â»
+		Â«IF this.linkingResources__ResourceEnvironment.size > 0Â»
 		else
 			throw new RuntimeException("Unknown resource container should be initialised. This should never happen");
-		«ENDIF»	
+		Â«ENDIFÂ»	
 	}
 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ResourceContainerAdd FOR ResourceContainer»
-	resourceContainerIds.add("«this.id»");
-	«EXPAND ResourceContainerAdd FOREACH this.nestedResourceContainers__ResourceContainer»
-«ENDDEFINE»
+Â«DEFINE ResourceContainerAdd FOR ResourceContainerÂ»
+	resourceContainerIds.add("Â«this.idÂ»");
+	Â«EXPAND ResourceContainerAdd FOREACH this.nestedResourceContainers__ResourceContainerÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ResourceContainerCaseResources FOR ResourceContainer»
-	if (rc.getResourceContainerID().equals("«this.id»")) {
-		«EXPAND ActiveResourceAdd FOREACH this.activeResourceSpecifications_ResourceContainer»
-		«REM» Refactor!
-		«EXPAND PassiveResourceAdd FOREACH this.passiveResourceSpecifications_ResourceContainer»
-		«ENDREM»
+Â«DEFINE ResourceContainerCaseResources FOR ResourceContainerÂ»
+	if (rc.getResourceContainerID().equals("Â«this.idÂ»")) {
+		Â«EXPAND ActiveResourceAdd FOREACH this.activeResourceSpecifications_ResourceContainerÂ»
+		Â«REMÂ» Refactor!
+		Â«EXPAND PassiveResourceAdd FOREACH this.passiveResourceSpecifications_ResourceContainerÂ»
+		Â«ENDREMÂ»
 	} else 
-	«EXPAND ResourceContainerCaseResources FOREACH this.nestedResourceContainers__ResourceContainer»
-«ENDDEFINE»
+	Â«EXPAND ResourceContainerCaseResources FOREACH this.nestedResourceContainers__ResourceContainerÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ResourceContainerCaseResourceContainers FOR ResourceContainer»
-	if (rc.getResourceContainerID().equals("«this.id»")) {
-		«EXPAND NestedResourceContainerAdd FOREACH this.nestedResourceContainers__ResourceContainer»
-		«IF this.parentResourceContainer__ResourceContainer != null»
-		«EXPAND ParentResourceContainerAdd FOR this.parentResourceContainer__ResourceContainer»
-		«ENDIF»
+Â«DEFINE ResourceContainerCaseResourceContainers FOR ResourceContainerÂ»
+	if (rc.getResourceContainerID().equals("Â«this.idÂ»")) {
+		Â«EXPAND NestedResourceContainerAdd FOREACH this.nestedResourceContainers__ResourceContainerÂ»
+		Â«IF this.parentResourceContainer__ResourceContainer != nullÂ»
+		Â«EXPAND ParentResourceContainerAdd FOR this.parentResourceContainer__ResourceContainerÂ»
+		Â«ENDIFÂ»
 	} else 
-	«EXPAND ResourceContainerCaseResourceContainers FOREACH this.nestedResourceContainers__ResourceContainer»
-«ENDDEFINE»
+	Â«EXPAND ResourceContainerCaseResourceContainers FOREACH this.nestedResourceContainers__ResourceContainerÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE LinkingResourceCase FOR LinkingResource»
-	if (rc.getResourceContainerID().equals("«this.id»")) {
-		«EXPAND LinkingResourceAdd FOR this.communicationLinkResourceSpecifications_LinkingResource»
+Â«DEFINE LinkingResourceCase FOR LinkingResourceÂ»
+	if (rc.getResourceContainerID().equals("Â«this.idÂ»")) {
+		Â«EXPAND LinkingResourceAdd FOR this.communicationLinkResourceSpecifications_LinkingResourceÂ»
 	}
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE LinkingResourceAdd FOR CommunicationLinkResourceSpecification»
+Â«DEFINE LinkingResourceAdd FOR CommunicationLinkResourceSpecificationÂ»
 	rc.addActiveResource(
-		"«this.linkingResource_CommunicationLinkResourceSpecification.getResourceURI()»",
+		"Â«this.linkingResource_CommunicationLinkResourceSpecification.getResourceURI()Â»",
 		rc.getResourceContainerID());
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE NestedResourceContainerAdd FOR ResourceContainer»
-	rc.addNestedResourceContainer("«this.id»");
-«ENDDEFINE»
+Â«DEFINE NestedResourceContainerAdd FOR ResourceContainerÂ»
+	rc.addNestedResourceContainer("Â«this.idÂ»");
+Â«ENDDEFINEÂ»
 
-«DEFINE ParentResourceContainerAdd FOR ResourceContainer»
-	rc.setParentResourceContainer("«this.id»");
-«ENDDEFINE»
+Â«DEFINE ParentResourceContainerAdd FOR ResourceContainerÂ»
+	rc.setParentResourceContainer("Â«this.idÂ»");
+Â«ENDDEFINEÂ»
 
-«DEFINE ActiveResourceAdd FOR ProcessingResourceSpecification»
-	String[] «this.activeResourceType_ActiveResourceSpecification.id.javaVariableName()»_provInterfaces = null;
-	«IF this.activeResourceType_ActiveResourceSpecification.resourceProvidedRoles__ResourceInterfaceProvidingEntity.isEmpty»
-	«ELSE»
-		«this.activeResourceType_ActiveResourceSpecification.id.javaVariableName()»_provInterfaces = new String[«this.activeResourceType_ActiveResourceSpecification.resourceProvidedRoles__ResourceInterfaceProvidingEntity.size»];
-		«FOREACH this.activeResourceType_ActiveResourceSpecification.resourceProvidedRoles__ResourceInterfaceProvidingEntity AS resProvRole ITERATOR iter»
-			«this.activeResourceType_ActiveResourceSpecification.id.javaVariableName()»_provInterfaces[«iter.counter0»] = "«resProvRole.providedResourceInterface__ResourceProvidedRole.entityName.javaString()»";
-		«ENDFOREACH»
-	«ENDIF»
+Â«DEFINE ActiveResourceAdd FOR ProcessingResourceSpecificationÂ»
+	String[] Â«this.activeResourceType_ActiveResourceSpecification.id.javaVariableName()Â»_provInterfaces = null;
+	Â«IF this.activeResourceType_ActiveResourceSpecification.resourceProvidedRoles__ResourceInterfaceProvidingEntity.isEmptyÂ»
+	Â«ELSEÂ»
+		Â«this.activeResourceType_ActiveResourceSpecification.id.javaVariableName()Â»_provInterfaces = new String[Â«this.activeResourceType_ActiveResourceSpecification.resourceProvidedRoles__ResourceInterfaceProvidingEntity.sizeÂ»];
+		Â«FOREACH this.activeResourceType_ActiveResourceSpecification.resourceProvidedRoles__ResourceInterfaceProvidingEntity AS resProvRole ITERATOR iterÂ»
+			Â«this.activeResourceType_ActiveResourceSpecification.id.javaVariableName()Â»_provInterfaces[Â«iter.counter0Â»] = "Â«resProvRole.providedResourceInterface__ResourceProvidedRole.entityName.javaString()Â»";
+		Â«ENDFOREACHÂ»
+	Â«ENDIFÂ»
 	rc.addActiveResource(
-		"«this.getResourceURI()»",
-		«this.activeResourceType_ActiveResourceSpecification.id.javaVariableName()»_provInterfaces,
+		"Â«this.getResourceURI()Â»",
+		Â«this.activeResourceType_ActiveResourceSpecification.id.javaVariableName()Â»_provInterfaces,
 		rc.getResourceContainerID(),
-		«EXPAND SchedulingStrategy(((ResourceContainer)this.eContainer)) FOR this»
+		Â«EXPAND SchedulingStrategy(((ResourceContainer)this.eContainer)) FOR thisÂ»
 		);
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE SchedulingStrategy(ResourceContainer container) FOR ProcessingResourceSpecification»
-	«IF (this.schedulingPolicy.id == "FCFS") || (this.schedulingPolicy.id == "ProcessorSharing") || (this.schedulingPolicy.id == "Delay")»
-		«IF this.schedulingPolicy.id == "FCFS"»
+Â«DEFINE SchedulingStrategy(ResourceContainer container) FOR ProcessingResourceSpecificationÂ»
+	Â«IF (this.schedulingPolicy.id == "FCFS") || (this.schedulingPolicy.id == "ProcessorSharing") || (this.schedulingPolicy.id == "Delay")Â»
+		Â«IF this.schedulingPolicy.id == "FCFS"Â»
 			de.uka.ipd.sdq.simucomframework.resources.SchedulingStrategy.FCFS
-		«ENDIF»
-		«IF this.schedulingPolicy.id == "ProcessorSharing"»
+		Â«ENDIFÂ»
+		Â«IF this.schedulingPolicy.id == "ProcessorSharing"Â»
 			de.uka.ipd.sdq.simucomframework.resources.SchedulingStrategy.PROCESSOR_SHARING
-		«ENDIF»
-		«IF this.schedulingPolicy.id == "Delay"»
+		Â«ENDIFÂ»
+		Â«IF this.schedulingPolicy.id == "Delay"Â»
 			de.uka.ipd.sdq.simucomframework.resources.SchedulingStrategy.DELAY
-		«ENDIF»
-	«ELSE»
-		"«this.schedulingPolicy.id»"
-	«ENDIF»
-«ENDDEFINE»
+		Â«ENDIFÂ»
+	Â«ELSEÂ»
+		"Â«this.schedulingPolicy.idÂ»"
+	Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«REM»TODO: Refactor
-«DEFINE PassiveResourceAdd FOR PassiveResourceSpecification»
+Â«REMÂ»TODO: Refactor
+Â«DEFINE PassiveResourceAdd FOR PassiveResourceSpecificationÂ»
 	rc.addPassiveResource(
-		"«this.passiveResourceType_PassiveResourceSpecification.entityName»",
-		«this.capacity»);
-«ENDDEFINE»
-«ENDREM»
+		"Â«this.passiveResourceType_PassiveResourceSpecification.entityNameÂ»",
+		Â«this.capacityÂ»);
+Â«ENDDEFINEÂ»
+Â«ENDREMÂ»

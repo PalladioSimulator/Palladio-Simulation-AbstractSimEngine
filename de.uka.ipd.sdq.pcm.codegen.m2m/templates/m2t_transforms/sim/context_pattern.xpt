@@ -1,19 +1,19 @@
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
-«IMPORT core::composition»
-«IMPORT usagemodel»
-«IMPORT core::entity»
-«IMPORT repository»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«IMPORT core::compositionÂ»
+Â«IMPORT usagemodelÂ»
+Â«IMPORT core::entityÂ»
+Â«IMPORT repositoryÂ»
 
-«DEFINE ContextInterfaceUserData FOR InterfaceRequiringEntity»
+Â«DEFINE ContextInterfaceUserData FOR InterfaceRequiringEntityÂ»
   
   public de.uka.ipd.sdq.simucomframework.variables.userdata.UserData getUserData();
     	  
   public void setUserData(de.uka.ipd.sdq.simucomframework.variables.userdata.UserData data);
 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComponentContextImplUserData FOR InterfaceRequiringEntity»
+Â«DEFINE ComponentContextImplUserData FOR InterfaceRequiringEntityÂ»
 
   de.uka.ipd.sdq.simucomframework.variables.userdata.UserData myUserData;
   
@@ -25,4 +25,4 @@
     this.myUserData = data;
   }
 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»

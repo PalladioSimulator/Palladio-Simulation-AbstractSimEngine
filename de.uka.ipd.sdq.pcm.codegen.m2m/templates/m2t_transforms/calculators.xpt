@@ -1,8 +1,8 @@
-«EXTENSION m2t_transforms::pcm»
-«IMPORT usagemodel»
-«IMPORT seff»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«IMPORT usagemodelÂ»
+Â«IMPORT seffÂ»
 
-«DEFINE SetupCalculatorResponseTime(String startProbeSetId, String endProbeSetId) FOR String»
+Â«DEFINE SetupCalculatorResponseTime(String startProbeSetId, String endProbeSetId) FOR StringÂ»
 	{
 		java.util.List<org.palladiosimulator.probeframework.probes.Probe> probes = 
 			java.util.Arrays.asList(
@@ -11,32 +11,32 @@
 		
 		// TODO get rid of StringMeasuringPoint and use a more concrete one.
 		org.palladiosimulator.edp2.models.measuringpoint.StringMeasuringPoint mp = measuringpointFactory.createStringMeasuringPoint();
-		mp.setMeasuringPoint("«this»");
+		mp.setMeasuringPoint("Â«thisÂ»");
 		org.palladiosimulator.edp2.models.measuringpoint.MeasuringPointRepository myMeasurementPointRepository = org.palladiosimulator.edp2.models.measuringpoint.MeasuringpointFactory.eINSTANCE.createMeasuringPointRepository();
         myMeasurementPointRepository.getMeasuringPoints().add(mp);
         mp.setMeasuringPointRepository(myMeasurementPointRepository);
 
 		getModel().getProbeFrameworkContext().getCalculatorFactory().buildResponseTimeCalculator(mp,probes);
-		this.startStopProbes.put("«this»",probes);
+		this.startStopProbes.put("Â«thisÂ»",probes);
 	}
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE SetupCalculatorExecutionResult FOR UsageScenario»
+Â«DEFINE SetupCalculatorExecutionResult FOR UsageScenarioÂ»
 // TODO: FIXME
 //	getModel().getProbeFrameworkContext().registerCalculator(
-//		"«this.entityName»/«this.id»/ExecutionResult",
+//		"Â«this.entityNameÂ»/Â«this.idÂ»/ExecutionResult",
 //		getModel().getProbeFrameworkContext().getCalculatorFactory().buildExecutionResultCalculator(
-//			"UsageScenario «this.entityName» <«this.id»>", 
+//			"UsageScenario Â«this.entityNameÂ» <Â«this.idÂ»>", 
 //			getModel().getProbeFrameworkContext().obtainProbeSetId(
 //				de.uka.ipd.sdq.simucomframework.ReliabilitySensorHelper.getScenarioProbeSetId(
-//					"«this.id»"))));
-«ENDDEFINE»
+//					"Â«this.idÂ»"))));
+Â«ENDDEFINEÂ»
 
-«DEFINE SetupCalculatorExecutionResult(String callName) FOR ExternalCallAction»
+Â«DEFINE SetupCalculatorExecutionResult(String callName) FOR ExternalCallActionÂ»
 // TODO: FIXME
 //	getModel().getProbeFrameworkContext().registerCalculator(
-//		"«this.entityName»/«this.id»/ExecutionResult",
+//		"Â«this.entityNameÂ»/Â«this.idÂ»/ExecutionResult",
 //		getModel().getProbeFrameworkContext().getCalculatorFactory().buildExecutionResultCalculator(
-//			"«callName»", 
-//			getModel().getProbeFrameworkContext().obtainProbeSetId("«callName»")));
-«ENDDEFINE»
+//			"Â«callNameÂ»", 
+//			getModel().getProbeFrameworkContext().obtainProbeSetId("Â«callNameÂ»")));
+Â«ENDDEFINEÂ»

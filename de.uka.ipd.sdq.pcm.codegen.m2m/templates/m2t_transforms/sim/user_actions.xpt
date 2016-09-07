@@ -1,43 +1,43 @@
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
-«IMPORT system»
-«IMPORT core::composition»
-«IMPORT usagemodel»
-«IMPORT core::entity»
-«IMPORT repository»
-«IMPORT allocation»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«IMPORT systemÂ»
+Â«IMPORT core::compositionÂ»
+Â«IMPORT usagemodelÂ»
+Â«IMPORT core::entityÂ»
+Â«IMPORT repositoryÂ»
+Â«IMPORT allocationÂ»
 
-«DEFINE UserAction FOR Loop»
-   for (int iterationCount_«this.id.javaVariableName()» = 0, maxIterationCount_«this.id.javaVariableName()» = (Integer)ctx.evaluate("«this.loopIteration_Loop.specification.specificationString()»",Integer.class); 
-            iterationCount_«this.id.javaVariableName()» < maxIterationCount_«this.id.javaVariableName()»; iterationCount_«this.id.javaVariableName()»++){
-       «EXPAND m2t_transforms::usage::UserActions FOR this.bodyBehaviour_Loop.actions_ScenarioBehaviour.typeSelect(Start).get(0)»
+Â«DEFINE UserAction FOR LoopÂ»
+   for (int iterationCount_Â«this.id.javaVariableName()Â» = 0, maxIterationCount_Â«this.id.javaVariableName()Â» = (Integer)ctx.evaluate("Â«this.loopIteration_Loop.specification.specificationString()Â»",Integer.class); 
+            iterationCount_Â«this.id.javaVariableName()Â» < maxIterationCount_Â«this.id.javaVariableName()Â»; iterationCount_Â«this.id.javaVariableName()Â»++){
+       Â«EXPAND m2t_transforms::usage::UserActions FOR this.bodyBehaviour_Loop.actions_ScenarioBehaviour.typeSelect(Start).get(0)Â»
    } 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE UserAction FOR Branch»
+Â«DEFINE UserAction FOR BranchÂ»
 	{
-		«LET this.id.javaVariableName() AS counterID»
-			double u«counterID» = ctx.getModel().getConfiguration().getRandomGenerator().random();
-			double sum«counterID» = 0;
-			«EXPAND BranchTransition(counterID) FOREACH this.branchTransitions_Branch SEPARATOR ""»
-		«ENDLET»
+		Â«LET this.id.javaVariableName() AS counterIDÂ»
+			double uÂ«counterIDÂ» = ctx.getModel().getConfiguration().getRandomGenerator().random();
+			double sumÂ«counterIDÂ» = 0;
+			Â«EXPAND BranchTransition(counterID) FOREACH this.branchTransitions_Branch SEPARATOR ""Â»
+		Â«ENDLETÂ»
 	}
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE BranchTransition(String counterNumber) FOR BranchTransition»
-	if (sum«counterNumber» <= u«counterNumber» && u«counterNumber» < sum«counterNumber» + «this.branchProbability» )
+Â«DEFINE BranchTransition(String counterNumber) FOR BranchTransitionÂ»
+	if (sumÂ«counterNumberÂ» <= uÂ«counterNumberÂ» && uÂ«counterNumberÂ» < sumÂ«counterNumberÂ» + Â«this.branchProbabilityÂ» )
 	{
-		«EXPAND m2t_transforms::usage::UserActions FOR this.branchedBehaviour_BranchTransition.actions_ScenarioBehaviour.typeSelect(Start).get(0)»
+		Â«EXPAND m2t_transforms::usage::UserActions FOR this.branchedBehaviour_BranchTransition.actions_ScenarioBehaviour.typeSelect(Start).get(0)Â»
 	}
-	sum«counterNumber» += «this.branchProbability»;
-«ENDDEFINE»
+	sumÂ«counterNumberÂ» += Â«this.branchProbabilityÂ»;
+Â«ENDDEFINEÂ»
 
-«DEFINE UserAction FOR Delay»
+Â«DEFINE UserAction FOR DelayÂ»
 	{
-	double delay = de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter.toDouble(ctx.evaluate("«this.timeSpecification_Delay.specification»"));
+	double delay = de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter.toDouble(ctx.evaluate("Â«this.timeSpecification_Delay.specificationÂ»"));
 	ctx.getThread().hold(delay);
 	}
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE UserAction FOR Stop»
-«ENDDEFINE»
+Â«DEFINE UserAction FOR StopÂ»
+Â«ENDDEFINEÂ»

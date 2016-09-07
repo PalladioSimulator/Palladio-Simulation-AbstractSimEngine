@@ -1,70 +1,70 @@
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
-«EXTENSION m2t_transforms::sensors»
-«IMPORT repository»
-«IMPORT usagemodel»
-«IMPORT system»
-«IMPORT seff»
-«IMPORT pcm»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«EXTENSION m2t_transforms::sensorsÂ»
+Â«IMPORT repositoryÂ»
+Â«IMPORT usagemodelÂ»
+Â«IMPORT systemÂ»
+Â«IMPORT seffÂ»
+Â«IMPORT pcmÂ»
 
-«DEFINE SetupCalculators FOR UsageScenario»
+Â«DEFINE SetupCalculators FOR UsageScenarioÂ»
 	if(getModel().getConfiguration().getSimulateFailures()){
-		«EXPAND m2t_transforms::calculators::SetupCalculatorExecutionResult FOR this»
+		Â«EXPAND m2t_transforms::calculators::SetupCalculatorExecutionResult FOR thisÂ»
 	}
 
-	«EXPAND SetupCalculators FOREACH this.querySystemCalls()»
-«ENDDEFINE»
+	Â«EXPAND SetupCalculators FOREACH this.querySystemCalls()Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE SetupCalculators FOR EntryLevelSystemCall»
-	«LET "Call_"+this.operationSignature__EntryLevelSystemCall.javaSignature()+" <EntryLevelSystemCall id: "+this.id+" >" AS callName»
-		// Setup calculator for system call «this.entityName» («this.id»)
-		«EXPAND m2t_transforms::calculators::SetupCalculatorResponseTime("start"+callName, "end"+callName) FOR callName»
-	«ENDLET»
-«ENDDEFINE»
+Â«DEFINE SetupCalculators FOR EntryLevelSystemCallÂ»
+	Â«LET "Call_"+this.operationSignature__EntryLevelSystemCall.javaSignature()+" <EntryLevelSystemCall id: "+this.id+" >" AS callNameÂ»
+		// Setup calculator for system call Â«this.entityNameÂ» (Â«this.idÂ»)
+		Â«EXPAND m2t_transforms::calculators::SetupCalculatorResponseTime("start"+callName, "end"+callName) FOR callNameÂ»
+	Â«ENDLETÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE SetupCalculators FOR RepositoryComponent»
-	«IF BasicComponent.isInstance(this) »
-		«EXPAND SetupCalculators FOREACH ((BasicComponent)this).serviceEffectSpecifications__BasicComponent»
-	«ENDIF»  
-	«REM»TODO: Should there be calculators for RepositoryComponents other than BasicComponent?«ENDREM» 
-«ENDDEFINE»
+Â«DEFINE SetupCalculators FOR RepositoryComponentÂ»
+	Â«IF BasicComponent.isInstance(this) Â»
+		Â«EXPAND SetupCalculators FOREACH ((BasicComponent)this).serviceEffectSpecifications__BasicComponentÂ»
+	Â«ENDIFÂ»  
+	Â«REMÂ»TODO: Should there be calculators for RepositoryComponents other than BasicComponent?Â«ENDREMÂ» 
+Â«ENDDEFINEÂ»
 
-«DEFINE SetupCalculators FOR ServiceEffectSpecification»
-	«ERROR "This should never be called!"»
-«ENDDEFINE»
+Â«DEFINE SetupCalculators FOR ServiceEffectSpecificationÂ»
+	Â«ERROR "This should never be called!"Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE SetupCalculators FOR ResourceDemandingSEFF»
-	// Setup calculators for service call «this.describedService__SEFF.entityName»,
-	// contained ExternalCallActions: «this.steps_Behaviour.findStart().queryExternalCallActions({}).entityName» («this.steps_Behaviour.findStart().queryExternalCallActions({}).id»)
-	«EXPAND SetupCalculators FOREACH this.steps_Behaviour.findStart().queryExternalCallActions({})»
-	«REM»Remove the following two lines in order to disable measurements on infrastructure calls«ENDREM»
-	// contained InternalActions: «this.steps_Behaviour.findStart().queryInternalActions({}).entityName» («this.steps_Behaviour.findStart().queryInternalActions({}).id»)
-	«EXPAND SetupCalculators FOREACH this.steps_Behaviour.findStart().queryInternalActions({})»
-«ENDDEFINE»
+Â«DEFINE SetupCalculators FOR ResourceDemandingSEFFÂ»
+	// Setup calculators for service call Â«this.describedService__SEFF.entityNameÂ»,
+	// contained ExternalCallActions: Â«this.steps_Behaviour.findStart().queryExternalCallActions({}).entityNameÂ» (Â«this.steps_Behaviour.findStart().queryExternalCallActions({}).idÂ»)
+	Â«EXPAND SetupCalculators FOREACH this.steps_Behaviour.findStart().queryExternalCallActions({})Â»
+	Â«REMÂ»Remove the following two lines in order to disable measurements on infrastructure callsÂ«ENDREMÂ»
+	// contained InternalActions: Â«this.steps_Behaviour.findStart().queryInternalActions({}).entityNameÂ» (Â«this.steps_Behaviour.findStart().queryInternalActions({}).idÂ»)
+	Â«EXPAND SetupCalculators FOREACH this.steps_Behaviour.findStart().queryInternalActions({})Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE SetupCalculators FOR ExternalCallAction»
+Â«DEFINE SetupCalculators FOR ExternalCallActionÂ»
 	// Old: "Call "+this.calledService_ExternalService.interface__OperationSignature.entityName+"."+this.calledService_ExternalService.javaSignature()+" <AssemblyCtx: \"+this.assemblyContext.getId()+\", CallID: "+ this.id +">"
-	«LET externalCallActionDescription(this.calledService_ExternalService, this) AS callName»
-		// ExternalCallAction «this.entityName» («this.id»)
-		«EXPAND m2t_transforms::calculators::SetupCalculatorResponseTime("start" + callName, "end" + callName) FOR callName»
+	Â«LET externalCallActionDescription(this.calledService_ExternalService, this) AS callNameÂ»
+		// ExternalCallAction Â«this.entityNameÂ» (Â«this.idÂ»)
+		Â«EXPAND m2t_transforms::calculators::SetupCalculatorResponseTime("start" + callName, "end" + callName) FOR callNameÂ»
 		if(getModel().getConfiguration().getSimulateFailures()){
-			«EXPAND m2t_transforms::calculators::SetupCalculatorExecutionResult(callName) FOR this»
+			Â«EXPAND m2t_transforms::calculators::SetupCalculatorExecutionResult(callName) FOR thisÂ»
 		}
-	«ENDLET»
-«ENDDEFINE»
+	Â«ENDLETÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE SetupCalculators FOR InternalAction»
-	«FOREACH this.infrastructureCall__Action AS infrastructureCall»
-		«LET internalActionDescription(infrastructureCall.signature__InfrastructureCall, this) AS callName»
-			// InternalAction «this.entityName» («this.id»)
-			«EXPAND m2t_transforms::calculators::SetupCalculatorResponseTime("start" + callName, "end" + callName) FOR callName»
-		«ENDLET»
-	«ENDFOREACH»
-«ENDDEFINE»
+Â«DEFINE SetupCalculators FOR InternalActionÂ»
+	Â«FOREACH this.infrastructureCall__Action AS infrastructureCallÂ»
+		Â«LET internalActionDescription(infrastructureCall.signature__InfrastructureCall, this) AS callNameÂ»
+			// InternalAction Â«this.entityNameÂ» (Â«this.idÂ»)
+			Â«EXPAND m2t_transforms::calculators::SetupCalculatorResponseTime("start" + callName, "end" + callName) FOR callNameÂ»
+		Â«ENDLETÂ»
+	Â«ENDFOREACHÂ»
+Â«ENDDEFINEÂ»
 
-«REM»
-«DEFINE CalculatorRoot FOR UsageModel»
-	«FILE "main/CalculatorRepositoryFactory.java"»
+Â«REMÂ»
+Â«DEFINE CalculatorRoot FOR UsageModelÂ»
+	Â«FILE "main/CalculatorRepositoryFactory.java"Â»
 		package main;
 		import de.uka.ipd.sdq.simucomframework.calculator.CalculatorRepository;
 		import de.uka.ipd.sdq.simucomframework.calculator.ICalculatorRepositoryFactory;
@@ -80,7 +80,7 @@
 			public CalculatorRepository createCalculatorRepository(SampleBlackboard blackboard) {
 				CalculatorRepository repository = new CalculatorRepository();
 				
-				«EXPAND CreateCalculatorForUsageScenario FOREACH this.usageScenario_UsageModel»
+				Â«EXPAND CreateCalculatorForUsageScenario FOREACH this.usageScenario_UsageModelÂ»
 				
 				return repository;
 			}
@@ -89,67 +89,67 @@
 				return instance;
 			}
 		}
-	«ENDFILE»
-«ENDDEFINE»
-«ENDREM»
+	Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
+Â«ENDREMÂ»
 
-«REM»
-«DEFINE CalculatorRoot FOR Repository»
-	«IF this.components__Repository.size > 0»
-		«FILE this.basePackageName() + "/CalculatorFactory.java"»
-			package «this.basePackageName()»;
+Â«REMÂ»
+Â«DEFINE CalculatorRoot FOR RepositoryÂ»
+	Â«IF this.components__Repository.size > 0Â»
+		Â«FILE this.basePackageName() + "/CalculatorFactory.java"Â»
+			package Â«this.basePackageName()Â»;
 			
-			// CalculatorRoot FOR Repository: «this.datatypes_Repository.toString()»
+			// CalculatorRoot FOR Repository: Â«this.datatypes_Repository.toString()Â»
 			public class CalculatorFactory {
 				public static void createCalculators(String assemblyContext) {
-					«EXPAND CreateCalculatorForComponents FOREACH this.components__Repository»
+					Â«EXPAND CreateCalculatorForComponents FOREACH this.components__RepositoryÂ»
 				}
 			}
-		«ENDFILE»
-	«ENDIF»
-«ENDDEFINE»
+		Â«ENDFILEÂ»
+	Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE CreateCalculatorForComponents FOR RepositoryComponent»
+Â«DEFINE CreateCalculatorForComponents FOR RepositoryComponentÂ»
 	// Nothing to do?? (Create calculators solely for BasicComponents?)
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE CreateCalculatorForComponents FOR BasicComponent»
+Â«DEFINE CreateCalculatorForComponents FOR BasicComponentÂ»
 	// CreateCalculatorForComponents FOR BasicComponent
-	«EXPAND CreateCalculatorForComponents(this) FOREACH this.serviceEffectSpecifications__BasicComponent.describedService__SEFF»
-«ENDDEFINE»
+	Â«EXPAND CreateCalculatorForComponents(this) FOREACH this.serviceEffectSpecifications__BasicComponent.describedService__SEFFÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE CreateCalculatorForComponents(RepositoryComponent component) FOR Signature»
+Â«DEFINE CreateCalculatorForComponents(RepositoryComponent component) FOR SignatureÂ»
 	// CreateCalculatorForComponents(RepositoryComponent component) FOR Signature
-	«IF this.hasSEFF(component)»
-   	  	«LET ((ResourceDemandingSEFF)this.getSEFF(component)) AS seff»
-	      «EXPAND CreateCalculatorForComponents FOREACH seff.steps_Behaviour.findStart().queryExternalCallActions({})»      
-    	«ENDLET»
-   	  «ENDIF»
-«ENDDEFINE»
+	Â«IF this.hasSEFF(component)Â»
+   	  	Â«LET ((ResourceDemandingSEFF)this.getSEFF(component)) AS seffÂ»
+	      Â«EXPAND CreateCalculatorForComponents FOREACH seff.steps_Behaviour.findStart().queryExternalCallActions({})Â»      
+    	Â«ENDLETÂ»
+   	  Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE CreateCalculatorForComponents FOR ExternalCallAction»
+Â«DEFINE CreateCalculatorForComponents FOR ExternalCallActionÂ»
 	// CreateCalculatorForComponents FOR ExternalCallAction
-	// «this.entityName»
-«ENDDEFINE»«ENDREM»
+	// Â«this.entityNameÂ»
+Â«ENDDEFINEÂ»Â«ENDREMÂ»
 
-«REM»Creates one calculator for each UsageScenario«ENDREM»
-«REM»«DEFINE CreateCalculatorForUsageScenario FOR UsageScenario»
-	// Initialise calculator for «this.entityName»
+Â«REMÂ»Creates one calculator for each UsageScenarioÂ«ENDREMÂ»
+Â«REMÂ»Â«DEFINE CreateCalculatorForUsageScenario FOR UsageScenarioÂ»
+	// Initialise calculator for Â«this.entityNameÂ»
 	Recorder recorder = new RawRecorder(new ConsoleWriteStrategy());
 	PipesAndFiltersManager pipesAndFiltersManager = new PipesAndFiltersManager(recorder);
 	Calculator calculator = new ResponseTimeCalculator(blackboard,
-			"start«this.entityName»", "end«this.entityName»");
+			"startÂ«this.entityNameÂ»", "endÂ«this.entityNameÂ»");
 	calculator.setPipesAndFiltersManager(pipesAndFiltersManager);
-	repository.addCalculator("«this.entityName»", calculator);
+	repository.addCalculator("Â«this.entityNameÂ»", calculator);
 	
-	// «this.scenarioBehaviour_UsageScenario.querySystemCalls()»
-«ENDDEFINE»
+	// Â«this.scenarioBehaviour_UsageScenario.querySystemCalls()Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE CreateCalculators FOR System»
-	«this.toString()»
-«ENDDEFINE» 
+Â«DEFINE CreateCalculators FOR SystemÂ»
+	Â«this.toString()Â»
+Â«ENDDEFINEÂ» 
 
-«DEFINE CreateCalculator FOR EntryLevelSystemCall»
-	// Create calculator for «this.toString()»
-«ENDDEFINE»
-«ENDREM»
+Â«DEFINE CreateCalculator FOR EntryLevelSystemCallÂ»
+	// Create calculator for Â«this.toString()Â»
+Â«ENDDEFINEÂ»
+Â«ENDREMÂ»

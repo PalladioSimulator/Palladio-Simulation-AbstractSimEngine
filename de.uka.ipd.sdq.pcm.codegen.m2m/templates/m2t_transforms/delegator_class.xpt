@@ -1,72 +1,72 @@
-«EXTENSION m2t_transforms::java_names»
-«IMPORT repository»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«IMPORT repositoryÂ»
 
-«DEFINE DelegatorClass(String prefix) FOR OperationInterface»
-   «FILE (this.implementationPackage()+".delegates").fqnToDirectoryPath()+"/"+prefix+this.javaName()+".java"»
-	  package «this.implementationPackage()».delegates;
-	  // Delegator class for interface «this.entityName»
-	  public class «prefix»«this.javaName()» implements «this.fqn()»
+Â«DEFINE DelegatorClass(String prefix) FOR OperationInterfaceÂ»
+   Â«FILE (this.implementationPackage()+".delegates").fqnToDirectoryPath()+"/"+prefix+this.javaName()+".java"Â»
+	  package Â«this.implementationPackage()Â».delegates;
+	  // Delegator class for interface Â«this.entityNameÂ»
+	  public class Â«prefixÂ»Â«this.javaName()Â» implements Â«this.fqn()Â»
 	  {
 		private static org.apache.log4j.Logger logger = 
-			org.apache.log4j.Logger.getLogger(«this.fqn()».class.getName());
+			org.apache.log4j.Logger.getLogger(Â«this.fqn()Â».class.getName());
 	  
-	     protected «this.fqn()» myInnerPort = null;
+	     protected Â«this.fqn()Â» myInnerPort = null;
 	     
-	     public «prefix»«this.javaName()»(«this.fqn()» myInnerPort){
+	     public Â«prefixÂ»Â«this.javaName()Â»(Â«this.fqn()Â» myInnerPort){
 	        this.myInnerPort = myInnerPort;
 	     }
 	     
-	     «EXPAND m2t_transforms::provided_ports::ComposedComponentPortHelperMethodsTM FOR this»    
+	     Â«EXPAND m2t_transforms::provided_ports::ComposedComponentPortHelperMethodsTM FOR thisÂ»    
 	     
-	     «EXPAND Delegator FOREACH this.signatures__OperationInterface»
+	     Â«EXPAND Delegator FOREACH this.signatures__OperationInterfaceÂ»
 	  }
-	«ENDFILE»
-«ENDDEFINE»
+	Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE DelegatorClass(String prefix) FOR InfrastructureInterface»
-   «FILE (this.implementationPackage()+".delegates").fqnToDirectoryPath()+"/"+prefix+this.javaName()+".java"»
-	  package «this.implementationPackage()».delegates;
-	  // Delegator class for interface «this.entityName»
-	  public class «prefix»«this.javaName()» implements «this.fqn()»
+Â«DEFINE DelegatorClass(String prefix) FOR InfrastructureInterfaceÂ»
+   Â«FILE (this.implementationPackage()+".delegates").fqnToDirectoryPath()+"/"+prefix+this.javaName()+".java"Â»
+	  package Â«this.implementationPackage()Â».delegates;
+	  // Delegator class for interface Â«this.entityNameÂ»
+	  public class Â«prefixÂ»Â«this.javaName()Â» implements Â«this.fqn()Â»
 	  {
 		private static org.apache.log4j.Logger logger = 
-			org.apache.log4j.Logger.getLogger(«this.fqn()».class.getName());
+			org.apache.log4j.Logger.getLogger(Â«this.fqn()Â».class.getName());
 	  
-	     protected «this.fqn()» myInnerPort = null;
+	     protected Â«this.fqn()Â» myInnerPort = null;
 	     
-	     public «prefix»«this.javaName()»(«this.fqn()» myInnerPort){
+	     public Â«prefixÂ»Â«this.javaName()Â»(Â«this.fqn()Â» myInnerPort){
 	        this.myInnerPort = myInnerPort;
 	     }
 	     
-	     «EXPAND m2t_transforms::provided_ports::ComposedComponentPortHelperMethodsTM FOR this»    
+	     Â«EXPAND m2t_transforms::provided_ports::ComposedComponentPortHelperMethodsTM FOR thisÂ»    
 	     
-	     «EXPAND Delegator FOREACH this.infrastructureSignatures__InfrastructureInterface»
+	     Â«EXPAND Delegator FOREACH this.infrastructureSignatures__InfrastructureInterfaceÂ»
 	  }
-	«ENDFILE»
-«ENDDEFINE»
+	Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE Delegator FOR OperationSignature»
-   public «EXPAND m2t_transforms::java_core::OperationSignature FOR this» {
-		logger.debug("Delegating «this.entityName»");
+Â«DEFINE Delegator FOR OperationSignatureÂ»
+   public Â«EXPAND m2t_transforms::java_core::OperationSignature FOR thisÂ» {
+		logger.debug("Delegating Â«this.entityNameÂ»");
 		// Pre
 		ctx.setEvaluationMode(de.uka.ipd.sdq.simucomframework.variables.stoexvisitor.VariableMode.EXCEPTION_ON_NOT_FOUND);
-		«EXPAND m2t_transforms::java_core::ReturnTypeTM FOR this» result = myInnerPort.«this.javaSignature()»(
-		     «EXPAND m2t_transforms::java_core::ParameterUsageListTM FOR this»);
+		Â«EXPAND m2t_transforms::java_core::ReturnTypeTM FOR thisÂ» result = myInnerPort.Â«this.javaSignature()Â»(
+		     Â«EXPAND m2t_transforms::java_core::ParameterUsageListTM FOR thisÂ»);
 		// Post
 		ctx.setEvaluationMode(de.uka.ipd.sdq.simucomframework.variables.stoexvisitor.VariableMode.RETURN_DEFAULT_ON_NOT_FOUND);
 		return result;
    }   
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE Delegator FOR InfrastructureSignature»
-   public «EXPAND m2t_transforms::java_core::InfrastructureSignature FOR this» {
-		logger.debug("Delegating «this.entityName»");
+Â«DEFINE Delegator FOR InfrastructureSignatureÂ»
+   public Â«EXPAND m2t_transforms::java_core::InfrastructureSignature FOR thisÂ» {
+		logger.debug("Delegating Â«this.entityNameÂ»");
 		// Pre
 		ctx.setEvaluationMode(de.uka.ipd.sdq.simucomframework.variables.stoexvisitor.VariableMode.EXCEPTION_ON_NOT_FOUND);
-		«EXPAND m2t_transforms::java_core::ReturnTypeTM FOR this» result = myInnerPort.«this.javaSignature()»(
-		     «EXPAND m2t_transforms::java_core::ParameterUsageListTM FOR this»);
+		Â«EXPAND m2t_transforms::java_core::ReturnTypeTM FOR thisÂ» result = myInnerPort.Â«this.javaSignature()Â»(
+		     Â«EXPAND m2t_transforms::java_core::ParameterUsageListTM FOR thisÂ»);
 		// Post
 		ctx.setEvaluationMode(de.uka.ipd.sdq.simucomframework.variables.stoexvisitor.VariableMode.RETURN_DEFAULT_ON_NOT_FOUND);
 		return result;
    }   
-«ENDDEFINE»
+Â«ENDDEFINEÂ»

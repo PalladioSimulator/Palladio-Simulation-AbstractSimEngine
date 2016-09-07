@@ -1,13 +1,13 @@
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
-«IMPORT system»
-«IMPORT core::composition»
-«IMPORT usagemodel»
-«IMPORT core::entity»
-«IMPORT repository»
-«IMPORT pcm::qosannotations::qos_performance»
-«IMPORT pcm::qosannotations::qos_reliability»
-«IMPORT pcm::reliability»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«IMPORT systemÂ»
+Â«IMPORT core::compositionÂ»
+Â«IMPORT usagemodelÂ»
+Â«IMPORT core::entityÂ»
+Â«IMPORT repositoryÂ»
+Â«IMPORT pcm::qosannotations::qos_performanceÂ»
+Â«IMPORT pcm::qosannotations::qos_reliabilityÂ»
+Â«IMPORT pcm::reliabilityÂ»
 
 //-------------------------------
 // In the simulation, generate a time delay
@@ -15,86 +15,86 @@
 // to the specification in the QoS annotations
 // of the system
 //-------------------------------
-«DEFINE DummyMethodBody(System s,OperationRequiredRole r) FOR OperationSignature»
+Â«DEFINE DummyMethodBody(System s,OperationRequiredRole r) FOR OperationSignatureÂ»
 	de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe resultStackFrame = 
 		new de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe();
-	«LET s.qosAnnotations_System.specifiedQoSAnnotations_QoSAnnotations.select(annotation | (SpecifiedReliabilityAnnotation.isInstance(annotation)) && (annotation.role_SpecifiedQoSAnnotation==r) && (annotation.signature_SpecifiedQoSAnnation==this)) AS annotations»
-		«IF annotations.size == 1»
+	Â«LET s.qosAnnotations_System.specifiedQoSAnnotations_QoSAnnotations.select(annotation | (SpecifiedReliabilityAnnotation.isInstance(annotation)) && (annotation.role_SpecifiedQoSAnnotation==r) && (annotation.signature_SpecifiedQoSAnnation==this)) AS annotationsÂ»
+		Â«IF annotations.size == 1Â»
     // Simulate a failure that occurs with a predefined probability:
     if (ctx.getModel().getConfig().getSimulateFailures()) {   
     	double accProbability = 0;
     	double randValue = ctx.getModel().getConfiguration().getRandomGenerator().random();
-    	«EXPAND FailureOccurrence(r.id, this.id) FOREACH ((SpecifiedReliabilityAnnotation)annotations.get(0)).externalFailureOccurrenceDescriptions__SpecifiedReliabilityAnnotation»
+    	Â«EXPAND FailureOccurrence(r.id, this.id) FOREACH ((SpecifiedReliabilityAnnotation)annotations.get(0)).externalFailureOccurrenceDescriptions__SpecifiedReliabilityAnnotationÂ»
     }
-		«ENDIF»
-	«ENDLET»
-	«LET s.qosAnnotations_System.specifiedQoSAnnotations_QoSAnnotations.select(annotation | (SystemSpecifiedExecutionTime.isInstance(annotation)) && (annotation.role_SpecifiedQoSAnnotation==r) && (annotation.signature_SpecifiedQoSAnnation==this)) AS annotations»
-		«IF annotations.size == 1»
-	double delay = de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter.toDouble(ctx.evaluate("«((SpecifiedExecutionTime)annotations.get(0)).specification_SpecifiedExecutionTime.specification.specificationString()»"));
-	logger.info("SystemExternalCall «annotations.get(0).signature_SpecifiedQoSAnnation.entityName» delaying execution for "+delay);
+		Â«ENDIFÂ»
+	Â«ENDLETÂ»
+	Â«LET s.qosAnnotations_System.specifiedQoSAnnotations_QoSAnnotations.select(annotation | (SystemSpecifiedExecutionTime.isInstance(annotation)) && (annotation.role_SpecifiedQoSAnnotation==r) && (annotation.signature_SpecifiedQoSAnnation==this)) AS annotationsÂ»
+		Â«IF annotations.size == 1Â»
+	double delay = de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter.toDouble(ctx.evaluate("Â«((SpecifiedExecutionTime)annotations.get(0)).specification_SpecifiedExecutionTime.specification.specificationString()Â»"));
+	logger.info("SystemExternalCall Â«annotations.get(0).signature_SpecifiedQoSAnnation.entityNameÂ» delaying execution for "+delay);
 	ctx.getThread().hold(delay);
-		«ENDIF»
-	«ENDLET»
+		Â«ENDIFÂ»
+	Â«ENDLETÂ»
 	return resultStackFrame;
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE DummyMethodBody(System s,InfrastructureRequiredRole r) FOR InfrastructureSignature»
+Â«DEFINE DummyMethodBody(System s,InfrastructureRequiredRole r) FOR InfrastructureSignatureÂ»
 	de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe resultStackFrame = 
 		new de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe();
-	«LET s.qosAnnotations_System.specifiedQoSAnnotations_QoSAnnotations.select(annotation | (SpecifiedReliabilityAnnotation.isInstance(annotation)) && (annotation.role_SpecifiedQoSAnnotation==r) && (annotation.signature_SpecifiedQoSAnnation==this)) AS annotations»
-		«IF annotations.size == 1»
+	Â«LET s.qosAnnotations_System.specifiedQoSAnnotations_QoSAnnotations.select(annotation | (SpecifiedReliabilityAnnotation.isInstance(annotation)) && (annotation.role_SpecifiedQoSAnnotation==r) && (annotation.signature_SpecifiedQoSAnnation==this)) AS annotationsÂ»
+		Â«IF annotations.size == 1Â»
     // Simulate a failure that occurs with a predefined probability:
     if (ctx.getModel().getConfig().getSimulateFailures()) {   
     	double accProbability = 0;
     	double randValue = Math.random();
-    	«EXPAND FailureOccurrence(r.id, this.id) FOREACH ((SpecifiedReliabilityAnnotation)annotations.get(0)).externalFailureOccurrenceDescriptions__SpecifiedReliabilityAnnotation»
+    	Â«EXPAND FailureOccurrence(r.id, this.id) FOREACH ((SpecifiedReliabilityAnnotation)annotations.get(0)).externalFailureOccurrenceDescriptions__SpecifiedReliabilityAnnotationÂ»
     }
-		«ENDIF»
-	«ENDLET»
-	«LET s.qosAnnotations_System.specifiedQoSAnnotations_QoSAnnotations.select(annotation | (SystemSpecifiedExecutionTime.isInstance(annotation)) && (annotation.role_SpecifiedQoSAnnotation==r) && (annotation.signature_SpecifiedQoSAnnation==this)) AS annotations»
-		«IF annotations.size == 1»
-	double delay = de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter.toDouble(ctx.evaluate("«((SpecifiedExecutionTime)annotations.get(0)).specification_SpecifiedExecutionTime.specification.specificationString()»"));
-	logger.info("SystemExternalCall «annotations.get(0).signature_SpecifiedQoSAnnation.entityName» delaying execution for "+delay);
+		Â«ENDIFÂ»
+	Â«ENDLETÂ»
+	Â«LET s.qosAnnotations_System.specifiedQoSAnnotations_QoSAnnotations.select(annotation | (SystemSpecifiedExecutionTime.isInstance(annotation)) && (annotation.role_SpecifiedQoSAnnotation==r) && (annotation.signature_SpecifiedQoSAnnation==this)) AS annotationsÂ»
+		Â«IF annotations.size == 1Â»
+	double delay = de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter.toDouble(ctx.evaluate("Â«((SpecifiedExecutionTime)annotations.get(0)).specification_SpecifiedExecutionTime.specification.specificationString()Â»"));
+	logger.info("SystemExternalCall Â«annotations.get(0).signature_SpecifiedQoSAnnation.entityNameÂ» delaying execution for "+delay);
 	ctx.getThread().hold(delay);
-		«ENDIF»
-	«ENDLET»
+		Â«ENDIFÂ»
+	Â«ENDLETÂ»
 	return resultStackFrame;
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE FailureOccurrence(String roleId, String signatureId) FOR ExternalFailureOccurrenceDescription»
-    «LET "failureProbability"+this.failureType__ExternalFailureOccurrenceDescription.javaName() AS fp»
-		double «fp»;
+Â«DEFINE FailureOccurrence(String roleId, String signatureId) FOR ExternalFailureOccurrenceDescriptionÂ»
+    Â«LET "failureProbability"+this.failureType__ExternalFailureOccurrenceDescription.javaName() AS fpÂ»
+		double Â«fpÂ»;
         try {
-			    «fp» = Double.parseDouble("«this.failureProbability»");
+			    Â«fpÂ» = Double.parseDouble("Â«this.failureProbabilityÂ»");
 		} catch (NumberFormatException exception) {
-			    «fp» = 0.0;
+			    Â«fpÂ» = 0.0;
 		}
-			accProbability += «fp»;
-	  		if ((«fp» > 0.0) && (accProbability >= randValue)) {
-				«EXPAND RaiseFailure(roleId, signatureId) FOR this.failureType__ExternalFailureOccurrenceDescription»
+			accProbability += Â«fpÂ»;
+	  		if ((Â«fpÂ» > 0.0) && (accProbability >= randValue)) {
+				Â«EXPAND RaiseFailure(roleId, signatureId) FOR this.failureType__ExternalFailureOccurrenceDescriptionÂ»
   		}
-	«ENDLET» 
-«ENDDEFINE»
+	Â«ENDLETÂ» 
+Â«ENDDEFINEÂ»
 
-«DEFINE RaiseFailure(String roleId, String signatureId) FOR FailureType»
-	«ERROR "OAW GENERATION ERROR [m2t_transforms/sim/dummies.xpt]: Unknown FailureType found: " + this.entityName + " (type = " + this.metaType + "; id = " + this.id + ")"» 
-«ENDDEFINE»
+Â«DEFINE RaiseFailure(String roleId, String signatureId) FOR FailureTypeÂ»
+	Â«ERROR "OAW GENERATION ERROR [m2t_transforms/sim/dummies.xpt]: Unknown FailureType found: " + this.entityName + " (type = " + this.metaType + "; id = " + this.id + ")"Â» 
+Â«ENDDEFINEÂ»
 
-«DEFINE RaiseFailure(String roleId, String signatureId) FOR SoftwareInducedFailureType»
+Â«DEFINE RaiseFailure(String roleId, String signatureId) FOR SoftwareInducedFailureTypeÂ»
     de.uka.ipd.sdq.simucomframework.exceptions.FailureException.raise(
 		this.getModel(),this.getModel().getFailureStatistics().getExternalSoftwareFailureType(
-			"«this.id»", "«roleId»", "«signatureId»"));
-«ENDDEFINE»
+			"Â«this.idÂ»", "Â«roleIdÂ»", "Â«signatureIdÂ»"));
+Â«ENDDEFINEÂ»
 
-«DEFINE RaiseFailure(String roleId, String signatureId) FOR HardwareInducedFailureType»
+Â«DEFINE RaiseFailure(String roleId, String signatureId) FOR HardwareInducedFailureTypeÂ»
     de.uka.ipd.sdq.simucomframework.exceptions.FailureException.raise(
 		this.getModel(),this.getModel().getFailureStatistics().getExternalHardwareFailureType(
-		    "«this.processingResourceType__HardwareInducedFailureType.id»", "«roleId»", "«signatureId»"));
-«ENDDEFINE»
+		    "Â«this.processingResourceType__HardwareInducedFailureType.idÂ»", "Â«roleIdÂ»", "Â«signatureIdÂ»"));
+Â«ENDDEFINEÂ»
 
-«DEFINE RaiseFailure(String roleId, String signatureId) FOR NetworkInducedFailureType»
+Â«DEFINE RaiseFailure(String roleId, String signatureId) FOR NetworkInducedFailureTypeÂ»
     de.uka.ipd.sdq.simucomframework.exceptions.FailureException.raise(
 		this.getModel(),this.getModel().getFailureStatistics().getExternalNetworkFailureType(
-			"«this.communicationLinkResourceType__NetworkInducedFailureType.id»", "«roleId»", "«signatureId»"));
-«ENDDEFINE»
+			"Â«this.communicationLinkResourceType__NetworkInducedFailureType.idÂ»", "Â«roleIdÂ»", "Â«signatureIdÂ»"));
+Â«ENDDEFINEÂ»
 

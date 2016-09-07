@@ -1,11 +1,11 @@
-«EXTENSION m2t_transforms::java_names»
-«EXTENSION m2t_transforms::pcm»
-«IMPORT repository»
-«IMPORT seff»
-«IMPORT system»
-«IMPORT core::entity»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«EXTENSION m2t_transforms::pcmÂ»
+Â«IMPORT repositoryÂ»
+Â«IMPORT seffÂ»
+Â«IMPORT systemÂ»
+Â«IMPORT core::entityÂ»
 
-«DEFINE SpecificImplementationPartTM FOR RepositoryComponent»
+Â«DEFINE SpecificImplementationPartTM FOR RepositoryComponentÂ»
 	// Component Parameter Defaults
 	// TODO: The stackframes are not yet initialised by calling setComponentFrame in Protocom, thus initialise them here, too
 	protected de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe<Object> myDefaultComponentStackFrame = new de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe<Object>();
@@ -17,23 +17,23 @@
 	public void setComponentFrame(de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe<Object> myComponentStackFrame) {
 		this.myComponentStackFrame = myComponentStackFrame;	
 		this.myDefaultComponentStackFrame = new de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe<Object>();
-		«IF ImplementationComponentType.isInstance(this)»
-			«FOREACH ((ImplementationComponentType)this).componentParameterUsage_ImplementationComponentType AS pu»
-				«FOREACH pu.variableCharacterisation_VariableUsage AS vc»
-					this.myDefaultComponentStackFrame.addValue("«pu.parameterUsageLHS()+'.'+vc.type.toString()»",
-					   	new de.uka.ipd.sdq.simucomframework.variables.EvaluationProxy("«vc.specification_VariableCharacterisation.specification.specificationString()»",
+		Â«IF ImplementationComponentType.isInstance(this)Â»
+			Â«FOREACH ((ImplementationComponentType)this).componentParameterUsage_ImplementationComponentType AS puÂ»
+				Â«FOREACH pu.variableCharacterisation_VariableUsage AS vcÂ»
+					this.myDefaultComponentStackFrame.addValue("Â«pu.parameterUsageLHS()+'.'+vc.type.toString()Â»",
+					   	new de.uka.ipd.sdq.simucomframework.variables.EvaluationProxy("Â«vc.specification_VariableCharacterisation.specification.specificationString()Â»",
 					   	new de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe<Object>()));
-				«ENDFOREACH»
-			«ENDFOREACH»
-		«ENDIF»
+				Â«ENDFOREACHÂ»
+			Â«ENDFOREACHÂ»
+		Â«ENDIFÂ»
 	}
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE SpecificImplementationPartForInterfaceTM FOR RepositoryComponent»
+Â«DEFINE SpecificImplementationPartForInterfaceTM FOR RepositoryComponentÂ»
 public void setComponentFrame(de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe<Object> myComponentStackFrame);
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComponentConstructor FOR RepositoryComponent»
+Â«DEFINE ComponentConstructor FOR RepositoryComponentÂ»
 	private static final org.apache.log4j.Logger logger = 
 			org.apache.log4j.Logger.getLogger(de.uka.ipd.sdq.simucomframework.model.SimuComModel.class.getName());
 	
@@ -53,43 +53,43 @@ public void setComponentFrame(de.uka.ipd.sdq.simucomframework.variables.stackfra
 		return model;
 	} 
 	
-	«EXPAND PassiveResourceDecls FOR this»
+	Â«EXPAND PassiveResourceDecls FOR thisÂ»
 	
-	public «this.javaName()» (String assemblyContextURI, de.uka.ipd.sdq.simucomframework.model.SimuComModel model) {
+	public Â«this.javaName()Â» (String assemblyContextURI, de.uka.ipd.sdq.simucomframework.model.SimuComModel model) {
 		this.assemblyContext = (org.palladiosimulator.pcm.core.composition.AssemblyContext) org.palladiosimulator.commons.emfutils.EMFLoadHelper.loadAndResolveEObject(assemblyContextURI);
 		this.model = model;
 		
-		«EXPAND InitCalculatorsTM FOR this»
+		Â«EXPAND InitCalculatorsTM FOR thisÂ»
 	}
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE PassiveResourceDecls FOR RepositoryComponent»
-«ENDDEFINE»
+Â«DEFINE PassiveResourceDecls FOR RepositoryComponentÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE PassiveResourceDecls FOR BasicComponent»
+Â«DEFINE PassiveResourceDecls FOR BasicComponentÂ»
 	// Initialize this component's passive resources
-	«FOREACH this.passiveResource_BasicComponent AS pr»
-		de.uka.ipd.sdq.scheduler.IPassiveResource pr_«pr.id.javaVariableName()» = null;
-	«ENDFOREACH»
-«ENDDEFINE»
+	Â«FOREACH this.passiveResource_BasicComponent AS prÂ»
+		de.uka.ipd.sdq.scheduler.IPassiveResource pr_Â«pr.id.javaVariableName()Â» = null;
+	Â«ENDFOREACHÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComponentHelperMethodsDeclaration FOR InterfaceProvidingEntity»
+Â«DEFINE ComponentHelperMethodsDeclaration FOR InterfaceProvidingEntityÂ»
  public org.palladiosimulator.pcm.core.composition.AssemblyContext getAssemblyContext();
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE InterfaceHelperMethodsDeclaration FOR OperationInterface»
+Â«DEFINE InterfaceHelperMethodsDeclaration FOR OperationInterfaceÂ»
  public org.palladiosimulator.pcm.core.composition.AssemblyContext getComponentAssemblyContext();
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE InterfaceHelperMethodsDeclaration FOR InfrastructureInterface»
+Â«DEFINE InterfaceHelperMethodsDeclaration FOR InfrastructureInterfaceÂ»
  public org.palladiosimulator.pcm.core.composition.AssemblyContext getComponentAssemblyContext();
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«REM»Template Method for the calculator initialization«ENDREM»
-«DEFINE InitCalculatorsTM FOR RepositoryComponent»
-«ENDDEFINE»
+Â«REMÂ»Template Method for the calculator initializationÂ«ENDREMÂ»
+Â«DEFINE InitCalculatorsTM FOR RepositoryComponentÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ContainerAvailabilityCheck FOR OperationSignature»
+Â«DEFINE ContainerAvailabilityCheck FOR OperationSignatureÂ»
 	// Simulate a failure if one or multiple of the processing resources
 	// required by the executing resource container are currently unavailable:
 	de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer container = ctx.findResource(this.assemblyContext.getId());
@@ -102,7 +102,7 @@ public void setComponentFrame(de.uka.ipd.sdq.simucomframework.variables.stackfra
 						container.getResourceContainerID(),
 						failedResources.get(index).getResourceTypeId()));
 	}
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
 /* Separation of bodies generated for actions and calling these bodies. This is 
 required due to the Java restriction that methods may not longer than 64k which 
@@ -111,14 +111,14 @@ generated.
 Use ActionsAsCalls to execute the mapped AbstractAction. 
 Use ActionsAsMethods to generate the mapping for exactly one AbstractAction.
 */
-«DEFINE ComponentService(RepositoryComponent component) FOR OperationSignature»
-   public «EXPAND m2t_transforms::java_core::ComponentServiceSignature FOR this»
+Â«DEFINE ComponentService(RepositoryComponent component) FOR OperationSignatureÂ»
+   public Â«EXPAND m2t_transforms::java_core::ComponentServiceSignature FOR thisÂ»
    {
-   	  «EXPAND m2t_transforms::java_core::ContainerAvailabilityCheckTM FOR this» 
+   	  Â«EXPAND m2t_transforms::java_core::ContainerAvailabilityCheckTM FOR thisÂ» 
 
-      «PROTECT CSTART '/*' CEND '*/' ID this.javaSignature() + "_" + component.id + "_" + this.interface__OperationSignature.id DISABLE»
-   	  «IF this.hasSEFF(component)»
-   	  	«LET ((ResourceDemandingSEFF)this.getSEFF(component)) AS seff»
+      Â«PROTECT CSTART '/*' CEND '*/' ID this.javaSignature() + "_" + component.id + "_" + this.interface__OperationSignature.id DISABLEÂ»
+   	  Â«IF this.hasSEFF(component)Â»
+   	  	Â«LET ((ResourceDemandingSEFF)this.getSEFF(component)) AS seffÂ»
 			de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe<Object> resultStackFrame =
 				new de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe<Object>();
 			de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe<Object> methodBodyStackFrame =
@@ -129,25 +129,25 @@ Use ActionsAsMethods to generate the mapping for exactly one AbstractAction.
 			if (this.myComponentStackFrame.getContents().size() > 0) {
 				methodBodyStackFrame.addVariables(this.myComponentStackFrame);
 			}
-	      «EXPAND ActionsAsCalls FOR seff.steps_Behaviour.findStart()»
+	      Â«EXPAND ActionsAsCalls FOR seff.steps_Behaviour.findStart()Â»
 	      return resultStackFrame;   
-    	«ENDLET»
-   	  «ENDIF»
-   	  «ENDPROTECT»
+    	Â«ENDLETÂ»
+   	  Â«ENDIFÂ»
+   	  Â«ENDPROTECTÂ»
    }   
-   «IF this.hasSEFF(component)»
-	«LET ((ResourceDemandingSEFF)this.getSEFF(component)) AS seff»
-    	«EXPAND ActionsAsMethods FOR seff.steps_Behaviour.findStart()»      
-	«ENDLET»
-  «ENDIF»
-«ENDDEFINE»
+   Â«IF this.hasSEFF(component)Â»
+	Â«LET ((ResourceDemandingSEFF)this.getSEFF(component)) AS seffÂ»
+    	Â«EXPAND ActionsAsMethods FOR seff.steps_Behaviour.findStart()Â»      
+	Â«ENDLETÂ»
+  Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ComponentService(RepositoryComponent component) FOR InfrastructureSignature»
-   public «EXPAND m2t_transforms::java_core::ComponentServiceSignature FOR this»
+Â«DEFINE ComponentService(RepositoryComponent component) FOR InfrastructureSignatureÂ»
+   public Â«EXPAND m2t_transforms::java_core::ComponentServiceSignature FOR thisÂ»
    { 
-      «PROTECT CSTART '/*' CEND '*/' ID this.javaSignature() + "_" + component.id + "_" + this.infrastructureInterface__InfrastructureSignature.id DISABLE»
-   	  «IF this.hasSEFF(component)»
-   	  	«LET ((ResourceDemandingSEFF)this.getSEFF(component)) AS seff»
+      Â«PROTECT CSTART '/*' CEND '*/' ID this.javaSignature() + "_" + component.id + "_" + this.infrastructureInterface__InfrastructureSignature.id DISABLEÂ»
+   	  Â«IF this.hasSEFF(component)Â»
+   	  	Â«LET ((ResourceDemandingSEFF)this.getSEFF(component)) AS seffÂ»
 			de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe<Object> resultStackFrame =
 				new de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe<Object>();
 			de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe<Object> methodBodyStackFrame =
@@ -158,65 +158,65 @@ Use ActionsAsMethods to generate the mapping for exactly one AbstractAction.
 			if (this.myComponentStackFrame.getContents().size() > 0) {
 				methodBodyStackFrame.addVariables(this.myComponentStackFrame);
 			}
-	      «EXPAND ActionsAsCalls FOR seff.steps_Behaviour.findStart()»
+	      Â«EXPAND ActionsAsCalls FOR seff.steps_Behaviour.findStart()Â»
 	      return resultStackFrame;   
-    	«ENDLET»
-   	  «ENDIF»
-   	  «ENDPROTECT»
+    	Â«ENDLETÂ»
+   	  Â«ENDIFÂ»
+   	  Â«ENDPROTECTÂ»
    }   
-   «IF this.hasSEFF(component)»
-	«LET ((ResourceDemandingSEFF)this.getSEFF(component)) AS seff»
-    	«EXPAND ActionsAsMethods FOR seff.steps_Behaviour.findStart()»      
-	«ENDLET»
-  «ENDIF»
-«ENDDEFINE»
+   Â«IF this.hasSEFF(component)Â»
+	Â«LET ((ResourceDemandingSEFF)this.getSEFF(component)) AS seffÂ»
+    	Â«EXPAND ActionsAsMethods FOR seff.steps_Behaviour.findStart()Â»      
+	Â«ENDLETÂ»
+  Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ActionsAsCalls FOR AbstractAction»
-	action«javaVariableName(this.id)»(ctx, resultStackFrame, methodBodyStackFrame);
-   «IF !StopAction.isInstance(this)»
-      «EXPAND ActionsAsCalls FOR this.successor_AbstractAction»
-   «ENDIF»
-«ENDDEFINE»
+Â«DEFINE ActionsAsCalls FOR AbstractActionÂ»
+	actionÂ«javaVariableName(this.id)Â»(ctx, resultStackFrame, methodBodyStackFrame);
+   Â«IF !StopAction.isInstance(this)Â»
+      Â«EXPAND ActionsAsCalls FOR this.successor_AbstractActionÂ»
+   Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ActionsAsMethods FOR AbstractAction»
-	private void action«javaVariableName(this.id)»(
-			final «EXPAND m2t_transforms::java_core::ContextTypeTM FOR this» ctx, 
+Â«DEFINE ActionsAsMethods FOR AbstractActionÂ»
+	private void actionÂ«javaVariableName(this.id)Â»(
+			final Â«EXPAND m2t_transforms::java_core::ContextTypeTM FOR thisÂ» ctx, 
 			final de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe<Object> resultStackFrame, 
 			final de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe<Object> methodBodyStackFrame) {
-		// EntityName = «javaString(this.entityName)», Type = «javaString(this.metaType.name)»
-	   «EXPAND m2t_transforms::seff_body::Action FOR this»
+		// EntityName = Â«javaString(this.entityName)Â», Type = Â«javaString(this.metaType.name)Â»
+	   Â«EXPAND m2t_transforms::seff_body::Action FOR thisÂ»
    }
-   «EXPAND ActionsAsMethodsSubBehavior FOR this»
-   «IF this.successor_AbstractAction != null»
-      «EXPAND ActionsAsMethods FOR this.successor_AbstractAction»
-   «ENDIF»
-«ENDDEFINE»
+   Â«EXPAND ActionsAsMethodsSubBehavior FOR thisÂ»
+   Â«IF this.successor_AbstractAction != nullÂ»
+      Â«EXPAND ActionsAsMethods FOR this.successor_AbstractActionÂ»
+   Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ActionsAsMethodsSubBehavior FOR AbstractAction»
-«ENDDEFINE»
+Â«DEFINE ActionsAsMethodsSubBehavior FOR AbstractActionÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ActionsAsMethodsSubBehavior FOR CollectionIteratorAction»
-	«EXPAND ActionsAsMethods FOR this.bodyBehaviour_Loop.steps_Behaviour.findStart()»
-«ENDDEFINE»
+Â«DEFINE ActionsAsMethodsSubBehavior FOR CollectionIteratorActionÂ»
+	Â«EXPAND ActionsAsMethods FOR this.bodyBehaviour_Loop.steps_Behaviour.findStart()Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ActionsAsMethodsSubBehavior FOR LoopAction»
-       «EXPAND ActionsAsMethods FOR this.bodyBehaviour_Loop.steps_Behaviour.findStart()»
-«ENDDEFINE»
+Â«DEFINE ActionsAsMethodsSubBehavior FOR LoopActionÂ»
+       Â«EXPAND ActionsAsMethods FOR this.bodyBehaviour_Loop.steps_Behaviour.findStart()Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ActionsAsMethodsSubBehavior FOR BranchAction»
-	«FOREACH this.branches_Branch.branchBehaviour_BranchTransition AS transition SEPARATOR " "»
-		«EXPAND ActionsAsMethods FOR transition.steps_Behaviour.findStart()»
-	«ENDFOREACH»
-«ENDDEFINE»
+Â«DEFINE ActionsAsMethodsSubBehavior FOR BranchActionÂ»
+	Â«FOREACH this.branches_Branch.branchBehaviour_BranchTransition AS transition SEPARATOR " "Â»
+		Â«EXPAND ActionsAsMethods FOR transition.steps_Behaviour.findStart()Â»
+	Â«ENDFOREACHÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ActionsAsMethodsSubBehavior FOR ForkAction»
-	«FOREACH this.asynchronousForkedBehaviours_ForkAction AS f SEPARATOR " "»
-		«EXPAND ActionsAsMethods FOR f.steps_Behaviour.findStart()»
-	«ENDFOREACH»
-	«FOREACH this.synchronisingBehaviours_ForkAction.synchronousForkedBehaviours_SynchronisationPoint AS f SEPARATOR " "»
-		«EXPAND ActionsAsMethods FOR f.steps_Behaviour.findStart()»
-	«ENDFOREACH»
-«ENDDEFINE»
+Â«DEFINE ActionsAsMethodsSubBehavior FOR ForkActionÂ»
+	Â«FOREACH this.asynchronousForkedBehaviours_ForkAction AS f SEPARATOR " "Â»
+		Â«EXPAND ActionsAsMethods FOR f.steps_Behaviour.findStart()Â»
+	Â«ENDFOREACHÂ»
+	Â«FOREACH this.synchronisingBehaviours_ForkAction.synchronousForkedBehaviours_SynchronisationPoint AS f SEPARATOR " "Â»
+		Â«EXPAND ActionsAsMethods FOR f.steps_Behaviour.findStart()Â»
+	Â«ENDFOREACHÂ»
+Â«ENDDEFINEÂ»
 
 
 

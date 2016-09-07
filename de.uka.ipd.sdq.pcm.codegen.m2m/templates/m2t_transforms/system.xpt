@@ -1,26 +1,26 @@
-«EXTENSION m2t_transforms::java_names»
-«IMPORT system»
-«IMPORT core::composition»
+Â«EXTENSION m2t_transforms::java_namesÂ»
+Â«IMPORT systemÂ»
+Â«IMPORT core::compositionÂ»
 
-«DEFINE Root FOR System»
-   «EXPAND m2t_transforms::completions::ExpandCompletions FOR this»
-   «FILE this.getFileName()»
-      «EXPAND System FOR this»
-   «ENDFILE»
-«ENDDEFINE»
+Â«DEFINE Root FOR SystemÂ»
+   Â«EXPAND m2t_transforms::completions::ExpandCompletions FOR thisÂ»
+   Â«FILE this.getFileName()Â»
+      Â«EXPAND System FOR thisÂ»
+   Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE System FOR System»
-	«EXPAND m2t_transforms::composed_structure::ComposedStructureStart FOR this»
-    «EXPAND m2t_transforms::provided_ports::ProvidedPorts FOR this»
-	«EXPAND m2t_transforms::context_pattern::RequiredInterfaces FOR this»
-	«EXPAND SystemInnerAdditionsTM FOR this»
-	«EXPAND m2t_transforms::composed_structure::ComposedStructureEnd FOR this»
-	«EXPAND SystemAdditionsTM FOR this»
-«ENDDEFINE»
+Â«DEFINE System FOR SystemÂ»
+	Â«EXPAND m2t_transforms::composed_structure::ComposedStructureStart FOR thisÂ»
+    Â«EXPAND m2t_transforms::provided_ports::ProvidedPorts FOR thisÂ»
+	Â«EXPAND m2t_transforms::context_pattern::RequiredInterfaces FOR thisÂ»
+	Â«EXPAND SystemInnerAdditionsTM FOR thisÂ»
+	Â«EXPAND m2t_transforms::composed_structure::ComposedStructureEnd FOR thisÂ»
+	Â«EXPAND SystemAdditionsTM FOR thisÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE SystemInnerAdditionsTM FOR System»
-«ENDDEFINE»
+Â«DEFINE SystemInnerAdditionsTM FOR SystemÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE SystemAdditionsTM FOR System»
-«ENDDEFINE»
+Â«DEFINE SystemAdditionsTM FOR SystemÂ»
+Â«ENDDEFINEÂ»
 
