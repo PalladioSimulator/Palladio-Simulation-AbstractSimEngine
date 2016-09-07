@@ -7,7 +7,6 @@
 «IMPORT core::composition»
 «IMPORT allocation»
 «IMPORT resourceenvironment»
-«IMPORT resourcerepository»
 «IMPORT completions»
 
 //------------------------------
