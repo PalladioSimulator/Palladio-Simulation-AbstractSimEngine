@@ -250,8 +250,3 @@ List[InternalAction] queryInternalActionsForkedBehaviour(List[ForkedBehaviour] l
 
 List[InternalAction] queryInternalActions(ForkedBehaviour b, List[InternalAction] result):
 	queryInternalActions(b.steps_Behaviour.findStart(), result);
-
-
-ResourceDemandingSEFF getRdseff(AbstractAction action) : JAVA
-	de.uka.sdq.pcm.transformations.Helper.getRdseff(org.palladiosimulator.pcm.seff.AbstractAction)
-	;
