@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Level;
-
 import org.palladiosimulator.pcm.core.composition.AssemblyContext;
 import org.palladiosimulator.pcm.repository.PassiveResource;
+import org.palladiosimulator.pcm.resourceenvironment.HDDProcessingResourceSpecification;
 import org.palladiosimulator.pcm.resourceenvironment.ProcessingResourceSpecification;
+
 import de.uka.ipd.sdq.scheduler.IPassiveResource;
 import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
 import de.uka.ipd.sdq.simucomframework.exceptions.ResourceContainerIsMissingRequiredResourceType;
@@ -35,8 +36,8 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
     protected SimulatedResourceContainer(final SimuComModel myModel, final String containerID, final List<SimulatedResourceContainer> nestedContainer, final SimulatedResourceContainer parent) {
         super(myModel, containerID);
 
-        nestedResourceContainers = nestedContainer;
-        parentResourceContainer = parent;
+        this.nestedResourceContainers = nestedContainer;
+        this.parentResourceContainer = parent;
     }
 
     public IPassiveResource createPassiveResource(final PassiveResource resource,
@@ -53,31 +54,31 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
     }
 
     public List<SimulatedResourceContainer> getNestedResourceContainers() {
-        return nestedResourceContainers;
+        return this.nestedResourceContainers;
     }
 
     public SimulatedResourceContainer getParentResourceContainer() {
-        return parentResourceContainer;
+        return this.parentResourceContainer;
     }
 
     public void addNestedResourceContainer(final String nestedResourceContainerId) {
-        final AbstractSimulatedResourceContainer resourceContainer = myModel.getResourceRegistry()
+        final AbstractSimulatedResourceContainer resourceContainer = this.myModel.getResourceRegistry()
                 .getResourceContainer(nestedResourceContainerId);
         if ((resourceContainer == null) || (!(resourceContainer instanceof SimulatedResourceContainer))) {
             throw new RuntimeException("Could not initialize resouce container " + this.myContainerID
                     + ": Nested resource container " + nestedResourceContainerId + " is not available.");
         }
-        nestedResourceContainers.add((SimulatedResourceContainer) resourceContainer);
+        this.nestedResourceContainers.add((SimulatedResourceContainer) resourceContainer);
     }
     
     public void setParentResourceContainer(final String parentResourceContainerId) {
-        final AbstractSimulatedResourceContainer resourceContainer = myModel.getResourceRegistry()
+        final AbstractSimulatedResourceContainer resourceContainer = this.myModel.getResourceRegistry()
                 .getResourceContainer(parentResourceContainerId);
         if ((resourceContainer == null) || (!(resourceContainer instanceof SimulatedResourceContainer))) {
             throw new RuntimeException("Could not initialize resouce container " + this.myContainerID
                     + ": Parent resource container " + parentResourceContainerId + " is not available.");
         }
-        parentResourceContainer = (SimulatedResourceContainer) resourceContainer;
+        this.parentResourceContainer = (SimulatedResourceContainer) resourceContainer;
     }
 
     public void addActiveResource(final ProcessingResourceSpecification activeResource,
@@ -111,15 +112,24 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
 
     public ScheduledResource addActiveResourceWithoutCalculators(final ProcessingResourceSpecification activeResource,
             final String[] providedInterfaceIds, final String resourceContainerID, final String schedulingStrategyID) {
-        final ScheduledResource scheduledResource = new ScheduledResource(activeResource, myModel, resourceContainerID,
-                schedulingStrategyID);
+    	
+		ScheduledResource scheduledResource = null;
+    	
+    	if (activeResource instanceof HDDProcessingResourceSpecification) {
+			scheduledResource = new HDDResource((HDDProcessingResourceSpecification) activeResource, this.myModel,
+					resourceContainerID, schedulingStrategyID);
+		} else {
+			scheduledResource = new ScheduledResource(activeResource, this.myModel, resourceContainerID,
+					schedulingStrategyID);
+    	}
+
         final String resourceType = activeResource.getActiveResourceType_ActiveResourceSpecification().getId();
 
-        activeResources.put(resourceType, scheduledResource);
+        this.activeResources.put(resourceType, scheduledResource);
         // Currently, resources can also be looked up by the provided interface id
         if (providedInterfaceIds != null) {
             for (final String providedInterfaceId : providedInterfaceIds) {
-                activeResourceProvidedInterfaces.put(providedInterfaceId, resourceType);
+                this.activeResourceProvidedInterfaces.put(providedInterfaceId, resourceType);
             }
         }
 
@@ -149,7 +159,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
         try {
             super.loadActiveResource(requestingProcess, typeID, demand);
         } catch (final ResourceContainerIsMissingRequiredResourceType e) {
-            if (parentResourceContainer == null) {
+            if (this.parentResourceContainer == null) {
                 if (LOGGER.isEnabledFor(Level.ERROR)) {
                     LOGGER.error("Resource container is missing a resource which was attempted to be loaded"
                             + " by a component and has no parent Resource Container to look in. ID of resource type was: "
@@ -157,7 +167,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
                 }
                 throw new ResourceContainerIsMissingRequiredResourceType(typeID);
             } else {
-                parentResourceContainer.loadActiveResource(requestingProcess, typeID, demand);
+                this.parentResourceContainer.loadActiveResource(requestingProcess, typeID, demand);
             }
         }
     }
@@ -183,7 +193,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
         try {
             super.loadActiveResource(requestingProcess, providedInterfaceID, resourceServiceID, demand);
         } catch (final ResourceContainerIsMissingRequiredResourceType e) {
-            if (parentResourceContainer == null) {
+            if (this.parentResourceContainer == null) {
                 if (LOGGER.isEnabledFor(Level.ERROR)) {
                     LOGGER.error("Resource container is missing a resource which was attempted to be loaded"
                             + " by a component and has no parent Resource Container to look in. ID of resource type was: "
@@ -191,7 +201,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
                 }
                 throw new ResourceContainerIsMissingRequiredResourceType(e.getTypeID());
             } else {
-                parentResourceContainer.loadActiveResource(requestingProcess, providedInterfaceID, resourceServiceID,
+                this.parentResourceContainer.loadActiveResource(requestingProcess, providedInterfaceID, resourceServiceID,
                         demand);
             }
         }
@@ -221,7 +231,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
         try {
             super.loadActiveResource(requestingProcess, providedInterfaceID, resourceServiceID, parameterMap, demand);
         } catch (final ResourceContainerIsMissingRequiredResourceType e) {
-            if (parentResourceContainer == null) {
+            if (this.parentResourceContainer == null) {
                 if (LOGGER.isEnabledFor(Level.ERROR)) {
                     LOGGER.error("Resource container is missing a resource which was attempted to be loaded"
                             + " by a component and has no parent Resource Container to look in. ID of resource type was: "
@@ -229,7 +239,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
                 }
                 throw new ResourceContainerIsMissingRequiredResourceType(e.getTypeID());
             } else {
-                parentResourceContainer.loadActiveResource(requestingProcess, providedInterfaceID, resourceServiceID,
+                this.parentResourceContainer.loadActiveResource(requestingProcess, providedInterfaceID, resourceServiceID,
                         parameterMap, demand);
             }
         }

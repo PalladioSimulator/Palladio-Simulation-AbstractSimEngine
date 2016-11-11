@@ -164,4 +164,31 @@ public abstract class AbstractSimulatedResourceContainer {
         return myContainerID;
     }
 
+    /**
+     * Demand processing of a resource demand by a given type of active
+     * resources In future versions this has to control schedulers of resource
+     * types which exist in multiple instances
+     *
+     * @param requestingProcess
+     *            The thread requesting the processing of a resource demand
+     * @param resourceServiceID
+     *            the id of the resource service to be called.
+     * @param typeID
+     *            ID of the resource type to which the demand is directed. Same
+     *            as the PCM resource type IDs
+     * @param demand
+     *            The demand in units processable by the resource. The resource
+     *            is responsible itself for converting this demand into time
+     *            spans
+     */
+    public void loadActiveResource(final SimuComSimProcess requestingProcess, final int resourceServiceID,
+            final String typeID, final double demand) {
+        final AbstractScheduledResource resource = this.activeResources.get(typeID);
+        if (resource == null) {
+            throw new ResourceContainerIsMissingRequiredResourceType(typeID);
+        }
+        resource.consumeResource(requestingProcess, resourceServiceID, Collections.<String, Serializable> emptyMap(),
+                demand);
+    }
+
 }
