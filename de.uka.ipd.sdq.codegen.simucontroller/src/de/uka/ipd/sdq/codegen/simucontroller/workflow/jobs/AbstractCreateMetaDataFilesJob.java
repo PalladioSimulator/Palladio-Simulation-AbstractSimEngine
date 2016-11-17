@@ -121,7 +121,7 @@ public abstract class AbstractCreateMetaDataFilesJob {
         out.println("Bundle-ActivationPolicy: lazy"); //$NON-NLS-1$
         out.println("Bundle-ClassPath: bin/,");
         out.println(" .");
-        out.println("Bundle-RequiredExecutionEnvironment: JavaSE-1.6");
+        out.println("Bundle-RequiredExecutionEnvironment: JavaSE-1.7");
         // out.println("Export-Package: main");
 
         out.close();
@@ -140,16 +140,16 @@ public abstract class AbstractCreateMetaDataFilesJob {
      * Creates the content.properties file of the generated project which is necessary for rerunning
      * the simulation
      */
-    private void createAdditionalProperties(IProject project) throws CoreException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream out = new PrintStream(baos);
+    private void createAdditionalProperties(final IProject project) throws CoreException {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final PrintStream out = new PrintStream(baos);
 
         out.println("#####Contains data about the original models on which this project was built#####");
         if (configuration.getStoragePluginID() != null) {
             out.println("baseProjectID = " + configuration.getBaseProjectID());
 
-            for (String path : configuration.getModelPaths()) {
-                String fileEnding = path.substring(path.lastIndexOf(".") + 1);
+            for (final String path : configuration.getModelPaths()) {
+                final String fileEnding = path.substring(path.lastIndexOf(".") + 1);
                 out.println(fileEnding + " = " + path);
             }
         }
