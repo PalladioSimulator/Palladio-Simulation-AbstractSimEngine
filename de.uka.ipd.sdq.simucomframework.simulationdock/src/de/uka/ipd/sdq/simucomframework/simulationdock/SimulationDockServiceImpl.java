@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Map;
 
+import javax.management.RuntimeErrorException;
+
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
@@ -107,6 +109,7 @@ public class SimulationDockServiceImpl implements SimulationDockService {
             simulationBundleRef.start();
 
         } catch (BundleException e) {
+            uninstallBundle(simulationBundleRef);
             throw new RuntimeException("OSGi failure", e);
         }
         ServiceReference[] services = simulationBundleRef.getRegisteredServices();
@@ -125,7 +128,18 @@ public class SimulationDockServiceImpl implements SimulationDockService {
             sendEvent("de/uka/ipd/sdq/simucomframework/simucomdock/SIM_STARTED");
             ((ISimulationControl) service.getService()).prepareSimulation(config, simulationObservers, isRemoteRun);
         } catch (Exception ex) {
+            uninstallBundle(simulationBundleRef);
             throw new RuntimeException(ex);
+        }
+    }
+
+    private static void uninstallBundle(Bundle simulationBundleRef) {
+        if(simulationBundleRef != null) {
+            try {
+                simulationBundleRef.uninstall();
+            } catch (BundleException e) {
+                throw new RuntimeException("OSGi failure", e);
+            }
         }
     }
 
