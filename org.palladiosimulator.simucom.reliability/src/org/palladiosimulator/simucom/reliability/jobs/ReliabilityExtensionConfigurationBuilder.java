@@ -3,6 +3,7 @@ package org.palladiosimulator.simucom.reliability.jobs;
 import java.util.Map;
 
 import de.uka.ipd.sdq.codegen.simucontroller.runconfig.SimuComExtensionConfigurationBuilder;
+import de.uka.ipd.sdq.simucomframework.SimuComConfig;
 import de.uka.ipd.sdq.simucomframework.SimuComConfigExtension;
 import de.uka.ipd.sdq.workflow.extension.AbstractExtensionJobConfiguration;
 
@@ -14,8 +15,8 @@ public class ReliabilityExtensionConfigurationBuilder extends SimuComExtensionCo
     @Override
     public final AbstractExtensionJobConfiguration buildConfiguration(final Map<String, Object> attributes) {
         ReliabilityExtensionJobConfiguration configuration = new ReliabilityExtensionJobConfiguration();
-        if (attributes.containsKey(ReliabilityExtensionTab.SIMULATE_FAILURES)) {
-            Boolean simulateFailures = (Boolean) attributes.get(ReliabilityExtensionTab.SIMULATE_FAILURES);
+        if (attributes.containsKey(SimuComConfig.SIMULATE_FAILURES)) {
+            Boolean simulateFailures = (Boolean) attributes.get(SimuComConfig.SIMULATE_FAILURES);
             configuration.setSimulateFailures(simulateFailures);
         }
         return configuration;

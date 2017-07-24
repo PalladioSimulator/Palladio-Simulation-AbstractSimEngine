@@ -13,6 +13,8 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
+import de.uka.ipd.sdq.simucomframework.SimuComConfig;
+
 /**
  * This class defines a tab with reliability-specific configuration options.
  */
@@ -22,11 +24,6 @@ public class ReliabilityExtensionTab extends AbstractLaunchConfigurationTab {
      * Default configuration for simulation of failure-on-demand occurrences.
      */
     private static final Boolean DEFAULT_SIMULATE_FAILURES = false;
-
-    /**
-     * Name of configuration attribute for failure-on-demand simulation.
-     */
-    public static final String SIMULATE_FAILURES = "reliability.simulateFailures";
 
     /**
      * Button for control of failure-on-demand simulation.
@@ -76,7 +73,7 @@ public class ReliabilityExtensionTab extends AbstractLaunchConfigurationTab {
     @Override
     public final void initializeFrom(final ILaunchConfiguration configuration) {
         try {
-            simulateFailuresButton.setSelection(configuration.getAttribute(SIMULATE_FAILURES, true));
+            simulateFailuresButton.setSelection(configuration.getAttribute(SimuComConfig.SIMULATE_FAILURES, true));
         } catch (CoreException e) {
             simulateFailuresButton.setSelection(false);
         }
@@ -84,12 +81,12 @@ public class ReliabilityExtensionTab extends AbstractLaunchConfigurationTab {
 
     @Override
     public final void performApply(final ILaunchConfigurationWorkingCopy configuration) {
-        configuration.setAttribute(SIMULATE_FAILURES, this.simulateFailuresButton.getSelection());
+        configuration.setAttribute(SimuComConfig.SIMULATE_FAILURES, this.simulateFailuresButton.getSelection());
     }
 
     @Override
     public final void setDefaults(final ILaunchConfigurationWorkingCopy configuration) {
-        configuration.setAttribute(SIMULATE_FAILURES, DEFAULT_SIMULATE_FAILURES);
+        configuration.setAttribute(SimuComConfig.SIMULATE_FAILURES, DEFAULT_SIMULATE_FAILURES);
     }
 
 }
