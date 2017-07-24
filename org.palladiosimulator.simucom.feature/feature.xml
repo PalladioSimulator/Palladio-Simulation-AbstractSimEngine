@@ -180,13 +180,6 @@ loader.
          unpack="false"/>
 
    <plugin
-         id="org.palladiosimulator.simucom.reliability"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="de.uka.ipd.sdq.simulation.abstractsimengine"
          download-size="0"
          install-size="0"
