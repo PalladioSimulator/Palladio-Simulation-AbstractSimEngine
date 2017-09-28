@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Abstract Simulation Engine Tests
 Bundle-SymbolicName: de.uka.ipd.sdq.simulation.abstractsimengine.example;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 4.1.0.qualifier
 Bundle-Vendor: edu.kit.ipd.sdq
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: de.uka.ipd.sdq.simulation.abstractsimengine;bundle-version="1.0.0",
