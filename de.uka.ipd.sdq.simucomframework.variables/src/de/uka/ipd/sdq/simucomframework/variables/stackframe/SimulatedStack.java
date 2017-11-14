@@ -6,7 +6,7 @@ import java.util.Stack;
 /**
  * A simulated stack used by simulation threads to store their local variables during their
  * execution
- * 
+ *
  * @author Steffen Becker
  *
  * @param <T>
@@ -15,8 +15,8 @@ import java.util.Stack;
 public class SimulatedStack<T> implements Serializable {
 
     /**
-	 * 
-	 */
+     *
+     */
     private static final long serialVersionUID = 4131291044209793459L;
 
     /**
@@ -29,24 +29,24 @@ public class SimulatedStack<T> implements Serializable {
 
     /**
      * Add a stackframe to this stack. The frame has no parent frame.
-     * 
+     *
      * @return The frame added by this method
      */
     public SimulatedStackframe<T> createAndPushNewStackFrame() {
-        SimulatedStackframe<T> frame = new SimulatedStackframe<T>();
+        final SimulatedStackframe<T> frame = new SimulatedStackframe<T>();
         stack.push(frame);
         return frame;
     }
 
     /**
      * Add a stackframe to this stack using the given frame as parent frame
-     * 
+     *
      * @param parent
      *            The parent frame of the frame to create
      * @return The newly created frame
      */
-    public SimulatedStackframe<T> createAndPushNewStackFrame(SimulatedStackframe<T> parent) {
-        SimulatedStackframe<T> frame = new SimulatedStackframe<T>(parent);
+    public SimulatedStackframe<T> createAndPushNewStackFrame(final SimulatedStackframe<T> parent) {
+        final SimulatedStackframe<T> frame = new SimulatedStackframe<T>(parent);
         stack.push(frame);
         return frame;
     }
@@ -74,11 +74,19 @@ public class SimulatedStack<T> implements Serializable {
 
     /**
      * Add a stackframe on top of this stack. The frame already exists.
-     * 
+     *
      * @param copyFrame
      *            The frame to push on the stack
      */
-    public void pushStackFrame(SimulatedStackframe<T> copyFrame) {
+    public void pushStackFrame(final SimulatedStackframe<T> copyFrame) {
         stack.push(copyFrame);
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "SimulatedStack [stack=" + stack + "]";
     }
 }
