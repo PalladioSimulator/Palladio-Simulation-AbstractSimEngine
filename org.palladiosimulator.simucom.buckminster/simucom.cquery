@@ -8,8 +8,6 @@
     <cq:advisorNode namePattern="^de\.uka\.ipd\.sdq\.scheduler.*" sourceLevel="REQUIRE" useWorkspace="false"/>
     <cq:advisorNode namePattern="^de\.uka\.ipd\.sdq\.simucom.*" sourceLevel="REQUIRE" useWorkspace="false"/>
     <cq:advisorNode namePattern="^de\.uka\.ipd\.sdq\.simulation.*" sourceLevel="REQUIRE" useWorkspace="false"/>
-    <cq:advisorNode namePattern="^org\.palladiosimulator\.pcm$" sourceLevel="REJECT">
-        <cq:property key="resolveFrom" value="nightly"/>
-    </cq:advisorNode>
+    <cq:advisorNode namePattern="^org\.palladiosimulator\.pcm$" sourceLevel="REJECT"/>
     <cq:advisorNode namePattern=".*" sourceLevel="REJECT"/>
 </cq:componentQuery>
