@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/de.uka.ipd.sdq.simulation.abstractsimengine.feature.source_4.0.0.qualifier.jar" id="de.uka.ipd.sdq.simulation.abstractsimengine.feature.source" version="4.0.0.qualifier">
+   <feature url="features/de.uka.ipd.sdq.simulation.abstractsimengine.feature.source_4.1.0.qualifier.jar" id="de.uka.ipd.sdq.simulation.abstractsimengine.feature.source" version="4.1.0.qualifier">
       <category name="org.palladiosimulator.support.source.category"/>
    </feature>
-   <feature url="features/de.uka.ipd.sdq.simulation.abstractsimengine.feature_4.0.0.qualifier.jar" id="de.uka.ipd.sdq.simulation.abstractsimengine.feature" version="4.0.0.qualifier">
+   <feature url="features/de.uka.ipd.sdq.simulation.abstractsimengine.feature_4.1.0.qualifier.jar" id="de.uka.ipd.sdq.simulation.abstractsimengine.feature" version="4.1.0.qualifier">
       <category name="org.palladiosimulator.support.category"/>
    </feature>
    <category-def name="org.palladiosimulator.support.category" label="Palladio Supporting Features">
