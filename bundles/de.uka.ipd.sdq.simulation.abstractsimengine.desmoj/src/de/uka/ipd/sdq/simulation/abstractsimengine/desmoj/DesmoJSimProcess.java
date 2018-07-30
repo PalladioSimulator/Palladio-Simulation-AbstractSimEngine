@@ -5,6 +5,7 @@ package de.uka.ipd.sdq.simulation.abstractsimengine.desmoj;
 
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimProcessDelegator;
 import de.uka.ipd.sdq.simulation.abstractsimengine.processes.ProcessState;
+import de.uka.ipd.sdq.simulation.abstractsimengine.processes.SimProcessCachedThreadPoolStrategy;
 import de.uka.ipd.sdq.simulation.abstractsimengine.processes.SimProcessThreadingStrategy;
 import de.uka.ipd.sdq.simulation.abstractsimengine.processes.SimulatedProcess;
 import desmoj.core.simulator.ExternalEvent;
@@ -26,7 +27,8 @@ public class DesmoJSimProcess extends SimulatedProcess {
     private final DesmoJExperiment experiment;
 
     public DesmoJSimProcess(AbstractSimProcessDelegator process, DesmoJModel model, String name) {
-        super(new SimProcessThreadingStrategy());
+    	super(new SimProcessCachedThreadPoolStrategy());
+    	
         this.myAbstractProcess = process;
         this.model = model;
         this.experiment = (DesmoJExperiment) myAbstractProcess.getModel().getSimulationControl();
