@@ -2,11 +2,11 @@ package org.palladiosimulator.simulation.abstractsimengine.ssj;
 
 import org.apache.log4j.Logger;
 
-import umontreal.iro.lecuyer.simevents.Event;
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimEntityDelegator;
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimEventDelegator;
 import de.uka.ipd.sdq.simulation.abstractsimengine.IEntity;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimEvent;
+import umontreal.ssj.simevents.Event;
 
 /**
  * @author Steffen Becker

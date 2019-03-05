@@ -5,12 +5,12 @@ package org.palladiosimulator.simulation.abstractsimengine.ssj;
 
 import org.apache.log4j.Logger;
 
-import umontreal.iro.lecuyer.simevents.Event;
-import umontreal.iro.lecuyer.simevents.Simulator;
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimProcessDelegator;
 import de.uka.ipd.sdq.simulation.abstractsimengine.processes.ProcessState;
 import de.uka.ipd.sdq.simulation.abstractsimengine.processes.SimProcessThreadingStrategy;
 import de.uka.ipd.sdq.simulation.abstractsimengine.processes.SimulatedProcess;
+import umontreal.ssj.simevents.Event;
+import umontreal.ssj.simevents.Simulator;
 
 /**
  * Simulation Process implementation for SSJ

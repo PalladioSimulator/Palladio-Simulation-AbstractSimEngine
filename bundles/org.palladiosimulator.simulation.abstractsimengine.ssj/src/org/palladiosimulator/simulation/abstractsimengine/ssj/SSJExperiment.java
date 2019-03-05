@@ -1,8 +1,8 @@
 package org.palladiosimulator.simulation.abstractsimengine.ssj;
 
-import umontreal.iro.lecuyer.simevents.Simulator;
-import umontreal.iro.lecuyer.simevents.eventlist.SplayTree;
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractExperiment;
+import umontreal.ssj.simevents.Simulator;
+import umontreal.ssj.simevents.eventlist.SplayTree;
 
 /**
  * @author Steffen Becker
