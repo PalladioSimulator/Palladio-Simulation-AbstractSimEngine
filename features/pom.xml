@@ -13,6 +13,7 @@
 	
 	<modules>
 		<module>de.uka.ipd.sdq.simulation.abstractsimengine.feature</module>
+		<module>org.palladiosimulator.simulation.abstractsimengine.ssj.feature</module>
 	</modules>
 	
 </project>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.palladiosimulator.simulation.abstractsimengine.ssj.feature"
+      label="SSJ Simulation Engine Feature"
+      version="4.0.0.qualifier"
+      plugin="org.palladiosimulator.branding"
+      license-feature="org.palladiosimulator.license"
+      license-feature-version="1.0.0">
+
+   <description url="http://sdq.ipd.kit.edu/">
+      Provides an implementation of the abstract simulation engine concepts based on the SSJ simulation engine.
+   </description>
+
+   <requires>
+      <import plugin="org.apache.log4j" version="1.2.13" match="greaterOrEqual"/>
+      <import plugin="de.uka.ipd.sdq.simulation.abstractsimengine" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="ca.umontreal.iro.lecuyer.ssj" version="1.2.2" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="org.palladiosimulator.simulation.abstractsimengine.ssj"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.palladiosimulator.branding"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
