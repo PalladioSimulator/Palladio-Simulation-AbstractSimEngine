@@ -18,19 +18,10 @@
    <requires>
       <import plugin="org.apache.log4j"/>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="de.uka.ipd.sdq.simulation.abstractsimengine" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="de.desmoj"/>
    </requires>
 
    <plugin
          id="de.uka.ipd.sdq.simulation.abstractsimengine"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="de.uka.ipd.sdq.simulation.abstractsimengine.desmoj"
          download-size="0"
          install-size="0"
          version="0.0.0"
