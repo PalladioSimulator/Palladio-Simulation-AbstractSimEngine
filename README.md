@@ -1,5 +1,6 @@
-# Palladio-Addons-SimuComSSJ
-This repository extends the simulator SimuCom by discrete-event simulation with Stochastic Simulation in Java.
+# Palladio-Simulation-AbstractSimEngine
+This repository contains the discrete event simulator abstraction layer used by the SimuComFramework. 
+Currently we provide two concrete realizations: using the DesmoJ library and SSJ. 
 
 ## Documentation
 For comprehensive documentation, please visit our [wiki page](https://sdqweb.ipd.kit.edu/wiki/Abstract_Simulation_Engine).
