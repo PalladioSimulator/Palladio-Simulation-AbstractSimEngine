@@ -18,6 +18,7 @@
    <requires>
       <import plugin="org.apache.log4j"/>
       <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.palladiosimulator.branding"/>
    </requires>
 
    <plugin
