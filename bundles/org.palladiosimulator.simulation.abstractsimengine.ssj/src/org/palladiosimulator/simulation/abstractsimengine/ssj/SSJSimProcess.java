@@ -6,6 +6,7 @@ package org.palladiosimulator.simulation.abstractsimengine.ssj;
 import org.apache.log4j.Logger;
 
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimProcessDelegator;
+import de.uka.ipd.sdq.simulation.abstractsimengine.processes.ISimProcessStrategy;
 import de.uka.ipd.sdq.simulation.abstractsimengine.processes.ProcessState;
 import de.uka.ipd.sdq.simulation.abstractsimengine.processes.SimProcessThreadingStrategy;
 import de.uka.ipd.sdq.simulation.abstractsimengine.processes.SimulatedProcess;
@@ -15,7 +16,7 @@ import umontreal.ssj.simevents.Simulator;
 /**
  * Simulation Process implementation for SSJ
  * 
- * @author Snowball, Michael H. & Jens (bugfixing, refactorings, cleanup) 
+ * @author Snowball, Michael H., Jens (bugfixing, refactorings, cleanup) & Floriment (constructor for enabling choosing different SimProcessStrategy)
  */
 public class SSJSimProcess extends SimulatedProcess {
 
@@ -42,7 +43,16 @@ public class SSJSimProcess extends SimulatedProcess {
      * @param name an ID
      */
     public SSJSimProcess(AbstractSimProcessDelegator myProcess, String name) {
-        super(new SimProcessThreadingStrategy());
+    	this(myProcess, name, new SimProcessThreadingStrategy());
+    }
+    
+    /**
+     * Constructor
+     * @param myProcess Underlying abstract sim process
+     * @param name an ID
+     */
+    public SSJSimProcess(AbstractSimProcessDelegator myProcess, String name, ISimProcessStrategy processStrategy) {
+        super(processStrategy);
         this.myAbstractProcess = myProcess;
         this.ssjExperiment = (SSJExperiment) myAbstractProcess.getModel().getSimulationControl();
         this.sim = ssjExperiment.getSimulator();

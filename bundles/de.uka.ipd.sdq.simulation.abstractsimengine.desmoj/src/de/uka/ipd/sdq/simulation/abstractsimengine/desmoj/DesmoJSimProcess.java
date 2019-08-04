@@ -4,6 +4,7 @@
 package de.uka.ipd.sdq.simulation.abstractsimengine.desmoj;
 
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimProcessDelegator;
+import de.uka.ipd.sdq.simulation.abstractsimengine.processes.ISimProcessStrategy;
 import de.uka.ipd.sdq.simulation.abstractsimengine.processes.ProcessState;
 import de.uka.ipd.sdq.simulation.abstractsimengine.processes.SimProcessCachedThreadPoolStrategy;
 import de.uka.ipd.sdq.simulation.abstractsimengine.processes.SimProcessThreadingStrategy;
@@ -14,95 +15,111 @@ import desmoj.core.simulator.TimeSpan;
 /**
  * @author Steffen Becker
  * @author Philipp Merkle
+ * @author Floriment Klinaku
  */
 public class DesmoJSimProcess extends SimulatedProcess {
 
-    private AbstractSimProcessDelegator myAbstractProcess;
+	private AbstractSimProcessDelegator myAbstractProcess;
 
-    private DesmoJModel model;
+	private DesmoJModel model;
 
-    /**
-     * Reference to the underlying experiment
-     */
-    private final DesmoJExperiment experiment;
+	/**
+	 * Reference to the underlying experiment
+	 */
+	private final DesmoJExperiment experiment;
 
-    public DesmoJSimProcess(AbstractSimProcessDelegator process, DesmoJModel model, String name) {
-    	super(new SimProcessCachedThreadPoolStrategy());
-    	
-        this.myAbstractProcess = process;
-        this.model = model;
-        this.experiment = (DesmoJExperiment) myAbstractProcess.getModel().getSimulationControl();
+	/** Creates a DesmoJSimProcess with SimProcessCachedThreadPoolStrategy as a default processing strategy
+	 * @param process
+	 * @param model
+	 * @param name
+	 */
+	public DesmoJSimProcess(AbstractSimProcessDelegator process, DesmoJModel model, String name) {
+		this(process,model,name, new SimProcessCachedThreadPoolStrategy());
+	}
+	
+	
+	/** Creates a DesmoJSimProcess with a custom process strategy
+	 * @param process
+	 * @param model
+	 * @param name
+	 * @param processStrategy
+	 */
+	public DesmoJSimProcess(AbstractSimProcessDelegator process, DesmoJModel model, String name,
+			ISimProcessStrategy processStrategy) {
+		super(processStrategy);
+		this.myAbstractProcess = process;
+		this.model = model;
+		this.experiment = (DesmoJExperiment) myAbstractProcess.getModel().getSimulationControl();
+		startProcess(processStrategy);
+	}
 
-        startProcess(processStrategy);
-    }
+	public void scheduleAt(double delay) {
+		if (!isTerminated()) {
+			if (this.myProcessState != ProcessState.SUSPENDED) {
+				throw new IllegalStateException(
+						"Tried to schedule thread which was not suspended [" + this.myAbstractProcess.getId() + "]");
+			}
 
-    public void scheduleAt(double delay) {
-        if (!isTerminated()) {
-            if (this.myProcessState != ProcessState.SUSPENDED) {
-                throw new IllegalStateException("Tried to schedule thread which was not suspended ["
-                        + this.myAbstractProcess.getId() + "]");
-            }
+			// Resume process immediately to force process cleanup
+			if (!simIsRunning()) {
+				resume();
+			}
 
-            // Resume process immediately to force process cleanup
-            if (!simIsRunning()) {
-                resume();
-            }
+			// TODO set event name
+			new ExternalEvent(this.model, "TODO event name", false) {
+				@Override
+				public void eventRoutine() {
+					if (!isTerminated()) {
+						resume();
+					}
+				}
+			}.schedule(new TimeSpan(delay));
+		}
+	}
 
-            // TODO set event name
-            new ExternalEvent(this.model, "TODO event name", false) {
-                @Override
-                public void eventRoutine() {
-                    if (!isTerminated()) {
-                        resume();
-                    }
-                }
-            }.schedule(new TimeSpan(delay));
-        }
-    }
+	public void passivate(double delay) {
+		if (!isTerminated()) {
+			if (this.myProcessState != ProcessState.RUNNING) {
+				throw new IllegalStateException(
+						"Tried to passivate thread which was not running [" + this.myAbstractProcess.getId() + "]");
+			}
 
-    public void passivate(double delay) {
-        if (!isTerminated()) {
-            if (this.myProcessState != ProcessState.RUNNING) {
-                throw new IllegalStateException("Tried to passivate thread which was not running ["
-                        + this.myAbstractProcess.getId() + "]");
-            }
+			// Resume process immediately to force process cleanup
+			if (!simIsRunning()) {
+				resume();
+			}
 
-            // Resume process immediately to force process cleanup
-            if (!simIsRunning()) {
-                resume();
-            }
+			new ExternalEvent(this.model, "Passivate " + this.myAbstractProcess.getId(), false) {
+				@Override
+				public void eventRoutine() {
+					if (!isTerminated()) {
+						resume();
+					}
+				}
+			}.schedule(new TimeSpan(delay));
 
-            new ExternalEvent(this.model, "Passivate " + this.myAbstractProcess.getId(), false) {
-                @Override
-                public void eventRoutine() {
-                    if (!isTerminated()) {
-                        resume();
-                    }
-                }
-            }.schedule(new TimeSpan(delay));
+			suspend();
+		}
+	}
 
-            suspend();
-        }
-    }
+	private boolean simIsRunning() {
+		// do not use isRunning method here, since !isRunning != isStopped
+		return !experiment.getExperiment().isStopped();
+	}
 
-    private boolean simIsRunning() {
-        // do not use isRunning method here, since !isRunning != isStopped
-        return !experiment.getExperiment().isStopped();
-    }
+	@Override
+	protected AbstractSimProcessDelegator getAbstractProcess() {
+		return this.myAbstractProcess;
+	}
 
-    @Override
-    protected AbstractSimProcessDelegator getAbstractProcess() {
-        return this.myAbstractProcess;
-    }
+	@Override
+	public boolean isScheduled() {
+		throw new UnsupportedOperationException();
+	}
 
-    @Override
-    public boolean isScheduled() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void reschedule(double delay) {
-        throw new UnsupportedOperationException();
-    }
+	@Override
+	public void reschedule(double delay) {
+		throw new UnsupportedOperationException();
+	}
 
 }

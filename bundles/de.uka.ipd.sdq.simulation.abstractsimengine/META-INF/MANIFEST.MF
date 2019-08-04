@@ -5,6 +5,7 @@ Bundle-SymbolicName: de.uka.ipd.sdq.simulation.abstractsimengine;singleton:=true
 Bundle-Version: 4.1.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: de.uka.ipd.sdq.simulation.abstractsimengine,
+ de.uka.ipd.sdq.simulation.abstractsimengine.events,
  de.uka.ipd.sdq.simulation.abstractsimengine.processes,
  de.uka.ipd.sdq.simulation.abstractsimengine.util
 Require-Bundle: org.apache.log4j,

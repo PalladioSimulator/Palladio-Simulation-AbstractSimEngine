@@ -9,6 +9,7 @@ import de.uka.ipd.sdq.simulation.abstractsimengine.ISimEvent;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimProcess;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimulationControl;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimulationModel;
+import de.uka.ipd.sdq.simulation.abstractsimengine.processes.ISimProcessStrategy;
 
 /**
  * @author Steffen Becker
@@ -44,6 +45,11 @@ public class DesmoJSimEngineFactory implements ISimEngineFactory {
     @Override
     public ISimProcess createSimProcess(final AbstractSimProcessDelegator myProcess, final String name) {
         return new DesmoJSimProcess(myProcess, this.model, name);
+    }
+    
+    @Override
+    public ISimProcess createSimProcess(final AbstractSimProcessDelegator myProcess, final String name, ISimProcessStrategy processStrategy) {
+        return new DesmoJSimProcess(myProcess, this.model, name, processStrategy);
     }
 
 }
