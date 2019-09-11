@@ -4,19 +4,19 @@
 	<locations>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="release" refresh="true">
 			<unit id="ca.umontreal.iro.ssj.feature.feature.group" version="3.3.1"/>
-			<repository location="https://sdqweb.ipd.kit.edu/eclipse/palladio/thirdparty/thirdpartylibrary/releases/latest"/>
+			<repository location="https://updatesite.palladio-simulator.com/palladio-thirdparty-library/releases/latest"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">
 			<unit id="ca.umontreal.iro.ssj.feature.feature.group" version="3.3.1"/>
-			<repository location="https://sdqweb.ipd.kit.edu/eclipse/palladio/thirdparty/thirdpartylibrary/nightly/"/>
+			<repository location="https://updatesite.palladio-simulator.com/palladio-thirdparty-library/nightly/"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="release" refresh="true">
 			<unit id="org.palladiosimulator.thirdpartywrapper.feature.feature.group" version="1.0.2.201709282218"/>
-			<repository location="https://sdqweb.ipd.kit.edu/eclipse/thirdpartywrapper/releases/latest/"/>
+			<repository location="https://updatesite.palladio-simulator.com/palladio-thirdparty-wrapper/releases/latest/"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">
 			<unit id="org.palladiosimulator.thirdpartywrapper.feature.feature.group" version="1.0.2.201709282218"/>
-			<repository location="https://sdqweb.ipd.kit.edu/eclipse/thirdpartywrapper/nightly/"/>
+			<repository location="https://updatesite.palladio-simulator.com/palladio-thirdparty-wrapper/nightly/"/>
 		</location>
 	</locations>
 </target>
