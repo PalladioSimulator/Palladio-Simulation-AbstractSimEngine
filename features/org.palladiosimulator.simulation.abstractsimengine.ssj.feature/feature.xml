@@ -2,7 +2,7 @@
 <feature
       id="org.palladiosimulator.simulation.abstractsimengine.ssj.feature"
       label="SSJ Simulation Engine Feature"
-      version="4.1.0.qualifier"
+      version="4.2.0.qualifier"
       plugin="org.palladiosimulator.branding"
       license-feature="org.palladiosimulator.license"
       license-feature-version="1.0.0">
@@ -17,7 +17,8 @@
 
    <requires>
       <import plugin="org.apache.log4j" version="1.2.13" match="greaterOrEqual"/>
-      <import plugin="ca.umontreal.iro.lecuyer.ssj" version="1.2.2" match="greaterOrEqual"/>
+      <import plugin="ca.umontreal.iro.simul.ssj" version="3.3.1" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.branding"/>
    </requires>
 
    <plugin
