@@ -1,7 +1,6 @@
 package de.uka.ipd.sdq.simulation.abstractsimengine.desmoj;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractExperiment;
