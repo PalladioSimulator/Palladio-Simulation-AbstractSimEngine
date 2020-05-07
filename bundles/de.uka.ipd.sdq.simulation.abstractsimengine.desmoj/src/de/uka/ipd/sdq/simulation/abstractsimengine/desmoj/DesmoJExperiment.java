@@ -1,5 +1,7 @@
 package de.uka.ipd.sdq.simulation.abstractsimengine.desmoj;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractExperiment;
@@ -21,8 +23,14 @@ public class DesmoJExperiment extends AbstractExperiment {
         super(model);
 
         this.desmojModel = model;
-        this.experiment = new Experiment(model.getConfiguration().getNameExperimentRun(), TimeUnit.NANOSECONDS,
-                TimeUnit.SECONDS, new SingleUnitTimeFormatter(TimeUnit.SECONDS, TimeUnit.NANOSECONDS, 9, false));
+        this.experiment = new Experiment(model.getConfiguration().getNameExperimentRun(), ".", //<- Path for storing output that defaults to .
+        		TimeUnit.NANOSECONDS,
+                TimeUnit.SECONDS, 
+                new SingleUnitTimeFormatter(TimeUnit.SECONDS, TimeUnit.NANOSECONDS, 9, false), 
+                new ArrayList<String>(), //<- Empty to avoid nasty file creation
+                new ArrayList<String>(), //<- Empty to avoid nasty file creation
+                new ArrayList<String>(), //<- Empty to avoid nasty file creation
+                new ArrayList<String>());//<- Empty to avoid nasty file creation
         this.desmojModel.connectToExperiment(experiment);
         this.experiment.setShowProgressBar(false);
     }
