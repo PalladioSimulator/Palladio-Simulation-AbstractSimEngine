@@ -14,7 +14,9 @@ import desmoj.core.simulator.SingleUnitTimeFormatter;
  */
 public class DesmoJExperiment extends AbstractExperiment {
 
-    private final Experiment experiment;
+    private static final ArrayList<String> EMPTY_ARRAY_LIST = new ArrayList<String>();
+
+	private final Experiment experiment;
 
     private final DesmoJModel desmojModel;
 
@@ -26,10 +28,10 @@ public class DesmoJExperiment extends AbstractExperiment {
         		TimeUnit.NANOSECONDS,
                 TimeUnit.SECONDS, 
                 new SingleUnitTimeFormatter(TimeUnit.SECONDS, TimeUnit.NANOSECONDS, 9, false), 
-                new ArrayList<String>(), //<- Empty to avoid nasty file creation
-                new ArrayList<String>(), //<- Empty to avoid nasty file creation
-                new ArrayList<String>(), //<- Empty to avoid nasty file creation
-                new ArrayList<String>());//<- Empty to avoid nasty file creation
+                EMPTY_ARRAY_LIST, //<- Empty to avoid nasty file creation
+                EMPTY_ARRAY_LIST, 
+                EMPTY_ARRAY_LIST, 
+                EMPTY_ARRAY_LIST);
         this.desmojModel.connectToExperiment(experiment);
         this.experiment.setShowProgressBar(false);
     }
