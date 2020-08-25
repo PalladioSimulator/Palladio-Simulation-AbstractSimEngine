@@ -13,7 +13,7 @@ public abstract class AbstractSimEntityDelegator extends SimulationElement imple
     /**
      * the delegate has the simulation-library-specific knowledge of how entities are handled.
      */
-    protected IEntity delegate;
+    protected final IEntity delegate;
 
     protected AbstractSimEntityDelegator(ISimulationModel model, String name) {
         super(model, name);
