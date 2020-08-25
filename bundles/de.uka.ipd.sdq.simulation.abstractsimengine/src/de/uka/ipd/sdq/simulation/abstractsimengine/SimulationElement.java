@@ -12,8 +12,8 @@ package de.uka.ipd.sdq.simulation.abstractsimengine;
  */
 public abstract class SimulationElement {
 
-    private String name;
-    private ISimulationModel model;
+    private final String name;
+    private final ISimulationModel model;
 
     public SimulationElement(ISimulationModel model, String name) {
         this.model = model;
