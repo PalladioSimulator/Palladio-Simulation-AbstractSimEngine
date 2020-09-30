@@ -18,6 +18,11 @@ public interface ISimProcess extends IEntity {
      * again using the <code>scheduleAt</code> method.
      */
     public void passivate();
+    
+    
+    public void terminate();
+    
+    public void start();
 
     /**
      * Resumes the process after waiting <code>delay</code> simulated time units.

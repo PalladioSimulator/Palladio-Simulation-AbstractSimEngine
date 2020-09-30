@@ -9,6 +9,7 @@ import de.uka.ipd.sdq.simulation.abstractsimengine.ISimEvent;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimProcess;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimulationControl;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimulationModel;
+import de.uka.ipd.sdq.simulation.abstractsimengine.processes.ISimProcessStrategy;
 
 /**
  * @author Steffen Becker
@@ -45,5 +46,11 @@ public class SSJSimEngineFactory implements ISimEngineFactory {
     public IEntity createEntity(AbstractSimEntityDelegator e, String name) {
         return new SSJEntity(e, name);
     }
+
+	@Override
+	public ISimProcess createSimProcess(AbstractSimProcessDelegator myProcess, String name,
+			ISimProcessStrategy processStrategy) {
+		  return new SSJSimProcess(myProcess, name, processStrategy);
+	}
 
 }

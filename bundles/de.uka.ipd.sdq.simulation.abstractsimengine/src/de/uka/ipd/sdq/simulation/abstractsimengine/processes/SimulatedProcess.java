@@ -59,16 +59,26 @@ public abstract class SimulatedProcess implements ISimProcess {
 
     public void actions() {
         // set state to running and suspended, i.e., return to constructor
-        this.myProcessState = ProcessState.RUNNING;
+    	start();
         suspend();
 
         // execute process's behavior
         getAbstractProcess().lifeCycle();
 
         // terminate process
-        notifyListeners(this, this.myProcessState, ProcessState.TERMINATED);
-        this.myProcessState = ProcessState.TERMINATED;
-        processStrategy.finishProcess();
+        terminate();
+    }
+    
+    @Override
+    public void start() {
+        this.myProcessState = ProcessState.RUNNING;
+    }
+    
+    @Override
+    public void terminate() {
+    	 notifyListeners(this, this.myProcessState, ProcessState.TERMINATED);
+         this.myProcessState = ProcessState.TERMINATED;
+         processStrategy.finishProcess();
     }
 
     @Override
@@ -99,8 +109,6 @@ public abstract class SimulatedProcess implements ISimProcess {
         this.myProcessState = ProcessState.SUSPENDED;
         processStrategy.suspendProcess();
 
-        // notify listeners of the imminent resume
-        notifyListeners(this, ProcessState.SUSPENDED, ProcessState.RUNNING);
     }
 
     protected void resume() {
@@ -112,6 +120,8 @@ public abstract class SimulatedProcess implements ISimProcess {
             LOGGER.debug("Resuming thread [" + this.getAbstractProcess().getId() + "]");
         }
 
+        // notify listeners of the imminent resume
+        notifyListeners(this, ProcessState.SUSPENDED, ProcessState.RUNNING);
         // resume this process
         this.myProcessState = ProcessState.RUNNING;
         processStrategy.resumeProcess();

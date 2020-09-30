@@ -2,6 +2,9 @@ package de.uka.ipd.sdq.simulation.abstractsimengine;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import de.uka.ipd.sdq.simulation.abstractsimengine.processes.ISimProcessStrategy;
+import de.uka.ipd.sdq.simulation.abstractsimengine.processes.ProcessState;
+
 /**
  * @author Steffen Becker (this code has been factored out from SimuCom)
  * @author Philipp Merkle
@@ -29,6 +32,16 @@ public abstract class AbstractSimProcessDelegator extends AbstractSimEntityDeleg
         this.id = generateNextID();
     }
 
+        
+    /**
+     * this constructor enables the creation of processes with a custom process strategy
+     */
+    public AbstractSimProcessDelegator(ISimulationModel model, String name, ISimProcessStrategy processStrategy) {
+    	super(model, name);
+    	this.delegate = model.getSimEngineFactory().createSimProcess(this, name, processStrategy);
+        this.id = generateNextID();
+    }
+    
     // TODO This method should be rather named getId() but there is already such a method. Thus,
     // getId() should be renamed to getTextualId() or similar.
     public long getRawId() {
@@ -84,6 +97,16 @@ public abstract class AbstractSimProcessDelegator extends AbstractSimEntityDeleg
     @Override
     public void preempt() {
     	delegate.preempt();
+    }
+    
+    @Override
+    public void start() {
+        delegate.start();
+    }
+    
+    @Override
+    public void terminate() {
+    	delegate.terminate();
     }
 
     // public boolean isScheduled() {
