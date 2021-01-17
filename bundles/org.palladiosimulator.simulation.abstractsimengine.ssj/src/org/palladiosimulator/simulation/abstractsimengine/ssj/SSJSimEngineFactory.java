@@ -1,12 +1,12 @@
 package org.palladiosimulator.simulation.abstractsimengine.ssj;
 
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimEntityDelegator;
-import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimEventDelegator;
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimProcessDelegator;
 import de.uka.ipd.sdq.simulation.abstractsimengine.IEntity;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimEngineFactory;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimEvent;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimProcess;
+import de.uka.ipd.sdq.simulation.abstractsimengine.ISimRunnable;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimulationControl;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimulationModel;
 
@@ -27,7 +27,6 @@ public class SSJSimEngineFactory implements ISimEngineFactory {
     public ISimulationControl createSimulationControl() {
         ISimulationControl delegate = new SSJExperiment(model);
         model.setSimulationControl(delegate);
-        // model.setSimulationEngineFactory(this);
         return delegate;
     }
 
@@ -37,13 +36,14 @@ public class SSJSimEngineFactory implements ISimEngineFactory {
     }
 
     @Override
-    public <E extends IEntity> ISimEvent<E> createSimEvent(AbstractSimEventDelegator<E> myEvent, String name) {
-        return new SSJSimEvent<E>(myEvent, name);
+    public <E extends IEntity> ISimEvent<E> createSimEvent(ISimRunnable<E> myEvent, String name) {
+        return new SSJSimEvent<E>(myEvent, (SSJExperiment) model.getSimulationControl(), name);
     }
 
     @Override
     public IEntity createEntity(AbstractSimEntityDelegator e, String name) {
         return new SSJEntity(e, name);
     }
-
+    
+    
 }

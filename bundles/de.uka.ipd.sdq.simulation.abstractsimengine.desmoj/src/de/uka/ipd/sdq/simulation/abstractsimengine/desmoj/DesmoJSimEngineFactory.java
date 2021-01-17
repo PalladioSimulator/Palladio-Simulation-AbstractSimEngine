@@ -1,12 +1,12 @@
 package de.uka.ipd.sdq.simulation.abstractsimengine.desmoj;
 
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimEntityDelegator;
-import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimEventDelegator;
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimProcessDelegator;
 import de.uka.ipd.sdq.simulation.abstractsimengine.IEntity;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimEngineFactory;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimEvent;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimProcess;
+import de.uka.ipd.sdq.simulation.abstractsimengine.ISimRunnable;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimulationControl;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimulationModel;
 
@@ -37,7 +37,7 @@ public class DesmoJSimEngineFactory implements ISimEngineFactory {
     }
 
     @Override
-    public <E extends IEntity> ISimEvent<E> createSimEvent(final AbstractSimEventDelegator<E> myEvent, final String name) {
+    public <E extends IEntity> ISimEvent<E> createSimEvent(final ISimRunnable<E> myEvent, final String name) {
         return new DesmoJSimEvent<E>(myEvent, this.model, name);
     }
 

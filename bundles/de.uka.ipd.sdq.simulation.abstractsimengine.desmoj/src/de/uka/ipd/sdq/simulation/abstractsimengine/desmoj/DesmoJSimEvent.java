@@ -1,9 +1,9 @@
 package de.uka.ipd.sdq.simulation.abstractsimengine.desmoj;
 
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimEntityDelegator;
-import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimEventDelegator;
 import de.uka.ipd.sdq.simulation.abstractsimengine.IEntity;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimEvent;
+import de.uka.ipd.sdq.simulation.abstractsimengine.ISimRunnable;
 import desmoj.core.simulator.Event;
 import desmoj.core.simulator.TimeSpan;
 
@@ -13,9 +13,9 @@ import desmoj.core.simulator.TimeSpan;
  */
 public class DesmoJSimEvent<E extends IEntity> extends Event<DesmoJEntity> implements ISimEvent<E> {
 
-    private final AbstractSimEventDelegator<E> event;
+    private final ISimRunnable<E> event;
 
-    public DesmoJSimEvent(final AbstractSimEventDelegator<E> event, final DesmoJModel owner, final String name) {
+    public DesmoJSimEvent(final ISimRunnable<E> event, final DesmoJModel owner, final String name) {
         super(owner, name, false);
         this.event = event;
     }

@@ -27,7 +27,6 @@ public abstract class AbstractExperiment implements ISimulationControl {
         this.model = model;
     }
 
-
     @Override
     public void addStopCondition(final SimCondition condition) {
         this.stopConditions.add(condition);
