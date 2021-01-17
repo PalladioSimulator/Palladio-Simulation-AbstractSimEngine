@@ -27,17 +27,6 @@ public abstract class AbstractExperiment implements ISimulationControl {
         this.model = model;
     }
 
-    @Override
-    public void setMaxSimTime(final long simTime) {
-        addStopCondition(new SimCondition() {
-
-            @Override
-            public boolean check() {
-                return getCurrentSimulationTime() >= simTime;
-            }
-
-        });
-    }
 
     @Override
     public void addStopCondition(final SimCondition condition) {

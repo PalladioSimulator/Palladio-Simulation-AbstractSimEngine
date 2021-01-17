@@ -14,6 +14,7 @@ package de.uka.ipd.sdq.simulation.abstractsimengine;
  * @param <M>
  *            the type of the simulation model
  */
+@FunctionalInterface
 public interface SimCondition {
 
     /**
