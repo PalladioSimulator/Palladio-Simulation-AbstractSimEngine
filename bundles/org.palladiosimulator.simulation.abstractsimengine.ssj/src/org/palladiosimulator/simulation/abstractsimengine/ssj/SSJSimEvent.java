@@ -63,11 +63,17 @@ public class SSJSimEvent<E extends IEntity> extends Event implements ISimEvent<E
     public void schedule(E resource, double delay) {
         who = resource;
 
-        // TODO try to get rid of manual casts
-        AbstractSimEntityDelegator abstractEntity = (AbstractSimEntityDelegator) who;
-        SSJEntity ssjEntity = (SSJEntity) abstractEntity.getEncapsulatedEntity();
-        ssjEntity.isScheduled = true;
-        ssjEntity.nextEventForThisEntity = this;
+        if (who instanceof AbstractSimEntityDelegator) {
+            AbstractSimEntityDelegator abstractEntity = (AbstractSimEntityDelegator) who;
+            if (abstractEntity.getEncapsulatedEntity() instanceof SSJEntity) {
+                SSJEntity ssjEntity = (SSJEntity) abstractEntity.getEncapsulatedEntity();
+                ssjEntity.isScheduled = true;
+                ssjEntity.nextEventForThisEntity = this;    
+            } else {
+                logger.warn("Unsupported entity type contained in abstract sim entity delegator: " + abstractEntity.getEncapsulatedEntity().getClass().getName());
+            }
+        }
+        
         this.schedule(delay);
     }
 
