@@ -10,7 +10,7 @@ package de.uka.ipd.sdq.simulation.abstractsimengine;
  *            the type of the entity which is modified by this event
  * @see ISimEvent
  */
-public abstract class AbstractSimEventDelegator<E extends IEntity> extends SimulationElement implements ISimEvent<E> {
+public abstract class AbstractSimEventDelegator<E extends IEntity> extends SimulationElement implements ISimEvent<E>, ISimRunnable<E> {
 
     /**
      * the delegate has the simulation-library-specific knowledge of how this event can be scheduled
@@ -24,18 +24,6 @@ public abstract class AbstractSimEventDelegator<E extends IEntity> extends Simul
         super(model, name);
         delegate = model.getSimEngineFactory().createSimEvent(this, name);
     }
-
-    /**
-     * Executes the simulation logic associated with this event.
-     * <p>
-     * Notice, that this method is not intended to be called by clients. Instead, the event
-     * scheduler of the respective simulation library invokes this method as soon as the simulation
-     * is reached at which the event has been scheduled.
-     * 
-     * @param who
-     *            the entity associated with this event
-     */
-    public abstract void eventRoutine(E who);
 
     /**
      * {@inheritDoc}

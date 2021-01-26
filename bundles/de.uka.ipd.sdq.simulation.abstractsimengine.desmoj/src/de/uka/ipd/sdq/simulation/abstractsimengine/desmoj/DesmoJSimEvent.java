@@ -1,23 +1,26 @@
 package de.uka.ipd.sdq.simulation.abstractsimengine.desmoj;
 
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimEntityDelegator;
-import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractSimEventDelegator;
 import de.uka.ipd.sdq.simulation.abstractsimengine.IEntity;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimEvent;
+import de.uka.ipd.sdq.simulation.abstractsimengine.ISimRunnable;
 import desmoj.core.simulator.Event;
+import desmoj.core.simulator.Entity;
 import desmoj.core.simulator.TimeSpan;
 
 /**
  * @author Steffen Becker
  * @author Philipp Merkle
  */
-public class DesmoJSimEvent<E extends IEntity> extends Event<DesmoJEntity> implements ISimEvent<E> {
+public class DesmoJSimEvent<E extends IEntity> extends Event<Entity> implements ISimEvent<E> {
 
-    private final AbstractSimEventDelegator<E> event;
+    private final ISimRunnable<E> event;
+    private final Entity anonymousEntity;
 
-    public DesmoJSimEvent(final AbstractSimEventDelegator<E> event, final DesmoJModel owner, final String name) {
+    public DesmoJSimEvent(final ISimRunnable<E> event, final DesmoJModel owner, final String name) {
         super(owner, name, false);
         this.event = event;
+        this.anonymousEntity = new Entity(owner, "Anonymous Entity", false) {};
     }
 
     /**
@@ -29,15 +32,22 @@ public class DesmoJSimEvent<E extends IEntity> extends Event<DesmoJEntity> imple
      */
     @SuppressWarnings("unchecked")
     @Override
-    public void eventRoutine(final DesmoJEntity who) {
-        // delegate the event handling to the encapsulated event
-        this.event.eventRoutine(who == null ? null : (E) who.getEncapsulatedEntity());
+    public void eventRoutine(final Entity who) {
+        E entity = null;
+        if (who != null && who instanceof DesmoJEntity) {
+            // delegate the event handling to the encapsulated event
+            entity = (E) ((DesmoJEntity)who).getEncapsulatedEntity();
+        }
+        this.event.eventRoutine(entity);
     }
 
     @Override
     public void schedule(final E entity, final double delay) {
-        final AbstractSimEntityDelegator simEntity = (AbstractSimEntityDelegator) entity;
-        final DesmoJEntity desmoJEntity = simEntity == null ? null : (DesmoJEntity) simEntity.getEncapsulatedEntity();
+        Entity desmoJEntity = anonymousEntity;
+        if (entity != null && entity instanceof AbstractSimEntityDelegator) {
+            final AbstractSimEntityDelegator simEntity = (AbstractSimEntityDelegator) entity;
+            desmoJEntity = (Entity) simEntity.getEncapsulatedEntity();
+        }
         this.schedule(desmoJEntity, new TimeSpan(delay));
     }
 

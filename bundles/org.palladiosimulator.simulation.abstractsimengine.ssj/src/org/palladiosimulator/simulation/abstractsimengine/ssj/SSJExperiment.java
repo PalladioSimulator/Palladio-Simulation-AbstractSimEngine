@@ -1,6 +1,7 @@
 package org.palladiosimulator.simulation.abstractsimengine.ssj;
 
 import de.uka.ipd.sdq.simulation.abstractsimengine.AbstractExperiment;
+import umontreal.ssj.simevents.Event;
 import umontreal.ssj.simevents.Simulator;
 import umontreal.ssj.simevents.eventlist.SplayTree;
 
@@ -11,14 +12,13 @@ import umontreal.ssj.simevents.eventlist.SplayTree;
 public class SSJExperiment extends AbstractExperiment {
 
     private final Simulator simulator;
+    private Event maxSimTimeTrigger;
 
     public SSJExperiment(final SSJModel model) {
         super(model);
 
         this.simulator = new Simulator();
         this.simulator.init(new SplayTree());
-
-//        this.scheduleEvent(this.CHECK_EVENT, 1);
     }
 
     public double getCurrentSimulationTime() {
@@ -29,16 +29,6 @@ public class SSJExperiment extends AbstractExperiment {
         return this.simulator;
     }
 
-//    @Override
-//    public void scheduleEvent(final IEvent event, final double delay) {
-//        new Event(this.simulator) {
-//            @Override
-//            public void actions() {
-//                event.run();
-//            }
-//        }.schedule(delay);
-//    }
-
     @Override
     public void startSimulator() {
         this.simulator.start();
@@ -47,6 +37,20 @@ public class SSJExperiment extends AbstractExperiment {
     @Override
     public void stopSimulator() {
         this.simulator.stop();
+    }
+    
+    @Override
+    public void setMaxSimTime(long simTime) {
+        if (maxSimTimeTrigger != null) {
+            maxSimTimeTrigger.cancel();
+        }
+        maxSimTimeTrigger = new Event(simulator) {
+            @Override
+            public void actions() {
+                simulator.stop();
+            }
+        };
+        maxSimTimeTrigger.schedule(simTime - (simulator.isSimulating() ? simulator.time() : 0.0));
     }
 
 }
