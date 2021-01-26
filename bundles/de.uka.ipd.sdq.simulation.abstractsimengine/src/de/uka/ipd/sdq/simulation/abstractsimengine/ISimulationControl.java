@@ -3,6 +3,9 @@ package de.uka.ipd.sdq.simulation.abstractsimengine;
 import java.util.Observer;
 
 /**
+ * 
+ * This interface provides low level controls for the running simulation.
+ * 
  * @author Steffen Becker (this code has been factored out from SimuCom)
  * @author Philipp Merkle
  * 
