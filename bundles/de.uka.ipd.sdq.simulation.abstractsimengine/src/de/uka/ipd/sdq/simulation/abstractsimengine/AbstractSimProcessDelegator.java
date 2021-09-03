@@ -23,10 +23,15 @@ public abstract class AbstractSimProcessDelegator extends AbstractSimEntityDeleg
     private ISimProcess delegate;
     private long id;
 
-    public AbstractSimProcessDelegator(ISimulationModel model, String name) {
+    public AbstractSimProcessDelegator(ISimulationModel model, String name, boolean autostart) {
         super(model, name);
-        this.delegate = model.getSimEngineFactory().createSimProcess(this, name);
+        this.delegate = model.getSimEngineFactory().createSimProcess(this, name, autostart);
         this.id = generateNextID();
+    }
+
+    @Override
+    public void startProcess() {
+        delegate.startProcess();
     }
 
     // TODO This method should be rather named getId() but there is already such a method. Thus,

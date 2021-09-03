@@ -14,7 +14,7 @@ public class PassengerArrivalProcess extends AbstractSimProcessDelegator {
     private PoissonDistribution d;
 
     public PassengerArrivalProcess(BusStop busStop, Duration interarrivalTime) {
-        super(busStop.getModel(), busStop.getName() + "_arrivalProcess");
+        super(busStop.getModel(), busStop.getName() + "_arrivalProcess", true);
         this.busStop = busStop;
 
         this.d = new PoissonDistribution(interarrivalTime.toSeconds().value());
