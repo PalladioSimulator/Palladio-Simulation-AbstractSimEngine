@@ -41,13 +41,21 @@ public class SSJSimProcess extends SimulatedProcess {
      * @param myProcess Underlying abstract sim process
      * @param name an ID
      */
-    public SSJSimProcess(AbstractSimProcessDelegator myProcess, String name) {
+    public SSJSimProcess(AbstractSimProcessDelegator myProcess, String name, boolean autostart) {
         super(new SimProcessThreadingStrategy());
         this.myAbstractProcess = myProcess;
         this.ssjExperiment = (SSJExperiment) myAbstractProcess.getModel().getSimulationControl();
         this.sim = ssjExperiment.getSimulator();
 
+        if (autostart) {
+            startProcess();
+        }
+    }
+    
+    @Override
+    public void startProcess() {
         startProcess(processStrategy);
+        
     }
 
     /* (non-Javadoc)
@@ -119,5 +127,6 @@ public class SSJSimProcess extends SimulatedProcess {
     public void reschedule(double delay) {
         throw new UnsupportedOperationException();
     }
+
 
 }
