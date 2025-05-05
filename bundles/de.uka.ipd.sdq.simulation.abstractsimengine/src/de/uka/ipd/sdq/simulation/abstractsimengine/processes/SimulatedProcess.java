@@ -59,6 +59,7 @@ public abstract class SimulatedProcess implements ISimProcess {
 
     public void actions() {
         // set state to running and suspended, i.e., return to constructor
+        notifyListeners(this, this.myProcessState, ProcessState.RUNNING);
         this.myProcessState = ProcessState.RUNNING;
         suspend();
 
@@ -144,6 +145,8 @@ public abstract class SimulatedProcess implements ISimProcess {
                 l.notifySuspending(process);
             } else if (oldState == ProcessState.SUSPENDED && newState == ProcessState.RUNNING) {
                 l.notifyResuming(process);
+            } else if (oldState == ProcessState.READY && newState == ProcessState.RUNNING) {
+                l.notifyStarted(process);
             } else if (newState == ProcessState.TERMINATED) {
                 l.notifyTerminated(process);
             } else {
