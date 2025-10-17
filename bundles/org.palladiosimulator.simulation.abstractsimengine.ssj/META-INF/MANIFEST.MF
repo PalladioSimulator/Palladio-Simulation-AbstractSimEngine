@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SSJ Simulation Engine
 Bundle-SymbolicName: org.palladiosimulator.simulation.abstractsimengine.ssj;singleton:=true
-Bundle-Version: 5.2.2
+Bundle-Version: 6.0.0.qualifier
 Bundle-Vendor: palladiosimulator.org
 Require-Bundle: org.apache.log4j,
  de.uka.ipd.sdq.simulation.abstractsimengine;bundle-version="1.0.0",
