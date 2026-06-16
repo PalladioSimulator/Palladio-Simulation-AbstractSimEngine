@@ -43,7 +43,13 @@ public class DesmoJSimEngineFactory implements ISimEngineFactory {
 
     @Override
     public ISimProcess createSimProcess(final AbstractSimProcessDelegator myProcess, final String name) {
-        return new DesmoJSimProcess(myProcess, this.model, name);
+        return createSimProcess(myProcess, name, true);
+    }
+    
+    @Override
+    public ISimProcess createSimProcess(AbstractSimProcessDelegator myProcess, String name, boolean autostart) {
+        DesmoJSimProcess desmoJSimProcess = new DesmoJSimProcess(myProcess, this.model, name, autostart);
+        return desmoJSimProcess;
     }
 
 }

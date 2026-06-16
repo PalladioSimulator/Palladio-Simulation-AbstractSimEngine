@@ -32,7 +32,7 @@ public class SSJSimEngineFactory implements ISimEngineFactory {
 
     @Override
     public ISimProcess createSimProcess(AbstractSimProcessDelegator myProcess, String name) {
-        return new SSJSimProcess(myProcess, name);
+        return new SSJSimProcess(myProcess, name, true);
     }
 
     @Override
@@ -43,6 +43,11 @@ public class SSJSimEngineFactory implements ISimEngineFactory {
     @Override
     public IEntity createEntity(AbstractSimEntityDelegator e, String name) {
         return new SSJEntity(e, name);
+    }
+
+    @Override
+    public ISimProcess createSimProcess(AbstractSimProcessDelegator myProcess, String name, boolean autostart) {
+        return new SSJSimProcess(myProcess, name, autostart);
     }
     
     

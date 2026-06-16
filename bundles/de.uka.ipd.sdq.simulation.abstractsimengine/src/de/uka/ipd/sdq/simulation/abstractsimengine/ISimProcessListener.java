@@ -24,6 +24,9 @@ public interface ISimProcessListener {
      *            the simulated process
      */
     public void notifySuspending(ISimProcess process);
+    
+    
+    public void notifyStarted(ISimProcess process);
 
     public void notifyTerminated(ISimProcess process);
 

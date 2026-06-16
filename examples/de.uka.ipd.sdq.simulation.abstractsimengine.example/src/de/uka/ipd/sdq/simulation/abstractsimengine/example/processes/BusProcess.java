@@ -12,7 +12,7 @@ public class BusProcess extends AbstractSimProcessDelegator {
     private Bus bus;
 
     public BusProcess(Bus bus) {
-        super(bus.getModel(), bus.getName());
+        super(bus.getModel(), bus.getName(), true);
         this.bus = bus;
     }
 
