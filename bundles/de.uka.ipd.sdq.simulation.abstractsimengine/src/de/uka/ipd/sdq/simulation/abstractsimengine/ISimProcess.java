@@ -12,6 +12,8 @@ package de.uka.ipd.sdq.simulation.abstractsimengine;
  * @author Philipp Merkle
  */
 public interface ISimProcess extends IEntity {
+    
+    void startProcess();
 
     /**
      * Passivates this process. This will suspend the simulation of the process until it is resumed
